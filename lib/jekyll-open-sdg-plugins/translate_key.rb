@@ -12,6 +12,11 @@ module Jekyll
         return ""
       end
 
+      # Also make sure it is a string, and other just return it.
+      if not key.is_a? String
+        return key
+      end
+
       # Determine the language of the current page.
       translations = @context.registers[:site].data['translations']
       language = @context.environments.first["page"]['language']
