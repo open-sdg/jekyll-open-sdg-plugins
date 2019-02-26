@@ -6,6 +6,13 @@ module Jekyll
     # language of the current page. Or if none is found, returns the original
     # key.
     def t(key)
+
+      # Safety code - abort now if key is nil.
+      if key.nil?
+        return ""
+      end
+
+      # Determine the language of the current page.
       translations = @context.registers[:site].data['translations']
       language = @context.environments.first["page"]['language']
 
