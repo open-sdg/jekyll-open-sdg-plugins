@@ -7,8 +7,8 @@ module Jekyll
     # key.
     def t(key)
 
-      # Safety code - abort now if key is nil.
-      if key.nil?
+      # Safety code - abort now if key is nil or empty.
+      if key.nil? or key.empty?
         return ""
       end
 
