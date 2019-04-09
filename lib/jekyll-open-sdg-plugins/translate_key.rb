@@ -7,14 +7,19 @@ module Jekyll
     # key.
     def t(key)
 
-      # Safety code - abort now if key is nil or empty.
-      if key.nil? or key.empty?
+      # Safety code - abort now if key is nil.
+      if key.nil?
         return ""
       end
 
       # Also make sure it is a string, and other just return it.
       if not key.is_a? String
         return key
+      end
+
+      # More safety code - abort now if key is empty.
+      if key.empty?
+        return ""
       end
 
       # Determine the language of the current page.
