@@ -16,7 +16,7 @@ module Jekyll
     # 4. "indicator_name" in non-translated metadata
     # 5. "title" in non-translated metadata
     # 6. indicator ID
-    def indicator_name(inid)
+    def get_indicator_name(inid)
 
       # Safety code - abort now if id is nil.
       if inid.nil?
