@@ -44,48 +44,61 @@ module Jekyll
       meta = data['meta'][inid]
       metadata_fields = ['indicator_name', 'title']
 
+      name = false
+
       # First choice, is there a subfolder translation of any metadata fields?
       if meta and meta.has_key? language
         metadata_fields.each do |field|
-          if meta[language].has_key? field
-            return meta[language][field]
+          if !name and meta[language].has_key? field
+            name = meta[language][field]
           end
         end
       end
 
       # Next choice, are any of the metadata fields a translation key?
-      metadata_fields.each do |field|
-        if meta and meta.has_key? field
-          untranslated = meta[field]
-          translated = opensdg_translate_key(untranslated, translations, language)
-          if untranslated != translated
-            # If the opensdg_translate_key() function returned something else,
-            # that means it was an actual translation key.
-            return translated
+      if !name
+        metadata_fields.each do |field|
+          if !name and meta and meta.has_key? field
+            untranslated = meta[field]
+            translated = opensdg_translate_key(untranslated, translations, language)
+            if untranslated != translated
+              # If the opensdg_translate_key() function returned something else,
+              # that means it was an actual translation key.
+              name = translated
+            end
           end
         end
       end
 
       # Next, is this a global indicator with a translation? For this we actually
       # need the inid dot-delimited.
-      inid_dots = inid.gsub('-', '.')
-      if translations.has_key? language
-        if translations[language].has_key? 'global_indicators'
-          if translations[language]['global_indicators'].has_key? inid_dots
-            return translations[language]['global_indicators'][inid_dots]['title']
+      if !name
+        inid_dots = inid.gsub('-', '.')
+        if translations.has_key? language
+          if translations[language].has_key? 'global_indicators'
+            if translations[language]['global_indicators'].has_key? inid_dots
+              name = translations[language]['global_indicators'][inid_dots]['title']
+            end
           end
         end
       end
 
       # Next just return any untranslated metadata field.
-      metadata_fields.each do |field|
-        if meta and meta.has_key? field
-          return meta[field]
+      if !name
+        metadata_fields.each do |field|
+          if !name and meta and meta.has_key? field
+            name = meta[field]
+          end
         end
       end
 
       # Still here? Just return the inid.
-      return inid
+      if !name
+        name = inid
+      end
+
+      # Finally return the name with key translation for good measure.
+      return opensdg_translate_key(name, translations, language)
 
     end
   end
