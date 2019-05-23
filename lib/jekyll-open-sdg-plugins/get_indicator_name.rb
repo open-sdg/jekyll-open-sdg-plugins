@@ -38,7 +38,7 @@ module Jekyll
       # Some variables to help our lookups later.
       page = @context.environments.first['page']
       language = page['language']
-      languages = @context.registers[:site].languages
+      languages = @context.registers[:site].config['languages']
       data = @context.registers[:site].data
       translations = data['translations']
       meta = data['meta'][inid]
