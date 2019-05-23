@@ -10,12 +10,11 @@ module Jekyll
     #
     # The order of preference in the lookup is:
     #
-    # 1. "indicator_name" in translated metadata
-    # 2. "title" in translated metadata
+    # 1. "indicator_name" or "title" in translated metadata
+    # 2. If the default language, "indicator_name" or "title" in non-translated metadata
     # 3. if global, translated global indicator name
-    # 4. "indicator_name" in non-translated metadata
-    # 5. "title" in non-translated metadata
-    # 6. indicator ID
+    # 4. "indicator_name" or "title" in non-translated metadata
+    # 5. indicator ID
     def get_indicator_name(inid)
 
       # Safety code - abort now if id is nil.
@@ -39,6 +38,7 @@ module Jekyll
       # Some variables to help our lookups later.
       page = @context.environments.first['page']
       language = page['language']
+      languages = @context.registers[:site].languages
       data = @context.registers[:site].data
       translations = data['translations']
       meta = data['meta'][inid]
@@ -65,6 +65,18 @@ module Jekyll
               # If the opensdg_translate_key() function returned something else,
               # that means it was an actual translation key.
               name = translated
+            end
+          end
+        end
+      end
+
+      # Next, if this is the default language, use the non-translated fields
+      # if available.
+      if !name
+        if language == languages[0]
+          metadata_fields.each do |field|
+            if !name and meta and meta.has_key? field
+              name = meta[field]
             end
           end
         end
