@@ -10,10 +10,10 @@ module Jekyll
     #
     # The order of preference in the lookup is:
     #
-    # 1. "indicator_name" or "title" in translated metadata
-    # 2. If the default language, "indicator_name" or "title" in non-translated metadata
+    # 1. "indicator_name" in translated metadata
+    # 2. If the default language, "indicator_name" in non-translated metadata
     # 3. if global, translated global indicator name
-    # 4. "indicator_name" or "title" in non-translated metadata
+    # 4. "indicator_name" in non-translated metadata
     # 5. indicator ID
     def get_indicator_name(inid)
 
@@ -42,42 +42,36 @@ module Jekyll
       data = @context.registers[:site].data
       translations = data['translations']
       meta = data['meta'][inid]
-      metadata_fields = ['indicator_name', 'title']
+      field = 'indicator_name'
 
       name = false
 
-      # First choice, is there a subfolder translation of any metadata fields?
+      # First choice, is there a subfolder translation of the name?
       if meta and meta.has_key? language
-        metadata_fields.each do |field|
-          if !name and meta[language].has_key? field
-            name = meta[language][field]
-          end
+        if !name and meta[language].has_key? field
+          name = meta[language][field]
         end
       end
 
-      # Next choice, are any of the metadata fields a translation key?
+      # Next choice, is the name actually a "translation key"?
       if !name
-        metadata_fields.each do |field|
-          if !name and meta and meta.has_key? field
-            untranslated = meta[field]
-            translated = opensdg_translate_key(untranslated, translations, language)
-            if untranslated != translated
-              # If the opensdg_translate_key() function returned something else,
-              # that means it was an actual translation key.
-              name = translated
-            end
+        if meta and meta.has_key? field
+          untranslated = meta[field]
+          translated = opensdg_translate_key(untranslated, translations, language)
+          if untranslated != translated
+            # If the opensdg_translate_key() function returned something else,
+            # that means it was an actual "translation key".
+            name = translated
           end
         end
       end
 
-      # Next, if this is the default language, use the non-translated fields
+      # Next, if this is the default language, use the non-translated name
       # if available.
       if !name
         if language == languages[0]
-          metadata_fields.each do |field|
-            if !name and meta and meta.has_key? field
-              name = meta[field]
-            end
+          if meta and meta.has_key? field
+            name = meta[field]
           end
         end
       end
@@ -95,12 +89,10 @@ module Jekyll
         end
       end
 
-      # Next just return any untranslated metadata field.
+      # Next just return the non-translated name, if available.
       if !name
-        metadata_fields.each do |field|
-          if !name and meta and meta.has_key? field
-            name = meta[field]
-          end
+        if meta and meta.has_key? field
+          name = meta[field]
         end
       end
 
