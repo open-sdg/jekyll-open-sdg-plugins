@@ -10,11 +10,15 @@ module Jekyll
     #
     # The order of preference in the lookup is:
     #
-    # 1. "indicator_name" in translated metadata
-    # 2. If the default language, "indicator_name" in non-translated metadata
-    # 3. if global, translated global indicator name
-    # 4. "indicator_name" in non-translated metadata
-    # 5. indicator ID
+    # 1. "indicator_name_national" in translated metadata - subfolder approach
+    # 2. "indicator_name_national" in translated metadata - translation key approach
+    # 3. If the default language, "indicator_name_national" in non-translated metadata
+    # 4. If a global indicator, translated global indicator name
+    # 5. "indicator_name" in translated metadata - subfolder approach
+    # 6. "indicator_name" in translated metadata - translation key approach
+    # 7. "indicator_name" in non-translated metadata
+    # 8. Finally, fall back to the indicator ID
+
     def get_indicator_name(inid)
 
       # Safety code - abort now if id is nil.
@@ -42,21 +46,24 @@ module Jekyll
       data = @context.registers[:site].data
       translations = data['translations']
       meta = data['meta'][inid]
-      field = 'indicator_name'
+
+      # The metadata fields that we'll seek, first "override" then "default".
+      override_field = 'indicator_name_national'
+      default_field = 'indicator_name'
 
       name = false
 
-      # First choice, is there a subfolder translation of the name?
+      # 1. Is there a subfolder translation of the override field?
       if meta and meta.has_key? language
-        if !name and meta[language].has_key? field
+        if !name and meta[language].has_key? override_field
           name = meta[language][field]
         end
       end
 
-      # Next choice, is the name actually a "translation key"?
+      # 2. Is the override field actually a "translation key"?
       if !name
-        if meta and meta.has_key? field
-          untranslated = meta[field]
+        if meta and meta.has_key? override_field
+          untranslated = meta[override_field]
           translated = opensdg_translate_key(untranslated, translations, language)
           if untranslated != translated
             # If the opensdg_translate_key() function returned something else,
@@ -66,17 +73,17 @@ module Jekyll
         end
       end
 
-      # Next, if this is the default language, use the non-translated name
-      # if available.
+      # 3. If this is the default language, use the non-translated override
+      # field, if available.
       if !name
         if language == languages[0]
-          if meta and meta.has_key? field
-            name = meta[field]
+          if meta and meta.has_key? override_field
+            name = meta[override_field]
           end
         end
       end
 
-      # Next, is this a global indicator with a translation? For this we actually
+      # 4. Is this a global indicator with a translation? For this we actually
       # need the inid dot-delimited.
       if !name
         inid_dots = inid.gsub('-', '.')
@@ -89,14 +96,36 @@ module Jekyll
         end
       end
 
-      # Next just return the non-translated name, if available.
+      # 5. Is there a subfolder translation of the default field?
       if !name
-        if meta and meta.has_key? field
-          name = meta[field]
+        if meta and meta.has_key? language
+          if !name and meta[language].has_key? default_field
+            name = meta[language][default_field]
+          end
         end
       end
 
-      # Still here? Just return the inid.
+      # 6. Is the default field actually a "translation key"?
+      if !name
+        if meta and meta.has_key? default_field
+          untranslated = meta[default_field]
+          translated = opensdg_translate_key(untranslated, translations, language)
+          if untranslated != translated
+            # If the opensdg_translate_key() function returned something else,
+            # that means it was an actual "translation key".
+            name = translated
+          end
+        end
+      end
+
+      # 7. Use the non-translated default field, if available.
+      if !name
+        if meta and meta.has_key? default_field
+          name = meta[default_field]
+        end
+      end
+
+      # 8. Still here? Just return the inid.
       if !name
         name = inid
       end
