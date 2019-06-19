@@ -83,13 +83,15 @@ module Jekyll
         end
       end
 
-      # 4. Is this a global indicator with a translation? For this we actually
-      # need the inid dot-delimited.
+      # 4. Is this a global indicator with a translation?
       if !name
+        # For backwards compatibility, look for both dot and dash-delimited keys.
         inid_dots = inid.gsub('-', '.')
         if translations.has_key? language
           if translations[language].has_key? 'global_indicators'
-            if translations[language]['global_indicators'].has_key? inid_dots
+            if translations[language]['global_indicators'].has_key? inid
+              name = translations[language]['global_indicators'][inid]['title']
+            elsif translations[language]['global_indicators'].has_key? inid_dots
               name = translations[language]['global_indicators'][inid_dots]['title']
             end
           end
