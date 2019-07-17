@@ -39,3 +39,19 @@ create_indicators:
   # This determines which layout is used to render the pages.
   layout: indicator
 ```
+
+## 5. Automatically create 4 required pages.
+
+This automates the creation of 4 required pages that all implementations of Open SDG will need. These consist of:
+
+* the home page: /
+* the indicators json page: /indicators.json
+* the search results page: /search
+* the reporting status page: /reporting-status
+
+There are advanced options for overriding the location of these pages (see creae_pages.rb). But see the example below to use the defaults.
+
+Usage example (in `_config.yml`):
+```
+create_pages: true
+```
