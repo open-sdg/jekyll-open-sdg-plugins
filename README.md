@@ -55,3 +55,19 @@ Usage example (in `_config.yml`):
 ```
 create_pages: true
 ```
+
+## 6. Automatically fetch remote data and translations.
+
+This automates the fetching of the remote data (from the "data repository") and any remote translations.
+
+Note: This feature is disabled if "jekyll_get_json" is in the site config. This was the older (more verbose) way to do this.
+
+Usage example (in `_config.yml`):
+```
+remote_data_prefix: https://mygithuborg.github.io/my-data-repository
+remote_translations:
+  - https://open-sdg.github.io/sdg-translations/translations-0.6.0.json
+
+```
+
+For those interested in switching to this convenience feature, note that this makes the "jekyll_get_json" and "remotedatabaseurl" settings obsolete; so they can be removed.
