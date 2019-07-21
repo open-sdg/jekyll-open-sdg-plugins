@@ -14,8 +14,10 @@ module JekyllOpenSdgPlugins
           site.data['meta'].each do |indicator_id, meta|
             if meta[language]
               meta.each do |meta_key, meta_value|
-                if meta_key != language && !meta[language][meta_key]
-                  meta[language][meta_key] = meta_value
+                unless site.config['languages'].include? meta_key
+                  if !meta[language][meta_key]
+                    meta[language][meta_key] = meta_value
+                  end
                 end
               end
             end
