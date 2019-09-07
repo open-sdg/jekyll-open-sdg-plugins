@@ -85,14 +85,15 @@ module Jekyll
 
       # 4. Is this a global indicator with a translation?
       if !name
+        title_key = inid + '-title'
         # For backwards compatibility, look for both dot and dash-delimited keys.
-        inid_dots = inid.gsub('-', '.')
+        title_key_dots = inid.gsub('-', '.') + '-title'
         if translations.has_key? language
           if translations[language].has_key? 'global_indicators'
-            if translations[language]['global_indicators'].has_key? inid
-              name = translations[language]['global_indicators'][inid]['title']
-            elsif translations[language]['global_indicators'].has_key? inid_dots
-              name = translations[language]['global_indicators'][inid_dots]['title']
+            if translations[language]['global_indicators'].has_key? title_key
+              name = translations[language]['global_indicators'][title_key]
+            elsif translations[language]['global_indicators'].has_key? title_key_dots
+              name = translations[language]['global_indicators'][title_key_dots]
             end
           end
         end
