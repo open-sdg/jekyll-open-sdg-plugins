@@ -13,12 +13,22 @@ module JekyllOpenSdgPlugins
         if site.config['create_indicators'].key?('layout')
           layout = site.config['create_indicators']['layout']
         end
+        # See if we need to "map" any language codes.
+        languages_public = Hash.new
+        if site.config['languages_public']
+          languages_public = site.config['languages_public']
+        end
         # Loop through the languages.
         site.config['languages'].each_with_index do |language, index|
+          # Get the "public language" (for URLs) which may be different.
+          language_public = language
+          if languages_public[language]
+            language_public = languages_public[language]
+          end
           # Loop through the indicators (using metadata as a list).
           site.data['meta'].each do |inid, meta|
             # Add the language subfolder for all except the default (first) language.
-            dir = index == 0 ? inid : File.join(language, inid)
+            dir = index == 0 ? inid : File.join(language_public, inid)
             # Create the indicator page.
             site.collections['indicators'].docs << IndicatorPage.new(site, site.source, dir, inid, language, layout)
           end

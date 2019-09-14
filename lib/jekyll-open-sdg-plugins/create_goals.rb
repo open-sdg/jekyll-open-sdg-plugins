@@ -19,12 +19,22 @@ module JekyllOpenSdgPlugins
         if site.config['create_goals'].key?('layout')
           layout = site.config['create_goals']['layout']
         end
+        # See if we need to "map" any language codes.
+        languages_public = Hash.new
+        if site.config['languages_public']
+          languages_public = site.config['languages_public']
+        end
         # Loop through the languages.
         site.config['languages'].each_with_index do |language, index|
+          # Get the "public language" (for URLs) which may be different.
+          language_public = language
+          if languages_public[language]
+            language_public = languages_public[language]
+          end
           # Loop through the goals.
           goals.sort.each do |goal, value|
             # Add the language subfolder for all except the default (first) language.
-            dir = index == 0 ? goal.to_s : File.join(language, goal.to_s)
+            dir = index == 0 ? goal.to_s : File.join(language_public, goal.to_s)
             # Create the goal page.
             site.collections['goals'].docs << GoalPage.new(site, site.source, dir, goal, language, layout)
           end

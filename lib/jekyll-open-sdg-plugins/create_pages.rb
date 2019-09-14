@@ -54,12 +54,23 @@ module JekyllOpenSdgPlugins
           pages = site.config['create_pages']['pages']
         end
 
+        # See if we need to "map" any language codes.
+        languages_public = Hash.new
+        if site.config['languages_public']
+          languages_public = site.config['languages_public']
+        end
+
         # Loop through the languages.
         site.config['languages'].each_with_index do |language, index|
+          # Get the "public language" (for URLs) which may be different.
+          language_public = language
+          if languages_public[language]
+            language_public = languages_public[language]
+          end
           # Loop through the pages.
           pages.each do |page|
             # Add the language subfolder for all except the default (first) language.
-            dir = index == 0 ? page['folder'] : File.join(language, page['folder'])
+            dir = index == 0 ? page['folder'] : File.join(language_public, page['folder'])
             # Create the page.
             site.pages << OpenSdgPage.new(site, site.source, dir, page, language)
           end
