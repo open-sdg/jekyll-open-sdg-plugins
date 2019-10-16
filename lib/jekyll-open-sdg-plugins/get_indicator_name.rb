@@ -56,7 +56,7 @@ module Jekyll
       # 1. Is there a subfolder translation of the override field?
       if meta and meta.has_key? language
         if !name and meta[language].has_key? override_field
-          name = meta[language][field]
+          name = meta[language][override_field]
         end
       end
 
