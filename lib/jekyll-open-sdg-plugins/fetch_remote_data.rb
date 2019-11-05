@@ -22,7 +22,8 @@ module JekyllOpenSdgPlugins
             'meta' => 'meta/all.json',
             'headlines' => 'headline/all.json',
             'schema' => 'meta/schema.json',
-            'reporting' => 'stats/reporting.json'
+            'reporting' => 'stats/reporting.json',
+            'translations' => 'translations/translations.json'
           }
           endpoints.each do |key, value|
             target = site.data[key]
