@@ -8,6 +8,8 @@ module JekyllOpenSdgPlugins
     def generate(site)
       # If site.create_indicators is set, create indicators per the metadata.
       if site.config['languages'] and site.config['create_indicators']
+        # Are we using translated builds?
+        translated_builds = site.config['translated_builds']
         # Decide what layout to use for the indicator pages.
         layout = 'indicator'
         if site.config['create_indicators'].key?('layout')
@@ -25,8 +27,17 @@ module JekyllOpenSdgPlugins
           if languages_public[language]
             language_public = languages_public[language]
           end
+          metadata = {}
+          if translated_builds
+            # If we are using translated builds, the metadata is underneath a
+            # language code.
+            metadata = site.data[language]['meta']
+          else
+            # Otherwise the 'meta' data is not underneath any language code.
+            metadata = site.data['meta']
+          end
           # Loop through the indicators (using metadata as a list).
-          site.data['meta'].each do |inid, meta|
+          metadata.each do |inid, meta|
             # Add the language subfolder for all except the default (first) language.
             dir = index == 0 ? inid : File.join(language_public, inid)
             # Create the indicator page.

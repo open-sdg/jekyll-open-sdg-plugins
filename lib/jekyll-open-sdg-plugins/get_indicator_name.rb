@@ -47,8 +47,13 @@ module Jekyll
       language = page['language']
       languages = @context.registers[:site].config['languages']
       data = @context.registers[:site].data
+      translated_builds = @context.registers[:site].data
       translations = data['translations']
-      meta = data['meta'][inid]
+      if translated_builds
+        meta = data[language]['meta'][inid]
+      else
+        meta = data['meta'][inid]
+      end
 
       # The metadata fields that we'll seek, first "override" then "default".
       override_field = 'indicator_name_national'

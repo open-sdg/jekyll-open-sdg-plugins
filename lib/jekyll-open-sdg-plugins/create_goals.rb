@@ -10,7 +10,19 @@ module JekyllOpenSdgPlugins
       if site.config['languages'] and site.config['create_goals']
         # Compile the list of goals.
         goals = {}
-        site.data['meta'].each do |inid, meta|
+        # Are we using translated builds?
+        translated_builds = site.config['translated_builds']
+        metadata = {}
+        if translated_builds
+          # If we are using translated builds, the 'meta' data is underneath
+          # language codes. We just use the first language.
+          default_language = site.config['languages'][0]
+          metadata = site.data[default_language]['meta']
+        else
+          # Otherwise the 'meta' data is not underneath any language code.
+          metadata = site.data['meta']
+        end
+        metadata.each do |inid, indicator|
           goal = inid.split('-')[0].to_i
           goals[goal] = true
         end

@@ -12,7 +12,7 @@ module JekyllOpenSdgPlugins
       # Make sure that the translated metadata contains a complete set of values
       # including non-translated metadata as a fallback. This allows us to treat
       # the translated metadata as complete when used in layouts and includes.
-      if site.config['languages']
+      if site.config['languages'] and !site.config['translated_builds']
         site.config['languages'].each do |language|
           site.data['meta'].each do |indicator_id, meta|
             if meta[language]
