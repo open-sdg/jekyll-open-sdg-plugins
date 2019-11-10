@@ -71,3 +71,36 @@ remote_translations:
 ```
 
 For those interested in switching to this convenience feature, note that this makes the "jekyll_get_json" and "remotedatabaseurl" settings obsolete; so they can be removed.
+
+## 7. Provide standard variables on all pages, for use in templates
+
+This feature provides access to Hashes for goals, targets, and indicators. Each
+contains the following keys:
+* number (eg, "1" for a goal, "1.1" for a target, "1.1.1" for an indicator)
+* name (the fully-translated name of the goal/target/indicator
+* sort (a string suitable for use in sorting the goals/targets/indicators)
+
+Additionally, Hashes for indicators contain all the indicator's metadata.
+
+The following variables can be used on all pages:
+
+* page.sdg_global_goals : Hash of global goals (keyed by goal number)
+* page.sdg_global_targets : Hash of global targets (keyed by target number)
+* page.sdg_global_indicators : Hash of global indicators (keyed by indicator number)
+* page.sdg_available_goals : Hash of available goals (keyed by goal number)
+* page.sdg_available_targets : Hash of available targets (keyed by target number)
+* page.sdg_available_indicators : Hash of available indicators (keyed by indicator number)
+
+The following variables can be used on all indicator pages:
+
+* page.sdg_global_goal : a Hash of the current global goal
+* page.sdg_global_target : a Hash of the current global target
+* page.sdg_global_indicator : a Hash of the current global indicator
+* page.sdg_available_goal : a Hash of the current available goal
+* page.sdg_available_target : a Hash of the current available target
+* page.sdg_available_indicator : a Hash of the current available indicator
+
+The following variables can be used on all goal pages:
+
+* page.sdg_global_goal : a Hash of the current global goal
+* page.sdg_available_goal : a Hash of the current available goal
