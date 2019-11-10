@@ -6,16 +6,19 @@ module JekyllOpenSdgPlugins
     safe true
     priority :lowest
 
+    # Get a goal number from an indicator number.
     def get_goal_number(indicator_number)
       parts = indicator_number.split('.')
       parts[0]
     end
 
+    # Get a target number from an indicator number.
     def get_target_number(indicator_number)
       parts = indicator_number.split('.')
       parts[0] + '.' + parts[1]
     end
 
+    # Make any goal/target/indicator number suitable for use in sorting.
     def get_sort_order(number)
       if number.is_a? Numeric
         number = number.to_s
@@ -31,28 +34,31 @@ module JekyllOpenSdgPlugins
       sort_order
     end
 
+    # This creates variables for use in Liquid templates under "page".
+    # We'll create lists of goals, targets, and indicators. These will be put
+    # on the page object. Eg: page.sdg_global_goals. To generate these lists
+    # we will make use of the metadata. Each item in the list will be a hash
+    # containing these keys:
+    # - name (translated)
+    # - number
+    # - sort (for the purposes of sorting the items, since it is not an array)
+    # The "available_indicator" hashes also contain all of the metadata for that
+    # indicator. The lists are:
+    # - sdg_global_goals
+    # - sdg_global_targets
+    # - sdg_global_indicators
+    # - sdg_available_goals
+    # - sdg_available_targets
+    # - sdg_available_indicators
+    # The "global" above means the official UN SDGs. The "available" above means
+    # the goals/targets/indicators in use by the country/locality.
     def generate(site)
-      # This creates variables for use in Liquid templates.
 
       # Some general variables needed below.
       translations = site.data['translations']
       default_language = site.config['languages'][0]
 
-      # We'll create lists of goals, targets, and indicators. These will be put
-      # on the site object. Eg: site.sdg_goals. In order to generate these lists
-      # we will make use of the metadata. Each item in the list will be a hash
-      # containing these keys:
-      # - name (translated)
-      # - number
-      # - sort (for the purposes of sorting the items, since it is not an array)
-      # The indicator hashes also contain a "meta" key with all the indicator's
-      # metadata. The lists are:
-      # - sdg_global_goals
-      # - sdg_global_targets
-      # - sdg_global_indicators
-      # - sdg_available_goals
-      # - sdg_available_targets
-      # - sdg_available_indicators
+      # Hardcoded indicator numbers for all the official UN SDGs.
       global_inids = [
         '1.1.1',
         '1.2.1',
@@ -304,6 +310,7 @@ module JekyllOpenSdgPlugins
       global_targets = {}
       global_goals = {}
 
+      # For available indicators, we simply map the "indictors" collection.
       available_inids = site.collections['indicators'].docs.map do |doc|
         doc.data['indicator']
       end
@@ -311,7 +318,7 @@ module JekyllOpenSdgPlugins
       available_targets = {}
       available_goals = {}
 
-      # Set up some empty hashes.
+      # Set up some empty hashes, per language.
       site.config['languages'].each do |language|
         global_goals[language] = {}
         global_targets[language] = {}
