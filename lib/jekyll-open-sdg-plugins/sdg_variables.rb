@@ -351,10 +351,7 @@ module JekyllOpenSdgPlugins
           global_indicators[language][indicator_number] = {
             'number' => indicator_number,
             'name' => opensdg_translate_key(indicator_translation_key, translations, language),
-            'sort' => get_sort_order(indicator_number),
-            # We don't track global metadata yet.
-            # TODO: Track global metadata!
-            'meta' => {}
+            'sort' => get_sort_order(indicator_number)
           }
         end
       end
@@ -404,8 +401,11 @@ module JekyllOpenSdgPlugins
             'number' => indicator_number,
             'name' => opensdg_translate_key(indicator_name, translations, language),
             'sort' => get_sort_order(indicator_number),
-            'meta' => meta
           }
+          # Set all the metadata as well.
+          meta.each do |key, value|
+            available_indicators[language][indicator_number][key] = value
+          end
         end
       end
 
