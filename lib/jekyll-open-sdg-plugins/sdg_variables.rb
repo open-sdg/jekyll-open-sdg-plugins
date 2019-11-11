@@ -34,6 +34,20 @@ module JekyllOpenSdgPlugins
       sort_order
     end
 
+    # Compute a URL for an item, given it's number.
+    def get_url(baseurl, language, default_language, number)
+      url = baseurl
+      if language != default_language
+        url += '/' + language
+      end
+      url + '/' + number
+    end
+
+    # Compute a URL for tha goal image, given it's number.
+    def get_goal_image(goal_image_base, language, number)
+      goal_image_base + '/' + language + '/' + number + '.png'
+    end
+
     # This creates variables for use in Liquid templates under "page".
     # We'll create lists of goals, targets, and indicators. These will be put
     # on the page object. Eg: page.sdg_global_goals. To generate these lists
@@ -41,9 +55,15 @@ module JekyllOpenSdgPlugins
     # containing these keys:
     # - name (translated)
     # - number
-    # - sort (for the purposes of sorting the items, since it is not an array)
-    # The "available_indicator" hashes also contain all of the metadata for that
-    # indicator. The lists are:
+    # - sort (for the purposes of sorting the items, if needed)
+    # The *_goals hashes contain additional keys:
+    # - short (the translated short version of the name)
+    # - icon (path to the translated icon)
+    # - url (path to the goal page)
+    # The *_indicators hashes contain additional keys:
+    # - url (path to the indicator page)
+    # - [all metadata fields from the indicator]
+    # The lists are:
     # - sdg_global_goals
     # - sdg_global_targets
     # - sdg_global_indicators
@@ -52,11 +72,28 @@ module JekyllOpenSdgPlugins
     # - sdg_available_indicators
     # The "global" above means the official UN SDGs. The "available" above means
     # the goals/targets/indicators in use by the country/locality.
+    # Additionally, on indicator pages themselves, there are variables for
+    # the current goal/target/indicator:
+    # - sdg_global_goal
+    # - sdg_global_target
+    # - sdg_global_indicator
+    # - sdg_available_goal
+    # - sdg_available_target
+    # - sdg_available_indicator
+    # Similarly, on goal pages themselves, there are variables for the current
+    # goal:
+    # - sdg_global_goal
+    # - sdg_available_goal
     def generate(site)
 
       # Some general variables needed below.
       translations = site.data['translations']
       default_language = site.config['languages'][0]
+      baseurl = site.config['baseurl']
+      if baseurl == ''
+        baseurl = '/'
+      end
+      goal_image_base = site.config['goal_image_base']
 
       # Hardcoded indicator numbers for all the official UN SDGs.
       global_inids = [
@@ -318,6 +355,10 @@ module JekyllOpenSdgPlugins
       available_targets = {}
       available_goals = {}
 
+      # Some throwaway variables to keep track of what has been added.
+      already_added_global = {}
+      already_added_available = {}
+
       # Set up some empty hashes, per language.
       site.config['languages'].each do |language|
         global_goals[language] = []
@@ -326,10 +367,11 @@ module JekyllOpenSdgPlugins
         available_goals[language] = []
         available_targets[language] = []
         available_indicators[language] = []
+        already_added_global[language] = []
+        already_added_available[language] = []
       end
       # Throwaway variables to keep track of what has been added.
-      already_added_global = []
-      already_added_available = []
+
 
       # Populate the "global" hashes.
       global_inids.each do |indicator_number|
@@ -337,32 +379,36 @@ module JekyllOpenSdgPlugins
         target_number = get_target_number(indicator_number)
         # To get the name of global stuff, we can use predicable translation
         # keys from the SDG Translations project. Eg: global_goals.1-title
-        goal_translation_key = 'global_goals.' + goal_number + '-title'
-        target_translation_key = 'global_targets.' + target_number.gsub('.', '-') + '-title'
-        indicator_translation_key = 'global_indicators.' + indicator_number.gsub('.', '-') + '-title'
+        goal_translation_key = 'global_goals.' + goal_number
+        target_translation_key = 'global_targets.' + target_number.gsub('.', '-')
+        indicator_translation_key = 'global_indicators.' + indicator_number.gsub('.', '-')
         site.config['languages'].each do |language|
           # Set the goal for this language, once only.
-          if already_added_global.index(goal_number) == nil
-            already_added_global.push(goal_number)
+          if already_added_global[language].index(goal_number) == nil
+            already_added_global[language].push(goal_number)
             global_goals[language].push({
               'number' => goal_number,
-              'name' => opensdg_translate_key(goal_translation_key, translations, language),
+              'name' => opensdg_translate_key(goal_translation_key + '-title', translations, language),
+              'short' => opensdg_translate_key(goal_translation_key + '-short', translations, language),
+              'url' => get_url(baseurl, language, default_language, goal_number),
+              'icon' => get_goal_image(goal_image_base, language, goal_number),
               'sort' => get_sort_order(goal_number)
             })
           end
           # Set the target for this language, once only.
-          if already_added_global.index(target_number) == nil
-            already_added_global.push(target_number)
+          if already_added_global[language].index(target_number) == nil
+            already_added_global[language].push(target_number)
             global_targets[language].push({
               'number' => target_number,
-              'name' => opensdg_translate_key(target_translation_key, translations, language),
+              'name' => opensdg_translate_key(target_translation_key + '-title', translations, language),
               'sort' => get_sort_order(target_number)
             })
           end
           # Set the indicator for this language.
           global_indicators[language].push({
             'number' => indicator_number,
-            'name' => opensdg_translate_key(indicator_translation_key, translations, language),
+            'name' => opensdg_translate_key(indicator_translation_key + '-title', translations, language),
+            'url' => get_url(baseurl, language, default_language, indicator_number),
             'sort' => get_sort_order(indicator_number)
           })
         end
@@ -388,15 +434,15 @@ module JekyllOpenSdgPlugins
           end
 
           # Set the goal for this language, once only.
-          if already_added_available.index(goal_number) == nil
-            already_added_available.push(goal_number)
+          if already_added_available[language].index(goal_number) == nil
+            already_added_available[language].push(goal_number)
             # For these we just copy the info from the global_goals.
             global_goal = global_goals[language].find {|x| x['number'] == goal_number}
             available_goals[language].push(global_goal)
           end
           # Set the target for this language, once only.
-          if already_added_available.index(target_number) == nil
-            already_added_available.push(target_number)
+          if already_added_available[language].index(target_number) == nil
+            already_added_available[language].push(target_number)
             # For these we just copy the info from the global_targets.
             global_target = global_targets[language].find {|x| x['number'] == target_number}
             available_targets[language].push(global_target)
@@ -416,10 +462,21 @@ module JekyllOpenSdgPlugins
           available_indicator = {
             'number' => indicator_number,
             'name' => opensdg_translate_key(indicator_name, translations, language),
+            'url' => get_url(baseurl, language, default_language, indicator_number),
             'sort' => get_sort_order(indicator_number),
           }.merge(meta)
           available_indicators[language].push(available_indicator)
         end
+      end
+
+      # Sort all the items.
+      site.config['languages'].each do |lang|
+        global_goals[lang] = global_goals[lang].sort_by { |x| x['sort'] }
+        global_targets[lang] = global_targets[lang].sort_by { |x| x['sort'] }
+        global_indicators[lang] = global_indicators[lang].sort_by { |x| x['sort'] }
+        available_goals[lang] = available_goals[lang].sort_by { |x| x['sort'] }
+        available_targets[lang] = available_targets[lang].sort_by { |x| x['sort'] }
+        available_indicators[lang] = available_indicators[lang].sort_by { |x| x['sort'] }
       end
 
       # Next set the stuff on each doc in certain collections, according
