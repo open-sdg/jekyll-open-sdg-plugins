@@ -84,23 +84,33 @@ Additionally, Hashes for indicators contain all the indicator's metadata.
 
 The following variables can be used on all pages:
 
-* page.sdg_global_goals : Hash of global goals (keyed by goal number)
-* page.sdg_global_targets : Hash of global targets (keyed by target number)
-* page.sdg_global_indicators : Hash of global indicators (keyed by indicator number)
-* page.sdg_available_goals : Hash of available goals (keyed by goal number)
-* page.sdg_available_targets : Hash of available targets (keyed by target number)
-* page.sdg_available_indicators : Hash of available indicators (keyed by indicator number)
+* page.sdg_global_goals : Array of global goals
+* page.sdg_global_targets : Array of global targets
+* page.sdg_global_indicators : Array of global indicators
+* page.sdg_available_goals : Array of available goals
+* page.sdg_available_targets : Array of available targets
+* page.sdg_available_indicators : Array of available indicators
 
 The following variables can be used on all indicator pages:
 
-* page.sdg_global_goal : a Hash of the current global goal
-* page.sdg_global_target : a Hash of the current global target
-* page.sdg_global_indicator : a Hash of the current global indicator
-* page.sdg_available_goal : a Hash of the current available goal
-* page.sdg_available_target : a Hash of the current available target
-* page.sdg_available_indicator : a Hash of the current available indicator
+* page.sdg_global_goal : the current global goal
+* page.sdg_global_target : the current global target
+* page.sdg_global_indicator : the current global indicator
+* page.sdg_available_goal : the current available goal
+* page.sdg_available_target : the current available target
+* page.sdg_available_indicator : the current available indicator
 
 The following variables can be used on all goal pages:
 
-* page.sdg_global_goal : a Hash of the current global goal
-* page.sdg_available_goal : a Hash of the current available goal
+* page.sdg_global_goal : the current global goal
+* page.sdg_available_goal : the current available goal
+
+Examples of usage:
+
+Printing titles for all available indicators in Goal 2:
+```
+{% assign indicators = page.sdg_available_indicators | where: "number", "2" %}
+{% for goal in indicators %}
+  {{ goal.name }}
+{% endfor %}
+```

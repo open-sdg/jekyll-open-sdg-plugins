@@ -320,13 +320,16 @@ module JekyllOpenSdgPlugins
 
       # Set up some empty hashes, per language.
       site.config['languages'].each do |language|
-        global_goals[language] = {}
-        global_targets[language] = {}
-        global_indicators[language] = {}
-        available_goals[language] = {}
-        available_targets[language] = {}
-        available_indicators[language] = {}
+        global_goals[language] = []
+        global_targets[language] = []
+        global_indicators[language] = []
+        available_goals[language] = []
+        available_targets[language] = []
+        available_indicators[language] = []
       end
+      # Throwaway variables to keep track of what has been added.
+      already_added_global = []
+      already_added_available = []
 
       # Populate the "global" hashes.
       global_inids.each do |indicator_number|
@@ -339,27 +342,29 @@ module JekyllOpenSdgPlugins
         indicator_translation_key = 'global_indicators.' + indicator_number.gsub('.', '-') + '-title'
         site.config['languages'].each do |language|
           # Set the goal for this language, once only.
-          if !global_goals[language].has_key? goal_number
-            global_goals[language][goal_number] = {
+          if already_added_global.index(goal_number) == nil
+            already_added_global.push(goal_number)
+            global_goals[language].push({
               'number' => goal_number,
               'name' => opensdg_translate_key(goal_translation_key, translations, language),
               'sort' => get_sort_order(goal_number)
-            }
+            })
           end
           # Set the target for this language, once only.
-          if !global_targets[language].has_key? target_number
-            global_targets[language][target_number] = {
+          if already_added_global.index(target_number) == nil
+            already_added_global.push(target_number)
+            global_targets[language].push({
               'number' => target_number,
               'name' => opensdg_translate_key(target_translation_key, translations, language),
               'sort' => get_sort_order(target_number)
-            }
+            })
           end
           # Set the indicator for this language.
-          global_indicators[language][indicator_number] = {
+          global_indicators[language].push({
             'number' => indicator_number,
             'name' => opensdg_translate_key(indicator_translation_key, translations, language),
             'sort' => get_sort_order(indicator_number)
-          }
+          })
         end
       end
 
@@ -383,14 +388,18 @@ module JekyllOpenSdgPlugins
           end
 
           # Set the goal for this language, once only.
-          if !available_goals[language].has_key? goal_number
-             # For these we just copy the info from the global_goals.
-            available_goals[language][goal_number] = global_goals[language][goal_number]
+          if already_added_available.index(goal_number) == nil
+            already_added_available.push(goal_number)
+            # For these we just copy the info from the global_goals.
+            global_goal = global_goals[language].find {|x| x['number'] == goal_number}
+            available_goals[language].push(global_goal)
           end
           # Set the target for this language, once only.
-          if !available_targets[language].has_key? target_number
+          if already_added_available.index(target_number) == nil
+            already_added_available.push(target_number)
             # For these we just copy the info from the global_targets.
-            available_targets[language][target_number] = global_targets[language][target_number]
+            global_target = global_targets[language].find {|x| x['number'] == target_number}
+            available_targets[language].push(global_target)
           end
           # Set the indicator for this language. Unfortunately we are currently
           # using two possible fields for the indicator name:
@@ -404,15 +413,12 @@ module JekyllOpenSdgPlugins
           else
             indicator_name = meta['indicator_name']
           end
-          available_indicators[language][indicator_number] = {
+          available_indicator = {
             'number' => indicator_number,
             'name' => opensdg_translate_key(indicator_name, translations, language),
             'sort' => get_sort_order(indicator_number),
-          }
-          # Set all the metadata as well.
-          meta.each do |key, value|
-            available_indicators[language][indicator_number][key] = value
-          end
+          }.merge(meta)
+          available_indicators[language].push(available_indicator)
         end
       end
 
@@ -440,18 +446,18 @@ module JekyllOpenSdgPlugins
             indicator_number = doc.data['indicator']
             goal_number = get_goal_number(indicator_number)
             target_number = get_target_number(indicator_number)
-            doc.data['sdg_global_goal'] = global_goals[language][goal_number]
-            doc.data['sdg_global_target'] = global_targets[language][target_number]
-            doc.data['sdg_global_indicator'] = global_indicators[language][indicator_number]
-            doc.data['sdg_available_goal'] = available_goals[language][goal_number]
-            doc.data['sdg_available_target'] = available_targets[language][target_number]
-            doc.data['sdg_available_indicator'] = available_indicators[language][indicator_number]
+            doc.data['sdg_global_goal'] = global_goals[language].find {|x| x['number'] == goal_number}
+            doc.data['sdg_global_target'] = global_targets[language].find {|x| x['number'] == target_number}
+            doc.data['sdg_global_indicator'] = global_indicators[language].find {|x| x['number'] == indicator_number}
+            doc.data['sdg_available_goal'] = available_goals[language].find {|x| x['number'] == goal_number}
+            doc.data['sdg_available_target'] = available_targets[language].find {|x| x['number'] == target_number}
+            doc.data['sdg_available_indicator'] = available_indicators[language].find {|x| x['number'] == indicator_number}
           elsif collection == 'goals'
             # For goals we also set the current goal. We rely on the sdg_goal
             # key for the goal number.
             goal_number = doc.data['sdg_goal']
-            doc.data['sdg_global_goal'] = global_goals[language][goal_number]
-            doc.data['sdg_available_goal'] = available_goals[language][goal_number]
+            doc.data['sdg_global_goal'] = global_goals[language].find {|x| x['number'] == goal_number}
+            doc.data['sdg_available_goal'] = available_goals[language].find {|x| x['number'] == goal_number}
           end
         end
       end
