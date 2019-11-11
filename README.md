@@ -80,7 +80,14 @@ contains the following keys:
 * name (the fully-translated name of the goal/target/indicator
 * sort (a string suitable for use in sorting the goals/targets/indicators)
 
-Additionally, Hashes for indicators contain all the indicator's metadata.
+Additionally, Hashes for indicators contain:
+* url (the URL of that indicator's page)
+* [all the indicator's metadata fields]
+
+Additionally, Hashes for goals contains:
+* url (the URL of that goal's page)
+* icon (the URL of that goal's icon)
+* short (the short version of the goal name, translated)
 
 The following variables can be used on all pages:
 
@@ -113,4 +120,9 @@ Printing titles for all available indicators in Goal 2:
 {% for goal in indicators %}
   {{ goal.name }}
 {% endfor %}
+```
+
+Printing the short name for the current goal, on a goal page:
+```
+{{ page.sdg_available_goal.short }}
 ```
