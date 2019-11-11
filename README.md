@@ -79,50 +79,56 @@ contains the following keys:
 * number (eg, "1" for a goal, "1.1" for a target, "1.1.1" for an indicator)
 * name (the fully-translated name of the goal/target/indicator
 * sort (a string suitable for use in sorting the goals/targets/indicators)
+* global (an equivalent Hash containing specifically "global" versions)
 
-Additionally, Hashes for indicators contain:
+Additionally, Indicators contain:
 * url (the URL of that indicator's page)
+* goal_number (the number of that indicator's goal)
+* target_number (the number of that indicator's target)
 * [all the indicator's metadata fields]
 
-Additionally, Hashes for goals contains:
+Additionally, Targets contain:
+* goal_number (the number of that target's goal)
+
+Additionally, Goals contains:
 * url (the URL of that goal's page)
 * icon (the URL of that goal's icon)
 * short (the short version of the goal name, translated)
 
 The following variables can be used on all pages:
 
-* page.sdg_global_goals : Array of global goals
-* page.sdg_global_targets : Array of global targets
-* page.sdg_global_indicators : Array of global indicators
-* page.sdg_available_goals : Array of available goals
-* page.sdg_available_targets : Array of available targets
-* page.sdg_available_indicators : Array of available indicators
+* Goals : Array of goals
+* Targets : Array of targets
+* Indicators : Array of indicators
 
 The following variables can be used on all indicator pages:
 
-* page.sdg_global_goal : the current global goal
-* page.sdg_global_target : the current global target
-* page.sdg_global_indicator : the current global indicator
-* page.sdg_available_goal : the current available goal
-* page.sdg_available_target : the current available target
-* page.sdg_available_indicator : the current available indicator
+* Goal : the current goal
+* Target : the current target
+* Indicator : the current indicator
 
 The following variables can be used on all goal pages:
 
-* page.sdg_global_goal : the current global goal
-* page.sdg_available_goal : the current available goal
+* Goal : the current goal
 
 Examples of usage:
 
 Printing titles for all available indicators in Goal 2:
 ```
-{% assign indicators = page.sdg_available_indicators | where: "number", "2" %}
-{% for goal in indicators %}
-  {{ goal.name }}
+{% assign indicators = page.Indicators | where: "goal_number", "2" %}
+{% for indicator in indicators %}
+  {{ indicator.name }}
 {% endfor %}
 ```
 
 Printing the short name for the current goal, on a goal page:
 ```
-{{ page.sdg_available_goal.short }}
+{{ page.Goal.short }}
 ```
+
+Printing the name of all targets in a particular, on that goal page:
+```
+{% assign targets = page.Targets | where: "goal_number", page.Goal.number %}
+{% for target in targets %}
+  {{ target.name }}
+{% endfor %}
