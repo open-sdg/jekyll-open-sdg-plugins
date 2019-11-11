@@ -160,7 +160,7 @@ module JekyllOpenSdgPlugins
           # Set the goal for this language, once only.
           if already_added[language].index(goal_number) == nil
             already_added[language].push(goal_number)
-            available_goals[language].push({
+            available_goal = {
               'number' => goal_number,
               'name' => opensdg_translate_key(goal_translation_key + '-title', translations, language),
               'short' => opensdg_translate_key(goal_translation_key + '-short', translations, language),
@@ -168,18 +168,20 @@ module JekyllOpenSdgPlugins
               'icon' => get_goal_image(goal_image_base, language, goal_number),
               'sort' => get_sort_order(goal_number),
               'global' => global_goal,
-            })
+            }
+            available_goals[language].push(available_goal)
           end
           # Set the target for this language, once only.
           if already_added[language].index(target_number) == nil
             already_added[language].push(target_number)
-            available_targets[language].push({
+            available_target = {
               'number' => target_number,
               'name' => opensdg_translate_key(target_translation_key + '-title', translations, language),
               'sort' => get_sort_order(target_number),
               'goal_number' => goal_number,
               'global' => global_target,
-            })
+            }
+            available_targets[language].push(available_target)
           end
           # Set the indicator for this language. Unfortunately we are currently
           # using two possible fields for the indicator name:
@@ -250,6 +252,46 @@ module JekyllOpenSdgPlugins
           end
         end
       end
+
+      # Finally let's set all these on the site object so that they can be
+      # easily looked up later.
+      lookup = {}
+      available_goals.each do |language, items|
+        lookup[language] = {}
+        items.each do |item|
+          number = item['number']
+          lookup[language][number] = item
+        end
+      end
+      available_targets.each do |language, items|
+        items.each do |item|
+          number = item['number']
+          lookup[language][number] = item
+        end
+      end
+      available_indicators.each do |language, items|
+        items.each do |item|
+          number = item['number']
+          lookup[language][number] = item
+        end
+      end
+      site.data['sdg_lookup'] = lookup
     end
   end
 end
+
+module Jekyll
+  module SDGLookup
+    # This provides a "sdg_lookup" filter that takes an id and returns a hash
+    # representation of a goal, target, or indicator.
+    def sdg_lookup(number)
+      number = number.gsub('-', '.')
+      data = @context.registers[:site].data
+      page = @context.environments.first['page']
+      language = page['language']
+      return data['sdg_lookup'][language][number]
+    end
+  end
+end
+
+Liquid::Template.register_filter(Jekyll::SDGLookup)

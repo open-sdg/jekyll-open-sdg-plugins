@@ -132,3 +132,16 @@ Printing the name of all targets in a particular, on that goal page:
 {% for target in targets %}
   {{ target.name }}
 {% endfor %}
+
+## 8. Lookup goals/targets/indicators by ID
+
+The hashes detailed above in #7 can also be looked up by id, with the `sdg_lookup` filter.
+
+Examples of usage:
+
+Looking up target 7.1 and printing its name
+
+```
+{% assign target = '7.1' | sdg_lookup %}
+{{ target.name }}
+```
