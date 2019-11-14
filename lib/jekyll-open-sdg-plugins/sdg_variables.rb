@@ -51,36 +51,37 @@ module JekyllOpenSdgPlugins
 
     # This creates variables for use in Liquid templates under "page".
     # We'll create lists of goals, targets, and indicators. These will be put
-    # on the page object. Eg: page.Goals. In order to generate these lists
+    # on the page object. Eg: page.goals. In order to generate these lists
     # we will make use of the metadata. Each item in the list will be a hash
     # containing these keys:
     # - name (translated)
     # - number (the "id" or number, eg: 1, 1.2, 1.2.1, etc.)
+    # - slug (version of 'number' but with dashes instead of dots)
     # - sort (for the purposes of sorting the items, if needed)
     # - global (a Hash containing any equivalent global metadata)
-    # The Goal hashes contain additional keys:
+    # The goal hashes contain additional keys:
     # - short (the translated short version of the name)
     # - icon (path to the translated icon)
     # - url (path to the goal page)
-    # The Target hashes contain additional keys:
+    # The target hashes contain additional keys:
     # - goal_number (the goal number for this target)
-    # The Indicator hashes contain additional keys:
+    # The indicator hashes contain additional keys:
     # - url (path to the indicator page)
     # - goal_number (the goal number for this indicator)
     # - target_number (the target number for this indicator)
     # - [all metadata fields from the indicator]
     # The lists are:
-    # - Goals
-    # - Targets
-    # - Indicators
+    # - goals
+    # - targets
+    # - indicators
     # Additionally, on indicator pages themselves, there are variables for
     # the current goal/target/indicator:
-    # - Goal
-    # - Target
-    # - Indicator
+    # - goal
+    # - target
+    # - indicator
     # Similarly, on goal pages themselves, there are variables for the current
     # goal:
-    # - Goal
+    # - goal
     def generate(site)
 
       # Some general variables needed below.
@@ -91,6 +92,13 @@ module JekyllOpenSdgPlugins
         baseurl = '/'
       end
       goal_image_base = site.config['goal_image_base']
+
+      # These keys are flagged as "protected" here so that we can make sure that
+      # country-specific metadata doesn't use any of these fields.
+      protected_keys = ['goals', 'goal', 'targets', 'target', 'indicators',
+        'indicator', 'language', 'name', 'number', 'sort', 'global', 'url',
+        'goal_number', 'target_number'
+      ]
 
       # Figure out from our translations the global indicator numbers.
       global_inids = translations[default_language]['global_indicators'].keys
@@ -162,6 +170,7 @@ module JekyllOpenSdgPlugins
             already_added[language].push(goal_number)
             available_goal = {
               'number' => goal_number,
+              'slug' => goal_number.gsub('.', '-'),
               'name' => opensdg_translate_key(goal_translation_key + '-title', translations, language),
               'short' => opensdg_translate_key(goal_translation_key + '-short', translations, language),
               'url' => get_url(baseurl, language, default_language, goal_number),
@@ -176,6 +185,7 @@ module JekyllOpenSdgPlugins
             already_added[language].push(target_number)
             available_target = {
               'number' => target_number,
+              'slug' => target_number.gsub('.', '-'),
               'name' => opensdg_translate_key(target_translation_key + '-title', translations, language),
               'sort' => get_sort_order(target_number),
               'goal_number' => goal_number,
@@ -197,6 +207,7 @@ module JekyllOpenSdgPlugins
           end
           available_indicator = {
             'number' => indicator_number,
+            'slug' => indicator_number.gsub('.', '-'),
             'name' => opensdg_translate_key(indicator_name, translations, language),
             'url' => get_url(baseurl, language, default_language, indicator_number),
             'sort' => get_sort_order(indicator_number),
@@ -206,7 +217,9 @@ module JekyllOpenSdgPlugins
           }
           # Translate and add any metadata.
           meta.each do |key, value|
-            available_indicator[key] = opensdg_translate_key(value, translations, language)
+            if !protected_keys.include? key
+              available_indicator[key] = opensdg_translate_key(value, translations, language)
+            end
           end
           available_indicators[language].push(available_indicator)
         end
@@ -232,23 +245,55 @@ module JekyllOpenSdgPlugins
             doc.data['language'] = default_language
           end
           language = doc.data['language']
-          # Set these on the page object, capitalized to avoid collisions.
-          doc.data['Goals'] = available_goals[language]
-          doc.data['Targets'] = available_targets[language]
-          doc.data['Indicators'] = available_indicators[language]
+          # Set these on the page object.
+          doc.data['goals'] = available_goals[language]
+          doc.data['targets'] = available_targets[language]
+          doc.data['indicators'] = available_indicators[language]
+          doc.data['t'] = site.data['translations'][language]
+          # Also figure out the language-specific baseurl and the "public"
+          # language code, in case it is different from the actual language.
+          language_public = language
+          if site.config['languages_public']
+            if site.config['languages_public'][language]
+              language_public = site.config['languages_public'][language]
+            end
+          end
+          baseurl = site.config['baseurl']
+          if baseurl == ''
+            baseurl = '/'
+          end
+          if default_language != language
+            baseurl += language_public + '/'
+          end
+          doc.data['baseurl'] = baseurl
+          doc.data['language_public'] = language_public
+
           if collection == 'indicators'
             # For indicators we also set the current indicator/target/goal.
-            indicator_number = doc.data['indicator']
+            if doc.data.has_key? 'indicator_number'
+              indicator_number = doc.data['indicator_number']
+            elsif doc.data.has_key? 'indicator'
+              # Backwards compatibility.
+              indicator_number = doc.data['indicator']
+            else
+              raise "Error: An indicator does not have 'indicator_number' property."
+            end
             goal_number = get_goal_number(indicator_number)
             target_number = get_target_number(indicator_number)
-            doc.data['Goal'] = available_goals[language].find {|x| x['number'] == goal_number}
-            doc.data['Target'] = available_targets[language].find {|x| x['number'] == target_number}
-            doc.data['Indicator'] = available_indicators[language].find {|x| x['number'] == indicator_number}
+            doc.data['goal'] = available_goals[language].find {|x| x['number'] == goal_number}
+            doc.data['target'] = available_targets[language].find {|x| x['number'] == target_number}
+            doc.data['indicator'] = available_indicators[language].find {|x| x['number'] == indicator_number}
           elsif collection == 'goals'
-            # For goals we also set the current goal. We rely on the sdg_goal
-            # key for the goal number.
-            goal_number = doc.data['sdg_goal']
-            doc.data['Goal'] = available_goals[language].find {|x| x['number'] == goal_number}
+            # For goals we also set the current goal.
+            if doc.data.has_key? 'goal_number'
+              goal_number = doc.data['goal_number']
+            elsif doc.data.has_key? 'sdg_goal'
+              # Backwards compatibility.
+              goal_number = doc.data['sdg_goal']
+            else
+              raise "Error: A goal does not have 'goal_number' property."
+            end
+            doc.data['goal'] = available_goals[language].find {|x| x['number'] == goal_number}
           end
         end
       end

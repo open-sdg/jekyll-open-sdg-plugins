@@ -77,6 +77,7 @@ For those interested in switching to this convenience feature, note that this ma
 This feature provides access to Hashes for goals, targets, and indicators. Each
 contains the following keys:
 * number (eg, "1" for a goal, "1.1" for a target, "1.1.1" for an indicator)
+* slug (eg, "1" for a goal, "1-1", for a target, "1-1-1" for an indicator)
 * name (the fully-translated name of the goal/target/indicator
 * sort (a string suitable for use in sorting the goals/targets/indicators)
 * global (an equivalent Hash containing specifically "global" versions)
@@ -95,27 +96,32 @@ Additionally, Goals contains:
 * icon (the URL of that goal's icon)
 * short (the short version of the goal name, translated)
 
-The following variables can be used on all pages:
+The following variables can be used on ALL pages:
 
-* Goals : Array of goals
-* Targets : Array of targets
-* Indicators : Array of indicators
+* goals : Array of goals
+* targets : Array of targets
+* indicators : Array of indicators
+* baseurl: A page-specific version of site.baseurl, taking language into account
+* language: The language code for the current page
+* language_public: The "public" language code, which may be different from the
+  language code.
+* t: A hash of all the compiled translations in the current language
 
 The following variables can be used on all indicator pages:
 
-* Goal : the current goal
-* Target : the current target
-* Indicator : the current indicator
+* goal : the current goal
+* target : the current target
+* indicator : the current indicator
 
 The following variables can be used on all goal pages:
 
-* Goal : the current goal
+* goal : the current goal
 
 Examples of usage:
 
 Printing titles for all available indicators in Goal 2:
 ```
-{% assign indicators = page.Indicators | where: "goal_number", "2" %}
+{% assign indicators = page.indicators | where: "goal_number", "2" %}
 {% for indicator in indicators %}
   {{ indicator.name }}
 {% endfor %}
@@ -123,12 +129,12 @@ Printing titles for all available indicators in Goal 2:
 
 Printing the short name for the current goal, on a goal page:
 ```
-{{ page.Goal.short }}
+{{ page.goal.short }}
 ```
 
 Printing the name of all targets in a particular, on that goal page:
 ```
-{% assign targets = page.Targets | where: "goal_number", page.Goal.number %}
+{% assign targets = page.targets | where: "goal_number", page.goal.number %}
 {% for target in targets %}
   {{ target.name }}
 {% endfor %}
