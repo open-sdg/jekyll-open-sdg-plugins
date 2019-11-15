@@ -265,6 +265,12 @@ module JekyllOpenSdgPlugins
           if default_language != language
             baseurl += language_public + '/'
           end
+          if !baseurl.start_with? '/'
+            baseurl = '/' + baseurl
+          end
+          if !baseurl.end_with? '/'
+            baseurl = baseurl + '/'
+          end
           doc.data['baseurl'] = baseurl
           doc.data['language_public'] = language_public
 
