@@ -50,6 +50,8 @@ module JekyllOpenSdgPlugins
       self.data['indicator_number'] = inid.gsub('-', '.')
       self.data['layout'] = layout
       self.data['language'] = language
+      # Backwards compatibility:
+      self.data['indicator'] = self.data['indicator_number']
     end
   end
 end

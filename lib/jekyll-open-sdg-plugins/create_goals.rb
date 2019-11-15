@@ -56,6 +56,8 @@ module JekyllOpenSdgPlugins
       self.data['goal_number'] = goal.to_s
       self.data['language'] = language
       self.data['layout'] = layout
+      # Backwards compatibility:
+      self.data['sdg_goal'] = self.data['goal_number']
     end
   end
 end
