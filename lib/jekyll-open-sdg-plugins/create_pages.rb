@@ -72,7 +72,7 @@ module JekyllOpenSdgPlugins
             # Add the language subfolder for all except the default (first) language.
             dir = index == 0 ? page['folder'] : File.join(language_public, page['folder'])
             # Create the page.
-            site.pages << OpenSdgPage.new(site, site.source, dir, page, language)
+            site.collections['pages'].docs << OpenSdgPage.new(site, site.source, dir, page, language)
           end
         end
       end
