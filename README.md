@@ -82,16 +82,16 @@ contains the following keys:
 * sort (a string suitable for use in sorting the goals/targets/indicators)
 * global (an equivalent Hash containing specifically "global" versions)
 
-Additionally, Indicators contain:
+Additionally, indicators contain:
 * url (the URL of that indicator's page)
 * goal_number (the number of that indicator's goal)
 * target_number (the number of that indicator's target)
 * [all the indicator's metadata fields]
 
-Additionally, Targets contain:
+Additionally, targets contain:
 * goal_number (the number of that target's goal)
 
-Additionally, Goals contains:
+Additionally, goals contain:
 * url (the URL of that goal's page)
 * icon (the URL of that goal's icon)
 * short (the short version of the goal name, translated)
