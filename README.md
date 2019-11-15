@@ -71,3 +71,83 @@ remote_translations:
 ```
 
 For those interested in switching to this convenience feature, note that this makes the "jekyll_get_json" and "remotedatabaseurl" settings obsolete; so they can be removed.
+
+## 7. Provide standard variables on all pages, for use in templates
+
+This feature provides access to Hashes for goals, targets, and indicators. Each
+contains the following keys:
+* number (eg, "1" for a goal, "1.1" for a target, "1.1.1" for an indicator)
+* slug (eg, "1" for a goal, "1-1", for a target, "1-1-1" for an indicator)
+* name (the fully-translated name of the goal/target/indicator
+* sort (a string suitable for use in sorting the goals/targets/indicators)
+* global (an equivalent Hash containing specifically "global" versions)
+
+Additionally, indicators contain:
+* url (the URL of that indicator's page)
+* goal_number (the number of that indicator's goal)
+* target_number (the number of that indicator's target)
+* [all the indicator's metadata fields]
+
+Additionally, targets contain:
+* goal_number (the number of that target's goal)
+
+Additionally, goals contain:
+* url (the URL of that goal's page)
+* icon (the URL of that goal's icon)
+* short (the short version of the goal name, translated)
+
+The following variables can be used on ALL pages:
+
+* goals : Array of goals
+* targets : Array of targets
+* indicators : Array of indicators
+* baseurl: A page-specific version of site.baseurl, taking language into account
+* language: The language code for the current page
+* language_public: The "public" language code, which may be different from the
+  language code.
+* t: A hash of all the compiled translations in the current language
+
+The following variables can be used on all indicator pages:
+
+* goal : the current goal
+* target : the current target
+* indicator : the current indicator
+
+The following variables can be used on all goal pages:
+
+* goal : the current goal
+
+Examples of usage:
+
+Printing titles for all available indicators in Goal 2:
+```
+{% assign indicators = page.indicators | where: "goal_number", "2" %}
+{% for indicator in indicators %}
+  {{ indicator.name }}
+{% endfor %}
+```
+
+Printing the short name for the current goal, on a goal page:
+```
+{{ page.goal.short }}
+```
+
+Printing the name of all targets in a particular, on that goal page:
+```
+{% assign targets = page.targets | where: "goal_number", page.goal.number %}
+{% for target in targets %}
+  {{ target.name }}
+{% endfor %}
+
+## 8. Lookup goals/targets/indicators by ID
+
+The hashes detailed above in #7 can also be looked up by id, with the `sdg_lookup` filter.
+
+Examples of usage:
+
+Looking up target 7.1 and printing its name
+
+```
+{% assign target = '7.1' | sdg_lookup %}
+{{ target.name }}
+```
