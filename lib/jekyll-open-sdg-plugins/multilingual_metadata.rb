@@ -1,5 +1,8 @@
 require "jekyll"
 
+# This plugin will be removed before version 1.0.0.
+# Do not rely on this!
+
 module JekyllOpenSdgPlugins
   class MultilingualMetadataGenerator < Jekyll::Generator
     safe true

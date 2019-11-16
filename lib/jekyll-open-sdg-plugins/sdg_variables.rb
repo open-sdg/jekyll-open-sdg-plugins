@@ -313,6 +313,10 @@ module JekyllOpenSdgPlugins
             else
               raise "Error: An indicator does not have 'indicator_number' property."
             end
+            # Force the indicator number to be a string.
+            if indicator_number.is_a? Numeric
+              indicator_number = indicator_number.to_s
+            end
             goal_number = get_goal_number(indicator_number)
             target_number = get_target_number(indicator_number)
             doc.data['goal'] = available_goals[language].find {|x| x['number'] == goal_number}
@@ -327,6 +331,10 @@ module JekyllOpenSdgPlugins
               goal_number = doc.data['sdg_goal']
             else
               raise "Error: A goal does not have 'goal_number' property."
+            end
+            # Force the goal number to be a string.
+            if goal_number.is_a? Numeric
+              goal_number = goal_number.to_s
             end
             doc.data['goal'] = available_goals[language].find {|x| x['number'] == goal_number}
           end

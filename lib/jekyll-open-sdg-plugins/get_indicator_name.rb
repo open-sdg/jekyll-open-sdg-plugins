@@ -1,6 +1,9 @@
 require "jekyll"
 require_relative "helpers"
 
+# This plugin will be removed before version 1.0.0.
+# Do not rely on this!
+
 module Jekyll
   module IndicatorName
 
