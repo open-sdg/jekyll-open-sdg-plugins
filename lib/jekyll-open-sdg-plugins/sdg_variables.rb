@@ -35,13 +35,65 @@ module JekyllOpenSdgPlugins
     end
 
     # Compute a URL for an item, given it's number.
-    def get_url(baseurl, language, default_language, number)
-      number = number.gsub('.', '-')
-      url = baseurl
-      if language != default_language
-        url += '/' + language
+    def get_url(baseurl, language, number, languages, languages_public)
+
+      default_language = languages[0]
+      language_public = language
+      if languages_public && languages_public[language]
+        language_public = languages_public[language]
       end
-      url + '/' + number
+      if baseurl == ''
+        baseurl = '/'
+      end
+      if default_language != language
+        baseurl += language_public + '/'
+      end
+      if !baseurl.start_with? '/'
+        baseurl = '/' + baseurl
+      end
+      if !baseurl.end_with? '/'
+        baseurl = baseurl + '/'
+      end
+
+      number = number.gsub('.', '-')
+      baseurl + number
+    end
+
+    # Get a Hash of all the URLs based on one particular one.
+    def get_all_urls(url, language, languages, languages_public)
+      language_public = language
+      if languages_public && languages_public[language]
+        language_public = languages_public[language]
+      end
+
+      # First figure out the language-free URL.
+      default_language = languages[0]
+      if language == default_language
+        url_without_language = url
+      else
+        url_without_language = url.gsub('/' + language_public + '/', '/')
+      end
+
+      urls = {
+        language => url
+      }
+      if language != default_language
+        urls[default_language] = url_without_language
+      end
+      languages.each do |other_language|
+        if other_language == language
+          next
+        end
+        if other_language == default_language
+          next
+        end
+        other_language_public = other_language
+        if languages_public && languages_public[other_language]
+          other_language_public = languages_public[other_language]
+        end
+        urls[other_language] = '/' + other_language_public + url_without_language
+      end
+      urls
     end
 
     # Compute a URL for tha goal image, given it's number.
@@ -86,11 +138,10 @@ module JekyllOpenSdgPlugins
 
       # Some general variables needed below.
       translations = site.data['translations']
-      default_language = site.config['languages'][0]
+      languages = site.config['languages']
+      languages_public = site.config['languages_public']
+      default_language = languages[0]
       baseurl = site.config['baseurl']
-      if baseurl == ''
-        baseurl = '/'
-      end
       goal_image_base = site.config['goal_image_base']
 
       # These keys are flagged as "protected" here so that we can make sure that
@@ -116,7 +167,7 @@ module JekyllOpenSdgPlugins
       already_added = {}
 
       # Set up some empty hashes, per language.
-      site.config['languages'].each do |language|
+      languages.each do |language|
         available_goals[language] = []
         available_targets[language] = []
         available_indicators[language] = []
@@ -134,7 +185,7 @@ module JekyllOpenSdgPlugins
         target_translation_key = 'global_targets.' + target_number.gsub('.', '-')
         indicator_translation_key = 'global_indicators.' + indicator_number.gsub('.', '-')
 
-        site.config['languages'].each do |language|
+        languages.each do |language|
           global_goal = {
             'name' => opensdg_translate_key(goal_translation_key + '-title', translations, language),
             # TODO: More global metadata about goals?
@@ -173,7 +224,7 @@ module JekyllOpenSdgPlugins
               'slug' => goal_number.gsub('.', '-'),
               'name' => opensdg_translate_key(goal_translation_key + '-title', translations, language),
               'short' => opensdg_translate_key(goal_translation_key + '-short', translations, language),
-              'url' => get_url(baseurl, language, default_language, goal_number),
+              'url' => get_url(baseurl, language, goal_number, languages, languages_public),
               'icon' => get_goal_image(goal_image_base, language, goal_number),
               'sort' => get_sort_order(goal_number),
               'global' => global_goal,
@@ -209,7 +260,7 @@ module JekyllOpenSdgPlugins
             'number' => indicator_number,
             'slug' => indicator_number.gsub('.', '-'),
             'name' => opensdg_translate_key(indicator_name, translations, language),
-            'url' => get_url(baseurl, language, default_language, indicator_number),
+            'url' => get_url(baseurl, language, indicator_number, languages, languages_public),
             'sort' => get_sort_order(indicator_number),
             'goal_number' => goal_number,
             'target_number' => target_number,
@@ -226,7 +277,7 @@ module JekyllOpenSdgPlugins
       end
 
       # Sort all the items.
-      site.config['languages'].each do |lang|
+      languages.each do |lang|
         available_goals[lang] = available_goals[lang].sort_by { |x| x['sort'] }
         available_targets[lang] = available_targets[lang].sort_by { |x| x['sort'] }
         available_indicators[lang] = available_indicators[lang].sort_by { |x| x['sort'] }
@@ -237,8 +288,7 @@ module JekyllOpenSdgPlugins
       # page, goal, and indicator across the site. This may be a bit memory-
       # intensive during the Jekyll build, but it is nice to have it available
       # for consistency.
-      collections = ['pages', 'goals', 'indicators']
-      collections.each do |collection|
+      site.collections.keys.each do |collection|
         site.collections[collection].docs.each do |doc|
           # Ensure it has a language.
           if !doc.data.has_key? 'language'
@@ -250,29 +300,8 @@ module JekyllOpenSdgPlugins
           doc.data['targets'] = available_targets[language]
           doc.data['indicators'] = available_indicators[language]
           doc.data['t'] = site.data['translations'][language]
-          # Also figure out the language-specific baseurl and the "public"
-          # language code, in case it is different from the actual language.
-          language_public = language
-          if site.config['languages_public']
-            if site.config['languages_public'][language]
-              language_public = site.config['languages_public'][language]
-            end
-          end
-          baseurl = site.config['baseurl']
-          if baseurl == ''
-            baseurl = '/'
-          end
-          if default_language != language
-            baseurl += language_public + '/'
-          end
-          if !baseurl.start_with? '/'
-            baseurl = '/' + baseurl
-          end
-          if !baseurl.end_with? '/'
-            baseurl = baseurl + '/'
-          end
-          doc.data['baseurl'] = baseurl
-          doc.data['language_public'] = language_public
+          doc.data['baseurl'] = get_url(baseurl, language, '', languages, languages_public)
+          doc.data['url_by_language'] = get_all_urls(doc.url, language, languages, languages_public)
 
           if collection == 'indicators'
             # For indicators we also set the current indicator/target/goal.
