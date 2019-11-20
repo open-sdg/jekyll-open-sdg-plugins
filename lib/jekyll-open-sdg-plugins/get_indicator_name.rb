@@ -47,9 +47,8 @@ module Jekyll
       language = page['language']
       languages = @context.registers[:site].config['languages']
       data = @context.registers[:site].data
-      translated_builds = @context.registers[:site].data
       translations = data['translations']
-      if translated_builds
+      if opensdg_translated_builds(@context.registers[:site])
         meta = data[language]['meta'][inid]
       else
         meta = data['meta'][inid]

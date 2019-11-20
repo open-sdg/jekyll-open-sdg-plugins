@@ -210,7 +210,7 @@ module JekyllOpenSdgPlugins
           meta_key = indicator_number.gsub('.', '-')
           # The location of the metadata is different depending on whether we are
           # using "translated_builds" or not.
-          if site.config['translated_builds']
+          if opensdg_translated_builds(site)
             meta = site.data[language]['meta'][meta_key]
           else
             meta = site.data['meta'][meta_key]
@@ -299,9 +299,13 @@ module JekyllOpenSdgPlugins
           doc.data['goals'] = available_goals[language]
           doc.data['targets'] = available_targets[language]
           doc.data['indicators'] = available_indicators[language]
-          doc.data['t'] = site.data['translations'][language]
           doc.data['baseurl'] = get_url(baseurl, language, '', languages, languages_public)
           doc.data['url_by_language'] = get_all_urls(doc.url, language, languages, languages_public)
+          if opensdg_translated_builds(site)
+            doc.data['t'] = site.data[language]['translations']
+          else
+            doc.data['t'] = site.data['translations'][language]
+          end
 
           if collection == 'indicators'
             # For indicators we also set the current indicator/target/goal.

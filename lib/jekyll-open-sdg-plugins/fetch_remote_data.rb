@@ -2,6 +2,7 @@ require "jekyll"
 require 'json'
 require 'deep_merge'
 require 'open-uri'
+require_relative "helpers"
 
 module JekyllOpenSdgPlugins
   class FetchRemoteData < Jekyll::Generator
@@ -37,7 +38,7 @@ module JekyllOpenSdgPlugins
         # First try to grab the remote data.
         if site.config['remote_data_prefix']
           prefix = site.config['remote_data_prefix']
-          if site.config['translated_builds']
+          if opensdg_translated_builds(site)
             site.config['languages'].each do |language|
               target = site.data[language]
               source = download_build(prefix + '/' + language)

@@ -1,4 +1,5 @@
 require "jekyll"
+require_relative "helpers"
 
 # This plugin will be removed before version 1.0.0.
 # Do not rely on this!
@@ -12,7 +13,7 @@ module JekyllOpenSdgPlugins
       # Make sure that the translated metadata contains a complete set of values
       # including non-translated metadata as a fallback. This allows us to treat
       # the translated metadata as complete when used in layouts and includes.
-      if site.config['languages'] and !site.config['translated_builds']
+      if site.config['languages'] and !opensdg_translated_builds(site)
         site.config['languages'].each do |language|
           site.data['meta'].each do |indicator_id, meta|
             if meta[language]

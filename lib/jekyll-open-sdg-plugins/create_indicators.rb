@@ -1,4 +1,5 @@
 require "jekyll"
+require_relative "helpers"
 
 module JekyllOpenSdgPlugins
   class CreateIndicators < Jekyll::Generator
@@ -8,8 +9,6 @@ module JekyllOpenSdgPlugins
     def generate(site)
       # If site.create_indicators is set, create indicators per the metadata.
       if site.config['languages'] and site.config['create_indicators']
-        # Are we using translated builds?
-        translated_builds = site.config['translated_builds']
         # Decide what layout to use for the indicator pages.
         layout = 'indicator'
         if site.config['create_indicators'].key?('layout')
@@ -28,7 +27,7 @@ module JekyllOpenSdgPlugins
             language_public = languages_public[language]
           end
           metadata = {}
-          if translated_builds
+          if opensdg_translated_builds(site)
             # If we are using translated builds, the metadata is underneath a
             # language code.
             metadata = site.data[language]['meta']

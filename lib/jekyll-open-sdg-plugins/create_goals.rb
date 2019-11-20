@@ -1,4 +1,5 @@
 require "jekyll"
+require_relative "helpers"
 
 module JekyllOpenSdgPlugins
   class CreateGoals < Jekyll::Generator
@@ -11,9 +12,8 @@ module JekyllOpenSdgPlugins
         # Compile the list of goals.
         goals = {}
         # Are we using translated builds?
-        translated_builds = site.config['translated_builds']
         metadata = {}
-        if translated_builds
+        if opensdg_translated_builds(site)
           # If we are using translated builds, the 'meta' data is underneath
           # language codes. We just use the first language.
           default_language = site.config['languages'][0]
