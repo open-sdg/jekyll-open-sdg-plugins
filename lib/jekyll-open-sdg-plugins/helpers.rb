@@ -51,7 +51,7 @@ def opensdg_translate_key(key, translations, language)
   return drilled
 end
 
-# Takes a site object and decides whether it is usiing translated builds.
+# Takes a site object and decides whether it is using translated builds.
 def opensdg_translated_builds(site)
   # Assume the site is using translated builds.
   translated_builds = true

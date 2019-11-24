@@ -301,11 +301,7 @@ module JekyllOpenSdgPlugins
           doc.data['indicators'] = available_indicators[language]
           doc.data['baseurl'] = get_url(baseurl, language, '', languages, languages_public)
           doc.data['url_by_language'] = get_all_urls(doc.url, language, languages, languages_public)
-          if opensdg_translated_builds(site)
-            doc.data['t'] = site.data[language]['translations']
-          else
-            doc.data['t'] = site.data['translations'][language]
-          end
+          doc.data['t'] = site.data['translations'][language]
 
           if collection == 'indicators'
             # For indicators we also set the current indicator/target/goal.
