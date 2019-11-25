@@ -10,6 +10,7 @@ module JekyllOpenSdgPlugins
     priority :highest
 
     def download_build(prefix)
+
       endpoints = {
         'meta' => 'meta/all.json',
         'headlines' => 'headline/all.json',
@@ -42,7 +43,17 @@ module JekyllOpenSdgPlugins
           site.data['translations'] = {}
         end
 
-        if opensdg_translated_builds(site)
+        # How do we tell, before data has been fetched, whether the site is
+        # using translated builds? Quick and dirty way - attempt a download
+        # of the non-tranlsated build. If it fails, assume translated builds.
+        translated_builds = false
+        begin
+          JSON.load(open(prefix + '/meta/all.json'))
+        rescue StandardError => e
+          translated_builds = true
+        end
+
+        if translated_builds
           # For translated builds, we download a build for each language, and
           # place them in "subfolders" (so to speak) of site.data.
           site.config['languages'].each do |language|
