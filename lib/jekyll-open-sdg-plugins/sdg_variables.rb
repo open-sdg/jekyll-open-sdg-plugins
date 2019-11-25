@@ -314,6 +314,12 @@ module JekyllOpenSdgPlugins
           doc.data['url_by_language'] = get_all_urls(doc.url, language, languages, languages_public, baseurl)
           doc.data['t'] = site.data['translations'][language]
 
+          # Set the remote_data_prefix for this indicator.
+          doc.data['remote_data_prefix'] = site.config['remote_data_prefix']
+          if opensdg_translated_builds(site)
+            doc.data['remote_data_prefix'] += '/' + language
+          end
+
           if collection == 'indicators'
             # For indicators we also set the current indicator/target/goal.
             if doc.data.has_key? 'indicator_number'
