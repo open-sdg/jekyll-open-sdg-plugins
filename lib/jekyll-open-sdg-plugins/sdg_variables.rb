@@ -89,7 +89,10 @@ module JekyllOpenSdgPlugins
         language => url
       }
       if language != default_language
-        urls[default_language] = baseurl + url_without_language
+        default_language_url = baseurl + url_without_language
+        # Fix potential double-slash.
+        default_language_url = default_language_url.gsub('//', '/')
+        urls[default_language] = default_language_url
       end
       languages.each do |other_language|
         if other_language == language
