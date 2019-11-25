@@ -25,9 +25,9 @@ module JekyllOpenSdgPlugins
           source = JSON.load(open(endpoint))
           build[key] = source
         rescue StandardError => e
-          puts e.message
           # For backwards compatibility, we allow 'translations' to be missing.
           if key != 'translations'
+            puts e.message
             abort 'Unable to fetch remote data from: ' + endpoint
           end
         end
