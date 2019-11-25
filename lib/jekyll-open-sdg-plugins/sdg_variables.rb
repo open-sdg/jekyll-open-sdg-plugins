@@ -34,19 +34,11 @@ module JekyllOpenSdgPlugins
       sort_order
     end
 
-    # Compute a URL for an item, given it's number.
-    def get_url(baseurl, language, number, languages, languages_public)
-
-      default_language = languages[0]
-      language_public = language
-      if languages_public && languages_public[language]
-        language_public = languages_public[language]
-      end
+    # The Jekyll baseurl is user-configured, and can be inconsistent. This
+    # ensure it is consistent in whether it starts/ends with a slash.
+    def normalize_baseurl(baseurl)
       if baseurl == ''
         baseurl = '/'
-      end
-      if default_language != language
-        baseurl += language_public + '/'
       end
       if !baseurl.start_with? '/'
         baseurl = '/' + baseurl
@@ -54,13 +46,32 @@ module JekyllOpenSdgPlugins
       if !baseurl.end_with? '/'
         baseurl = baseurl + '/'
       end
+      baseurl
+    end
+
+    # Compute a URL for an item, given it's number.
+    def get_url(baseurl, language, number, languages, languages_public)
+
+      baseurl = normalize_baseurl(baseurl)
+
+      default_language = languages[0]
+      language_public = language
+      if languages_public && languages_public[language]
+        language_public = languages_public[language]
+      end
+      if default_language != language
+        baseurl += language_public + '/'
+      end
 
       number = number.gsub('.', '-')
       baseurl + number
     end
 
     # Get a Hash of all the URLs based on one particular one.
-    def get_all_urls(url, language, languages, languages_public)
+    def get_all_urls(url, language, languages, languages_public, baseurl)
+
+      baseurl = normalize_baseurl(baseurl)
+
       language_public = language
       if languages_public && languages_public[language]
         language_public = languages_public[language]
@@ -78,7 +89,7 @@ module JekyllOpenSdgPlugins
         language => url
       }
       if language != default_language
-        urls[default_language] = url_without_language
+        urls[default_language] = baseurl + url_without_language
       end
       languages.each do |other_language|
         if other_language == language
@@ -91,7 +102,7 @@ module JekyllOpenSdgPlugins
         if languages_public && languages_public[other_language]
           other_language_public = languages_public[other_language]
         end
-        urls[other_language] = '/' + other_language_public + url_without_language
+        urls[other_language] = baseurl + other_language_public + url_without_language
       end
       urls
     end
@@ -210,7 +221,7 @@ module JekyllOpenSdgPlugins
           meta_key = indicator_number.gsub('.', '-')
           # The location of the metadata is different depending on whether we are
           # using "translated_builds" or not.
-          if site.config['translated_builds']
+          if opensdg_translated_builds(site)
             meta = site.data[language]['meta'][meta_key]
           else
             meta = site.data['meta'][meta_key]
@@ -299,9 +310,15 @@ module JekyllOpenSdgPlugins
           doc.data['goals'] = available_goals[language]
           doc.data['targets'] = available_targets[language]
           doc.data['indicators'] = available_indicators[language]
-          doc.data['t'] = site.data['translations'][language]
           doc.data['baseurl'] = get_url(baseurl, language, '', languages, languages_public)
-          doc.data['url_by_language'] = get_all_urls(doc.url, language, languages, languages_public)
+          doc.data['url_by_language'] = get_all_urls(doc.url, language, languages, languages_public, baseurl)
+          doc.data['t'] = site.data['translations'][language]
+
+          # Set the remote_data_prefix for this indicator.
+          doc.data['remote_data_prefix'] = site.config['remote_data_prefix']
+          if opensdg_translated_builds(site)
+            doc.data['remote_data_prefix'] += '/' + language
+          end
 
           if collection == 'indicators'
             # For indicators we also set the current indicator/target/goal.

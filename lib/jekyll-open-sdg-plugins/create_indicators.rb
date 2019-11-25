@@ -1,4 +1,5 @@
 require "jekyll"
+require_relative "helpers"
 
 module JekyllOpenSdgPlugins
   class CreateIndicators < Jekyll::Generator
@@ -25,8 +26,17 @@ module JekyllOpenSdgPlugins
           if languages_public[language]
             language_public = languages_public[language]
           end
+          metadata = {}
+          if opensdg_translated_builds(site)
+            # If we are using translated builds, the metadata is underneath a
+            # language code.
+            metadata = site.data[language]['meta']
+          else
+            # Otherwise the 'meta' data is not underneath any language code.
+            metadata = site.data['meta']
+          end
           # Loop through the indicators (using metadata as a list).
-          site.data['meta'].each do |inid, meta|
+          metadata.each do |inid, meta|
             # Add the language subfolder for all except the default (first) language.
             dir = index == 0 ? inid : File.join(language_public, inid)
             # Create the indicator page.

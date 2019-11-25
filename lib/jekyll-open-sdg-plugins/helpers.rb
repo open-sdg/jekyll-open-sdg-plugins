@@ -50,3 +50,17 @@ def opensdg_translate_key(key, translations, language)
   # Otherwise we must have drilled all they way.
   return drilled
 end
+
+# Takes a site object and decides whether it is using translated builds.
+def opensdg_translated_builds(site)
+  # Assume the site is using translated builds.
+  translated_builds = true
+  site.config['languages'].each do |language|
+    # If any languages don't have a key in site.data, the site is not using
+    # translated builds.
+    if !site.data.has_key? language
+      translated_builds = false
+    end
+  end
+  return translated_builds
+end

@@ -30,6 +30,7 @@ module JekyllOpenSdgPlugins
       #
       # create_pages: true
       if site.config['languages'] and site.config['create_pages']
+
         default_pages = [
           {
             'folder' => '/',
