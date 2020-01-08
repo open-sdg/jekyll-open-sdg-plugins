@@ -85,7 +85,30 @@ module JekyllOpenSdgPlugins
           target.deep_merge(source)
         end
       else
-        abort 'The "remote_data_prefix" configuration setting is missing.'
+        # If remote data is not configured, check to see if Jekyll's data folder
+        # already contains the data.
+        data_is_local = false
+        # Data will either be directly in site.data, or in a folder per language,
+        # depending on whether we are using translated builds.
+        if site.data.has_key? 'meta'
+          # We could be more thorough and check all the endpoints, but for now
+          # just assume that if 'meta' is there, all the endpoints are.
+          data_is_local = true
+        else
+          data_for_all_languages = true
+          site.config['languages'].each do |language|
+            if !site.data.has_key? language || !site.data[language].has_key? 'meta'
+              data_for_all_languages = false
+            end
+          end
+          if data_for_all_languages
+            data_is_local = true
+          end
+        end
+        # Finally give an error is there is no local data.
+        if !data_is_local
+          abort 'The "remote_data_prefix" configuration setting is missing and there is no local data.'
+        end
       end
 
       # Finally support the deprecated 'remote_translations' option.
