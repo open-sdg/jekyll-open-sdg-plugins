@@ -9,111 +9,130 @@ module JekyllOpenSdgPlugins
     safe true
     priority :highest
 
-    def download_build(prefix)
+    # Fix a Unix path in case we are on Windows.
+    def fix_path(path)
+      path_parts = path.split('/')
+      return path_parts.join(File::SEPARATOR)
+    end
 
-      endpoints = {
+    # Our hardcoded list of pieces of the build that we expect.
+    def get_endpoints()
+      return {
         'meta' => 'meta/all.json',
         'headlines' => 'headline/all.json',
         'schema' => 'meta/schema.json',
         'reporting' => 'stats/reporting.json',
         'translations' => 'translations/translations.json'
       }
+    end
+
+    # Is this path a remote path?
+    def is_path_remote(path)
+      return path.start_with?('http')
+    end
+
+    # Get a build from a local folder on disk or a remote URL on the Internet.
+    def fetch_build(path)
+
+      is_remote = is_path_remote(path)
       build = {}
-      endpoints.each do |key, value|
-        endpoint = prefix + '/' + value
+      get_endpoints().each do |key, value|
+        endpoint = is_remote ? path + '/' + value : File.join(path, fix_path(value))
+
         begin
-          source = JSON.load(open(endpoint))
-          build[key] = source
+          json_file = is_remote ? open(endpoint) : File.open(endpoint)
+          build[key] = JSON.load(json_file)
         rescue StandardError => e
           # For backwards compatibility, we allow 'translations' to be missing.
           if key != 'translations'
             puts e.message
-            abort 'Unable to fetch remote data from: ' + endpoint
+            abort 'Unable to read data from: ' + endpoint
           end
         end
       end
-      build
+
+      return build
+    end
+
+    # Predict (before data has been fetched) whether the site is using
+    # translated builds or not.
+    def site_uses_translated_builds(path)
+
+      is_remote = is_path_remote(path)
+      endpoints = get_endpoints()
+      # For a quick test, we just use 'meta'.
+      meta = endpoints['meta']
+      endpoint = is_remote ? path + '/' + meta : File.join(path, fix_path(meta))
+
+      begin
+        json_file = is_remote ? open(endpoint) : File.open(endpoint)
+      rescue StandardError => e
+        # If we didn't find an untranslated 'meta', we assume translated builds.
+        return true
+      end
+
+      # Other wise assume untranslated builds.
+      return false
     end
 
     def generate(site)
 
-      if site.config['remote_data_prefix']
-        prefix = site.config['remote_data_prefix']
+      # For below, make sure there is at least an empty hash at
+      # site.data.translations.
+      if !site.data.has_key?('translations')
+        site.data['translations'] = {}
+      end
 
-        # For below, make sure there is at least an empty hash at
-        # site.data.translations.
-        if !site.data.has_key?('translations')
-          site.data['translations'] = {}
-        end
+      remote = site.config['remote_data_prefix']
+      local = site.config['local_data_folder']
 
-        # How do we tell, before data has been fetched, whether the site is
-        # using translated builds? Quick and dirty way - attempt a download
-        # of the non-tranlsated build. If it fails, assume translated builds.
-        translated_builds = false
-        begin
-          JSON.load(open(prefix + '/meta/all.json'))
-        rescue StandardError => e
-          translated_builds = true
-        end
+      if !remote && !local
+        abort 'Site config must include either "remote_data_prefix" or "local_data_folder".'
+      end
 
-        if translated_builds
-          # For translated builds, we download a build for each language, and
-          # place them in "subfolders" (so to speak) of site.data.
-          site.config['languages'].each do |language|
-            data_target = site.data[language]
-            data_source = download_build(prefix + '/' + language)
-            if data_target
-              data_target.deep_merge(data_source)
-            else
-              site.data[language] = data_source
-            end
-            # Additionally, we move the language-specific translations to the
-            # site.data.translations location, where all translations are kept.
-            translation_target = site.data['translations'][language]
-            translation_source = site.data[language]['translations']
-            if translation_target
-              translation_target.deep_merge(translation_source)
-            else
-              site.data['translations'][language] = translation_source
-            end
+      build_location = remote ? remote : File.join(Dir.pwd, local)
+      translated_builds = site_uses_translated_builds(build_location)
+
+      if translated_builds
+        # For translated builds, we get a build for each language, and
+        # place them in "subfolders" (so to speak) of site.data.
+        site.config['languages'].each do |language|
+          data_target = site.data[language]
+          translated_build = remote ? build_location + '/' + language : File.join(build_location, language)
+          data_source = fetch_build(translated_build)
+          if data_target
+            data_target.deep_merge(data_source)
+          else
+            site.data[language] = data_source
           end
-        else
-          # For untranslated builds, we download one build only, and place it
-          # in the "root" (so to speak) of site.data. Nothing else is needed.
-          target = site.data
-          source = download_build(prefix)
-          target.deep_merge(source)
         end
+        # We move the language-specific translations to the
+        # site.data.translations location, where all translations are kept.
+        site.config['languages'].each do |language|
+          translation_target = site.data['translations'][language]
+          translation_source = site.data[language]['translations']
+          if translation_target
+            translation_target.deep_merge(translation_source)
+          else
+            site.data['translations'][language] = translation_source
+          end
+        end
+        # And there are some parts of the build that don't need to be translated
+        # and should be moved to the top level.
+        first_language = site.config['languages'][0]
+        site.data['reporting'] = site.data[first_language]['reporting']
+        site.data['schema'] = site.data[first_language]['schema']
       else
-        # If remote data is not configured, check to see if Jekyll's data folder
-        # already contains the data.
-        data_is_local = false
-        # Data will either be directly in site.data, or in a folder per language,
-        # depending on whether we are using translated builds.
-        if site.data.has_key? 'meta'
-          # We could be more thorough and check all the endpoints, but for now
-          # just assume that if 'meta' is there, all the endpoints are.
-          data_is_local = true
-        else
-          data_for_all_languages = true
-          site.config['languages'].each do |language|
-            if !site.data.has_key? language || !site.data[language].has_key? 'meta'
-              data_for_all_languages = false
-            end
-          end
-          if data_for_all_languages
-            data_is_local = true
-          end
-        end
-        # Finally give an error is there is no local data.
-        if !data_is_local
-          abort 'The "remote_data_prefix" configuration setting is missing and there is no local data.'
-        end
+        # For untranslated builds, we download one build only, and place it
+        # in the "root" (so to speak) of site.data. Nothing else is needed.
+        target = site.data
+        source = fetch_build(build_location)
+        target.deep_merge(source)
       end
 
       # Finally support the deprecated 'remote_translations' option.
       # This is deprecated because translations should now be in the
-      # data repository, where they will be fetched in download_build().
+      # data repository, where they will be fetched in fetch_build().
       if site.config['remote_translations']
         key = 'translations'
         target = site.data[key]
