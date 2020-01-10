@@ -318,7 +318,11 @@ module JekyllOpenSdgPlugins
           doc.data['t'] = site.data['translations'][language]
 
           # Set the remote_data_prefix for this indicator.
-          doc.data['remote_data_prefix'] = site.config['remote_data_prefix']
+          if site.config.has_key? 'remote_data_prefix'
+            doc.data['remote_data_prefix'] = site.config['remote_data_prefix']
+          elsif site.config.has_key? 'local_data_folder'
+            doc.data['remote_data_prefix'] = doc.data['baseurl']
+          end
           if opensdg_translated_builds(site)
             doc.data['remote_data_prefix'] += '/' + language
           end
