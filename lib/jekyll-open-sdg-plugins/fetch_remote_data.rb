@@ -152,4 +152,14 @@ module JekyllOpenSdgPlugins
       end
     end
   end
+
+  # This makes sure that the contents of the "local_data_folder" get copied
+  # into the Jekyll build, so that they can be served from the website.
+  Jekyll::Hooks.register :site, :post_write do |site|
+    if site.config['local_data_folder']
+      source = File.join(Dir.pwd, site.config['local_data_folder'], '.')
+      destination = site.config['destination']
+      FileUtils.cp_r(source, destination)
+    end
+  end
 end
