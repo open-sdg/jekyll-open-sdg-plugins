@@ -5,6 +5,7 @@ require_relative "jekyll-open-sdg-plugins/create_indicators"
 require_relative "jekyll-open-sdg-plugins/create_goals"
 require_relative "jekyll-open-sdg-plugins/create_pages"
 require_relative "jekyll-open-sdg-plugins/sdg_variables"
+require_relative "jekyll-open-sdg-plugins/search_index"
 
 module JekyllOpenSdgPlugins
 end
