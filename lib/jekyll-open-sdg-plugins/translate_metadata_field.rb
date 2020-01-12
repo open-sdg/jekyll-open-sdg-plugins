@@ -35,13 +35,13 @@ module Jekyll
 
       to_translate = ''
       # First choice - use the 'translation_key' property from the schema.
-      if field && field['field'].has_key? 'translation_key'
+      if field && field['field'].has_key?('translation_key')
         to_translate = field['field']['translation_key']
       # Next choice - try the 'metadata_fields' translation group.
-      elsif t[lang].has_key? 'metadata_fields' && t[lang]['metadata_fields'].has_key? field_name
+      elsif t[lang].has_key?('metadata_fields') && t[lang]['metadata_fields'].has_key?(field_name)
         to_translate = 'metadata_fields.' + field_name
       # Next choice - use the 'label' from the schema.
-      elsif field && field['field'].has_key? 'label'
+      elsif field && field['field'].has_key?('label')
         to_translate = field['field']['label']
       # Last choice - just use the field name.
       else
@@ -89,11 +89,11 @@ module Jekyll
       to_translate = value
 
       # Look for the 'translation_key' property from the schema.
-      if field && field['field'].has_key? 'options'
+      if field && field['field'].has_key?('options')
         option = field['field']['options'].select {|x| x['value'] == value}
         if option
           option = option.first()
-          if option.has_key? 'translation_key'
+          if option.has_key?('translation_key')
             to_translate = option['translation_key']
           else
             to_translate = option['name']
@@ -104,6 +104,7 @@ module Jekyll
       return opensdg_translate_key(to_translate, t, lang)
 
     end
+  end
 end
 
 Liquid::Template.register_filter(Jekyll::TranslateMetadataField)

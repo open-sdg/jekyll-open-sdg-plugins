@@ -70,6 +70,7 @@ module JekyllOpenSdgPlugins
 
       # Stow the data for later use in Jekyll templates.
       site.data['search_items'] = search_items
+
     end
   end
 end
