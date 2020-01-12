@@ -3,7 +3,7 @@ require "jekyll"
 module JekyllOpenSdgPlugins
   class CreatePages < Jekyll::Generator
     safe true
-    priority :low
+    priority :normal
 
     def generate(site)
       # If site.create_pages is set, create the 4 required pages. These include:

@@ -4,7 +4,7 @@ require_relative "helpers"
 module JekyllOpenSdgPlugins
   class SDGVariables < Jekyll::Generator
     safe true
-    priority :lowest
+    priority :low
 
     # Get a goal number from an indicator number.
     def get_goal_number(indicator_number)
@@ -388,6 +388,7 @@ module JekyllOpenSdgPlugins
         end
       end
       site.data['sdg_lookup'] = lookup
+
     end
   end
 end

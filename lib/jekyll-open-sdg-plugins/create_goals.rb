@@ -4,7 +4,7 @@ require_relative "helpers"
 module JekyllOpenSdgPlugins
   class CreateGoals < Jekyll::Generator
     safe true
-    priority :low
+    priority :normal
 
     def generate(site)
       # If site.create_goals is set, create goals per the metadata.
