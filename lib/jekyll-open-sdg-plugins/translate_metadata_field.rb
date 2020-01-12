@@ -2,7 +2,7 @@ require "jekyll"
 require_relative "helpers"
 
 module Jekyll
-  module MetadataField
+  module TranslateMetadataField
     # Takes a metadata field (machine name) and returns a translated string
     # according to the language of the current page, suitable for displaying to
     # the public. It gets this string by looking in the site's "schema" for a
@@ -19,7 +19,7 @@ module Jekyll
     # ----------
     # field_name : string
     #   The machine name of a metadata field.
-    def metadata_field(field_name)
+    def translate_metadata_field(field_name)
 
       # Determine the language of the current page.
       t = @context.registers[:site].data['translations']
@@ -52,14 +52,15 @@ module Jekyll
     end
   end
 
-  module MetadataFieldOption
+  module TranslateMetadataFieldOption
     # Takes a metadata field (machine name) and option (value) and returns a
     # translated string according to the language of the current page, suitable
     # for displaying to the public.
     #
-    # By contrast to MetadataField above, this is for translating the options
-    # of multiple-choice schema fields. But similar to MetadataField, this looks
-    # for a "translation_key" property on the option in the schema.
+    # By contrast to TranslateMetadataField above, this is for translating the
+    # options of multiple-choice schema fields. But similar to
+    # TranslateMetadataField, this looks for a "translation_key" property on
+    # the option in the schema.
     #
     # Temporary backwards compatibility: If the check fails, it falls back to
     # whatever is in a "name" property in the schema.
@@ -70,7 +71,7 @@ module Jekyll
     #   The machine name of a metadata field.
     # value : string
     #   The 'value' of the option to use.
-    def metadata_field_option(field_name, value)
+    def translate_metadata_field_option(field_name, value)
 
       # Determine the language of the current page.
       t = @context.registers[:site].data['translations']
@@ -105,5 +106,5 @@ module Jekyll
     end
 end
 
-Liquid::Template.register_filter(Jekyll::MetadataField)
-Liquid::Template.register_filter(Jekyll::MetadataFieldOption)
+Liquid::Template.register_filter(Jekyll::TranslateMetadataField)
+Liquid::Template.register_filter(Jekyll::TranslateMetadataFieldOption)
