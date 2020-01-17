@@ -8,6 +8,16 @@ module JekyllOpenSdgPlugins
     # NOTE: This must be executed **after** the sdg_variables.rb file, since it
     # relies heavily on the variables created there.
 
+    # Helper function to prepare content for the search index.
+    def prepare_content(site, content)
+      # First compile any Markdown.
+      converter = site.find_converter_instance(::Jekyll::Converters::Markdown)
+      content = converter.convert(content)
+      # Now strip any HTML.
+      content = content.gsub(/<\/?[^>]*>/, "")
+      return content
+    end
+
     def generate(site)
 
       # Generate a hash of items to include in the search index.
@@ -34,14 +44,14 @@ module JekyllOpenSdgPlugins
             # For the title, use the indicator name.
             item['title'] = doc.data['indicator']['name']
             # For the content, use the 'page_content' field.
-            item['content'] = doc.data['indicator']['page_content']
+            item['content'] = prepare_content(site, doc.data['indicator']['page_content'])
             # For the hidden field, use the ID number.
             item['hidden'] = doc.data['indicator']['number']
             # Also index any additional metadata fields.
             if site.config['search_index_extra_fields']
               site.config['search_index_extra_fields'].each do |field|
                 if doc.data['indicator'].has_key? field
-                  item['hidden'] += ' ' + doc.data['indicator'][field]
+                  item['hidden'] += ' ' + prepare_content(site, doc.data['indicator'][field])
                 end
               end
             end
@@ -59,7 +69,7 @@ module JekyllOpenSdgPlugins
             # Otherwise assume it is a normal Jekyll document.
             item['url'] = doc.url
             item['title'] = doc.data['title']
-            item['content'] = doc.content
+            item['content'] = prepare_content(site, doc.content)
             item['hidden'] = ''
           end
 
