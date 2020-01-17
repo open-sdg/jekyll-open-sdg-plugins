@@ -10,6 +10,12 @@ module JekyllOpenSdgPlugins
 
     # Helper function to prepare content for the search index.
     def prepare_content(site, content)
+
+      # Handle nil content.
+      if !content
+        content = ''
+      end
+
       # First compile any Markdown.
       converter = site.find_converter_instance(::Jekyll::Converters::Markdown)
       content = converter.convert(content)
