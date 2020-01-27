@@ -73,7 +73,7 @@ module JekyllOpenSdgPlugins
             item['hidden'] = doc.data['goal']['number']
           else
             # Otherwise assume it is a normal Jekyll document.
-            item['url'] = doc.url
+            item['url'] = File.join(doc.data['baseurl'], doc.url)
             item['title'] = doc.data['title']
             item['content'] = prepare_content(site, doc.content)
             item['hidden'] = ''
