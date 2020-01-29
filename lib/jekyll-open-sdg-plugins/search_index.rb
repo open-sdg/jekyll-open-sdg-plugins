@@ -51,13 +51,13 @@ module JekyllOpenSdgPlugins
             item['title'] = doc.data['indicator']['name']
             # For the content, use the 'page_content' field.
             item['content'] = prepare_content(site, doc.data['indicator']['page_content'])
-            # For the hidden field, use the ID number.
-            item['hidden'] = doc.data['indicator']['number']
+            # For the id field, use the ID number.
+            item['id'] = doc.data['indicator']['number']
             # Also index any additional metadata fields.
             if site.config['search_index_extra_fields']
               site.config['search_index_extra_fields'].each do |field|
                 if doc.data['indicator'].has_key? field
-                  item['hidden'] += ' ' + prepare_content(site, doc.data['indicator'][field])
+                  item[field] = prepare_content(site, doc.data['indicator'][field])
                 end
               end
             end
@@ -69,14 +69,14 @@ module JekyllOpenSdgPlugins
             item['title'] = doc.data['goal']['name']
             # For the content, currently nothing here.
             item['content'] = ''
-            # For the hidden field, use the ID number.
-            item['hidden'] = doc.data['goal']['number']
+            # For the id field, use the ID number.
+            item['id'] = doc.data['goal']['number']
           else
             # Otherwise assume it is a normal Jekyll document.
             item['url'] = File.join(doc.data['baseurl'], doc.url)
             item['title'] = doc.data['title']
             item['content'] = prepare_content(site, doc.content)
-            item['hidden'] = ''
+            item['id'] = ''
           end
 
           # Save this item in the language-specific search index.
