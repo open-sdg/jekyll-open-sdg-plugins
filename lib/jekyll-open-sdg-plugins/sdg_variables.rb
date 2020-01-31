@@ -317,14 +317,14 @@ module JekyllOpenSdgPlugins
           doc.data['url_by_language'] = get_all_urls(doc.url, language, languages, languages_public, baseurl)
           doc.data['t'] = site.data['translations'][language]
 
-          # Set the remote_data_prefix for this indicator.
+          # Set the remote_data_prefix for this page.
           if site.config.has_key? 'remote_data_prefix'
             doc.data['remote_data_prefix'] = site.config['remote_data_prefix']
           elsif site.config.has_key? 'local_data_folder'
-            doc.data['remote_data_prefix'] = doc.data['baseurl']
+            doc.data['remote_data_prefix'] = normalize_baseurl(baseurl)
           end
           if opensdg_translated_builds(site)
-            doc.data['remote_data_prefix'] += '/' + language
+            doc.data['remote_data_prefix'] = File.join(doc.data['remote_data_prefix'], language)
           end
 
           if collection == 'indicators'
