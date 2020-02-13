@@ -22,7 +22,8 @@ module JekyllOpenSdgPlugins
         'headlines' => 'headline/all.json',
         'schema' => 'meta/schema.json',
         'reporting' => 'stats/reporting.json',
-        'translations' => 'translations/translations.json'
+        'translations' => 'translations/translations.json',
+        'zip' => 'zip/all_indicators.json'
       }
     end
 
