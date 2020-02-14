@@ -1,3 +1,3 @@
 module JekyllOpenSdgPlugins
-  VERSION = "1.0.0.rc20".freeze
+  VERSION = "1.0.0.rc21".freeze
 end
