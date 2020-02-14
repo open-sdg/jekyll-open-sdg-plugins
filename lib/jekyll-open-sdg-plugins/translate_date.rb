@@ -29,6 +29,11 @@ module Jekyll
         end
       end
 
+      # Support timestamps.
+      if date.is_a? Integer
+        date = Time.at(date)
+      end
+
       # Convert the date into English.
       english = date.strftime(date_format)
 
