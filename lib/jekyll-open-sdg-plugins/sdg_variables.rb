@@ -228,6 +228,13 @@ module JekyllOpenSdgPlugins
             meta = site.data[language]['meta'][meta_key]
           else
             meta = site.data['meta'][meta_key]
+            # Also for untranslated builds, we need to support the "subfolder"
+            # approach for metadata translation. (This is handled at build-time
+            # for translated builds.)
+            if meta.has_key? language
+              meta = meta.merge(meta[language])
+              meta.delete(language)
+            end
           end
 
           # Set the goal for this language, once only.
