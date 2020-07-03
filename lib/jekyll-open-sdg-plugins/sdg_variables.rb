@@ -33,9 +33,9 @@ module JekyllOpenSdgPlugins
       parts.each do |part|
         if part.length == 1
           if is_number?(part)
-            part = part + part
-          else
             part = '0' + part
+          else
+            part = part + part
           end
         end
         sort_order += part
