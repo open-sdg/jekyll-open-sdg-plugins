@@ -18,6 +18,11 @@ module JekyllOpenSdgPlugins
       parts[0] + '.' + parts[1]
     end
 
+    # Is this string numeric?
+    def is_number? string
+      true if Float(string) rescue false
+    end
+
     # Make any goal/target/indicator number suitable for use in sorting.
     def get_sort_order(number)
       if number.is_a? Numeric
@@ -27,7 +32,11 @@ module JekyllOpenSdgPlugins
       parts = number.split('.')
       parts.each do |part|
         if part.length == 1
-          part = '0' + part
+          if is_number?(part)
+            part = '0' + part
+          else
+            part = part + part
+          end
         end
         sort_order += part
       end
