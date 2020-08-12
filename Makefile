@@ -8,7 +8,7 @@ clean:
 	rm -fr open-sdg-site-starter
 	rm -fr open-sdg
 
-build: clean
+install: clean
 	git clone https://github.com/open-sdg/open-sdg-site-starter.git
 	git clone https://github.com/open-sdg/open-sdg.git
 	# Copy all the theme files into the site starter.
@@ -21,9 +21,13 @@ build: clean
 	cp tests/Gemfile open-sdg-site-starter/
 	# Create a symlink to our plugin files.
 	ln -s ../lib/jekyll-open-sdg-plugins open-sdg-site-starter/_plugins
-	# Build the Jekyll site.
+	# Install Ruby dependencies.
 	cd open-sdg-site-starter && bundle install
+
+build:
 	cd open-sdg-site-starter && bundle exec jekyll build
 
-serve: build
-	cd open-sdg-site-starter && bundle exec jekyll serve --skip-initial-build
+serve:
+	cd open-sdg-site-starter && bundle exec jekyll serve
+
+test: install build
