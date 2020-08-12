@@ -315,6 +315,12 @@ module JekyllOpenSdgPlugins
           if !doc.data.has_key? 'language'
             doc.data['language'] = default_language
           end
+          # Ensure it has a valid language.
+          if !languages.include? doc.data['language']
+            message = "NOTICE: The document '#{doc.basename}' has an unexpected language '#{doc.data['language']}' so we are using the default language '#{default_language}' instead."
+            opensdg_notice(message)
+            doc.data['language'] = default_language
+          end
           language = doc.data['language']
           # Set these on the page object.
           doc.data['goals'] = available_goals[language]

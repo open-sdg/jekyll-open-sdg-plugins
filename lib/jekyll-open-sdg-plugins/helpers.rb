@@ -1,5 +1,7 @@
 # Simple collection of helper functions for use in these plugins.
 
+require "jekyll"
+
 # Takes a translation key and returns a translated string according to the
 # language of the current page. Or if none is found, returns the original
 # key.
@@ -63,4 +65,9 @@ def opensdg_translated_builds(site)
     end
   end
   return translated_builds
+end
+
+# Print a notice during compilation.
+def opensdg_notice(message)
+  Jekyll.logger.warn message.yellow
 end
