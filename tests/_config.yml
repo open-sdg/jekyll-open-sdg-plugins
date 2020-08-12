@@ -7,9 +7,6 @@ metadata_edit_url: http://prose.io/#open-sdg/open-sdg-data-starter/edit/develop/
 languages:
   - en
 
-languages_public:
-  es: foo
-
 title: Indicators For The Sustainable Development Goals
 url: ""
 data_dir: data
