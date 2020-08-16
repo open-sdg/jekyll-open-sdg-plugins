@@ -77,12 +77,12 @@ def opensdg_languages_public(site)
   languages_public = site.config['languages_public']
 
   # The current structure of the setting is an array of hashes, each containing
-  # keys for "language" and "public".
+  # keys for "language" and "language_public".
   if languages_public.is_a?(Array)
     converted_languages_public = Hash.new
     languages_public.each do |language_public|
       language_code = language_public['language']
-      language_code_public = language_public['public']
+      language_code_public = language_public['language_public']
       converted_languages_public[language_code] = language_code_public
     end
     return converted_languages_public
