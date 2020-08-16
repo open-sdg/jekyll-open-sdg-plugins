@@ -15,18 +15,44 @@ module Jekyll
 
       # Try to find the specified date format in the site config. It needs to be
       # something like this, assuming the "format_type" param is "standard":
+      #
+      # date_formats:
+      #   - type: standard
+      #     language: en
+      #     format: "%b %d, %Y"
+      #   - type: standard
+      #     language: es
+      #     format: "%d de %b de %Y"
+      #
+      # However the following deprecated structure is also supported:
+      #
       # date_formats:
       #   standard:
       #     en: "%b %d, %Y"
       #     es: "%d de %b de %Y"
       #     etc...
       date_format = '%b %d, %Y'
-      if config.has_key? 'date_formats'
-        if config['date_formats'].has_key? format_type
-          if config['date_formats'][format_type].has_key? language
+      if config.has_key?('date_formats')
+
+        # @deprecated start
+        # In a deprecated form of date_formats, it was a nested hash keyed first
+        # by the format type and then by the language.
+        if config['date_formats'].is_a?(Hash) && config['date_formats'].has_key?(format_type)
+          if config['date_formats'][format_type].has_key?(language)
             date_format = config['date_formats'][format_type][language]
           end
         end
+        # @deprecated end
+
+        # In the current form of data_formats, it is an array of hashes, each
+        # containing "type", "language", and "format" keys.
+        if config['date_formats'].is_a?(Array)
+          date_format_config = config['date_formats'].find {|d| d['type'] == format_type && d['language'] == language }
+          if date_format_config
+            date_format = date_format_config['format']
+          end
+        end
+
       end
 
       # Support timestamps.
