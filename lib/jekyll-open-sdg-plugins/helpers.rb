@@ -71,3 +71,24 @@ end
 def opensdg_notice(message)
   Jekyll.logger.warn message.yellow
 end
+
+# Get the public language codes for a site, keyed by the actual language codes.
+def opensdg_languages_public(site)
+  languages_public = site.config['languages_public']
+
+  # The current structure of the setting is an array of hashes, each containing
+  # keys for "language" and "public".
+  if languages_public.is_a?(Array)
+    converted_languages_public = Hash.new
+    languages_public.each do |language_public|
+      language_code = language_public['language']
+      language_code_public = language_public['public']
+      converted_languages_public[language_code] = language_code_public
+    end
+    return converted_languages_public
+  end
+
+  # Fallback to exactly what was retrieved from site.confg['languages_public'],
+  # since the deprecated structure is exactly what this function wants.
+  return languages_public
+end
