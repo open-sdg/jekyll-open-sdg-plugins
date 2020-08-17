@@ -1,5 +1,6 @@
 require_relative "jekyll-open-sdg-plugins/version"
 require_relative "jekyll-open-sdg-plugins/site_configuration"
+require_relative "jekyll-open-sdg-plugins/validate_config"
 require_relative "jekyll-open-sdg-plugins/fetch_remote_data"
 require_relative "jekyll-open-sdg-plugins/translate_key"
 require_relative "jekyll-open-sdg-plugins/translate_date"
