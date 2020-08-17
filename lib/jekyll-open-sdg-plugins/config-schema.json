@@ -652,20 +652,6 @@
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#remote_data_prefix"
                 }
             ]
-        },
-        "additional_settings": {
-            "title": "Additional settings",
-            "description": "This is for any additional custom or Jekyll configuration you would like to include.",
-            "type": "string",
-            "format": "yaml",
-            "options": {
-                "ace": {
-                    "theme": "ace/theme/dawn",
-                    "tabSize": 2,
-                    "useSoftTabs": true,
-                    "wrap": true
-                }
-            }
         }
     },
     "additionalProperties": true,
