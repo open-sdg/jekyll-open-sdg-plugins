@@ -30,11 +30,19 @@ module JekyllOpenSdgPlugins
               end
             end
           else
-            opensdg_notice('Validation error of type: ' + error['type'])
-            opensdg_notice('Expected schema:')
-            puts error['schema'].inspect
-            opensdg_notice('Actual data:')
-            puts error['data'].inspect
+            message = 'Validation error of type: ' + error['type']
+            if error['schema'] && error['schema'].has_key?('title')
+              message += ' (' + error['schema']['title'] + ')'
+            end
+            opensdg_notice(message)
+            if error['schema']
+              opensdg_notice('Expected schema:')
+              puts error['schema'].inspect
+            end
+            if error['data']
+              opensdg_notice('Actual data:')
+              puts error['data'].inspect
+            end
           end
         end
         opensdg_notice "The site configuration is not valid. See feedback above."
