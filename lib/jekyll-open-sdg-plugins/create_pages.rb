@@ -52,7 +52,10 @@ module JekyllOpenSdgPlugins
         ]
         pages = default_pages
         if site.config['create_pages'].is_a?(Hash) and site.config['create_pages'].key?('pages')
+          # Backwards compatability to support the deprecated "pages" key.
           pages = site.config['create_pages']['pages']
+        elsif site.config['create_pages'].is_a?(Array)
+          pages = site.config['create_pages']
         end
 
         # See if we need to "map" any language codes.
