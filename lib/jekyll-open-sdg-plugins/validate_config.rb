@@ -54,6 +54,8 @@ module JekyllOpenSdgPlugins
 
       # Regardless place the schema in site data so it can be used in Jekyll templates.
       site.data['config-schema'] = schema
+      # Also place the whole site config in site data, for similar reasons.
+      site.data['site-config'] = site.config
 
     end
   end
