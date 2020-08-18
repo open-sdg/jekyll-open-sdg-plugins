@@ -1,6 +1,7 @@
 # Jekyll configuration for Open SDG platform
 
-validate_configuration: true
+validate_site_config: true
+validate_indicator_config: true
 
 baseurl: "/open-sdg-site-starter"
 remote_data_prefix: "https://open-sdg.org/open-sdg-data-starter"

@@ -1,0 +1,43 @@
+{
+    "type": "object",
+    "title": "Open SDG indicator configuration",
+    "description": "This form will produce an indicator's configuration for your Open SDG implementation.",
+    "required": [],
+    "properties": {
+        "indicator_name": {
+            "type": "string",
+            "title": "Indicator name",
+            "description": "The name for the indicator, which displays at the top of the indicator page.",
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#mandatory-fields"
+                }
+            ]
+        },
+        "indicator_number": {
+            "type": "string",
+            "title": "Indicator number",
+            "description": "The number (or 'id') for the indicator.",
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#mandatory-fields"
+                }
+            ]
+        },
+        "data_non_statistical": {
+            "title": "Non-statistical data",
+            "type": "boolean",
+            "description": "Whether the indicator is statistical (can be charted/graphed) or not.",
+            "format": "checkbox",
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#mandatory-fields"
+                }
+            ]
+        }
+    },
+    "additionalProperties": true
+}
