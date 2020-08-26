@@ -38,7 +38,8 @@ module JekyllOpenSdgPlugins
           },
           {
             'folder' => '/reporting-status',
-            'layout' => 'reportingstatus'
+            'layout' => 'reportingstatus',
+            'title' => 'status.reporting_status',
           },
           {
             'filename' => 'indicators.json',
@@ -47,7 +48,8 @@ module JekyllOpenSdgPlugins
           },
           {
             'folder' => '/search',
-            'layout' => 'search'
+            'layout' => 'search',
+            'title' => 'search.search',
           }
         ]
         pages = default_pages
@@ -95,8 +97,15 @@ module JekyllOpenSdgPlugins
 
       self.process(@name)
       self.data = {}
-      self.data['layout'] = page['layout']
       self.data['language'] = language
+
+      # Add anything else besides "folder" and "filename". This will catch
+      # things like "layout" and "title", and anything else.
+      page.each do |key, value|
+        if key != 'folder' && key != 'filename'
+          self.data[key] = value
+        end
+      end
     end
   end
 end
