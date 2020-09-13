@@ -162,7 +162,7 @@ module JekyllOpenSdgPlugins
       # Some general variables needed below.
       translations = site.data['translations']
       languages = site.config['languages']
-      languages_public = site.config['languages_public']
+      languages_public = opensdg_languages_public(site)
       default_language = languages[0]
       baseurl = site.config['baseurl']
       goal_image_base = site.config['goal_image_base']

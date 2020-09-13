@@ -34,7 +34,7 @@ module JekyllOpenSdgPlugins
         # See if we need to "map" any language codes.
         languages_public = Hash.new
         if site.config['languages_public']
-          languages_public = site.config['languages_public']
+          languages_public = opensdg_languages_public(site)
         end
         # Loop through the languages.
         site.config['languages'].each_with_index do |language, index|
