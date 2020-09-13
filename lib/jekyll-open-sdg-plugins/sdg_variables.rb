@@ -120,8 +120,8 @@ module JekyllOpenSdgPlugins
     end
 
     # Compute a URL for tha goal image, given it's number.
-    def get_goal_image(goal_image_base, language, number)
-      goal_image_base + '/' + language + '/' + number + '.png'
+    def get_goal_image(goal_image_base, language, number, extension)
+      goal_image_base + '/' + language + '/' + number + '.' + extension
     end
 
     # This creates variables for use in Liquid templates under "page".
@@ -165,7 +165,14 @@ module JekyllOpenSdgPlugins
       languages_public = opensdg_languages_public(site)
       default_language = languages[0]
       baseurl = site.config['baseurl']
-      goal_image_base = site.config['goal_image_base']
+      goal_image_base = 'https://open-sdg.org/sdg-translations/assets/img/goals'
+      if site.config.has_key? 'goal_image_base'
+        goal_image_base = site.config['goal_image_base']
+      end
+      goal_image_extension = 'png'
+      if site.config.has_key? 'goal_image_extension'
+        goal_image_extension = site.config['goal_image_extension']
+      end
 
       # These keys are flagged as "protected" here so that we can make sure that
       # country-specific metadata doesn't use any of these fields.
@@ -255,7 +262,7 @@ module JekyllOpenSdgPlugins
               'name' => opensdg_translate_key(goal_translation_key + '-title', translations, language),
               'short' => opensdg_translate_key(goal_translation_key + '-short', translations, language),
               'url' => get_url(baseurl, language, goal_number, languages, languages_public),
-              'icon' => get_goal_image(goal_image_base, language, goal_number),
+              'icon' => get_goal_image(goal_image_base, language, goal_number, goal_image_extension),
               'sort' => get_sort_order(goal_number),
               'global' => global_goal,
             }
