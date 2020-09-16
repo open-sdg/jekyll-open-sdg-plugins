@@ -48,7 +48,7 @@ module JekyllOpenSdgPlugins
             # The URL of the page.
             item['url'] = doc.data['indicator']['url']
             # For the title, use the indicator name.
-            item['title'] = doc.data['indicator']['name']
+            item['title'] = doc.data['indicator']['number'] + ' ' + doc.data['indicator']['name']
             # For the content, use the 'page_content' field.
             item['content'] = prepare_content(site, doc.data['indicator']['page_content'])
             # For the id field, use the ID number.
@@ -66,7 +66,8 @@ module JekyllOpenSdgPlugins
             # The URL of the page.
             item['url'] = doc.data['goal']['url']
             # For the title we use the goal name.
-            item['title'] = doc.data['goal']['name']
+            goal_label = opensdg_translate_key('general.goal', site.data['translations'], language)
+            item['title'] = goal_label + ' ' + doc.data['goal']['number'] + ' ' + doc.data['goal']['name']
             # For the content, currently nothing here.
             item['content'] = ''
             # For the id field, use the ID number.
