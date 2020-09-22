@@ -91,6 +91,7 @@ def opensdg_languages_public(site)
   # Fallback to exactly what was retrieved from site.confg['languages_public'],
   # since the deprecated structure is exactly what this function wants.
   return languages_public
+end
 
 # Print notices about a validation error.
 def opensdg_validation_error(error)
