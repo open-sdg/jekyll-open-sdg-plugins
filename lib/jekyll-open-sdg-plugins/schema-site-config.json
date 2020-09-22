@@ -65,6 +65,7 @@
             "description": "This can contain breadcrumb settings for each of the supported collection types: goal, indicator, and post. Each should have a list of label/path objects.",
             "properties": {
                 "goal": {
+                    "options": {"collapsed": true},
                     "format": "table",
                     "type": "array",
                     "title": "Goal breadcrumbs",
@@ -74,6 +75,7 @@
                     }
                 },
                 "indicator": {
+                    "options": {"collapsed": true},
                     "format": "table",
                     "type": "array",
                     "title": "Indicator breadcrumbs",
@@ -83,6 +85,7 @@
                     }
                 },
                 "post": {
+                    "options": {"collapsed": true},
                     "format": "table",
                     "type": "array",
                     "title": "Post breadcrumbs",
@@ -307,17 +310,17 @@
                     "type": {
                         "type": "string",
                         "title": "Type",
-                        "description": "Use `standard` for news/post dates, or any other arbitrary type for custom usage."
+                        "description": "Use `standard` for news/post dates."
                     },
                     "language": {
                         "type": "string",
                         "title": "Language",
-                        "description": "The language code that this format applies to."
+                        "description": "Language code the format applies to."
                     },
                     "format": {
                         "type": "string",
                         "title": "Format",
-                        "description": "A date format containing any variables listed in this Ruby DateTime documentation: https://ruby-doc.org/stdlib-2.6.1/libdoc/date/rdoc/DateTime.html#method-i-strftime."
+                        "description": "Ruby DateTime date format."
                     }
                 }
             },
@@ -876,12 +879,12 @@
                     "field": {
                         "type": "string",
                         "title": "Field",
-                        "description": "The field to provide a boost to - either 'title', 'content', 'id', or any other metadata field."
+                        "description": "Field to boost ('title', 'content', etc.)"
                     },
                     "boost": {
-                        "type": "string",
+                        "type": "integer",
                         "title": "Boost",
-                        "description": "The higher the number, the more relevant this field will be in search results."
+                        "description": "Higher boost means higher search ranking."
                     }
                 }
             },
