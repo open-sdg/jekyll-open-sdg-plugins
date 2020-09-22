@@ -11,8 +11,7 @@
         "goal_image_base",
         "languages",
         "menu",
-        "metadata_edit_url",
-        "remote_data_prefix"
+        "metadata_edit_url"
     ],
     "properties": {
         "accessible_charts": {
