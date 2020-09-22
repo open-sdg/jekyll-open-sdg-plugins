@@ -4,13 +4,14 @@
     "description": "This form will produce the site configuration for your Open SDG implementation.",
     "required": [
         "country",
+        "data_edit_url",
         "email_contacts",
         "environment",
+        "footer_menu",
         "goal_image_base",
         "languages",
-        "data_edit_url",
+        "menu",
         "metadata_edit_url",
-        "plugins",
         "remote_data_prefix"
     ],
     "properties": {
