@@ -14,18 +14,27 @@
         "remote_data_prefix"
     ],
     "properties": {
-        "remote_theme": {
-            "type": "string",
-            "title": "Open SDG version",
-            "description": "Specify a version of Open SDG to use by referencing a Github.com repository, optionally with a branch or tag. Specifying a tag is strongly recommended.",
-            "default": "open-sdg/open-sdg@1.1.0",
-            "examples": [
-                "open-sdg/open-sdg@master"
-            ],
+        "accessible_charts": {
+            "title": "Accessible charts",
+            "type": "boolean",
+            "description": "This setting can be set to `true` to enable chart functionality that is intended to increase accessibility by adding support for screenreaders and keyboard navigation.",
+            "format": "checkbox",
             "links": [
                 {
                     "rel": "More information",
-                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#remote_theme"
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#accessible_charts"
+                }
+            ]
+        },
+        "accessible_tabs": {
+            "title": "Accessible tabs",
+            "type": "boolean",
+            "description": "This setting can be set to `true` to enable tab functionality that is compliant with the WAI-ARIA best practices. This adds improved keyboard navigation of the tabs.",
+            "format": "checkbox",
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#accessible_tabs"
                 }
             ]
         },
@@ -45,6 +54,60 @@
                 {
                     "rel": "More information",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#analytics"
+                }
+            ]
+        },
+        "breadcrumbs": {
+            "options": {"collapsed": true},
+            "type": "object",
+            "title": "Breadcrumbs",
+            "description": "This can contain breadcrumb settings for each of the supported collection types: goal, indicator, and post. Each should have a list of label/path objects.",
+            "properties": {
+                "goal": {
+                    "format": "table",
+                    "type": "array",
+                    "title": "Goal breadcrumbs",
+                    "description": "The breadcrumb items for goal pages.",
+                    "items": {
+                        "$ref": "#/definitions/breadcrumb_item"
+                    }
+                },
+                "indicator": {
+                    "format": "table",
+                    "type": "array",
+                    "title": "Indicator breadcrumbs",
+                    "description": "The breadcrumb items for indicator pages. Note that there will automatically be a final item, which is a link to the goal that the indicator belongs to. You do not need to specify this, since it is done dynamically and automatically.",
+                    "items": {
+                        "$ref": "#/definitions/breadcrumb_item"
+                    }
+                },
+                "post": {
+                    "format": "table",
+                    "type": "array",
+                    "title": "Post breadcrumbs",
+                    "description": "The breadcrumb items for post pages.",
+                    "items": {
+                        "$ref": "#/definitions/breadcrumb_item"
+                    }
+                }
+            },
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#breadcrumbs"
+                }
+            ]
+        },
+        "contrast_type": {
+            "type": "string",
+            "title": "Contrast type",
+            "description": "This setting allows you to change the type of contrast button your site uses. By default there are two buttons containing 'A'. If you use this option one single button will be displayed with the text 'High contrast' / 'Default contrast', depending on which mode of contrast is active.",
+            "format": "choices",
+            "enum": ["long"],
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#contrast_type"
                 }
             ]
         },
@@ -238,6 +301,45 @@
                 }
             ]
         },
+        "date_formats": {
+            "options": {"collapsed": true},
+            "format": "table",
+            "type": "array",
+            "title": "Date formats",
+            "description": "This setting can be used to control date formats for use in the site, such as in the news/category/post layouts. Any number date formats can be entered, and each must have an arbitrary type, such as `standard`. Make sure that each type has a variant for each of your languages.",
+            "items": {
+                "type": "object",
+                "title": "Date format",
+                "required": [
+                    "type",
+                    "language",
+                    "format"
+                ],
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "title": "Type",
+                        "description": "Use `standard` for news/post dates, or any other arbitrary type for custom usage."
+                    },
+                    "language": {
+                        "type": "string",
+                        "title": "Language",
+                        "description": "The language code that this format applies to."
+                    },
+                    "format": {
+                        "type": "string",
+                        "title": "Format",
+                        "description": "A date format containing any variables listed in this Ruby DateTime documentation: https://ruby-doc.org/stdlib-2.6.1/libdoc/date/rdoc/DateTime.html#method-i-strftime."
+                    }
+                }
+            },
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#date_formats"
+                }
+            ]
+        },
         "disclaimer": {
             "options": {"collapsed": true},
             "type": "object",
@@ -330,6 +432,20 @@
                 {
                     "rel": "More information",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#environment"
+                }
+            ]
+        },
+        "footer_language_toggle": {
+            "type": "string",
+            "title": "Footer language toggle",
+            "description": "This setting controls the type of language toggle to be used in the footer.",
+            "format": "choices",
+            "default": "none",
+            "enum": ["none", "dropdown", "links"],
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#footer_language_toggle"
                 }
             ]
         },
@@ -494,6 +610,18 @@
                 }
             ]
         },
+        "goal_image_extension": {
+            "type": "string",
+            "title": "Goal image extension",
+            "description": "This setting controls the type of file (the file extension) that will be used for the goal images.",
+            "default": "png",
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#goal_image_extension"
+                }
+            ]
+        },
         "goals_page": {
             "options": {"collapsed": true},
             "type": "object",
@@ -552,6 +680,20 @@
                 }
             ]
         },
+        "header_language_toggle": {
+            "type": "string",
+            "title": "Header language toggle",
+            "description": "This setting controls the type of language toggle to be used in the header.",
+            "format": "choices",
+            "default": "dropdown",
+            "enum": ["none", "dropdown", "links"],
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#header_language_toggle"
+                }
+            ]
+        },
         "hide_empty_metadata": {
             "title": "Hide empty metadata",
             "type": "boolean",
@@ -579,6 +721,39 @@
                 {
                     "rel": "More information",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#languages"
+                }
+            ]
+        },
+        "languages_public": {
+            "options": {"collapsed": true},
+            "format": "table",
+            "type": "array",
+            "title": "Language code overrides",
+            "description": "This setting can be used if you are not happy with any of the standard language codes.",
+            "items": {
+                "type": "object",
+                "title": "Language override",
+                "required": [
+                    "language",
+                    "language_public"
+                ],
+                "properties": {
+                    "language": {
+                        "type": "string",
+                        "title": "Language",
+                        "description": "The (standard) language code that you would like to override."
+                    },
+                    "language_public": {
+                        "type": "string",
+                        "title": "Language override",
+                        "description": "The (non-standard) language code that you would like show the public instead."
+                    }
+                }
+            },
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#languages_public"
                 }
             ]
         },
@@ -620,21 +795,54 @@
                 }
             ]
         },
-        "plugins": {
+        "metadata_tabs": {
             "options": {"collapsed": true},
             "format": "table",
             "type": "array",
-            "title": "Plugins",
-            "description": "This setting controls the Jekyll plugins to be used on the site.",
-            "default": ["jekyll-remote-theme", "jekyll-open-sdg-plugins"],
+            "title": "Metadata tabs",
+            "description": "This setting can control the metadata tabs which appear on the indicator pages.",
             "items": {
-                "type": "string",
-                "title": "Plugin"
+                "type": "object",
+                "title": "Metadata tab",
+                "required": [
+                    "scope",
+                    "title"
+                ],
+                "properties": {
+                    "scope": {
+                        "type": "string",
+                        "title": "Scope",
+                        "description": "This tab will contain fields in the specific `scope` in your data repository's metadata schema file (eg, `_prose.yml`)."
+                    },
+                    "title": {
+                        "type": "string",
+                        "title": "Title",
+                        "description": "The title of the metadata tab."
+                    },
+                    "description": {
+                        "type": "string",
+                        "title": "Description",
+                        "description": "A descriptive blurb to show at the top of the tab content.",
+                        "format": "markdown"
+                    }
+                }
             },
             "links": [
                 {
                     "rel": "More information",
-                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#plugins"
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#metadata_tabs"
+                }
+            ]
+        },
+        "non_global_metadata": {
+            "type": "string",
+            "title": "Non-global metadata",
+            "description": "This setting can be used to control the text of the tab containing non-global metadata.",
+            "default": "indicator.national_metadata",
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#non_global_metadata"
                 }
             ]
         },
@@ -643,13 +851,120 @@
             "title": "Remote data repository URL",
             "description": "Specify the URL of your published data repository.",
             "default": "https://my-github-org.github.io/my-data-repository",
-            "examples": [
-                "https://my-github-org.github.io/my-data-repository"
-            ],
             "links": [
                 {
                     "rel": "More information",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#remote_data_prefix"
+                }
+            ]
+        },
+        "reporting_status": {
+            "options": {"collapsed": true},
+            "type": "object",
+            "title": "Reporting status",
+            "description": "This setting is used in the 'reportingstatus' layout. It can display a title and description above the reporting status page.",
+            "$ref": "#/definitions/title_and_description",
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#reporting_status"
+                }
+            ]
+        },
+        "search_index_boost": {
+            "options": {"collapsed": true},
+            "format": "table",
+            "type": "array",
+            "title": "Search index boost",
+            "description": "This setting can be used to give a boost to one or more fields in the search index.",
+            "items": {
+                "type": "object",
+                "title": "Boost",
+                "required": [
+                    "field",
+                    "boost"
+                ],
+                "properties": {
+                    "field": {
+                        "type": "string",
+                        "title": "Field",
+                        "description": "The field to provide a boost to - either 'title', 'content', 'id', or any other metadata field."
+                    },
+                    "boost": {
+                        "type": "string",
+                        "title": "Boost",
+                        "description": "The higher the number, the more relevant this field will be in search results."
+                    }
+                }
+            },
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#search_index_boost"
+                }
+            ]
+        },
+        "search_index_extra_fields": {
+            "options": {"collapsed": true},
+            "format": "table",
+            "type": "array",
+            "title": "Search index extra fields",
+            "description": "This setting can be used to index additional metadata fields in your indicators, for the purposes of affecting the site-wide search.",
+            "items": {
+                "type": "string",
+                "title": "Extra field"
+            },
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#search_index_extra_fields"
+                }
+            ]
+        },
+        "series_toggle": {
+            "title": "Series toggle",
+            "type": "boolean",
+            "description": "This setting enables the special treatment of the 'Series' column in the data. If set to true, when an indicator's data includes a 'Series' column, it will be displayed above 'Units' as radio buttons.",
+            "format": "checkbox",
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#series_toggle"
+                }
+            ]
+        },
+        "sharethis_property": {
+            "type": "string",
+            "title": "ShareThis property",
+            "description": "This setting creates a ShareThis widget along the left side of every page. It should be the property id for your ShareThis account.",
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#sharethis_property"
+                }
+            ]
+        },
+        "validate_indicator_config": {
+            "title": "Validate indicator config",
+            "type": "boolean",
+            "description": "If checked, this will require that all indicators have valid Open SDG indicator configuration.",
+            "format": "checkbox",
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#validate_indicator_config"
+                }
+            ]
+        },
+        "validate_site_config": {
+            "title": "Validate site config",
+            "type": "boolean",
+            "description": "If checked, this will require valid site configuration.",
+            "format": "checkbox",
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#validate_site_config"
                 }
             ]
         }
@@ -673,6 +988,26 @@
                     "type": "string",
                     "title": "Label",
                     "description": "Label (or translation key) for the link."
+                }
+            }
+        },
+        "breadcrumb_item": {
+            "type": "object",
+            "title": "Breadcrumb item",
+            "required": [
+                "path",
+                "label"
+            ],
+            "properties": {
+                "path": {
+                    "type": "string",
+                    "title": "Path",
+                    "description": "Path or URL that the breadcrumb item should link to."
+                },
+                "label": {
+                    "type": "string",
+                    "title": "Label",
+                    "description": "Label (or translation key) for the breadcrumb item."
                 }
             }
         },

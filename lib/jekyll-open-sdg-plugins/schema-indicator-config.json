@@ -4,6 +4,71 @@
     "description": "This form will produce an indicator's configuration for your Open SDG implementation.",
     "required": [],
     "properties": {
+        "data_non_statistical": {
+            "title": "Non-statistical data",
+            "type": "boolean",
+            "description": "Whether the indicator is statistical (can be charted/graphed) or not.",
+            "format": "checkbox",
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#mandatory-fields"
+                }
+            ]
+        },
+        "graph_title": {
+            "type": "string",
+            "title": "Graph title",
+            "description": "The title that displays above the graph/chart.",
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#mandatory-for-statistical-indicators"
+                }
+            ]
+        },
+        "graph_titles": {
+            "options": {"collapsed": true},
+            "format": "table",
+            "type": "array",
+            "title": "Graph titles",
+            "description": "As an alternative to `graph_title`, this can be used to set specific titles for particular units and/or series.",
+            "items": {
+                "type": "object",
+                "title": "Graph title",
+                "required": [
+                    "title"
+                ],
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "title": "Title",
+                        "description": "The graph title."
+                    },
+                    "unit": {
+                        "type": "string",
+                        "title": "Unit",
+                        "description": "The unit of measurement the title applies to."
+                    },
+                    "series": {
+                        "type": "string",
+                        "title": "Series",
+                        "description": "The series the title applies to."
+                    }
+                }
+            }
+        },
+        "graph_type": {
+            "type": "string",
+            "title": "Graph type",
+            "description": "What type of graph to use for the indicator.",
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#mandatory-for-statistical-indicators"
+                }
+            ]
+        },
         "indicator_name": {
             "type": "string",
             "title": "Indicator name",
@@ -26,15 +91,42 @@
                 }
             ]
         },
-        "data_non_statistical": {
-            "title": "Non-statistical data",
-            "type": "boolean",
-            "description": "Whether the indicator is statistical (can be charted/graphed) or not.",
-            "format": "checkbox",
+        "national_geographical_coverage": {
+            "type": "string",
+            "title": "National geographical coverage",
+            "description": "A label used in the absence of any disaggregation.",
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#mandatory-for-statistical-indicators"
+                }
+            ]
+        },
+        "reporting_status": {
+            "type": "string",
+            "title": "Reporting status",
+            "description": "The status of the indicator.",
             "links": [
                 {
                     "rel": "More information",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#mandatory-fields"
+                }
+            ]
+        },
+        "tags": {
+            "options": {"collapsed": true},
+            "format": "table",
+            "type": "array",
+            "title": "Tags",
+            "description": "an optional list of 'tags' to display under an indicator when it is listed on its goal page.",
+            "items": {
+                "type": "string",
+                "title": "Tag"
+            },
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#recommended-special-fields"
                 }
             ]
         }
