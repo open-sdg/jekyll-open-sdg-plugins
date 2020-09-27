@@ -41,12 +41,19 @@ module JekyllOpenSdgPlugins
             dir = index == 0 ? inid : File.join(language_public, inid)
             # Create the indicator page.
             site.collections['indicators'].docs << IndicatorPage.new(site, site.source, dir, inid, language, layout)
-            # Create the indicator config page on staging sites.
-            if index == 0 && site.config['environment'] == 'staging'
-              dir = File.join('config', inid)
-              site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, meta)
-            end
           end
+        end
+        # Create the indicator configuration pages.
+        metadata = {}
+        if opensdg_translated_builds(site)
+          metadata = site.data['untranslated']['meta']
+        else
+          metadata = site.data['meta']
+        end
+        # Loop through the indicators (using metadata as a list).
+        metadata.each do |inid, meta|
+          dir = File.join('config', inid)
+          site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, meta)
         end
       end
     end
