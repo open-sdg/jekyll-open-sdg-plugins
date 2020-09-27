@@ -43,6 +43,7 @@ module JekyllOpenSdgPlugins
             site.collections['indicators'].docs << IndicatorPage.new(site, site.source, dir, inid, language, layout)
             # Create the indicator config page on staging sites.
             if site.config['environment'] == 'staging'
+              dir = File.join(dir, 'config')
               site.documents << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta)
             end
           end
