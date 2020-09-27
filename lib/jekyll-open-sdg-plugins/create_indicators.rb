@@ -41,6 +41,10 @@ module JekyllOpenSdgPlugins
             dir = index == 0 ? inid : File.join(language_public, inid)
             # Create the indicator page.
             site.collections['indicators'].docs << IndicatorPage.new(site, site.source, dir, inid, language, layout)
+            # Create the indicator config page on staging sites.
+            if site.config['environment'] == 'staging'
+              site.documents << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta)
+            end
           end
         end
       end
@@ -62,6 +66,23 @@ module JekyllOpenSdgPlugins
       self.data['language'] = language
       # Backwards compatibility:
       self.data['indicator'] = self.data['indicator_number']
+    end
+  end
+
+  # A Page subclass used in the `CreateIndicators` class.
+  class IndicatorConfigPage < Jekyll::Page
+    def initialize(site, base, dir, inid, language, meta)
+      @site = site
+      @base = base
+      @dir  = dir
+      @name = 'index.html'
+
+      self.process(@name)
+      self.data = {}
+      self.data['indicator_number'] = inid.gsub('-', '.')
+      self.data['layout'] = 'config-builder'
+      self.data['language'] = language
+      self.data['meta'] = meta
     end
   end
 end
