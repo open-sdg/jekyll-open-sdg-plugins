@@ -42,9 +42,9 @@ module JekyllOpenSdgPlugins
             # Create the indicator page.
             site.collections['indicators'].docs << IndicatorPage.new(site, site.source, dir, inid, language, layout)
             # Create the indicator config page on staging sites.
-            if site.config['environment'] == 'staging'
-              dir = File.join(dir, 'config')
-              site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta)
+            if index == 0 && site.config['environment'] == 'staging'
+              dir = File.join('config', inid)
+              site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, meta)
             end
           end
         end
@@ -72,7 +72,7 @@ module JekyllOpenSdgPlugins
 
   # A Page subclass used in the `CreateIndicators` class.
   class IndicatorConfigPage < Jekyll::Page
-    def initialize(site, base, dir, inid, language, meta)
+    def initialize(site, base, dir, inid, meta)
       @site = site
       @base = base
       @dir  = dir
@@ -83,8 +83,8 @@ module JekyllOpenSdgPlugins
       self.data['indicator_number'] = inid.gsub('-', '.')
       self.data['config_type'] = 'indicator'
       self.data['layout'] = 'config-builder'
-      self.data['language'] = language
       self.data['meta'] = meta
+      self.data['title'] = 'Open SDG indicator configuration: ' + self.data['indicator_number']
     end
   end
 end
