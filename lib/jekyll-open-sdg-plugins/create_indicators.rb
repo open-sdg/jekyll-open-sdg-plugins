@@ -45,7 +45,7 @@ module JekyllOpenSdgPlugins
         end
         # Create the indicator configuration pages.
         metadata = {}
-        if opensdg_translated_builds(site)
+        if opensdg_translated_builds(site) && site.data.has_key? 'untranslated'
           metadata = site.data['untranslated']['meta']
         else
           metadata = site.data['meta']

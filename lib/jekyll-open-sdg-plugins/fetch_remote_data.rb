@@ -97,7 +97,9 @@ module JekyllOpenSdgPlugins
       if translated_builds
         # For translated builds, we get a build for each language, and
         # place them in "subfolders" (so to speak) of site.data.
-        site.config['languages'].each do |language|
+        subfolders = site.config['languages']
+        subfolders.append('untranslated')
+        subfolders.each do |language|
           data_target = site.data[language]
           translated_build = remote ? build_location + '/' + language : File.join(build_location, language)
           data_source = fetch_build(translated_build)
