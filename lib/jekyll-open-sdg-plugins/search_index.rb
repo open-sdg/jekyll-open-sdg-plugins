@@ -9,14 +9,18 @@ module JekyllOpenSdgPlugins
     # relies heavily on the variables created there.
 
     # Helper function to prepare content for the search index.
-    def prepare_content(site, content)
+    def prepare_content(site, content, language)
 
       # Handle nil content.
       if !content
         content = ''
       end
 
-      # First compile any Markdown.
+      # Strip whitespace.
+      content = content.strip
+      # Translate if needed.
+      content = opensdg_translate_key(content, site.data['translations'], language)
+      # Next compile any Markdown.
       converter = site.find_converter_instance(::Jekyll::Converters::Markdown)
       content = converter.convert(content)
       # Now strip any HTML.
@@ -51,14 +55,14 @@ module JekyllOpenSdgPlugins
             indicator_label = opensdg_translate_key('general.indicator', site.data['translations'], language)
             item['title'] = indicator_label + ' ' + doc.data['indicator']['number'] + ' - ' + doc.data['indicator']['name']
             # For the content, use the 'page_content' field.
-            item['content'] = prepare_content(site, doc.data['indicator']['page_content'])
+            item['content'] = prepare_content(site, doc.data['indicator']['page_content'], language)
             # For the id field, use the ID number.
             item['id'] = doc.data['indicator']['number']
             # Also index any additional metadata fields.
             if site.config['search_index_extra_fields']
               site.config['search_index_extra_fields'].each do |field|
                 if doc.data['indicator'].has_key? field
-                  item[field] = prepare_content(site, doc.data['indicator'][field])
+                  item[field] = prepare_content(site, doc.data['indicator'][field], language)
                 end
               end
             end
@@ -76,8 +80,8 @@ module JekyllOpenSdgPlugins
           else
             # Otherwise assume it is a normal Jekyll document.
             item['url'] = File.join(doc.data['baseurl'], doc.url)
-            item['title'] = doc.data['title']
-            item['content'] = prepare_content(site, doc.content)
+            item['title'] = prepare_content(site, doc.data['title'], language)
+            item['content'] = prepare_content(site, doc.content, language)
             item['id'] = ''
           end
 
