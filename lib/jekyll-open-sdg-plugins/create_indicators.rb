@@ -81,6 +81,7 @@ module JekyllOpenSdgPlugins
       self.process(@name)
       self.data = {}
       self.data['indicator_number'] = inid.gsub('-', '.')
+      self.data['config_type'] = 'indicator'
       self.data['layout'] = 'config-builder'
       self.data['language'] = language
       self.data['meta'] = meta
