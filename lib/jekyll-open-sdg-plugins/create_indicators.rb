@@ -92,7 +92,7 @@ module JekyllOpenSdgPlugins
       self.data['layout'] = 'config-builder'
       self.data['meta'] = meta
       self.data['title'] = 'Open SDG indicator configuration: ' + self.data['indicator_number']
-      self.data['config_filename'] = inid + '.yml'
+      self.data['config_filename'] = 'indicator_config_' + inid + '.yml'
     end
   end
 end

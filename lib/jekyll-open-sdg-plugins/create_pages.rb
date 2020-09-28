@@ -51,6 +51,13 @@ module JekyllOpenSdgPlugins
             'folder' => '/search',
             'layout' => 'search',
             'title' => 'search.search',
+          },
+          {
+            'folder' => '/config',
+            'layout' => 'config-builder',
+            'title' => 'Open SDG site configuration',
+            'config_type' => 'site',
+            'config_filename' => 'site_config.yml'
           }
         ]
         pages = default_pages
