@@ -450,7 +450,7 @@
             "options": {"collapsed": true},
             "type": "array",
             "title": "Frontpage cards",
-            "description": "This setting is only used in the frontpage-alt layout. It can display any number of 'cards' in 3-column rows, beneath the grid of goal tiles."
+            "description": "This setting is only used in the frontpage-alt layout. It can display any number of 'cards' in 3-column rows, beneath the grid of goal tiles.",
             "items": {
                 "type": "object",
                 "title": "Frontpage card",
