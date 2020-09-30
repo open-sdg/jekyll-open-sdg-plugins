@@ -106,10 +106,6 @@
             "type": "object",
             "title": "Country information",
             "description": "Information about your country (or region, locality, etc.)",
-            "default": {
-                "name": "Australia",
-                "adjective": "Australian"
-            },
             "required": [
                 "name",
                 "adjective"
@@ -287,7 +283,6 @@
             "type": "string",
             "title": "Data edit URL",
             "description": "This setting controls the URL of the 'Edit Data' buttons that appear on the staging site's indicator pages.",
-            "default": "http://prose.io/#my-org/my-repo/edit/develop/data/indicator_[id].csv",
             "links": [
                 {
                     "rel": "More information",
@@ -339,12 +334,6 @@
             "type": "object",
             "title": "Disclaimer",
             "description": "This setting controls the content of the disclaimer that appears at the top of each page.",
-            "examples": [
-                {
-                    "phase": "BETA",
-                    "message": "This is my disclaimer message"
-                }
-            ],
             "properties": {
                 "phase": {
                     "type": "string",
@@ -383,29 +372,17 @@
                 "questions": {
                     "type": "string",
                     "title": "Questions",
-                    "description": "Inbox for questions about your platform.",
-                    "default": "",
-                    "examples": [
-                        "test@example.com"
-                    ]
+                    "description": "Inbox for questions about your platform."
                 },
                 "suggestions": {
                     "type": "string",
                     "title": "Suggestions",
-                    "description": "Inbox for suggestions for your platform.",
-                    "default": "",
-                    "examples": [
-                        "est@example.com"
-                    ]
+                    "description": "Inbox for suggestions for your platform."
                 },
                 "functional": {
                     "type": "string",
                     "title": "Functional",
-                    "description": "Inbox for bug reports for your platform.",
-                    "default": "",
-                    "examples": [
-                        "test@example.com"
-                    ]
+                    "description": "Inbox for bug reports for your platform."
                 }
             },
             "links": [
@@ -473,19 +450,7 @@
             "options": {"collapsed": true},
             "type": "array",
             "title": "Frontpage cards",
-            "description": "This setting is only used in the frontpage-alt layout. It can display any number of 'cards' in 3-column rows, beneath the grid of goal tiles.",
-            "examples": [
-                [
-                    {
-                        "rule_color": "red",
-                        "title": "My card title",
-                        "content": "My card content",
-                        "include": "components/download-all-data.html",
-                        "button_label": "My button text",
-                        "button_link": "https://example.com"
-                    }
-                ]
-            ],
+            "description": "This setting is only used in the frontpage-alt layout. It can display any number of 'cards' in 3-column rows, beneath the grid of goal tiles."
             "items": {
                 "type": "object",
                 "title": "Frontpage card",
@@ -496,8 +461,7 @@
                     "title": {
                         "type": "string",
                         "title": "Title",
-                        "description": "The card's title.",
-                        "default": "My card title"
+                        "description": "The card's title."
                     },
                     "content": {
                         "type": "string",
@@ -513,11 +477,7 @@
                     "button_label": {
                         "type": "string",
                         "title": "Button label",
-                        "description": "A label for a button to display at the bottom of the card.",
-                        "default": "",
-                        "examples": [
-                            "My button label"
-                        ]
+                        "description": "A label for a button to display at the bottom of the card."
                     },
                     "button_link": {
                         "type": "string",
@@ -781,7 +741,6 @@
             "type": "string",
             "title": "Metadata edit URL",
             "description": "This setting controls the URL of the 'Edit Metadata' buttons that appear on the staging site's indicator pages.",
-            "default": "http://prose.io/#my-org/my-repo/edit/develop/meta/[id].md",
             "links": [
                 {
                     "rel": "More information",
@@ -844,7 +803,6 @@
             "type": "string",
             "title": "Remote data repository URL",
             "description": "Specify the URL of your published data repository.",
-            "default": "https://my-github-org.github.io/my-data-repository",
             "links": [
                 {
                     "rel": "More information",
