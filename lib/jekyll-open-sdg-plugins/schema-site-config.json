@@ -145,9 +145,7 @@
                 "layout": {
                     "type": "string",
                     "title": "Layout",
-                    "description": "The layout to use for the goal pages.",
-                    "format": "choices",
-                    "enum": ["goal", "goal-by-target", "goal-by-target-vertical"]
+                    "description": "The layout to use for the goal pages."
                 }
             },
             "links": [
@@ -169,9 +167,7 @@
                 "layout": {
                     "type": "string",
                     "title": "Layout",
-                    "description": "The layout to use for the indicator pages.",
-                    "format": "choices",
-                    "enum": ["indicator"]
+                    "description": "The layout to use for the indicator pages."
                 }
             },
             "links": [
@@ -194,11 +190,13 @@
                 },
                 {
                     "folder": "/goals",
-                    "layout": "goals"
+                    "layout": "goals",
+                    "title": "general.goals"
                 },
                 {
                     "folder": "/reporting-status",
-                    "layout": "reportingstatus"
+                    "layout": "reportingstatus",
+                    "title": "status.reporting_status"
                 },
                 {
                     "filename": "indicators.json",
@@ -207,7 +205,8 @@
                 },
                 {
                     "folder": "/search",
-                    "layout": "search"
+                    "layout": "search",
+                    "title": "search.search"
                 }
             ],
             "items": {
@@ -235,6 +234,11 @@
                         "type": "string",
                         "title": "Layout",
                         "description": "The layout to use for the page."
+                    },
+                    "title": {
+                        "type": "string",
+                        "title": "Title",
+                        "description": "The page title for the page."
                     }
                 }
             },
