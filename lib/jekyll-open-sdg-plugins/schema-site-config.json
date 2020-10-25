@@ -718,6 +718,139 @@
                 }
             ]
         },
+        "map_layers": {
+            "options": {"collapsed": true},
+            "format": "table",
+            "type": "array",
+            "title": "Map layers",
+            "description": "Configure any number of layers to display on all indicator maps. A minimum of one layer is required to display maps.",
+            "items": {
+                "type": "object",
+                "title": "Map layer",
+                "properties": {
+                    "subfolder": {
+                        "type": "string",
+                        "title": "Subfolder",
+                        "description": "The subfolder under 'geojson' in the data repository holding the GeoJSON file for this layer."
+                    },
+                    "label": {
+                        "type": "string",
+                        "title": "Download button label",
+                        "description": "The label to use in the 'Download GeoJSON' button for this layer."
+                    },
+                    "min_zoom": {
+                        "type": "integer",
+                        "title": "Minimum zoom",
+                        "description": "This layer will only be visible when the map is zoomed to at least this number."
+                    },
+                    "max_zoom": {
+                        "type": "integer",
+                        "title": "Maximum zoom",
+                        "description": "The layer will not be visible when the map is zoomed beyond this number."
+                    },
+                    "staticBorders": {
+                        "type": "boolean",
+                        "format": "checkbox",
+                        "title": "Static borders",
+                        "description": "Whether the borders on this layer should remain visible when the map is zoomed past the maximum."
+                    }
+                }
+            },
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/maps/#map_layers"
+                }
+            ]
+        },
+        "map_options": {
+            "options": {"collapsed": true},
+            "type": "object",
+            "title": "Map options",
+            "description": "Site-wide configuration of map behavior and style.",
+            "properties": {
+                "minZoom": {
+                    "title": "Minimum zoom",
+                    "type": "integer",
+                    "description": "The lowest amount of 'zoom' possible for users."
+                },
+                "maxZoom": {
+                    "title": "Maximum zoom",
+                    "type": "integer",
+                    "description": "The highest amount of 'zoom' possible for users."
+                },
+                "tileURL": {
+                    "title": "Tile URL",
+                    "type": "string",
+                    "format": "url",
+                    "description": "If you would like the maps to show tile imagery, add the URL here."
+                },
+                "tileOptions": {
+                    "title": "Tile options",
+                    "type": "object",
+                    "options": {"collapsed": true},
+                    "description": "Additional options for map tile imagery.",
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "title": "Tile ID"
+                        },
+                        "accessToken": {
+                            "type": "string",
+                            "title": "Access token"
+                        },
+                        "attribution": {
+                            "type": "string",
+                            "title": "Attribution"
+                        }
+                    }
+                },
+                "colorRange": {
+                    "type": "string",
+                    "title": "Color range",
+                    "description": "The color range for the choropleth map.",
+                    "links": [
+                        {
+                            "ref": "More information",
+                            "href": "https://gka.github.io/chroma.js/#chroma-brewer"
+                        }
+                    ]
+                },
+                "noValueColor": {
+                    "type": "string",
+                    "format": "color",
+                    "title": "No-value color",
+                    "description": "Color for boundaries that have no data."
+                },
+                "styleNormal": {
+                    "type": "object",
+                    "format": "table",
+                    "title": "Style (normal)",
+                    "description": "Style for boundaries in normal state",
+                    "$ref": "#/definitions/map_style"
+                },
+                "styleHighlighted": {
+                    "type": "object",
+                    "format": "table",
+                    "title": "Style (highlighted)",
+                    "description": "Style for boundaries in highlighted state",
+                    "$ref": "#/definitions/map_style"
+                },
+                "styleStatic": {
+                    "type": "object",
+                    "format": "table",
+                    "title": "Style (static)",
+                    "description": "Style for boundaries in static state (map layers using the 'static boundaries' option).",
+                    "$ref": "#/definitions/map_style"
+                }
+            },
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/maps/#map_options"
+                }
+            ]
+        },
         "menu": {
             "options": {"collapsed": true},
             "format": "table",
@@ -1013,6 +1146,36 @@
                     "type": "string",
                     "title": "Description",
                     "format": "markdown"
+                }
+            }
+        },
+        "map_style": {
+            "properties": {
+                "weight": {
+                    "type": "number",
+                    "title": "Weight",
+                    "description": "The weight (boldness) of boundary borders."
+                },
+                "opacity": {
+                    "type": "number",
+                    "title": "Opacity",
+                    "description": "The opacity of the boundary borders (between 0 and 1)."
+                },
+                "fillOpacity": {
+                    "type": "number",
+                    "title": "Fill opacity",
+                    "description": "The opacity of the boundaries' background color (between 0 and 1)."
+                },
+                "color": {
+                    "type": "string",
+                    "format": "color",
+                    "title": "Color",
+                    "description": "The color of the boundary borders."
+                },
+                "dashArray": {
+                    "type": "string",
+                    "title": "Dash array",
+                    "description": "A 'dash array' describing the boundary as dashed lines."
                 }
             }
         },
