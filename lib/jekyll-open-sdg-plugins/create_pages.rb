@@ -61,9 +61,12 @@ module JekyllOpenSdgPlugins
           pages = site.config['create_pages']
         end
 
+        # Clone pages so that we don't edit the original.
+        pages = pages.clone
+
+        # Hardcode the site configuration page if it's not already there.
         config_page = pages.find { |page| page['layout'] == 'config-builder' }
         if config_page == nil
-          # Hardcode the site configuration page if it's not already there.
           pages.push({
             'folder' => '/config',
             'layout' => 'config-builder',
