@@ -660,6 +660,13 @@
                 }
             ]
         },
+        "indicator_config_form": {
+            "options": {"collapsed": true},
+            "type": "object",
+            "title": "Indicator configuration form",
+            "description": "Configuration of the indicator configuration form.",
+            "$ref": "#/definitions/config_form_options"
+        },
         "languages": {
             "options": {"collapsed": true},
             "format": "table",
@@ -917,6 +924,13 @@
                 }
             ]
         },
+        "site_config_form": {
+            "options": {"collapsed": true},
+            "type": "object",
+            "title": "Site configuration form",
+            "description": "Configuration of the site configuration form.",
+            "$ref": "#/definitions/config_form_options"
+        },
         "validate_indicator_config": {
             "title": "Validate indicator config",
             "type": "boolean",
@@ -999,6 +1013,42 @@
                     "type": "string",
                     "title": "Description",
                     "format": "markdown"
+                }
+            }
+        },
+        "config_form_options": {
+            "type": "object",
+            "properties": {
+                "dropdowns": {
+                    "format": "table",
+                    "type": "object",
+                    "title": "Dropdown lists",
+                    "description": "Set options for any dropdown lists.",
+                    "properties": {
+                        "jsonschema": {
+                            "type": "string",
+                            "title": "JSONSchema path",
+                            "description": "The jsonschema path to the dropdown field."
+                        },
+                        "values": {
+                            "type": "array",
+                            "title": "Values",
+                            "description": "List of dropdown option values",
+                            "items": {
+                                "type": "string",
+                                "title": "Value"
+                            }
+                        },
+                        "labels": {
+                            "type": "array",
+                            "title": "Labels",
+                            "description": "Optional list of dropdown option labels. Should correspond to the values above.",
+                            "items": {
+                                "type": "string",
+                                "title": "Label"
+                            }
+                        }
+                    }
                 }
             }
         }
