@@ -787,6 +787,27 @@
                 }
             ]
         },
+        "news": {
+            "options": {"collapsed": true},
+            "type": "object",
+            "title": "News",
+            "description": "Configuration related to news updates and posts.",
+            "properties": {
+                "category_links": {
+                    "title": "Category links",
+                    "type": "boolean",
+                    "description": "Whether you would like the 'categories' of posts to generate links to dedicated category pages.",
+                    "format": "checkbox",
+                    "default": true
+                }
+            },
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#news"
+                }
+            ]
+        },
         "non_global_metadata": {
             "type": "string",
             "title": "Non-global metadata",
