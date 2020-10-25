@@ -189,7 +189,6 @@
         },
         "graph_annotations": {
             "options": {"collapsed": true},
-            "format": "table",
             "type": "array",
             "title": "Graph annotations",
             "description": "This can be used to add line annotations to the graph, such as target lines to show the progress towards the 2030 goal for an indicator.",
