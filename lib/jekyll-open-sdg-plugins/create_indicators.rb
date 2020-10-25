@@ -58,9 +58,20 @@ module JekyllOpenSdgPlugins
         # Loop through the indicators (using metadata as a list).
         if !metadata.empty?
           site.config['show_indicator_config_forms'] = true
-          metadata.each do |inid, meta|
-            dir = File.join('config', inid)
-            site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, meta)
+          # Loop through the languages.
+          site.config['languages'].each_with_index do |language, index|
+            # Get the "public language" (for URLs) which may be different.
+            language_public = language
+            if languages_public[language]
+              language_public = languages_public[language]
+            end
+            metadata.each do |inid, meta|
+              dir = File.join('config', inid)
+              if index != 0
+                dir = File.join(language_public, 'config', inid)
+              end
+              site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta)
+            end
           end
         end
       end
@@ -87,7 +98,7 @@ module JekyllOpenSdgPlugins
 
   # A Page subclass used in the `CreateIndicators` class.
   class IndicatorConfigPage < Jekyll::Page
-    def initialize(site, base, dir, inid, meta)
+    def initialize(site, base, dir, inid, language, meta)
       @site = site
       @base = base
       @dir  = dir
@@ -95,6 +106,7 @@ module JekyllOpenSdgPlugins
 
       self.process(@name)
       self.data = {}
+      self.data['language'] = language
       self.data['indicator_number'] = inid.gsub('-', '.')
       self.data['config_type'] = 'indicator'
       self.data['layout'] = 'config-builder'
