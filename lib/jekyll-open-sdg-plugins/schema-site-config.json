@@ -338,12 +338,14 @@
                 "phase": {
                     "type": "string",
                     "title": "Phase",
-                    "description": "The development phase of your platform (alpha, beta, etc.)"
+                    "description": "The development phase of your platform (alpha, beta, etc.)",
+                    "default": ""
                 },
                 "message": {
                     "type": "string",
                     "title": "Message",
-                    "description": "A short disclaimer message."
+                    "description": "A short disclaimer message.",
+                    "default": ""
                 }
             },
             "links": [
@@ -764,7 +766,6 @@
             ]
         },
         "map_options": {
-            "additionalProperties": true,
             "options": {"collapsed": true},
             "type": "object",
             "title": "Map options",
