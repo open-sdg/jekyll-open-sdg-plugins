@@ -56,9 +56,12 @@ module JekyllOpenSdgPlugins
           metadata = site.data['meta']
         end
         # Loop through the indicators (using metadata as a list).
-        metadata.each do |inid, meta|
-          dir = File.join('config', inid)
-          site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, meta)
+        if !metadata.empty?
+          site.config['show_indicator_config_forms'] = true
+          metadata.each do |inid, meta|
+            dir = File.join('config', inid)
+            site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, meta)
+          end
         end
       end
     end
