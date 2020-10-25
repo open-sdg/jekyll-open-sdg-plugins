@@ -1026,6 +1026,7 @@
                     "items": {
                         "type": "object",
                         "format": "table",
+                        "title": "Dropdown list",
                         "properties": {
                             "jsonschema": {
                                 "type": "string",
@@ -1034,6 +1035,7 @@
                             },
                             "values": {
                                 "type": "array",
+                                "format": "table",
                                 "title": "Values",
                                 "description": "List of dropdown option values",
                                 "items": {
@@ -1043,6 +1045,7 @@
                             },
                             "labels": {
                                 "type": "array",
+                                "format": "table",
                                 "title": "Labels",
                                 "description": "Optional list of dropdown option labels. Should correspond to the values above.",
                                 "items": {
