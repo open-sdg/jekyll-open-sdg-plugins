@@ -206,13 +206,12 @@
                         "description": "A preset bundle of configurations."
                     },
                     "value": {
-                        "type": "string",
-                        "format": "number",
+                        "type": "number",
                         "title": "Value",
                         "description": "The value at which to draw the line. For horizontal lines, this number corresponds to your actual data. For vertical lines, this number should be between 0 (the left side of the chart) and the number of years minus 1 (the right side of the chart)."
                     },
                     "endValue": {
-                        "type": "string",
+                        "type": "number",
                         "title": "End value",
                         "description": "Optionally add a different ending value for the line."
                     },
@@ -355,12 +354,12 @@
                 ],
                 "properties": {
                     "minimum": {
-                        "type": "string",
+                        "type": "number",
                         "title": "Minimum",
                         "description": "Minimum value for the y axis."
                     },
                     "maximum": {
-                        "type": "string",
+                        "type": "number",
                         "title": "Maximum",
                         "description": "Maximum value for the y axis."
                     },
