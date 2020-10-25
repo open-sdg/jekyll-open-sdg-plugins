@@ -1,5 +1,8 @@
 # Jekyll configuration for Open SDG platform
 
+validate_site_config: true
+validate_indicator_config: true
+
 baseurl: "/open-sdg-site-starter"
 remote_data_prefix: "https://open-sdg.org/open-sdg-data-starter"
 data_edit_url: http://prose.io/#open-sdg/open-sdg-data-starter/edit/develop/data/indicator_[id].csv
@@ -17,18 +20,17 @@ create_indicators:
 create_goals:
   layout: goal-by-target-vertical
 create_pages:
-  pages:
-    - folder: /
-      layout: frontpage-alt
-    - folder: /goals
-      layout: goals
-    - folder: /reporting-status
-      layout: reportingstatus
-    - filename: indicators.json
-      folder: /
-      layout: indicator-json
-    - folder: /search
-      layout: search
+  - folder: /
+    layout: frontpage-alt
+  - folder: /goals
+    layout: goals
+  - folder: /reporting-status
+    layout: reportingstatus
+  - filename: indicators.json
+    folder: /
+    layout: indicator-json
+  - folder: /search
+    layout: search
 
 analytics:
   ga_prod: ''

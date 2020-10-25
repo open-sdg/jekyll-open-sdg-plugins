@@ -92,3 +92,33 @@ def opensdg_languages_public(site)
   # since the deprecated structure is exactly what this function wants.
   return languages_public
 end
+
+# Print notices about a validation error.
+def opensdg_validation_error(error)
+  if error['type'] == 'required'
+    missing = []
+    error['schema']['required'].each do |required_property|
+      unless error['data'].has_key?(required_property)
+        message = 'Missing configuration setting: ' + required_property
+        if error['schema'].has_key?('title')
+          message += ' (' + error['schema']['title'] + ')'
+        end
+        opensdg_notice(message)
+      end
+    end
+  else
+    message = 'Validation error of type: ' + error['type']
+    if error['schema'] && error['schema'].has_key?('title')
+      message += ' (' + error['schema']['title'] + ')'
+    end
+    opensdg_notice(message)
+    if error['schema']
+      opensdg_notice('Expected schema:')
+      puts error['schema'].inspect
+    end
+    if error['data']
+      opensdg_notice('Actual data:')
+      puts error['data'].inspect
+    end
+  end
+end

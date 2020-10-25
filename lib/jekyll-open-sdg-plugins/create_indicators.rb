@@ -43,6 +43,23 @@ module JekyllOpenSdgPlugins
             site.collections['indicators'].docs << IndicatorPage.new(site, site.source, dir, inid, language, layout)
           end
         end
+        # Create the indicator configuration pages.
+        metadata = {}
+        if opensdg_translated_builds(site)
+          if site.data.has_key?('untranslated')
+            metadata = site.data['untranslated']['meta']
+          else
+            default_language = site.config['languages'][0]
+            metadata = site.data[default_language]['meta']
+          end
+        else
+          metadata = site.data['meta']
+        end
+        # Loop through the indicators (using metadata as a list).
+        metadata.each do |inid, meta|
+          dir = File.join('config', inid)
+          site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, meta)
+        end
       end
     end
   end
@@ -62,6 +79,25 @@ module JekyllOpenSdgPlugins
       self.data['language'] = language
       # Backwards compatibility:
       self.data['indicator'] = self.data['indicator_number']
+    end
+  end
+
+  # A Page subclass used in the `CreateIndicators` class.
+  class IndicatorConfigPage < Jekyll::Page
+    def initialize(site, base, dir, inid, meta)
+      @site = site
+      @base = base
+      @dir  = dir
+      @name = 'index.html'
+
+      self.process(@name)
+      self.data = {}
+      self.data['indicator_number'] = inid.gsub('-', '.')
+      self.data['config_type'] = 'indicator'
+      self.data['layout'] = 'config-builder'
+      self.data['meta'] = meta
+      self.data['title'] = 'Open SDG indicator configuration: ' + self.data['indicator_number']
+      self.data['config_filename'] = 'indicator_config_' + inid + '.yml'
     end
   end
 end

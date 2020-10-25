@@ -44,8 +44,14 @@ module JekyllOpenSdgPlugins
           json_file = is_remote ? open(endpoint) : File.open(endpoint)
           build[key] = JSON.load(json_file)
         rescue StandardError => e
-          # For backwards compatibility, we allow 'translations' to be missing.
-          if key != 'translations'
+          # For backwards compatibility, forego the exception in some cases.
+          abort_build = true
+          if ['translations'].include? key
+            abort_build = false
+          elsif endpoint.include? '/untranslated/'
+            abort_build = false
+          end
+          if abort_build
             puts e.message
             abort 'Unable to read data from: ' + endpoint
           end
@@ -97,14 +103,18 @@ module JekyllOpenSdgPlugins
       if translated_builds
         # For translated builds, we get a build for each language, and
         # place them in "subfolders" (so to speak) of site.data.
-        site.config['languages'].each do |language|
+        subfolders = site.config['languages'].clone
+        subfolders.append('untranslated')
+        subfolders.each do |language|
           data_target = site.data[language]
           translated_build = remote ? build_location + '/' + language : File.join(build_location, language)
           data_source = fetch_build(translated_build)
-          if data_target
-            data_target.deep_merge(data_source)
-          else
-            site.data[language] = data_source
+          if !data_source.empty?
+            if data_target
+              data_target.deep_merge(data_source)
+            else
+              site.data[language] = data_source
+            end
           end
         end
         # We move the language-specific translations to the
@@ -129,7 +139,9 @@ module JekyllOpenSdgPlugins
         # in the "root" (so to speak) of site.data. Nothing else is needed.
         target = site.data
         source = fetch_build(build_location)
-        target.deep_merge(source)
+        if !source.empty?
+          target.deep_merge(source)
+        end
       end
 
       # Finally support the deprecated 'remote_translations' option.
