@@ -22,6 +22,7 @@ module JekyllOpenSdgPlugins
         'headlines' => 'headline/all.json',
         'schema' => 'meta/schema.json',
         'reporting' => 'stats/reporting.json',
+        'disaggregation' => 'stats/disaggregation.json',
         'translations' => 'translations/translations.json',
         'zip' => 'zip/all_indicators.json',
         'indicator_downloads' => 'downloads/indicator-downloads.json'
@@ -47,7 +48,7 @@ module JekyllOpenSdgPlugins
         rescue StandardError => e
           # For backwards compatibility, forego the exception in some cases.
           abort_build = true
-          if ['translations', 'indicator_downloads'].include? key
+          if ['translations', 'indicator_downloads', 'disaggregation'].include? key
             abort_build = false
           elsif endpoint.include? '/untranslated/'
             abort_build = false
