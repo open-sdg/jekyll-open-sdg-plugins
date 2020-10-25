@@ -1020,32 +1020,35 @@
             "type": "object",
             "properties": {
                 "dropdowns": {
-                    "format": "table",
-                    "type": "object",
+                    "type": "array",
                     "title": "Dropdown lists",
                     "description": "Set options for any dropdown lists.",
-                    "properties": {
-                        "jsonschema": {
-                            "type": "string",
-                            "title": "JSONSchema path",
-                            "description": "The jsonschema path to the dropdown field."
-                        },
-                        "values": {
-                            "type": "array",
-                            "title": "Values",
-                            "description": "List of dropdown option values",
-                            "items": {
+                    "items": {
+                        "type": "object",
+                        "format": "table",
+                        "properties": {
+                            "jsonschema": {
                                 "type": "string",
-                                "title": "Value"
-                            }
-                        },
-                        "labels": {
-                            "type": "array",
-                            "title": "Labels",
-                            "description": "Optional list of dropdown option labels. Should correspond to the values above.",
-                            "items": {
-                                "type": "string",
-                                "title": "Label"
+                                "title": "JSONSchema path",
+                                "description": "The jsonschema path to the dropdown field."
+                            },
+                            "values": {
+                                "type": "array",
+                                "title": "Values",
+                                "description": "List of dropdown option values",
+                                "items": {
+                                    "type": "string",
+                                    "title": "Value"
+                                }
+                            },
+                            "labels": {
+                                "type": "array",
+                                "title": "Labels",
+                                "description": "Optional list of dropdown option labels. Should correspond to the values above.",
+                                "items": {
+                                    "type": "string",
+                                    "title": "Label"
+                                }
                             }
                         }
                     }
