@@ -51,13 +51,6 @@ module JekyllOpenSdgPlugins
             'folder' => '/search',
             'layout' => 'search',
             'title' => 'search.search',
-          },
-          {
-            'folder' => '/config',
-            'layout' => 'config-builder',
-            'title' => 'Open SDG site configuration',
-            'config_type' => 'site',
-            'config_filename' => 'site_config.yml'
           }
         ]
         pages = default_pages
@@ -67,6 +60,15 @@ module JekyllOpenSdgPlugins
         elsif site.config['create_pages'].is_a?(Array)
           pages = site.config['create_pages']
         end
+
+        # Hardcode the site configuration page.
+        pages.push({
+          'folder' => '/config',
+          'layout' => 'config-builder',
+          'title' => 'Open SDG site configuration',
+          'config_type' => 'site',
+          'config_filename' => 'site_config.yml'
+        })
 
         # See if we need to "map" any language codes.
         languages_public = Hash.new
