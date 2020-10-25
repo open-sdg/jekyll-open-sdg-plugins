@@ -764,6 +764,7 @@
             ]
         },
         "map_options": {
+            "additionalProperties": true,
             "options": {"collapsed": true},
             "type": "object",
             "title": "Map options",
