@@ -61,14 +61,17 @@ module JekyllOpenSdgPlugins
           pages = site.config['create_pages']
         end
 
-        # Hardcode the site configuration page.
-        pages.push({
-          'folder' => '/config',
-          'layout' => 'config-builder',
-          'title' => 'Open SDG site configuration',
-          'config_type' => 'site',
-          'config_filename' => 'site_config.yml'
-        })
+        config_page = pages.find { |page| page.layout == 'config-builder' }
+        if config_page == nil
+          # Hardcode the site configuration page if it's not already there.
+          pages.push({
+            'folder' => '/config',
+            'layout' => 'config-builder',
+            'title' => 'Open SDG site configuration',
+            'config_type' => 'site',
+            'config_filename' => 'site_config.yml'
+          })
+        end
 
         # See if we need to "map" any language codes.
         languages_public = Hash.new
