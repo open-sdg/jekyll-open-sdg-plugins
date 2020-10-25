@@ -50,6 +50,40 @@
                 }
             ]
         },
+        "data_notice_class": {
+            "title": "Data notice - class",
+            "type": "string",
+            "description": "A CSS class to apply to the data notice for this indicator.",
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#data-notice"
+                }
+            ]
+        },
+        "data_notice_heading": {
+            "title": "Data notice - heading",
+            "type": "string",
+            "description": "A title to display above the data notice for this indicator.",
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#data-notice"
+                }
+            ]
+        },
+        "data_notice_text": {
+            "title": "Data notice - text",
+            "type": "string",
+            "format": "markdown",
+            "description": "Text to display as a data notice for this indicator, intended to contain very important information which site viewers must keep in mind when using the data provided.",
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#data-notice"
+                }
+            ]
+        },
         "data_show_map": {
             "title": "Show map",
             "type": "boolean",
@@ -96,19 +130,62 @@
             ]
         },
         "embedded_feature_footer": {
-
-        },
-        "embedded_feature_tab_title": {
-
-        },
-        "embedded_feature_title": {
-
-        },
-        "embedded_feature_url": {
-
+            "type": "string",
+            "format": "markdown",
+            "title": "Embedded feature - Footer",
+            "description": "A footer that displays below the embedded feature. Only used with either embedded_feature_url or embedded_feature_html.",
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#embedded-feature-metadata"
+                }
+            ]
         },
         "embedded_feature_html": {
-            "type": "string"
+            "type": "string",
+            "format": "textarea",
+            "title": "Embedded feature - HTML",
+            "description": "Any HTML to display in another tab, after Chart/Table/etc.",
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#embedded-feature-metadata"
+                }
+            ]
+        },
+        "embedded_feature_tab_title": {
+            "type": "string",
+            "title": "Embedded feature - Tab Title",
+            "description": "A title for the embedded feature tab (ie, Chart/Table/[this]). Only used with either embedded_feature_url or embedded_feature_html.",
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#embedded-feature-metadata"
+                }
+            ]
+        },
+        "embedded_feature_title": {
+            "type": "string",
+            "title": "Embedded feature - Title",
+            "description": "A title that displays above the embedded feature. Only used with either embedded_feature_url or embedded_feature_html.",
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#embedded-feature-metadata"
+                }
+            ]
+        },
+        "embedded_feature_url": {
+            "type": "string",
+            "format": "url",
+            "title": "Embedded feature - URL",
+            "description": "Any URL to display as an iframe in another tab, after Chart/Table/etc.",
+            "links": [
+                {
+                    "rel": "More information",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#embedded-feature-metadata"
+                }
+            ]
         },
         "graph_annotations": {
             "options": {"collapsed": true},
@@ -130,6 +207,7 @@
                     },
                     "value": {
                         "type": "string",
+                        "format": "number",
                         "title": "Value",
                         "description": "The value at which to draw the line. For horizontal lines, this number corresponds to your actual data. For vertical lines, this number should be between 0 (the left side of the chart) and the number of years minus 1 (the right side of the chart)."
                     },
@@ -161,6 +239,7 @@
                     },
                     "borderColor": {
                         "type": "string",
+                        "format": "color",
                         "title": "Line color",
                         "description": "The color of the line.",
                         "links": [
@@ -208,11 +287,13 @@
                             },
                             "fontColor": {
                                 "type": "string",
+                                "format": "color",
                                 "title": "Label color",
                                 "description": "Color for the label text."
                             },
                             "backgroundColor": {
                                 "type": "string",
+                                "format": "color",
                                 "title": "Background color",
                                 "description": "Background color for the label text."
                             }
@@ -225,6 +306,7 @@
                         "properties": {
                             "borderColor": {
                                 "type": "string",
+                                "format": "color",
                                 "title": "High-contrast line color",
                                 "description": "The color of the line in high-contrast mode."
                             },
@@ -235,11 +317,13 @@
                                 "properties": {
                                     "fontColor": {
                                         "type": "string",
+                                        "format": "color",
                                         "title": "High-contrast label color",
                                         "description": "Color for the label text in high-contrast mode."
                                     },
                                     "backgroundColor": {
                                         "type": "string",
+                                        "format": "color",
                                         "title": "High-contrast background color",
                                         "description": "Background color for the label text in high-contrast mode."
                                     }
