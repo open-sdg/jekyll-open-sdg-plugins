@@ -339,13 +339,13 @@
                     "type": "string",
                     "title": "Phase",
                     "description": "The development phase of your platform (alpha, beta, etc.)",
-                    "default": ""
+                    "default": " "
                 },
                 "message": {
                     "type": "string",
                     "title": "Message",
                     "description": "A short disclaimer message.",
-                    "default": ""
+                    "default": " "
                 }
             },
             "links": [
