@@ -201,7 +201,9 @@
                 "properties": {
                     "preset": {
                         "type": "string",
+                        "format": "choices",
                         "title": "Preset",
+                        "enum": ["target_line"],
                         "description": "A preset bundle of configurations."
                     },
                     "value": {
@@ -480,7 +482,9 @@
         },
         "reporting_status": {
             "type": "string",
+            "format": "choices",
             "title": "Reporting status",
+            "enum": ["complete", "inprogress", "notstarted", "notapplicable"],
             "description": "The status of the indicator.",
             "links": [
                 {
