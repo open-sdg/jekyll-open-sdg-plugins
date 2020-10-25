@@ -61,7 +61,7 @@ module JekyllOpenSdgPlugins
           pages = site.config['create_pages']
         end
 
-        config_page = pages.find { |page| page.layout == 'config-builder' }
+        config_page = pages.find { |page| page['layout'] == 'config-builder' }
         if config_page == nil
           # Hardcode the site configuration page if it's not already there.
           pages.push({
