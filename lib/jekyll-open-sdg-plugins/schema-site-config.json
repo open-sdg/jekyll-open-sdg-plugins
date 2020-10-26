@@ -110,6 +110,10 @@
                 "name",
                 "adjective"
             ],
+            "default": {
+                "name": "",
+                "adjective": ""
+            },
             "properties": {
                 "name": {
                     "type": "string",
@@ -334,7 +338,10 @@
             "type": "object",
             "title": "Disclaimer",
             "description": "This setting controls the content of the disclaimer that appears at the top of each page.",
-            "default": {"phase": "", "message": ""},
+            "default": {
+                "phase": "",
+                "message": ""
+            },
             "properties": {
                 "phase": {
                     "type": "string",
@@ -362,9 +369,9 @@
             "title": "Email addresses",
             "description": "Email addresses to publish on your platform.",
             "default": {
-                "questions": "test@example.com",
-                "suggestions": "test@example.com",
-                "functional": "test@example.com"
+                "questions": "",
+                "suggestions": "",
+                "functional": ""
             },
             "required": [
                 "questions",
@@ -374,16 +381,19 @@
             "properties": {
                 "questions": {
                     "type": "string",
+                    "format": "email",
                     "title": "Questions",
                     "description": "Inbox for questions about your platform."
                 },
                 "suggestions": {
                     "type": "string",
+                    "format": "email",
                     "title": "Suggestions",
                     "description": "Inbox for suggestions for your platform."
                 },
                 "functional": {
                     "type": "string",
+                    "format": "email",
                     "title": "Functional",
                     "description": "Inbox for bug reports for your platform."
                 }
@@ -518,9 +528,6 @@
             "type": "string",
             "title": "Frontpage heading",
             "description": "This setting can control the heading that appears on the front page. This setting is only used in the frontpage layout.",
-            "examples": [
-                "Australian data for Sustainable Development Goal indicators"
-            ],
             "links": [
                 {
                     "rel": "More information",
@@ -532,9 +539,6 @@
             "type": "string",
             "title": "Frontpage instructions",
             "description": "This setting can control the instructions that appear on the front page. This setting is only used in the frontpage layout.",
-            "examples": [
-                "Click on each goal for Australian statistics for Sustainable Development Goal global indicators."
-            ],
             "links": [
                 {
                     "rel": "More information",
@@ -771,6 +775,21 @@
             "type": "object",
             "title": "Map options",
             "description": "Site-wide configuration of map behavior and style.",
+            "default": {
+                "minZoom": 0,
+                "maxZoom": 0,
+                "tileURL": "",
+                "tileOptions": {
+                    "id": "",
+                    "accessToken": "",
+                    "attribution": ""
+                },
+                "colorRange": "",
+                "noValueColor": "",
+                "styleNormal": {},
+                "styleHighlighted": {},
+                "styleStatic": {}
+            },
             "properties": {
                 "minZoom": {
                     "title": "Minimum zoom",
@@ -1140,6 +1159,10 @@
                 "title",
                 "description"
             ],
+            "default": {
+                "title": "",
+                "description": ""
+            },
             "properties": {
                 "title": {
                     "type": "string",
