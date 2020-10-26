@@ -776,36 +776,36 @@
             "title": "Map options",
             "description": "Site-wide configuration of map behavior and style.",
             "default": {
-                "minZoom": 0,
-                "maxZoom": 0,
+                "minZoom": 5,
+                "maxZoom": 10,
                 "tileURL": "",
                 "tileOptions": {
                     "id": "",
                     "accessToken": "",
                     "attribution": ""
                 },
-                "colorRange": "",
-                "noValueColor": "",
+                "colorRange": "chroma.brewer.BuGn",
+                "noValueColor": "#f0f0f0",
                 "styleNormal": {
                     "weight": 1,
                     "opacity": 1,
-                    "fillOpacity": 1,
-                    "color": "",
+                    "fillOpacity": 0.7,
+                    "color": "#888",
                     "dashArray": ""
                 },
                 "styleHighlighted": {
                     "weight": 1,
                     "opacity": 1,
-                    "fillOpacity": 1,
-                    "color": "",
+                    "fillOpacity": 0.7,
+                    "color": "#111",
                     "dashArray": ""
                 },
                 "styleStatic": {
-                    "weight": 1,
+                    "weight": 2,
                     "opacity": 1,
-                    "fillOpacity": 1,
-                    "color": "",
-                    "dashArray": ""
+                    "fillOpacity": 0,
+                    "color": "#172d44",
+                    "dashArray": "5,5"
                 }
             },
             "properties": {
