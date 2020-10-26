@@ -334,6 +334,7 @@
             "type": "object",
             "title": "Disclaimer",
             "description": "This setting controls the content of the disclaimer that appears at the top of each page.",
+            "default": {"phase": "", "message": ""},
             "properties": {
                 "phase": {
                     "type": "string",
