@@ -786,9 +786,27 @@
                 },
                 "colorRange": "",
                 "noValueColor": "",
-                "styleNormal": {},
-                "styleHighlighted": {},
-                "styleStatic": {}
+                "styleNormal": {
+                    "weight": 1,
+                    "opacity": 1,
+                    "fillOpacity": 1,
+                    "color": "",
+                    "dashArray": ""
+                },
+                "styleHighlighted": {
+                    "weight": 1,
+                    "opacity": 1,
+                    "fillOpacity": 1,
+                    "color": "",
+                    "dashArray": ""
+                },
+                "styleStatic": {
+                    "weight": 1,
+                    "opacity": 1,
+                    "fillOpacity": 1,
+                    "color": "",
+                    "dashArray": ""
+                }
             },
             "properties": {
                 "minZoom": {
