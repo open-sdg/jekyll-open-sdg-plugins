@@ -96,10 +96,13 @@ module JekyllOpenSdgPlugins
       local = site.config['local_data_folder']
 
       if !remote && !local
-        abort 'Site config must include either "remote_data_prefix" or "local_data_folder".'
+        abort 'Site config must include "remote_data_prefix".'
       end
 
-      build_location = remote ? remote : File.join(Dir.pwd, local)
+      build_location = remote ? remote : local
+      is_remote = is_path_remote(build_location)
+
+      build_location = is_remote ? build_location : File.join(Dir.pwd, build_location)
       translated_builds = site_uses_translated_builds(build_location)
 
       if translated_builds
@@ -109,7 +112,7 @@ module JekyllOpenSdgPlugins
         subfolders.append('untranslated')
         subfolders.each do |language|
           data_target = site.data[language]
-          translated_build = remote ? build_location + '/' + language : File.join(build_location, language)
+          translated_build = is_remote ? build_location + '/' + language : File.join(build_location, language)
           data_source = fetch_build(translated_build)
           if !data_source.empty?
             if data_target
