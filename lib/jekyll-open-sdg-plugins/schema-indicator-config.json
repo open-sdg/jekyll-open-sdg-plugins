@@ -438,8 +438,10 @@
         },
         "graph_type": {
             "type": "string",
+            "format": "choices",
             "title": "Graph type",
             "description": "What type of graph to use for the indicator.",
+            "enum": ["line", "bar", "binary"],
             "links": [
                 {
                     "rel": "More information",
