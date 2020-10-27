@@ -122,3 +122,8 @@ def opensdg_validation_error(error)
     end
   end
 end
+
+# Is this path a remote path?
+def opensdg_is_path_remote(path)
+  return path.start_with?('http')
+end

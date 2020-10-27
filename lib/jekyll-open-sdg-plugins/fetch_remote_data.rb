@@ -29,15 +29,10 @@ module JekyllOpenSdgPlugins
       }
     end
 
-    # Is this path a remote path?
-    def is_path_remote(path)
-      return path.start_with?('http')
-    end
-
     # Get a build from a local folder on disk or a remote URL on the Internet.
     def fetch_build(path)
 
-      is_remote = is_path_remote(path)
+      is_remote = opensdg_is_path_remote(path)
       build = {}
       get_endpoints().each do |key, value|
         endpoint = is_remote ? path + '/' + value : File.join(path, fix_path(value))
@@ -67,7 +62,7 @@ module JekyllOpenSdgPlugins
     # translated builds or not.
     def site_uses_translated_builds(path)
 
-      is_remote = is_path_remote(path)
+      is_remote = opensdg_is_path_remote(path)
       endpoints = get_endpoints()
       # For a quick test, we just use 'meta'.
       meta = endpoints['meta']
@@ -100,7 +95,7 @@ module JekyllOpenSdgPlugins
       end
 
       build_location = remote ? remote : local
-      is_remote = is_path_remote(build_location)
+      is_remote = opensdg_is_path_remote(build_location)
 
       build_location = is_remote ? build_location : File.join(Dir.pwd, build_location)
       translated_builds = site_uses_translated_builds(build_location)
@@ -179,6 +174,14 @@ module JekyllOpenSdgPlugins
       source = File.join(Dir.pwd, site.config['local_data_folder'], '.')
       destination = site.config['destination']
       FileUtils.cp_r(source, destination)
+    # Do the same in the case that "remote_data_prefix" is being used for a local
+    # data folder (since "local_data_folder" is deprecated and undocumented).
+    elsif site.config['remote_data_prefix']
+      if !opensdg_is_path_remote(site.config['remote_data_prefix'])
+        source = File.join(Dir.pwd, site.config['remote_data_prefix'], '.')
+        destination = site.config['destination']
+        FileUtils.cp_r(source, destination)
+      end
     end
   end
 end
