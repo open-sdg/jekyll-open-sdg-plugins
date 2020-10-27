@@ -480,6 +480,12 @@
                 }
             ]
         },
+        "page_content": {
+            "type": "string",
+            "format": "markdown",
+            "title": "Page content",
+            "description": "Content which displays in the main content area of the indicator page."
+        },
         "reporting_status": {
             "type": "string",
             "format": "choices",
