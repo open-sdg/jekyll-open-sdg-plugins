@@ -125,5 +125,8 @@ end
 
 # Is this path a remote path?
 def opensdg_is_path_remote(path)
+  if path.nil?
+    return false
+  end
   return path.start_with?('http')
 end
