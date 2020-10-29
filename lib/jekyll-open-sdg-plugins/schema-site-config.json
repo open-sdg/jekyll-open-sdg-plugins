@@ -471,6 +471,14 @@
                 "required": [
                     "title"
                 ],
+                "default": {
+                    "title": "",
+                    "content": "",
+                    "include": "",
+                    "button_label": "",
+                    "button_link": "",
+                    "rule_color": ""
+                },
                 "properties": {
                     "title": {
                         "type": "string",
