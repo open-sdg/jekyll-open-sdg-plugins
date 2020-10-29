@@ -628,6 +628,7 @@
             "description": "This setting can be used to define a set of colors to be used in the charts. This is only used when graph_color_set is 'custom'.",
             "items": {
                 "type": "string",
+                "format": "color",
                 "title": "Color",
                 "description": "Hexadecimal color code"
             },
