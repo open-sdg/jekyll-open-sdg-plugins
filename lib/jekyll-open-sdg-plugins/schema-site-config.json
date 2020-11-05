@@ -689,6 +689,31 @@
             "type": "object",
             "title": "Map options",
             "description": "Site-wide configuration of map behavior and style.",
+            "default": {
+                "minZoom": 5,
+                "maxZoom": 10,
+                "colorRange": "chroma.brewer.BuGn",
+                "noValueColor": "#f0f0f0",
+                "styleNormal": {
+                    "weight": 1,
+                    "opacity": 1,
+                    "fillOpacity": 0.7,
+                    "color": "#888888"
+                },
+                "styleHighlighted": {
+                    "weight": 1,
+                    "opacity": 1,
+                    "fillOpacity": 0.7,
+                    "color": "#111111"
+                },
+                "styleStatic": {
+                    "weight": 2,
+                    "opacity": 1,
+                    "fillOpacity": 0,
+                    "color": "#172d44",
+                    "dashArray": "5,5"
+                }
+            },
             "properties": {
                 "minZoom": {
                     "title": "Minimum zoom",
