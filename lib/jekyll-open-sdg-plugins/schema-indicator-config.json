@@ -287,6 +287,7 @@
                             "backgroundColor": {
                                 "type": "string",
                                 "format": "color",
+                                "default": "#FFFFFFF",
                                 "title": "Background color",
                                 "description": "Background color for the label text."
                             }
@@ -300,6 +301,7 @@
                             "borderColor": {
                                 "type": "string",
                                 "format": "color",
+                                "default": "#FFFFFF",
                                 "title": "High-contrast line color",
                                 "description": "The color of the line in high-contrast mode."
                             },
@@ -311,12 +313,14 @@
                                     "fontColor": {
                                         "type": "string",
                                         "format": "color",
+                                        "default": "#FFFFFF",
                                         "title": "High-contrast label color",
                                         "description": "Color for the label text in high-contrast mode."
                                     },
                                     "backgroundColor": {
                                         "type": "string",
                                         "format": "color",
+                                        "default": "#000000",
                                         "title": "High-contrast background color",
                                         "description": "Background color for the label text in high-contrast mode."
                                     }
