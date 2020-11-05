@@ -594,6 +594,7 @@
             "options": {"collapsed": true},
             "format": "table",
             "type": "array",
+            "minItems": 1,
             "title": "Languages",
             "description": "This setting controls the languages to be used on the site.",
             "items": {
@@ -801,6 +802,7 @@
             "options": {"collapsed": true},
             "format": "table",
             "type": "array",
+            "minItems": 1,
             "title": "Main menu",
             "description": "The links to display in the main menu.",
             "items": {
