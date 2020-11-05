@@ -2,7 +2,6 @@
     "type": "object",
     "title": "Open SDG indicator configuration",
     "description": "This form will produce an indicator's configuration for your Open SDG implementation.",
-    "required": [],
     "properties": {
         "computation_units": {
             "type": "string",
@@ -105,18 +104,16 @@
             "items": {
                 "type": "object",
                 "title": "Starting value",
-                "required": [
-                    "field",
-                    "value"
-                ],
                 "properties": {
                     "title": {
                         "type": "string",
+                        "minLength": 1,
                         "title": "Field",
                         "description": "The field (column) name."
                     },
                     "unit": {
                         "type": "string",
+                        "minLength": 1,
                         "title": "Value",
                         "description": "The value in that field to pre-select."
                     }
@@ -195,9 +192,6 @@
             "items": {
                 "type": "object",
                 "title": "Graph annotation",
-                "required": [
-                    "value"
-                ],
                 "properties": {
                     "preset": {
                         "type": "string",
@@ -208,6 +202,7 @@
                     },
                     "value": {
                         "type": "number",
+                        "minimum": 0,
                         "title": "Value",
                         "description": "The value at which to draw the line. For horizontal lines, this number corresponds to your actual data. For vertical lines, this number should be between 0 (the left side of the chart) and the number of years minus 1 (the right side of the chart)."
                     },
@@ -264,9 +259,6 @@
                         "type": "object",
                         "title": "Label",
                         "description": "A text label for the annotation.",
-                        "required": [
-                            "content"
-                        ],
                         "properties": {
                             "position": {
                                 "type": "string",
@@ -282,6 +274,7 @@
                             },
                             "content": {
                                 "type": "string",
+                                "minLength": 1,
                                 "title": "Content",
                                 "description": "Text of the line label."
                             },
@@ -349,18 +342,16 @@
             "items": {
                 "type": "object",
                 "title": "Graph limit",
-                "required": [
-                    "minimum",
-                    "maximum"
-                ],
                 "properties": {
                     "minimum": {
                         "type": "number",
+                        "minimum": 0,
                         "title": "Minimum",
                         "description": "Minimum value for the y axis."
                     },
                     "maximum": {
                         "type": "number",
+                        "minimum": 0,
                         "title": "Maximum",
                         "description": "Maximum value for the y axis."
                     },
@@ -414,12 +405,10 @@
             "items": {
                 "type": "object",
                 "title": "Graph title",
-                "required": [
-                    "title"
-                ],
                 "properties": {
                     "title": {
                         "type": "string",
+                        "minLength": 1,
                         "title": "Title",
                         "description": "The graph title."
                     },
