@@ -2,18 +2,6 @@
     "type": "object",
     "title": "Open SDG site configuration",
     "description": "This form will produce the site configuration for your Open SDG implementation.",
-    "required": [
-        "country",
-        "data_edit_url",
-        "email_contacts",
-        "environment",
-        "footer_menu",
-        "goal_image_base",
-        "languages",
-        "menu",
-        "metadata_edit_url",
-        "remote_data_prefix"
-    ],
     "properties": {
         "accessible_charts": {
             "title": "Accessible charts",
@@ -107,24 +95,18 @@
             "type": "object",
             "title": "Country information",
             "description": "Information about your country (or region, locality, etc.)",
-            "required": [
-                "name",
-                "adjective"
-            ],
-            "default": {
-                "name": "",
-                "adjective": ""
-            },
             "properties": {
                 "name": {
                     "type": "string",
                     "title": "Name",
-                    "description": "The name of your country/region/locality/etc."
+                    "description": "The name of your country/region/locality/etc.",
+                    "minLength": 1
                 },
                 "adjective": {
                     "type": "string",
                     "title": "Adjective",
-                    "description": "Adjective form of your country/region/locality/etc."
+                    "description": "Adjective form of your country/region/locality/etc.",
+                    "minLength": 1
                 }
             },
             "links": [
@@ -139,9 +121,6 @@
             "type": "object",
             "title": "Create goals",
             "description": "This setting can be used to automatically create the goal pages.",
-            "default": {
-                "layout": "goal-by-target-vertical"
-            },
             "properties": {
                 "layout": {
                     "type": "string",
@@ -161,9 +140,6 @@
             "type": "object",
             "title": "Create indicators",
             "description": "This setting can be used to automatically create the indicator pages.",
-            "default": {
-                "layout": "indicator"
-            },
             "properties": {
                 "layout": {
                     "type": "string",
@@ -184,42 +160,9 @@
             "type": "array",
             "title": "Create pages",
             "description": "This setting can be used to automatically create the pages.",
-            "default": [
-                {
-                    "folder": "/",
-                    "layout": "frontpage-alt"
-                },
-                {
-                    "folder": "/goals",
-                    "layout": "goals",
-                    "title": "general.goals"
-                },
-                {
-                    "folder": "/reporting-status",
-                    "layout": "reportingstatus",
-                    "title": "status.reporting_status"
-                },
-                {
-                    "filename": "indicators.json",
-                    "folder": "/",
-                    "layout": "indicators.json"
-                },
-                {
-                    "folder": "/search",
-                    "layout": "search",
-                    "title": "search.search"
-                }
-            ],
             "items": {
                 "type": "object",
                 "title": "Page",
-                "default": {
-                    "filename": "index.html"
-                },
-                "required": [
-                    "layout",
-                    "folder"
-                ],
                 "properties": {
                     "filename": {
                         "type": "string",
@@ -228,11 +171,13 @@
                     },
                     "folder": {
                         "type": "string",
+                        "minLength": 1,
                         "title": "Folder",
                         "description": "The folder path for the page."
                     },
                     "layout": {
                         "type": "string",
+                        "minLength": 1,
                         "title": "Layout",
                         "description": "The layout to use for the page."
                     },
@@ -286,6 +231,7 @@
         },
         "data_edit_url": {
             "type": "string",
+            "minLength": 1,
             "title": "Data edit URL",
             "description": "This setting controls the URL of the 'Edit Data' buttons that appear on the staging site's indicator pages.",
             "links": [
@@ -304,24 +250,22 @@
             "items": {
                 "type": "object",
                 "title": "Date format",
-                "required": [
-                    "type",
-                    "language",
-                    "format"
-                ],
                 "properties": {
                     "type": {
                         "type": "string",
+                        "minLength": 1,
                         "title": "Type",
                         "description": "Use `standard` for news/post dates."
                     },
                     "language": {
                         "type": "string",
+                        "minLength": 1,
                         "title": "Language",
                         "description": "Language code the format applies to."
                     },
                     "format": {
                         "type": "string",
+                        "minLength": 1,
                         "title": "Format",
                         "description": "Ruby DateTime date format."
                     }
@@ -339,22 +283,16 @@
             "type": "object",
             "title": "Disclaimer",
             "description": "This setting controls the content of the disclaimer that appears at the top of each page.",
-            "default": {
-                "phase": "",
-                "message": ""
-            },
             "properties": {
                 "phase": {
                     "type": "string",
                     "title": "Phase",
-                    "description": "The development phase of your platform (alpha, beta, etc.)",
-                    "default": ""
+                    "description": "The development phase of your platform (alpha, beta, etc.)"
                 },
                 "message": {
                     "type": "string",
                     "title": "Message",
-                    "description": "A short disclaimer message.",
-                    "default": ""
+                    "description": "A short disclaimer message."
                 }
             },
             "links": [
@@ -369,31 +307,24 @@
             "type": "object",
             "title": "Email addresses",
             "description": "Email addresses to publish on your platform.",
-            "default": {
-                "questions": "",
-                "suggestions": "",
-                "functional": ""
-            },
-            "required": [
-                "questions",
-                "suggestions",
-                "functional"
-            ],
             "properties": {
                 "questions": {
                     "type": "string",
+                    "minLength": 1,
                     "format": "email",
                     "title": "Questions",
                     "description": "Inbox for questions about your platform."
                 },
                 "suggestions": {
                     "type": "string",
+                    "minLength": 1,
                     "format": "email",
                     "title": "Suggestions",
                     "description": "Inbox for suggestions for your platform."
                 },
                 "functional": {
                     "type": "string",
+                    "minLength": 1,
                     "format": "email",
                     "title": "Functional",
                     "description": "Inbox for bug reports for your platform."
@@ -408,9 +339,9 @@
         },
         "environment": {
             "type": "string",
+            "minLength": 1,
             "title": "Environment",
             "description": "Which environment (staging or production) this configuration is for.",
-            "default": "staging",
             "format": "choices",
             "enum": ["staging", "production"],
             "links": [
@@ -425,7 +356,6 @@
             "title": "Footer language toggle",
             "description": "This setting controls the type of language toggle to be used in the footer.",
             "format": "choices",
-            "default": "none",
             "enum": ["none", "dropdown", "links"],
             "links": [
                 {
@@ -440,16 +370,6 @@
             "type": "array",
             "title": "Footer menu",
             "description": "The links to display in the footer menu.",
-            "default": [
-                {
-                    "path": "mailto:my-email-address@example.com",
-                    "translation_key": "menu.contact_us"
-                },
-                {
-                    "path": "https://twitter.com/MyTwitterAccount",
-                    "translation_key": "general.twitter"
-                }
-            ],
             "items": {
                 "$ref": "#/definitions/menu_item"
             },
@@ -468,12 +388,10 @@
             "items": {
                 "type": "object",
                 "title": "Frontpage card",
-                "required": [
-                    "title"
-                ],
                 "properties": {
                     "title": {
                         "type": "string",
+                        "minLength": 1,
                         "title": "Title",
                         "description": "The card's title."
                     },
@@ -562,9 +480,9 @@
         },
         "goal_image_base": {
             "type": "string",
+            "minLength": 1,
             "title": "Goal image base URL",
             "description": "This setting controls the base URL for downloading the imagery for the goals.",
-            "default": "https://open-sdg.github.io/sdg-translations/assets/img/goals",
             "links": [
                 {
                     "rel": "More information",
@@ -576,7 +494,6 @@
             "type": "string",
             "title": "Goal image extension",
             "description": "This setting controls the type of file (the file extension) that will be used for the goal images.",
-            "default": "png",
             "links": [
                 {
                     "rel": "More information",
@@ -601,7 +518,6 @@
             "type": "string",
             "title": "Graph color set",
             "description": "This setting can be used to customize the color set used in the charts.",
-            "default": "default",
             "examples": [],
             "format": "choices",
             "enum": ["default", "sdg", "goal", "custom"],
@@ -620,6 +536,7 @@
             "description": "This setting can be used to define a set of colors to be used in the charts. This is only used when graph_color_set is 'custom'.",
             "items": {
                 "type": "string",
+                "format": "color",
                 "title": "Color",
                 "description": "Hexadecimal color code"
             },
@@ -634,7 +551,6 @@
             "title": "Graph color number",
             "type": "integer",
             "description": "This setting can be used to limit the length of the list of colors selected via graph_color_set.",
-            "default": 6,
             "links": [
                 {
                     "rel": "More information",
@@ -647,7 +563,6 @@
             "title": "Header language toggle",
             "description": "This setting controls the type of language toggle to be used in the header.",
             "format": "choices",
-            "default": "dropdown",
             "enum": ["none", "dropdown", "links"],
             "links": [
                 {
@@ -681,9 +596,9 @@
             "type": "array",
             "title": "Languages",
             "description": "This setting controls the languages to be used on the site.",
-            "default": ["en"],
             "items": {
                 "type": "string",
+                "minLength": 1,
                 "title": "Language"
             },
             "links": [
@@ -702,18 +617,16 @@
             "items": {
                 "type": "object",
                 "title": "Language override",
-                "required": [
-                    "language",
-                    "language_public"
-                ],
                 "properties": {
                     "language": {
                         "type": "string",
+                        "minLength": 1,
                         "title": "Language",
                         "description": "The (standard) language code that you would like to override."
                     },
                     "language_public": {
                         "type": "string",
+                        "minLength": 1,
                         "title": "Language override",
                         "description": "The (non-standard) language code that you would like show the public instead."
                     }
@@ -779,27 +692,19 @@
             "default": {
                 "minZoom": 5,
                 "maxZoom": 10,
-                "tileURL": "",
-                "tileOptions": {
-                    "id": "",
-                    "accessToken": "",
-                    "attribution": ""
-                },
                 "colorRange": "chroma.brewer.BuGn",
                 "noValueColor": "#f0f0f0",
                 "styleNormal": {
                     "weight": 1,
                     "opacity": 1,
                     "fillOpacity": 0.7,
-                    "color": "#888",
-                    "dashArray": ""
+                    "color": "#888888"
                 },
                 "styleHighlighted": {
                     "weight": 1,
                     "opacity": 1,
                     "fillOpacity": 0.7,
-                    "color": "#111",
-                    "dashArray": ""
+                    "color": "#111111"
                 },
                 "styleStatic": {
                     "weight": 2,
@@ -898,16 +803,6 @@
             "type": "array",
             "title": "Main menu",
             "description": "The links to display in the main menu.",
-            "default": [
-                {
-                    "path": "/reporting-status",
-                    "translation_key": "menu.reporting_status"
-                },
-                {
-                    "path": "/about",
-                    "translation_key": "menu.about"
-                }
-            ],
             "items": {
                 "$ref": "#/definitions/menu_item"
             },
@@ -920,6 +815,7 @@
         },
         "metadata_edit_url": {
             "type": "string",
+            "minLength": 1,
             "title": "Metadata edit URL",
             "description": "This setting controls the URL of the 'Edit Metadata' buttons that appear on the staging site's indicator pages.",
             "links": [
@@ -938,18 +834,16 @@
             "items": {
                 "type": "object",
                 "title": "Metadata tab",
-                "required": [
-                    "scope",
-                    "title"
-                ],
                 "properties": {
                     "scope": {
                         "type": "string",
+                        "minLength": 1,
                         "title": "Scope",
                         "description": "This tab will contain fields in the specific `scope` in your data repository's metadata schema file (eg, `_prose.yml`)."
                     },
                     "title": {
                         "type": "string",
+                        "minLength": 1,
                         "title": "Title",
                         "description": "The title of the metadata tab."
                     },
@@ -978,8 +872,7 @@
                     "title": "Category links",
                     "type": "boolean",
                     "description": "Whether you would like the 'categories' of posts to generate links to dedicated category pages.",
-                    "format": "checkbox",
-                    "default": true
+                    "format": "checkbox"
                 }
             },
             "links": [
@@ -993,7 +886,6 @@
             "type": "string",
             "title": "Non-global metadata",
             "description": "This setting can be used to control the text of the tab containing non-global metadata.",
-            "default": "indicator.national_metadata",
             "links": [
                 {
                     "rel": "More information",
@@ -1003,6 +895,7 @@
         },
         "remote_data_prefix": {
             "type": "string",
+            "minLength": 1,
             "title": "Remote data repository URL",
             "description": "Specify the URL of your published data repository.",
             "links": [
@@ -1034,18 +927,16 @@
             "items": {
                 "type": "object",
                 "title": "Boost",
-                "required": [
-                    "field",
-                    "boost"
-                ],
                 "properties": {
                     "field": {
                         "type": "string",
+                        "minLength": 1,
                         "title": "Field",
                         "description": "Field to boost ('title', 'content', etc.)"
                     },
                     "boost": {
                         "type": "integer",
+                        "minLength": 1,
                         "title": "Boost",
                         "description": "Higher boost means higher search ranking."
                     }
@@ -1135,18 +1026,16 @@
         "menu_item": {
             "type": "object",
             "title": "Menu item",
-            "required": [
-                "path",
-                "translation_key"
-            ],
             "properties": {
                 "path": {
                     "type": "string",
+                    "minLength": 1,
                     "title": "Path",
                     "description": "Path or URL that the menu item should link to."
                 },
                 "translation_key": {
                     "type": "string",
+                    "minLength": 1,
                     "title": "Label",
                     "description": "Label (or translation key) for the link."
                 }
@@ -1155,18 +1044,16 @@
         "breadcrumb_item": {
             "type": "object",
             "title": "Breadcrumb item",
-            "required": [
-                "path",
-                "label"
-            ],
             "properties": {
                 "path": {
                     "type": "string",
+                    "minLength": 1,
                     "title": "Path",
                     "description": "Path or URL that the breadcrumb item should link to."
                 },
                 "label": {
                     "type": "string",
+                    "minLength": 1,
                     "title": "Label",
                     "description": "Label (or translation key) for the breadcrumb item."
                 }
@@ -1174,21 +1061,15 @@
         },
         "title_and_description": {
             "type": "object",
-            "required": [
-                "title",
-                "description"
-            ],
-            "default": {
-                "title": "",
-                "description": ""
-            },
             "properties": {
                 "title": {
                     "type": "string",
+                    "minLength": 1,
                     "title": "Title"
                 },
                 "description": {
                     "type": "string",
+                    "minLength": 1,
                     "title": "Description",
                     "format": "markdown"
                 }

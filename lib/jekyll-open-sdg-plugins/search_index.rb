@@ -35,6 +35,10 @@ module JekyllOpenSdgPlugins
 
       site.collections.keys.each do |collection|
         site.collections[collection].docs.each do |doc|
+          # Do not index configuration forms.
+          if doc.data.has_key?('layout') && doc.data['layout'] == 'config-builder'
+            next
+          end
           # We segregate the search items by language.
           language = doc.data['language']
           if !search_items.has_key? language
