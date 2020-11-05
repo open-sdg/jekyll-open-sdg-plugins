@@ -105,13 +105,13 @@
                 "type": "object",
                 "title": "Starting value",
                 "properties": {
-                    "title": {
+                    "field": {
                         "type": "string",
                         "minLength": 1,
                         "title": "Field",
                         "description": "The field (column) name."
                     },
-                    "unit": {
+                    "value": {
                         "type": "string",
                         "minLength": 1,
                         "title": "Value",
