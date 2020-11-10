@@ -126,9 +126,15 @@
                     "type": "string",
                     "title": "Layout",
                     "format": "choices",
-                    "enum": ["", "config-builder"],
+                    "enum": [
+                        "",
+                        "config-builder"
+                    ],
                     "options": {
-                        "enum_titles": ["Do not automatically create config forms", "config-builder"]
+                        "enum_titles": [
+                            "Do not automatically create config forms",
+                            "config-builder"
+                        ]
                     },
                     "description": "The layout to use for the configuration form pages."
                 }
@@ -144,9 +150,19 @@
                     "type": "string",
                     "title": "Layout",
                     "format": "choices",
-                    "enum": ["", "goal", "goal-by-target", "goal-by-target-vertical"],
+                    "enum": [
+                        "",
+                        "goal",
+                        "goal-by-target",
+                        "goal-by-target-vertical"
+                    ],
                     "options": {
-                        "enum_titles": ["Do not automatically create goals", "goal", "goal-by-target", "goal-by-target-vertical"]
+                        "enum_titles": [
+                            "Do not automatically create goals",
+                            "goal",
+                            "goal-by-target",
+                            "goal-by-target-vertical"
+                        ]
                     },
                     "description": "The layout to use for the goal pages."
                 }
@@ -168,9 +184,15 @@
                     "type": "string",
                     "title": "Layout",
                     "format": "choices",
-                    "enum": ["", "indicator"],
+                    "enum": [
+                        "",
+                        "indicator"
+                    ],
                     "options": {
-                        "enum_titles": ["Do not automatically create indicators", "indicator"]
+                        "enum_titles": [
+                            "Do not automatically create indicators",
+                            "indicator"
+                        ]
                     },
                     "description": "The layout to use for the indicator pages."
                 }
