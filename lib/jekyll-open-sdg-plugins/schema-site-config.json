@@ -141,7 +141,7 @@
                     "type": "string",
                     "title": "Layout",
                     "format": "choices",
-                    "enum": ["goal"],
+                    "enum": ["goal", "goal-by-target", "goal-by-target-vertical"],
                     "description": "The layout to use for the goal pages."
                 }
             },
