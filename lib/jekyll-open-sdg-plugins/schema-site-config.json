@@ -116,6 +116,21 @@
                 }
             ]
         },
+        "create_config_forms": {
+            "options": {"collapsed": true},
+            "type": "object",
+            "title": "Create configuration forms",
+            "description": "This setting can be used to automatically create the configuration form pages.",
+            "properties": {
+                "layout": {
+                    "type": "string",
+                    "title": "Layout",
+                    "format": "choices",
+                    "enum": ["config-builder"],
+                    "description": "The layout to use for the configuration form pages."
+                }
+            }
+        },
         "create_goals": {
             "options": {"collapsed": true},
             "type": "object",
@@ -125,6 +140,8 @@
                 "layout": {
                     "type": "string",
                     "title": "Layout",
+                    "format": "choices",
+                    "enum": ["goal"],
                     "description": "The layout to use for the goal pages."
                 }
             },
@@ -144,6 +161,8 @@
                 "layout": {
                     "type": "string",
                     "title": "Layout",
+                    "format": "choices",
+                    "enum": ["indicator"],
                     "description": "The layout to use for the indicator pages."
                 }
             },
