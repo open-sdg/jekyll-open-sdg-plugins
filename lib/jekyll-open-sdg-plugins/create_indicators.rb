@@ -8,12 +8,9 @@ module JekyllOpenSdgPlugins
 
     def generate(site)
       # If site.create_indicators is set, create indicators per the metadata.
-      if site.config['languages'] and site.config['create_indicators']
+      if site.config['languages'] and site.config['create_indicators'] and site.config['create_indicators'].key?('layout') and site.config['create_indicators']['layout'] != ''
         # Decide what layout to use for the indicator pages.
-        layout = 'indicator'
-        if site.config['create_indicators'].key?('layout')
-          layout = site.config['create_indicators']['layout']
-        end
+        layout = site.config['create_indicators']['layout']
         # See if we need to "map" any language codes.
         languages_public = Hash.new
         if site.config['languages_public']
