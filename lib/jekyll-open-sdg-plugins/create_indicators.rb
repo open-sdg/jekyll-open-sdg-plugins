@@ -44,12 +44,9 @@ module JekyllOpenSdgPlugins
           end
         end
         # Create the indicator configuration pages.
-        if site.config['create_config_forms']
+        if site.config['create_config_forms'] && site.config['create_config_forms'].key?('layout') && site.config['create_config_forms']['layout'] != ''
           metadata = {}
-          layout = 'config-builder'
-          if site.config['create_config_forms'].key?('layout')
-            layout = site.config['create_config_forms']['layout']
-          end
+          layout = site.config['create_config_forms']['layout']
           if opensdg_translated_builds(site)
             if site.data.has_key?('untranslated')
               metadata = site.data['untranslated']['meta']
@@ -62,7 +59,6 @@ module JekyllOpenSdgPlugins
           end
           # Loop through the indicators (using metadata as a list).
           if !metadata.empty?
-            site.config['show_indicator_config_forms'] = true
             # Loop through the languages.
             site.config['languages'].each_with_index do |language, index|
               # Get the "public language" (for URLs) which may be different.
