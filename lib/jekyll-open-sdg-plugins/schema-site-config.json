@@ -128,12 +128,18 @@
                     "format": "choices",
                     "enum": [
                         "",
-                        "config-builder"
+                        "config-builder",
+                        "foo1",
+                        "foo2",
+                        "foo3"
                     ],
                     "options": {
                         "enum_titles": [
                             "Do not automatically create config forms",
-                            "config-builder"
+                            "config-builder",
+                            "foo1",
+                            "foo2",
+                            "foo3"
                         ]
                     },
                     "description": "The layout to use for the configuration form pages."
