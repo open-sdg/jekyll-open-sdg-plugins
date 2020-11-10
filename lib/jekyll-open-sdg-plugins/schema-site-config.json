@@ -126,7 +126,12 @@
                     "type": "string",
                     "title": "Layout",
                     "format": "choices",
-                    "enum": ["", "config-builder"],
+                    "options": {
+                        "choices_options": {
+                            "removeItemButton": true
+                        }
+                    },
+                    "enum": ["config-builder"],
                     "description": "The layout to use for the configuration form pages."
                 }
             }
@@ -141,7 +146,7 @@
                     "type": "string",
                     "title": "Layout",
                     "format": "choices",
-                    "enum": ["", "goal", "goal-by-target", "goal-by-target-vertical"],
+                    "enum": ["goal", "goal-by-target", "goal-by-target-vertical"],
                     "description": "The layout to use for the goal pages."
                 }
             },
@@ -162,7 +167,7 @@
                     "type": "string",
                     "title": "Layout",
                     "format": "choices",
-                    "enum": ["", "indicator"],
+                    "enum": ["indicator"],
                     "description": "The layout to use for the indicator pages."
                 }
             },
