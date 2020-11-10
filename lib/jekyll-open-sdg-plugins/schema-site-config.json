@@ -127,7 +127,9 @@
                     "title": "Layout",
                     "format": "choices",
                     "enum": ["", "config-builder"],
-                    "enum_titles": ["None", "config-builder"],
+                    "options": {
+                        "enum_titles": ["None", "config-builder"]
+                    },
                     "description": "The layout to use for the configuration form pages."
                 }
             }
