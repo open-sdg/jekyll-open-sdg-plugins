@@ -44,33 +44,39 @@ module JekyllOpenSdgPlugins
           end
         end
         # Create the indicator configuration pages.
-        metadata = {}
-        if opensdg_translated_builds(site)
-          if site.data.has_key?('untranslated')
-            metadata = site.data['untranslated']['meta']
-          else
-            default_language = site.config['languages'][0]
-            metadata = site.data[default_language]['meta']
+        if site.config['create_config_forms']
+          metadata = {}
+          layout = 'config-builder'
+          if site.config['create_config_forms'].key?('layout')
+            layout = site.config['create_config_forms']['layout']
           end
-        else
-          metadata = site.data['meta']
-        end
-        # Loop through the indicators (using metadata as a list).
-        if !metadata.empty?
-          site.config['show_indicator_config_forms'] = true
-          # Loop through the languages.
-          site.config['languages'].each_with_index do |language, index|
-            # Get the "public language" (for URLs) which may be different.
-            language_public = language
-            if languages_public[language]
-              language_public = languages_public[language]
+          if opensdg_translated_builds(site)
+            if site.data.has_key?('untranslated')
+              metadata = site.data['untranslated']['meta']
+            else
+              default_language = site.config['languages'][0]
+              metadata = site.data[default_language]['meta']
             end
-            metadata.each do |inid, meta|
-              dir = File.join('config', inid)
-              if index != 0
-                dir = File.join(language_public, 'config', inid)
+          else
+            metadata = site.data['meta']
+          end
+          # Loop through the indicators (using metadata as a list).
+          if !metadata.empty?
+            site.config['show_indicator_config_forms'] = true
+            # Loop through the languages.
+            site.config['languages'].each_with_index do |language, index|
+              # Get the "public language" (for URLs) which may be different.
+              language_public = language
+              if languages_public[language]
+                language_public = languages_public[language]
               end
-              site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta)
+              metadata.each do |inid, meta|
+                dir = File.join('config', inid)
+                if index != 0
+                  dir = File.join(language_public, 'config', inid)
+                end
+                site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta, layout)
+              end
             end
           end
         end
@@ -98,7 +104,7 @@ module JekyllOpenSdgPlugins
 
   # A Page subclass used in the `CreateIndicators` class.
   class IndicatorConfigPage < Jekyll::Page
-    def initialize(site, base, dir, inid, language, meta)
+    def initialize(site, base, dir, inid, language, meta, layout)
       @site = site
       @base = base
       @dir  = dir
@@ -109,7 +115,7 @@ module JekyllOpenSdgPlugins
       self.data['language'] = language
       self.data['indicator_number'] = inid.gsub('-', '.')
       self.data['config_type'] = 'indicator'
-      self.data['layout'] = 'config-builder'
+      self.data['layout'] = layout
       self.data['meta'] = meta
       self.data['title'] = 'Open SDG indicator configuration: ' + self.data['indicator_number']
       self.data['config_filename'] = inid + '.yml'
