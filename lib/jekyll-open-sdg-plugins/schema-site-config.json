@@ -126,19 +126,8 @@
                     "type": "string",
                     "title": "Layout",
                     "format": "choices",
-                    "options": {
-                        "choices_options": {
-                            "removeItems": true,
-                            "removeItemButton": true
-                        },
-                        "choices": {
-                            "removeItems": true,
-                            "removeItemButton": true
-                        },
-                        "choices_removeItems": true,
-                        "choices_removeItemButton": true
-                    },
-                    "enum": ["config-builder"],
+                    "enum": ["", "config-builder"],
+                    "enum_titles": ["None", "config-builder"],
                     "description": "The layout to use for the configuration form pages."
                 }
             }
