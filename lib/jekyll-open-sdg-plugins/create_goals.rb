@@ -8,7 +8,7 @@ module JekyllOpenSdgPlugins
 
     def generate(site)
       # If site.create_goals is set, create goals per the metadata.
-      if site.config['languages'] and site.config['create_goals']
+      if site.config['languages'] and site.config['create_goals'] and site.config['create_goals'].key?('layout') and site.config['create_goals']['layout'] != ''
         # Compile the list of goals.
         goals = {}
         # Are we using translated builds?
@@ -27,10 +27,7 @@ module JekyllOpenSdgPlugins
           goals[goal] = true
         end
         # Decide what layout to use for the goal pages.
-        layout = 'goal'
-        if site.config['create_goals'].key?('layout')
-          layout = site.config['create_goals']['layout']
-        end
+        layout = site.config['create_goals']['layout']
         # See if we need to "map" any language codes.
         languages_public = Hash.new
         if site.config['languages_public']
