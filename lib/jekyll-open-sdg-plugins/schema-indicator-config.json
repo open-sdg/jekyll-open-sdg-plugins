@@ -9,7 +9,7 @@
             "description": "Unit of measurement which displays below the indicator chart.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the units of measurement setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#recommended-special-fields"
                 }
             ]
@@ -20,7 +20,7 @@
             "description": "Copyright which displays below the indicator chart.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the copyright setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#footer"
                 }
             ]
@@ -32,7 +32,7 @@
             "description": "Footnote which displays below the indicator chart.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the footnote setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#footer"
                 }
             ]
@@ -44,7 +44,7 @@
             "format": "checkbox",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information the non-statistical setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#mandatory-fields"
                 }
             ]
@@ -55,7 +55,7 @@
             "description": "A CSS class to apply to the data notice for this indicator.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the data notice setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#data-notice"
                 }
             ]
@@ -66,7 +66,7 @@
             "description": "A title to display above the data notice for this indicator.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the data notice heading setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#data-notice"
                 }
             ]
@@ -78,7 +78,7 @@
             "description": "Text to display as a data notice for this indicator, intended to contain very important information which site viewers must keep in mind when using the data provided.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the data notice text setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#data-notice"
                 }
             ]
@@ -90,7 +90,7 @@
             "format": "checkbox",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the map setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/maps/#metadata-field-data_show_map"
                 }
             ]
@@ -121,7 +121,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the starting values setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#starting-values"
                 }
             ]
@@ -133,7 +133,7 @@
             "description": "A footer that displays below the embedded feature. Only used with either embedded_feature_url or embedded_feature_html.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the embed footer setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#embedded-feature-metadata"
                 }
             ]
@@ -145,7 +145,7 @@
             "description": "Any HTML to display in another tab, after Chart/Table/etc.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the embed HTML setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#embedded-feature-metadata"
                 }
             ]
@@ -156,7 +156,7 @@
             "description": "A title for the embedded feature tab (ie, Chart/Table/[this]). Only used with either embedded_feature_url or embedded_feature_html.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the embed tab title setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#embedded-feature-metadata"
                 }
             ]
@@ -167,7 +167,7 @@
             "description": "A title that displays above the embedded feature. Only used with either embedded_feature_url or embedded_feature_html.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the embed title setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#embedded-feature-metadata"
                 }
             ]
@@ -179,7 +179,7 @@
             "description": "Any URL to display as an iframe in another tab, after Chart/Table/etc.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the embed URL setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#embedded-feature-metadata"
                 }
             ]
@@ -195,7 +195,6 @@
                 "properties": {
                     "preset": {
                         "type": "string",
-                        "format": "choices",
                         "title": "Preset",
                         "enum": ["target_line"],
                         "description": "A preset bundle of configurations."
@@ -239,7 +238,7 @@
                         "description": "The color of the line.",
                         "links": [
                             {
-                                "rel": "More information",
+                                "rel": "More information on the border color setting",
                                 "href": "https://github.com/chartjs/chartjs-plugin-annotation/blob/master/README.md"
                             }
                         ]
@@ -250,7 +249,7 @@
                         "description": "The type of line dash.",
                         "links": [
                             {
-                                "rel": "More information",
+                                "rel": "More information on the line dash setting",
                                 "href": "https://github.com/chartjs/chartjs-plugin-annotation/blob/master/README.md"
                             }
                         ]
@@ -332,7 +331,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the graph annotations setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#graph-metadata"
                 }
             ]
@@ -373,7 +372,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the graph limits setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#graph-metadata"
                 }
             ]
@@ -384,7 +383,7 @@
             "description": "This can be used with the bar graph type to place a certain disaggregation into the same stacked bars.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the stacked disaggregation setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#recommended-special-fields"
                 }
             ]
@@ -395,7 +394,7 @@
             "description": "The title that displays above the graph/chart.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the graph title setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#mandatory-for-statistical-indicators"
                 }
             ]
@@ -431,13 +430,12 @@
         },
         "graph_type": {
             "type": "string",
-            "format": "choices",
             "title": "Graph type",
             "description": "What type of graph to use for the indicator.",
             "enum": ["line", "bar", "binary"],
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the graph titles setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#mandatory-for-statistical-indicators"
                 }
             ]
@@ -448,7 +446,7 @@
             "description": "The name for the indicator, which displays at the top of the indicator page.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the indicator name setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#mandatory-fields"
                 }
             ]
@@ -459,7 +457,7 @@
             "description": "The number (or 'id') for the indicator.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the indicator number setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#mandatory-fields"
                 }
             ]
@@ -470,7 +468,7 @@
             "description": "A label used in the absence of any disaggregation.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the geographical coverage setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#mandatory-for-statistical-indicators"
                 }
             ]
@@ -483,13 +481,12 @@
         },
         "reporting_status": {
             "type": "string",
-            "format": "choices",
             "title": "Reporting status",
             "enum": ["complete", "inprogress", "notstarted", "notapplicable"],
             "description": "The status of the indicator.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the reporting status setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#mandatory-fields"
                 }
             ]
@@ -506,7 +503,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the tags setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#recommended-special-fields"
                 }
             ]
