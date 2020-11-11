@@ -149,7 +149,6 @@
                 "layout": {
                     "type": "string",
                     "title": "Layout",
-                    "format": "choices",
                     "enum": [
                         "",
                         "goal",
