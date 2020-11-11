@@ -10,7 +10,7 @@
             "format": "checkbox",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the accessible charts setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#accessible_charts"
                 }
             ]
@@ -22,7 +22,7 @@
             "format": "checkbox",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the accessible tabs setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#accessible_tabs"
                 }
             ]
@@ -41,7 +41,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the analytics setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#analytics"
                 }
             ]
@@ -85,7 +85,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the breadcrumbs setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#breadcrumbs"
                 }
             ]
@@ -111,7 +111,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the country setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#country"
                 }
             ]
@@ -125,7 +125,6 @@
                 "layout": {
                     "type": "string",
                     "title": "Layout",
-                    "format": "choices",
                     "enum": [
                         "",
                         "config-builder"
@@ -138,7 +137,13 @@
                     },
                     "description": "The layout to use for the configuration form pages."
                 }
-            }
+            },
+            "links": [
+                {
+                    "rel": "More information on the create config forms setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#create_config_forms"
+                }
+            ]
         },
         "create_goals": {
             "options": {"collapsed": true},
@@ -168,7 +173,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the create goals setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#create_goals"
                 }
             ]
@@ -182,7 +187,6 @@
                 "layout": {
                     "type": "string",
                     "title": "Layout",
-                    "format": "choices",
                     "enum": [
                         "",
                         "indicator"
@@ -198,7 +202,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the create indicators setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#create_indicators"
                 }
             ]
@@ -239,7 +243,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the create pages setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#create_pages"
                 }
             ]
@@ -256,7 +260,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the custom CSS setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#custom_css"
                 }
             ]
@@ -273,7 +277,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the custom JS setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#custom_js"
                 }
             ]
@@ -285,7 +289,7 @@
             "description": "This setting controls the URL of the 'Edit Data' buttons that appear on the staging site's indicator pages.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the data edit URL setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#data_edit_url"
                 }
             ]
@@ -322,7 +326,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the date formats setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#date_formats"
                 }
             ]
@@ -346,7 +350,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the disclaimer setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#disclaimer"
                 }
             ]
@@ -381,7 +385,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the email contacts setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#email_contacts"
                 }
             ]
@@ -391,11 +395,10 @@
             "minLength": 1,
             "title": "Environment",
             "description": "Which environment (staging or production) this configuration is for.",
-            "format": "choices",
             "enum": ["staging", "production"],
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the environment setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#environment"
                 }
             ]
@@ -404,11 +407,10 @@
             "type": "string",
             "title": "Footer language toggle",
             "description": "This setting controls the type of language toggle to be used in the footer.",
-            "format": "choices",
             "enum": ["none", "dropdown", "links"],
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the footer language toggle setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#footer_language_toggle"
                 }
             ]
@@ -424,7 +426,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the footer menu setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#footer_menu"
                 }
             ]
@@ -474,7 +476,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the frontpage cards setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#frontpage_cards"
                 }
             ]
@@ -487,7 +489,7 @@
             "$ref": "#/definitions/title_and_description",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the frontpage goals grid setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#frontpage_goals_grid"
                 }
             ]
@@ -498,7 +500,7 @@
             "description": "This setting can control the heading that appears on the front page. This setting is only used in the frontpage layout.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the frontpage heading setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#frontpage_heading"
                 }
             ]
@@ -509,7 +511,7 @@
             "description": "This setting can control the instructions that appear on the front page. This setting is only used in the frontpage layout.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the frontpage instructions setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#frontpage_instructions"
                 }
             ]
@@ -522,7 +524,7 @@
             "$ref": "#/definitions/title_and_description",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the frontpage introduction banner setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#frontpage_introduction_banner"
                 }
             ]
@@ -534,7 +536,7 @@
             "description": "This setting controls the base URL for downloading the imagery for the goals.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the goal image base setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#goal_image_base"
                 }
             ]
@@ -545,7 +547,7 @@
             "description": "This setting controls the type of file (the file extension) that will be used for the goal images.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the goal image extension setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#goal_image_extension"
                 }
             ]
@@ -558,7 +560,7 @@
             "$ref": "#/definitions/title_and_description",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the goals page setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#goals_page"
                 }
             ]
@@ -568,11 +570,10 @@
             "title": "Graph color set",
             "description": "This setting can be used to customize the color set used in the charts.",
             "examples": [],
-            "format": "choices",
             "enum": ["default", "sdg", "goal", "custom"],
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the graph color set setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#graph_color_set"
                 }
             ]
@@ -591,7 +592,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the graph color list setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#graph_color_list"
                 }
             ]
@@ -602,7 +603,7 @@
             "description": "This setting can be used to limit the length of the list of colors selected via graph_color_set.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the graph color number setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#graph_color_number"
                 }
             ]
@@ -611,11 +612,10 @@
             "type": "string",
             "title": "Header language toggle",
             "description": "This setting controls the type of language toggle to be used in the header.",
-            "format": "choices",
             "enum": ["none", "dropdown", "links"],
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the header language toggle setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#header_language_toggle"
                 }
             ]
@@ -627,7 +627,7 @@
             "format": "checkbox",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the hide empty metadata setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#hide_empty_metadata"
                 }
             ]
@@ -653,7 +653,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the languages setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#languages"
                 }
             ]
@@ -684,7 +684,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the language override setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#languages_public"
                 }
             ]
@@ -729,7 +729,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the map layers setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/maps/#map_layers"
                 }
             ]
@@ -807,7 +807,7 @@
                     "description": "The color range for the choropleth map.",
                     "links": [
                         {
-                            "ref": "More information",
+                            "ref": "More information on the color range setting",
                             "href": "https://gka.github.io/chroma.js/#chroma-brewer"
                         }
                     ]
@@ -842,7 +842,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the map options setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/maps/#map_options"
                 }
             ]
@@ -859,7 +859,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the menu setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#menu"
                 }
             ]
@@ -871,7 +871,7 @@
             "description": "This setting controls the URL of the 'Edit Metadata' buttons that appear on the staging site's indicator pages.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the metadata edit URL setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#metadata_edit_url"
                 }
             ]
@@ -908,7 +908,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the metadata tabs setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#metadata_tabs"
                 }
             ]
@@ -928,7 +928,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the news setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#news"
                 }
             ]
@@ -939,7 +939,7 @@
             "description": "This setting can be used to control the text of the tab containing non-global metadata.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the non-global metadata setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#non_global_metadata"
                 }
             ]
@@ -951,7 +951,7 @@
             "description": "Specify the URL of your published data repository.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the remote data prefix setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#remote_data_prefix"
                 }
             ]
@@ -964,7 +964,7 @@
             "$ref": "#/definitions/title_and_description",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the reporting status setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#reporting_status"
                 }
             ]
@@ -995,7 +995,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the search index boost setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#search_index_boost"
                 }
             ]
@@ -1012,7 +1012,7 @@
             },
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the search index extra fields setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#search_index_extra_fields"
                 }
             ]
@@ -1024,7 +1024,7 @@
             "format": "checkbox",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the series toggle setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#series_toggle"
                 }
             ]
@@ -1035,7 +1035,7 @@
             "description": "This setting creates a ShareThis widget along the left side of every page. It should be the property id for your ShareThis account.",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the sharethis setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#sharethis_property"
                 }
             ]
@@ -1054,7 +1054,7 @@
             "format": "checkbox",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the validate indicator config setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#validate_indicator_config"
                 }
             ]
@@ -1066,7 +1066,7 @@
             "format": "checkbox",
             "links": [
                 {
-                    "rel": "More information",
+                    "rel": "More information on the validate site config setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#validate_site_config"
                 }
             ]
