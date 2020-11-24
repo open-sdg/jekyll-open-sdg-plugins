@@ -1115,12 +1115,10 @@
             "properties": {
                 "title": {
                     "type": "string",
-                    "minLength": 1,
                     "title": "Title"
                 },
                 "description": {
                     "type": "string",
-                    "minLength": 1,
                     "title": "Description",
                     "format": "markdown"
                 }
