@@ -109,7 +109,7 @@ module JekyllOpenSdgPlugins
       @site = site
       @base = base
 
-      index_files = (!page.key?('filename') or page['filename'] == 'index.html')
+      index_files = (!page.key?('filename') or page['filename'] == 'index.html' or page['filename'] == '')
       @dir = index_files ? File.join(dir, '/') : dir
       @name = index_files ? 'index.html' : page['filename']
 
