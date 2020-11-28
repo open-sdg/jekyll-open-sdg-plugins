@@ -37,6 +37,8 @@ module JekyllOpenSdgPlugins
             permalink = inid
             if meta.has_key?('permalink') and meta['permalink'] != ''
               permalink = meta['permalink']
+            if meta.has_key?('standalone') and meta['standalone']
+              next
             end
             # Add the language subfolder for all except the default (first) language.
             dir = index == 0 ? permalink : File.join(language_public, permalink)
