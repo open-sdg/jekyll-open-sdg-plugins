@@ -34,6 +34,9 @@ module JekyllOpenSdgPlugins
           end
           # Loop through the indicators (using metadata as a list).
           metadata.each do |inid, meta|
+            if meta.has_key?('standalone') and meta['standalone']
+              next
+            end
             # Add the language subfolder for all except the default (first) language.
             dir = index == 0 ? inid : File.join(language_public, inid)
             # Create the indicator page.
