@@ -37,6 +37,7 @@ module JekyllOpenSdgPlugins
             permalink = inid
             if meta.has_key?('permalink') and meta['permalink'] != ''
               permalink = meta['permalink']
+            end
             if meta.has_key?('standalone') and meta['standalone']
               next
             end
