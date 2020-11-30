@@ -296,11 +296,17 @@ module JekyllOpenSdgPlugins
           else
             indicator_name = meta['indicator_name']
           end
+          indicator_slug = indicator_number.gsub('.', '-')
+          indicator_path = indicator_number
+          if is_standalone && meta.has_key?('permalink') && meta['permalink'] != ''
+            indicator_slug = meta['permalink'].split('/').last().gsub('.', '-')
+            indicator_path = meta['permalink']
+          end
           available_indicator = {
             'number' => indicator_number,
-            'slug' => indicator_number.gsub('.', '-'),
+            'slug' => indicator_slug,
             'name' => opensdg_translate_key(indicator_name, translations, language),
-            'url' => get_url(baseurl, language, indicator_number, languages, languages_public),
+            'url' => get_url(baseurl, language, indicator_path, languages, languages_public),
             'sort' => get_sort_order(indicator_number),
             'goal_number' => goal_number,
             'target_number' => target_number,
