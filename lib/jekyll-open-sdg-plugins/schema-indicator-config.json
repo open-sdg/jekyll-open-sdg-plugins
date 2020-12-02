@@ -184,6 +184,23 @@
                 }
             ]
         },
+        "expected_disaggregations": {
+            "options": {"collapsed": true},
+            "format": "table",
+            "type": "array",
+            "title": "Expected disaggregations",
+            "description": "An optional list of disaggregations (ie, data column names) to use when calculating the disaggregation status statistics.",
+            "items": {
+                "type": "string",
+                "title": "Expected disaggregation"
+            },
+            "links": [
+                {
+                    "rel": "More information on the expected disaggregation setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#recommended-special-fields"
+                }
+            ]
+        },
         "graph_annotations": {
             "options": {"collapsed": true},
             "type": "array",
