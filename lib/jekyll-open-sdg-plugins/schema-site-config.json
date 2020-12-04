@@ -173,7 +173,7 @@
                 "previous_next_links": {
                     "title": "Previous/next links",
                     "type": "boolean",
-                    "description": "This setting can be set to `true` to show navigation links to the previous/next goals.",
+                    "description": "This setting can be used to show navigation links to the previous/next goals.",
                     "format": "checkbox"
                 }
             },
@@ -208,7 +208,7 @@
                 "previous_next_links": {
                     "title": "Previous/next links",
                     "type": "boolean",
-                    "description": "This setting can be set to `true` to show navigation links to the previous/next indicators.",
+                    "description": "This setting can be used to show navigation links to the previous/next indicators.",
                     "format": "checkbox"
                 }
             },
