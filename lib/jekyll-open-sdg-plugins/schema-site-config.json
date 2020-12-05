@@ -959,7 +959,19 @@
             "type": "object",
             "title": "Reporting status",
             "description": "This setting is used in the 'reportingstatus' layout. It can display a title and description above the reporting status page.",
-            "$ref": "#/definitions/title_and_description",
+            "allOf": [
+                { "$ref": "#/definitions/title_and_description" },
+                {
+                    "properties": {
+                        "disaggregation_tabs": {
+                            "title": "Disaggregation tabs",
+                            "type": "boolean",
+                            "description": "Whether or not to display disaggregation status tabs. If you enable this setting, you should also use 'expected_disaggregations' in your indicator configuration, in order to provide the disaggregation status report with useful metrics.",
+                            "format": "checkbox"
+                        }
+                    }
+                }
+            ],
             "links": [
                 {
                     "rel": "More information on the reporting status setting",
