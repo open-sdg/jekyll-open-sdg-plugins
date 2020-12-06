@@ -301,7 +301,7 @@ module JekyllOpenSdgPlugins
             indicator_path = meta['permalink']
           end
           indicator_sort = get_sort_order(indicator_number)
-          if meta.has_key('sort') && meta['sort'] != ''
+          if meta.has_key?('sort') && meta['sort'] != ''
             # Allow metadata 'sort' field to override the default sort.
             indicator_sort = meta['sort']
           end
