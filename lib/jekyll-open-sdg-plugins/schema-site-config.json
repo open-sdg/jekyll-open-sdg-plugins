@@ -179,11 +179,6 @@
                         "type": "object",
                         "title": "Goal",
                         "properties": {
-                            "number": {
-                                "type": "string",
-                                "title": "Goal number",
-                                "description": "The goal number (eg: 1, 2, 3, etc)"
-                            },
                             "content": {
                                 "type": "string",
                                 "title": "Content",
