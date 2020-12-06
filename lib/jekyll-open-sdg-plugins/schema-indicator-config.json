@@ -97,7 +97,6 @@
         },
         "data_start_values": {
             "options": {"collapsed": true},
-            "format": "table",
             "type": "array",
             "title": "Starting values",
             "description": "Disaggregation values for a an indicator to start with already selected",
@@ -186,7 +185,6 @@
         },
         "expected_disaggregations": {
             "options": {"collapsed": true},
-            "format": "table",
             "type": "array",
             "title": "Expected disaggregations",
             "description": "An optional list of disaggregations (ie, data column names) to use when calculating the disaggregation status statistics.",
@@ -355,7 +353,6 @@
         },
         "graph_limits": {
             "options": {"collapsed": true},
-            "format": "table",
             "type": "array",
             "title": "Graph limits",
             "description": "A list of min/max limits controlling the lowest/highest values to be shown on the y-axis.",
@@ -418,7 +415,6 @@
         },
         "graph_titles": {
             "options": {"collapsed": true},
-            "format": "table",
             "type": "array",
             "title": "Graph titles",
             "description": "As an alternative to `graph_title`, this can be used to set specific titles for particular units and/or series.",
@@ -510,7 +506,6 @@
         },
         "tags": {
             "options": {"collapsed": true},
-            "format": "table",
             "type": "array",
             "title": "Tags",
             "description": "An optional list of 'tags' to display under an indicator when it is listed on its goal page.",
