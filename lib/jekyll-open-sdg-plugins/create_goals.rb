@@ -60,9 +60,19 @@ module JekyllOpenSdgPlugins
       @dir  = dir
       @name = 'index.html'
 
+      goal_number = goal.to_s
+      goal_content = ''
+      if site.config['create_goals'].has_key('goals')
+        goal_config = site.config['create_goals']['goals'].find {|x| x['number'] == goal_number}
+        if goal_config
+          goal_content = goal_config['content']
+        end
+      end
+      @content = goal_content
+
       self.process(@name)
       self.data = {}
-      self.data['goal_number'] = goal.to_s
+      self.data['goal_number'] = goal_number
       self.data['language'] = language
       self.data['layout'] = layout
       # Backwards compatibility:

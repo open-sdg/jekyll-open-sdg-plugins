@@ -169,6 +169,29 @@
                         ]
                     },
                     "description": "The layout to use for the goal pages."
+                },
+                "goals": {
+                    "options": {"collapsed": true},
+                    "type": "array",
+                    "title": "Content per goal",
+                    "description": "This setting can be used to enter details for each goal.",
+                    "items": {
+                        "type": "object",
+                        "title": "Goal",
+                        "properties": {
+                            "number": {
+                                "type": "string",
+                                "title": "Goal number",
+                                "description": "The goal number (eg: 1, 2, 3, etc)"
+                            },
+                            "content": {
+                                "type": "string",
+                                "title": "Content",
+                                "format": "markdown",
+                                "description": "Markdown content or a translation key for this goal."
+                            }
+                        }
+                    }
                 }
             },
             "links": [
