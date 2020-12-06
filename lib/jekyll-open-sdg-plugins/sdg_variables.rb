@@ -300,12 +300,17 @@ module JekyllOpenSdgPlugins
           if is_standalone && meta.has_key?('permalink') && meta['permalink'] != ''
             indicator_path = meta['permalink']
           end
+          indicator_sort = get_sort_order(indicator_number)
+          if meta.has_key('sort') && meta['sort'] != ''
+            # Allow metadata 'sort' field to override the default sort.
+            indicator_sort = meta['sort']
+          end
           available_indicator = {
             'number' => indicator_number,
             'slug' => indicator_number.gsub('.', '-'),
             'name' => opensdg_translate_key(indicator_name, translations, language),
             'url' => get_url(baseurl, language, indicator_path, languages, languages_public),
-            'sort' => get_sort_order(indicator_number),
+            'sort' => indicator_sort,
             'goal_number' => goal_number,
             'target_number' => target_number,
             'global' => global_indicator,
