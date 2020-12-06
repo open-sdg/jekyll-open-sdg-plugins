@@ -54,7 +54,6 @@
             "properties": {
                 "goal": {
                     "options": {"collapsed": true},
-                    "format": "table",
                     "type": "array",
                     "title": "Goal breadcrumbs",
                     "description": "The breadcrumb items for goal pages.",
@@ -64,7 +63,6 @@
                 },
                 "indicator": {
                     "options": {"collapsed": true},
-                    "format": "table",
                     "type": "array",
                     "title": "Indicator breadcrumbs",
                     "description": "The breadcrumb items for indicator pages. Note that there will automatically be a final item, which is a link to the goal that the indicator belongs to. You do not need to specify this, since it is done dynamically and automatically.",
@@ -74,7 +72,6 @@
                 },
                 "post": {
                     "options": {"collapsed": true},
-                    "format": "table",
                     "type": "array",
                     "title": "Post breadcrumbs",
                     "description": "The breadcrumb items for post pages.",
@@ -209,7 +206,6 @@
         },
         "create_pages": {
             "options": {"collapsed": true},
-            "format": "table",
             "type": "array",
             "title": "Create pages",
             "description": "This setting can be used to automatically create the pages.",
@@ -250,7 +246,6 @@
         },
         "custom_css": {
             "options": {"collapsed": true},
-            "format": "table",
             "type": "array",
             "title": "Custom CSS files",
             "description": "Deprecated: instead of using this, it is recommended to put custom CSS in a _sass/custom.scss file.",
@@ -267,7 +262,6 @@
         },
         "custom_js": {
             "options": {"collapsed": true},
-            "format": "table",
             "type": "array",
             "title": "Custom JavaScript files",
             "description": "This setting can be used to load additional JavaScript files on each page.",
@@ -296,7 +290,6 @@
         },
         "date_formats": {
             "options": {"collapsed": true},
-            "format": "table",
             "type": "array",
             "title": "Date formats",
             "description": "This setting can be used to control date formats for use in the site, such as in the news/category/post layouts. Any number date formats can be entered, and each must have an arbitrary type, such as `standard`. Make sure that each type has a variant for each of your languages.",
@@ -417,7 +410,6 @@
         },
         "footer_menu": {
             "options": {"collapsed": true},
-            "format": "table",
             "type": "array",
             "title": "Footer menu",
             "description": "The links to display in the footer menu.",
@@ -580,7 +572,6 @@
         },
         "graph_color_list": {
             "options": {"collapsed": true},
-            "format": "table",
             "type": "array",
             "title": "Graph color list",
             "description": "This setting can be used to define a set of colors to be used in the charts. This is only used when graph_color_set is 'custom'.",
@@ -641,7 +632,6 @@
         },
         "languages": {
             "options": {"collapsed": true},
-            "format": "table",
             "type": "array",
             "minItems": 1,
             "title": "Languages",
@@ -660,7 +650,6 @@
         },
         "languages_public": {
             "options": {"collapsed": true},
-            "format": "table",
             "type": "array",
             "title": "Language code overrides",
             "description": "This setting can be used if you are not happy with any of the standard language codes.",
@@ -691,7 +680,6 @@
         },
         "map_layers": {
             "options": {"collapsed": true},
-            "format": "table",
             "type": "array",
             "title": "Map layers",
             "description": "Configure any number of layers to display on all indicator maps. A minimum of one layer is required to display maps.",
@@ -799,7 +787,6 @@
                 },
                 "styleNormal": {
                     "type": "object",
-                    "format": "table",
                     "title": "Style (normal)",
                     "description": "Style for boundaries in normal state",
                     "$ref": "#/definitions/map_style",
@@ -812,7 +799,6 @@
                 },
                 "styleHighlighted": {
                     "type": "object",
-                    "format": "table",
                     "title": "Style (highlighted)",
                     "description": "Style for boundaries in highlighted state",
                     "$ref": "#/definitions/map_style",
@@ -825,7 +811,6 @@
                 },
                 "styleStatic": {
                     "type": "object",
-                    "format": "table",
                     "title": "Style (static)",
                     "description": "Style for boundaries in static state (map layers using the 'static boundaries' option).",
                     "$ref": "#/definitions/map_style",
@@ -847,7 +832,6 @@
         },
         "menu": {
             "options": {"collapsed": true},
-            "format": "table",
             "type": "array",
             "minItems": 1,
             "title": "Main menu",
@@ -876,7 +860,6 @@
         },
         "metadata_tabs": {
             "options": {"collapsed": true},
-            "format": "table",
             "type": "array",
             "title": "Metadata tabs",
             "description": "This setting can control the metadata tabs which appear on the indicator pages.",
@@ -981,7 +964,6 @@
         },
         "search_index_boost": {
             "options": {"collapsed": true},
-            "format": "table",
             "type": "array",
             "title": "Search index boost",
             "description": "This setting can be used to give a boost to one or more fields in the search index.",
@@ -1012,7 +994,6 @@
         },
         "search_index_extra_fields": {
             "options": {"collapsed": true},
-            "format": "table",
             "type": "array",
             "title": "Search index extra fields",
             "description": "This setting can be used to index additional metadata fields in your indicators, for the purposes of affecting the site-wide search.",
@@ -1173,7 +1154,6 @@
                     "description": "Set options for any dropdown lists.",
                     "items": {
                         "type": "object",
-                        "format": "table",
                         "title": "Dropdown list",
                         "properties": {
                             "jsonschema": {
@@ -1183,7 +1163,6 @@
                             },
                             "values": {
                                 "type": "array",
-                                "format": "table",
                                 "title": "Values",
                                 "description": "List of dropdown option values",
                                 "items": {
@@ -1193,7 +1172,6 @@
                             },
                             "labels": {
                                 "type": "array",
-                                "format": "table",
                                 "title": "Labels",
                                 "description": "Optional list of dropdown option labels. Should correspond to the values above.",
                                 "items": {
