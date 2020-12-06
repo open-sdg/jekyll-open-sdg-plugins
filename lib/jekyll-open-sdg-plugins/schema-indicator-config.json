@@ -515,6 +515,17 @@
                 }
             ]
         },
+        "sort": {
+            "type": "string",
+            "title": "Sort order",
+            "description": "Override the default order in which this indicator is displayed in lists. This can be left blank, and it will be automatically determined.",
+            "links": [
+                {
+                    "rel": "More information on the sort setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#sorting-in-lists"
+                }
+            ]
+        },
         "standalone": {
             "title": "Standalone indicator",
             "type": "boolean",
