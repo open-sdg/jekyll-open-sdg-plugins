@@ -838,7 +838,10 @@
             "description": "The links to display in the main menu.",
             "items": {
                 "allOf": [
-                    {  "$ref": "#/definitions/menu_item" },
+                    {
+                        "$ref": "#/definitions/menu_item",
+                        "title": "Menu item"
+                    },
                     {
                         "properties": {
                             "dropdown": {
