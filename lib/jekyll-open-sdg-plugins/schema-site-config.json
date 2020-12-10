@@ -837,20 +837,18 @@
             "title": "Main menu",
             "description": "The links to display in the main menu.",
             "items": {
+                "title": "Menu item",
                 "allOf": [
-                    {
-                        "$ref": "#/definitions/menu_item",
-                        "title": "Menu item"
-                    },
+                    { "$ref": "#/definitions/menu_item" },
                     {
                         "properties": {
                             "dropdown": {
-                                "options": {"collapsed": true},
                                 "title": "Dropdown menu",
                                 "type": "array",
                                 "description": "Enter menu items here to turn this into a dropdown.",
                                 "items": {
-                                    "$ref": "#/definitions/menu_item"
+                                    "$ref": "#/definitions/menu_item",
+                                    "title": "Dropdown menu item"
                                 }
                             }
                         }
