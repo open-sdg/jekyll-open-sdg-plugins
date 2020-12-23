@@ -617,6 +617,35 @@
                 }
             ]
         },
+        "header": {
+            "options": {"collapsed": true},
+            "type": "object",
+            "title": "Header",
+            "description": "This setting can be used to customise the header.",
+            "properties": {
+                "include": {
+                    "type": "string",
+                    "title": "Include file",
+                    "enum": [
+                        "header-default.html",
+                        "header-menu-left-aligned.html"
+                    ],
+                    "options": {
+                        "enum_titles": [
+                            "Default header",
+                            "Menu left-aligned"
+                        ]
+                    },
+                    "description": "The header style to use on all pages."
+                }
+            },
+            "links": [
+                {
+                    "rel": "More information on the header setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#header"
+                }
+            ]
+        },
         "header_language_toggle": {
             "type": "string",
             "title": "Header language toggle",
