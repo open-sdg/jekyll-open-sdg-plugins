@@ -34,8 +34,13 @@ module JekyllOpenSdgPlugins
           end
           # Loop through the indicators (using metadata as a list).
           metadata.each do |inid, meta|
+            permalink = inid
+            if meta.has_key?('permalink') and meta['permalink'] != ''
+              permalink = meta['permalink']
+            end
             # Add the language subfolder for all except the default (first) language.
-            dir = index == 0 ? inid : File.join(language_public, inid)
+            dir = index == 0 ? permalink : File.join(language_public, permalink)
+
             # Create the indicator page.
             site.collections['indicators'].docs << IndicatorPage.new(site, site.source, dir, inid, language, layout)
           end
@@ -64,9 +69,13 @@ module JekyllOpenSdgPlugins
                 language_public = languages_public[language]
               end
               metadata.each do |inid, meta|
-                dir = File.join('config', inid)
+                permalink = inid
+                if meta.has_key?('permalink') and meta['permalink'] != ''
+                  permalink = meta['permalink']
+                end
+                dir = File.join('config', permalink)
                 if index != 0
-                  dir = File.join(language_public, 'config', inid)
+                  dir = File.join(language_public, 'config', permalink)
                 end
                 site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta, layout)
               end
