@@ -170,7 +170,7 @@ module JekyllOpenSdgPlugins
         goal_image_base = site.config['goal_image_base']
       end
       goal_image_extension = 'png'
-      if site.config.has_key? 'goal_image_extension'
+      if site.config.has_key?('goal_image_extension') && site.config['goal_image_extension'] != ''
         goal_image_extension = site.config['goal_image_extension']
       end
 
