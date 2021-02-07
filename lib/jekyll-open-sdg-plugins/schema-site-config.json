@@ -893,6 +893,13 @@
                 }
             ]
         },
+        "metadata_config_form": {
+            "options": {"collapsed": true},
+            "type": "object",
+            "title": "Indicator metadata form",
+            "description": "Configuration of the indicator metadata form.",
+            "$ref": "#/definitions/config_form_options"
+        },
         "metadata_edit_url": {
             "type": "string",
             "minLength": 1,
