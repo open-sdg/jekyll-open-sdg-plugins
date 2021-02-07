@@ -9,6 +9,7 @@ data_edit_url: http://prose.io/#open-sdg/open-sdg-data-starter/edit/develop/data
 metadata_edit_url: http://prose.io/#open-sdg/open-sdg-data-starter/edit/develop/meta/[id].md
 languages:
   - en
+  - es
 
 title: Indicators For The Sustainable Development Goals
 url: ""
@@ -31,6 +32,11 @@ create_pages:
     layout: indicator-json
   - folder: /search
     layout: search
+create_config_forms:
+  layout: config-builder
+  metadata_scopes:
+    - key: national
+      label: National metadata
 
 analytics:
   ga_prod: ''
