@@ -16,8 +16,6 @@ module JekyllOpenSdgPlugins
       t = site.data['translations']
       lang = language_config[0]
 
-      opensdg_translate_key(key, translations, language)
-
       if form_config && form_config.key?('metadata_scopes') && form_config['metadata_scopes'].length() > 0
 
         schema = {}
@@ -25,13 +23,13 @@ module JekyllOpenSdgPlugins
         form_config['metadata_scopes'].each do |scope|
           schema[scope['key']] = {
             "type" => "object",
-            "title" => "Open SDG " + scope['label'] + " metadata",
+            "title" => "Open SDG " + scope['label'],
             "properties" => {},
           }
           scopes.append(scope['key'])
         end
 
-        site.data.schema.each do |field|
+        site.data['schema'].each do |field|
           field_scope = field['field']['scope']
           next unless scopes.include?(field_scope)
 

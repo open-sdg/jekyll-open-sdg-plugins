@@ -176,7 +176,7 @@ module JekyllOpenSdgPlugins
       self.data['metadata_scope'] = scope['key']
       self.data['layout'] = layout
       self.data['meta'] = meta
-      self.data['title'] = 'Open SDG ' + scope['label'] + 'metadata: ' + self.data['indicator_number']
+      self.data['title'] = 'Open SDG ' + scope['label'] + ': ' + self.data['indicator_number']
       self.data['config_filename'] = inid + '.yml'
     end
   end
