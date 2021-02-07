@@ -35,7 +35,7 @@ create_pages:
 create_config_forms:
   layout: config-builder
   metadata_scopes:
-    - key: national
+    - scope: national
       label: National metadata
 
 analytics:

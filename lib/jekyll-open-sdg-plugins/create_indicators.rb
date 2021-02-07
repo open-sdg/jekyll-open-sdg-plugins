@@ -108,9 +108,9 @@ module JekyllOpenSdgPlugins
                   if meta.has_key?('permalink') and meta['permalink'] != ''
                     permalink = meta['permalink']
                   end
-                  dir = File.join('config', scope['key'], permalink)
+                  dir = File.join('config', scope['scope'], permalink)
                   if index != 0
-                    dir = File.join(language_public, 'config', scope['key'], permalink)
+                    dir = File.join(language_public, 'config', scope['scope'], permalink)
                   end
                   site.collections['pages'].docs << IndicatorMetadataPage.new(site, site.source, dir, inid, language, meta, layout, scope)
                 end
@@ -173,7 +173,7 @@ module JekyllOpenSdgPlugins
       self.data['language'] = language
       self.data['indicator_number'] = inid.gsub('-', '.')
       self.data['config_type'] = 'metadata'
-      self.data['metadata_scope'] = scope['key']
+      self.data['metadata_scope'] = scope['scope']
       self.data['layout'] = layout
       self.data['meta'] = meta
       self.data['title'] = 'Open SDG ' + scope['label'] + ': ' + self.data['indicator_number']

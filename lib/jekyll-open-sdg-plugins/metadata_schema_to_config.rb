@@ -21,12 +21,12 @@ module JekyllOpenSdgPlugins
         schema = {}
         scopes = []
         form_config['metadata_scopes'].each do |scope|
-          schema[scope['key']] = {
+          schema[scope['scope']] = {
             "type" => "object",
             "title" => "Open SDG " + scope['label'],
             "properties" => {},
           }
-          scopes.append(scope['key'])
+          scopes.append(scope['scope'])
         end
 
         site.data['schema'].each do |field|
