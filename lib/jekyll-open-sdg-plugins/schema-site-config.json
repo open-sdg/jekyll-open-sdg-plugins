@@ -686,6 +686,11 @@
                 { "$ref": "#/definitions/config_form_options" },
                 {
                     "properties": {
+                        "language": {
+                            "type": "string",
+                            "title": "Language for editing",
+                            "description": "Choose the language you prefer when editing metadata. This is used to translate the labels of the metadata fields."
+                        },
                         "scopes": {
                             "options": {"collapsed": true},
                             "type": "array",

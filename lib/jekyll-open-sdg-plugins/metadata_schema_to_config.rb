@@ -30,10 +30,13 @@ module JekyllOpenSdgPlugins
             exclude_fields = metadata_form_config['exclude_fields']
           end
         end
+        if metadata_form_config && metadata_form_config.has_key?('language') && metadata_form_config['language'] != ''
+          lang = metadata_form_config['language']
+        end
 
         schema = {
           "type" => "object",
-          "title" => "Edit Metadata",
+          "title" => opensdg_translate_key('indicator.edit_metadata', t, lang),
           "properties" => {},
         }
 
