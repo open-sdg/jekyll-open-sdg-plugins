@@ -57,7 +57,7 @@ module JekyllOpenSdgPlugins
             "type" => "string",
             "format" => "markdown",
             "title" => field_label,
-            "description" => 'Scope: ' + field_scope,
+            "description" => 'Scope: ' + field_scope + '<br>Field: ' + field_name,
           }
           schema['additionalProperties'] = true
         end

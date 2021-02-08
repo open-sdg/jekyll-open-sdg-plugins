@@ -141,7 +141,7 @@ module JekyllOpenSdgPlugins
       self.data['config_type'] = config_type
       self.data['layout'] = layout
       self.data['meta'] = meta
-      self.data['title'] = title + ': ' + self.data['indicator_number']
+      self.data['title'] = title + ': ' + inid.gsub('-', '.')
       self.data['config_filename'] = inid + '.yml'
       self.data['form_settings'] = form_settings
     end
