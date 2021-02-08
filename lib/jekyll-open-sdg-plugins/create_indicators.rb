@@ -11,7 +11,7 @@ module JekyllOpenSdgPlugins
       language_config = site.config['languages']
       indicator_config = site.config['create_indicators']
       form_config = site.config['create_config_forms']
-      t = site.data['translations']
+      translations = site.data['translations']
       # If site.create_indicators is set, create indicators per the metadata.
       if language_config and indicator_config and indicator_config.key?('layout') and indicator_config['layout'] != ''
         # Decide what layout to use for the indicator pages.
@@ -84,36 +84,18 @@ module JekyllOpenSdgPlugins
                 if index != 0
                   dir = File.join(language_public, 'config', permalink)
                 end
-                site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta, layout)
-              end
-            end
-          end
 
-          # Create the indicator metadata configuration pages.
-          scopes = []
-          if form_config.key?('metadata_scopes') && form_config['metadata_scopes'].length() > 0
-            scopes = form_config['metadata_scopes']
-          end
-          scopes.each do |scope|
-            # Loop through the indicators (using metadata as a list).
-            if !metadata.empty?
-              # Loop through the languages.
-              language_config.each_with_index do |language, index|
-                # Get the "public language" (for URLs) which may be different.
-                language_public = language
-                if languages_public[language]
-                  language_public = languages_public[language]
+                if form_config.has_key?('indicator_settings') && form_config['indicator_settings']['create']
+                  title = opensdg_translate_key('indicator.edit_configuration', translations, language)
+                  config_type = 'indicator'
+                  site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta, layout, title, config_type, form_config['indicator_settings'])
                 end
-                metadata.each do |inid, meta|
-                  permalink = inid
-                  if meta.has_key?('permalink') and meta['permalink'] != ''
-                    permalink = meta['permalink']
-                  end
-                  dir = File.join('config', scope['scope'], permalink)
-                  if index != 0
-                    dir = File.join(language_public, 'config', scope['scope'], permalink)
-                  end
-                  site.collections['pages'].docs << IndicatorMetadataPage.new(site, site.source, dir, inid, language, meta, layout, scope, t)
+
+                if form_config.has_key?('indicator_metadata') && form_config['indicator_metadata']['create']
+                  dir = dir.sub('config', 'metadata')
+                  title = opensdg_translate_key('indicator.edit_metadata', translations, language)
+                  config_type = 'metadata'
+                  site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta, layout, title, config_type, form_config['indicator_metadata'])
                 end
               end
             end
@@ -143,7 +125,7 @@ module JekyllOpenSdgPlugins
 
   # A Page subclass used in the `CreateIndicators` class for the indicator config forms.
   class IndicatorConfigPage < Jekyll::Page
-    def initialize(site, base, dir, inid, language, meta, layout)
+    def initialize(site, base, dir, inid, language, meta, layout, title, config_type, form_settings)
       @site = site
       @base = base
       @dir  = dir
@@ -153,32 +135,12 @@ module JekyllOpenSdgPlugins
       self.data = {}
       self.data['language'] = language
       self.data['indicator_number'] = inid.gsub('-', '.')
-      self.data['config_type'] = 'indicator'
+      self.data['config_type'] = config_type
       self.data['layout'] = layout
       self.data['meta'] = meta
-      self.data['title'] = 'Open SDG indicator configuration: ' + self.data['indicator_number']
+      self.data['title'] = title + ': ' + self.data['indicator_number']
       self.data['config_filename'] = inid + '.yml'
-    end
-  end
-
-  # A Page subclass used in the `CreateIndicators` class for the metadata config forms.
-  class IndicatorMetadataPage < Jekyll::Page
-    def initialize(site, base, dir, inid, language, meta, layout, scope, t)
-      @site = site
-      @base = base
-      @dir  = dir
-      @name = 'index.html'
-
-      self.process(@name)
-      self.data = {}
-      self.data['language'] = language
-      self.data['indicator_number'] = inid.gsub('-', '.')
-      self.data['config_type'] = 'metadata'
-      self.data['metadata_scope'] = scope['scope']
-      self.data['layout'] = layout
-      self.data['meta'] = meta
-      self.data['title'] = opensdg_translate_key(scope['label'], t, language) + ': ' + self.data['indicator_number']
-      self.data['config_filename'] = inid + '.yml'
+      self.data['form_settings'] = form_settings
     end
   end
 end

@@ -34,9 +34,17 @@ create_pages:
     layout: search
 create_config_forms:
   layout: config-builder
-  metadata_scopes:
-    - scope: national
-      label: National metadata
+  site:
+    create: true
+    repository_link: https://github.com/open-sdg/open-sdg-site-starter
+  indicator_settings:
+    create: true
+    repository_link: https://github.com/open-sdg/open-sdg-data-starter/tree/develop/meta
+  indicator_metadata:
+    create: true
+    repository_link: https://github.com/open-sdg/open-sdg-data-starter/tree/develop/meta
+    scopes:
+      - national
 
 analytics:
   ga_prod: ''
