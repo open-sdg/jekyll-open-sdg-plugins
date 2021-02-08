@@ -16,18 +16,20 @@ module JekyllOpenSdgPlugins
       t = site.data['translations']
       lang = language_config[0]
 
-      if form_config && form_config.key?('metadata_scopes') && form_config['metadata_scopes'].length() > 0
-
-        schema = {}
-        scopes = []
-        form_config['metadata_scopes'].each do |scope|
-          schema[scope['scope']] = {
-            "type" => "object",
-            "title" => "Open SDG " + scope['label'],
-            "properties" => {},
-          }
-          scopes.append(scope['scope'])
+      if form_config
+        metadata_form_config = form_config['indicator_metadata']
+        scopes = ['national', 'global']
+        if metadata_form_config && metadata_form_config.has_key?('scopes')
+          if metadata_form_config['scopes'].kind_of?(Array) && metadata_form_config['scopes'].length() > 0
+            scopes = metadata_form_config['scopes']
+          end
         end
+
+        schema = {
+          "type" => "object",
+          "title" => "Edit Metadata",
+          "properties" => {},
+        }
 
         site.data['schema'].each do |field|
           field_scope = field['field']['scope']
@@ -44,12 +46,12 @@ module JekyllOpenSdgPlugins
           end
           field_label = opensdg_translate_key(to_translate, t, lang)
 
-          schema[field_scope]['properties'][field_name] = {
+          schema['properties'][field_name] = {
             "type" => "string",
             "format" => "markdown",
             "title" => field_label,
           }
-          schema[field_scope]['additionalProperties'] = true
+          schema['additionalProperties'] = true
         end
 
         # Regardless place the schema in site data so it can be used in Jekyll templates.
