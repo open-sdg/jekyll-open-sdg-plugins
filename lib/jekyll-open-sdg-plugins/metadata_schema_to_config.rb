@@ -17,7 +17,7 @@ module JekyllOpenSdgPlugins
       lang = language_config[0]
 
       if form_config
-        metadata_form_config = form_config['indicator_metadata']
+        metadata_form_config = site.config['indicator_metadata_form']
         scopes = ['national', 'global']
         if metadata_form_config && metadata_form_config.has_key?('scopes')
           if metadata_form_config['scopes'].kind_of?(Array) && metadata_form_config['scopes'].length() > 0
