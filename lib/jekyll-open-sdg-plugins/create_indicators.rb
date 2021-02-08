@@ -137,7 +137,7 @@ module JekyllOpenSdgPlugins
       self.process(@name)
       self.data = {}
       self.data['language'] = language
-      self.data['indicator_number'] = inid.gsub('-', '.')
+      self.data['indicator_number'] = inid
       self.data['config_type'] = config_type
       self.data['layout'] = layout
       self.data['meta'] = meta
