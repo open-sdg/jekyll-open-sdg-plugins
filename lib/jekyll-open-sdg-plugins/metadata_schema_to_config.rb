@@ -24,6 +24,12 @@ module JekyllOpenSdgPlugins
             scopes = metadata_form_config['scopes']
           end
         end
+        exclude_fields = []
+        if metadata_form_config && metadata_form_config.has_key?('exclude_fields')
+          if metadata_form_config['exclude_fields'].kind_of?(Array) && metadata_form_config['exclude_fields'].length() > 0
+            exclude_fields = metadata_form_config['exclude_fields']
+          end
+        end
 
         schema = {
           "type" => "object",
@@ -32,11 +38,11 @@ module JekyllOpenSdgPlugins
         }
 
         site.data['schema'].each do |field|
+          field_name = field['name']
           field_scope = field['field']['scope']
           next unless scopes.include?(field_scope)
-          next if field['field']['element'] == 'hidden'
+          next if exclude_fields.include?(field_name)
 
-          field_name = field['name']
           to_translate = field_name
           if field['field'].has_key?('translation_key')
             to_translate = field['field']['translation_key']
