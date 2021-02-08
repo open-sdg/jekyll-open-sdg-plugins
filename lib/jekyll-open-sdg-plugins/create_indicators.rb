@@ -66,6 +66,12 @@ module JekyllOpenSdgPlugins
             metadata = site.data['meta']
           end
 
+          # Because we have config forms for indicator config and metadata, we
+          # take over the metadata_edit_url and configuration_edit_url settings
+          # here with simple relative links.
+          site.config['metadata_edit_url'] = 'metadata'
+          site.config['configuration_edit_url'] = 'config'
+
           # Loop through the indicators (using metadata as a list).
           if !metadata.empty?
             # Loop through the languages.
