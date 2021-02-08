@@ -80,16 +80,17 @@ module JekyllOpenSdgPlugins
                 if meta.has_key?('permalink') and meta['permalink'] != ''
                   permalink = meta['permalink']
                 end
-                dir = File.join('config', permalink)
+                dir_base = File.join(permalink)
                 if index != 0
-                  dir = File.join(language_public, 'config', permalink)
+                  dir_base = File.join(language_public, permalink)
                 end
 
+                dir = File.join(dir_base, 'config')
                 title = opensdg_translate_key('indicator.edit_configuration', translations, language)
                 config_type = 'indicator'
                 site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta, layout, title, config_type, form_config['indicator_settings'])
 
-                dir = dir.sub('config', 'metadata')
+                dir = File.join(dir_base, 'metadata')
                 title = opensdg_translate_key('indicator.edit_metadata', translations, language)
                 config_type = 'metadata'
                 site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta, layout, title, config_type, form_config['indicator_metadata'])
