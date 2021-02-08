@@ -677,6 +677,39 @@
             "description": "Configuration of the indicator configuration form.",
             "$ref": "#/definitions/config_form_options"
         },
+        "metadata_config_form": {
+            "options": {"collapsed": true},
+            "type": "object",
+            "title": "Indicator metadata form",
+            "description": "Configuration of the indicator metadata form.",
+            "allOf": [
+                { "$ref": "#/definitions/config_form_options" },
+                {
+                    "properties": {
+                        "scopes": {
+                            "options": {"collapsed": true},
+                            "type": "array",
+                            "title": "Metadata scopes",
+                            "description": "Specify the 'scopes' of metadata to include on the form. Eg: 'national' or 'global'.",
+                            "items": {
+                                "type": "string",
+                                "title": "Scope"
+                            }
+                        },
+                        "exclude_fields": {
+                            "options": {"collapsed": true},
+                            "type": "array",
+                            "title": "Exclude fields",
+                            "description": "Specify any fields you would like to exclude from the form.",
+                            "items": {
+                                "type": "string",
+                                "title": "Field"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
         "languages": {
             "options": {"collapsed": true},
             "type": "array",
@@ -892,13 +925,6 @@
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#menu"
                 }
             ]
-        },
-        "metadata_config_form": {
-            "options": {"collapsed": true},
-            "type": "object",
-            "title": "Indicator metadata form",
-            "description": "Configuration of the indicator metadata form.",
-            "$ref": "#/definitions/config_form_options"
         },
         "metadata_edit_url": {
             "type": "string",
@@ -1235,6 +1261,16 @@
                             }
                         }
                     }
+                },
+                "repository_link": {
+                    "type": "string",
+                    "title": "Repository link",
+                    "description": "The URL pattern of the 'Go to repository' link on the configuration page."
+                },
+                "translation_link": {
+                    "type": "string",
+                    "title": "Translation link",
+                    "description": "The URL pattern for all 'Go to translation' links on the configuration page."
                 }
             }
         }

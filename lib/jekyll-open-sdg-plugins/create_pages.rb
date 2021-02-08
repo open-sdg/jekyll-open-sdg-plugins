@@ -69,17 +69,14 @@ module JekyllOpenSdgPlugins
         if config_page == nil
           form_config = site.config['create_config_forms']
           if form_config && form_config.has_key?('layout') && form_config['layout'] != ''
-            site_form_config = form_config['site']
-            if site_form_config
-              pages.push({
-                'folder' => '/config',
-                'layout' => form_config['layout'],
-                'title' => 'Open SDG site configuration',
-                'config_type' => 'site',
-                'config_filename' => 'site_config.yml',
-                'form_settings' => site_form_config,
-              })
-            end
+            pages.push({
+              'folder' => '/config',
+              'layout' => form_config['layout'],
+              'title' => 'Open SDG site configuration',
+              'config_type' => 'site',
+              'config_filename' => 'site_config.yml',
+              'form_settings' => site.config['site_config_form'],
+            })
           end
         end
 

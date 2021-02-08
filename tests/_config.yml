@@ -34,14 +34,6 @@ create_pages:
     layout: search
 create_config_forms:
   layout: config-builder
-  site:
-    repository_link: https://github.com/open-sdg/open-sdg-site-starter
-  indicator_settings:
-    repository_link: https://github.com/open-sdg/open-sdg-data-starter/tree/develop/meta
-  indicator_metadata:
-    repository_link: https://github.com/open-sdg/open-sdg-data-starter/tree/develop/meta
-    scopes:
-      - national
 
 analytics:
   ga_prod: ''
@@ -156,3 +148,12 @@ exclude:
 #    max_zoom: 10
 #    subfolder: my-geojson-subfolder
 #    label: My map layer label (can be a translation key)
+
+site_config_form:
+  repository_link: https://github.com/open-sdg/open-sdg-site-starter
+indicator_config_form:
+  repository_link: https://github.com/open-sdg/open-sdg-data-starter/tree/develop/meta
+indicator_metadata_form:
+  repository_link: https://github.com/open-sdg/open-sdg-data-starter/tree/develop/meta
+  scopes:
+    - national

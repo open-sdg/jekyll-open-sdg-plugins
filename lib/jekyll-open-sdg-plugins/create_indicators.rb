@@ -94,12 +94,12 @@ module JekyllOpenSdgPlugins
                 dir = File.join(dir_base, 'config')
                 title = opensdg_translate_key('indicator.edit_configuration', translations, language)
                 config_type = 'indicator'
-                site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta, layout, title, config_type, form_config['indicator_settings'])
+                site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta, layout, title, config_type, site.config['indicator_config_form'])
 
                 dir = File.join(dir_base, 'metadata')
                 title = opensdg_translate_key('indicator.edit_metadata', translations, language)
                 config_type = 'metadata'
-                site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta, layout, title, config_type, form_config['indicator_metadata'])
+                site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta, layout, title, config_type, site.config['indicator_metadata_form'])
               end
             end
           end
