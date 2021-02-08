@@ -35,13 +35,10 @@ create_pages:
 create_config_forms:
   layout: config-builder
   site:
-    create: true
     repository_link: https://github.com/open-sdg/open-sdg-site-starter
   indicator_settings:
-    create: true
     repository_link: https://github.com/open-sdg/open-sdg-data-starter/tree/develop/meta
   indicator_metadata:
-    create: true
     repository_link: https://github.com/open-sdg/open-sdg-data-starter/tree/develop/meta
     scopes:
       - national

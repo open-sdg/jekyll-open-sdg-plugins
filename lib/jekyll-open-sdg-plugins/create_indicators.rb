@@ -85,18 +85,14 @@ module JekyllOpenSdgPlugins
                   dir = File.join(language_public, 'config', permalink)
                 end
 
-                if form_config.has_key?('indicator_settings') && form_config['indicator_settings']['create']
-                  title = opensdg_translate_key('indicator.edit_configuration', translations, language)
-                  config_type = 'indicator'
-                  site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta, layout, title, config_type, form_config['indicator_settings'])
-                end
+                title = opensdg_translate_key('indicator.edit_configuration', translations, language)
+                config_type = 'indicator'
+                site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta, layout, title, config_type, form_config['indicator_settings'])
 
-                if form_config.has_key?('indicator_metadata') && form_config['indicator_metadata']['create']
-                  dir = dir.sub('config', 'metadata')
-                  title = opensdg_translate_key('indicator.edit_metadata', translations, language)
-                  config_type = 'metadata'
-                  site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta, layout, title, config_type, form_config['indicator_metadata'])
-                end
+                dir = dir.sub('config', 'metadata')
+                title = opensdg_translate_key('indicator.edit_metadata', translations, language)
+                config_type = 'metadata'
+                site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta, layout, title, config_type, form_config['indicator_metadata'])
               end
             end
           end

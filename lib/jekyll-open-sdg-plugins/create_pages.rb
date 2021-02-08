@@ -70,7 +70,7 @@ module JekyllOpenSdgPlugins
           form_config = site.config['create_config_forms']
           if form_config && form_config.has_key?('layout') && form_config['layout'] != ''
             site_form_config = form_config['site']
-            if site_form_config && site_form_config['create']
+            if site_form_config
               pages.push({
                 'folder' => '/config',
                 'layout' => form_config['layout'],
