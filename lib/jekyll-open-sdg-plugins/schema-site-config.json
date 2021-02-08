@@ -677,7 +677,7 @@
             "description": "Configuration of the indicator configuration form.",
             "$ref": "#/definitions/config_form_options"
         },
-        "metadata_config_form": {
+        "indicator_metadata_form": {
             "options": {"collapsed": true},
             "type": "object",
             "title": "Indicator metadata form",
