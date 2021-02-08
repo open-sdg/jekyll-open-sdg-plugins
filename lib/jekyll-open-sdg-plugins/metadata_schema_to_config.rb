@@ -34,6 +34,7 @@ module JekyllOpenSdgPlugins
         site.data['schema'].each do |field|
           field_scope = field['field']['scope']
           next unless scopes.include?(field_scope)
+          next if field['field']['element'] == 'hidden'
 
           field_name = field['name']
           to_translate = field_name
