@@ -43,24 +43,6 @@ module JekyllOpenSdgPlugins
       sort_order
     end
 
-    # Get previous item from an array, or loop to the end.
-    def get_previous_item(list, index)
-      decremented = index - 1
-      if decremented < 0
-        decremented = list.length() - 1
-      end
-      list[decremented]
-    end
-
-    # Get next item from an array, or loop to the beginning.
-    def get_next_item(list, index)
-      incremented = index + 1
-      if incremented >= list.length()
-        incremented = 0
-      end
-      list[incremented]
-    end
-
     # The Jekyll baseurl is user-configured, and can be inconsistent. This
     # ensure it is consistent in whether it starts/ends with a slash.
     def normalize_baseurl(baseurl)
@@ -392,11 +374,7 @@ module JekyllOpenSdgPlugins
             target_number = get_target_number(indicator_number)
             doc.data['goal'] = available_goals[language].find {|x| x['number'] == goal_number}
             doc.data['target'] = available_targets[language].find {|x| x['number'] == target_number}
-            indicator_index = available_indicators[language].find_index {|x| x['number'] == indicator_number}
-            doc.data['indicator'] = available_indicators[language][indicator_index]
-            doc.data['next'] = get_next_item(available_indicators[language], indicator_index)
-            doc.data['previous'] = get_previous_item(available_indicators[language], indicator_index)
-
+            doc.data['indicator'] = available_indicators[language].find {|x| x['number'] == indicator_number}
           elsif collection == 'goals'
             # For goals we also set the current goal.
             if doc.data.has_key? 'goal_number'
@@ -411,10 +389,7 @@ module JekyllOpenSdgPlugins
             if goal_number.is_a? Numeric
               goal_number = goal_number.to_s
             end
-            goal_index = available_goals[language].find_index {|x| x['number'] == goal_number}
-            doc.data['goal'] = available_goals[language][goal_index]
-            doc.data['next'] = get_next_item(available_goals[language], goal_index)
-            doc.data['previous'] = get_previous_item(available_goals[language], goal_index)
+            doc.data['goal'] = available_goals[language].find {|x| x['number'] == goal_number}
           end
         end
       end

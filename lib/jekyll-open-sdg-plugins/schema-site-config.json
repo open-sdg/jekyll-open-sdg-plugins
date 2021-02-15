@@ -167,12 +167,6 @@
                     },
                     "description": "The layout to use for the goal pages."
                 },
-                "previous_next_links": {
-                    "title": "Previous/next links",
-                    "type": "boolean",
-                    "description": "This setting can be used to show navigation links to the previous/next goals.",
-                    "format": "checkbox"
-                },
                 "goals": {
                     "options": {"collapsed": true},
                     "type": "array",
@@ -219,12 +213,6 @@
                         ]
                     },
                     "description": "The layout to use for the indicator pages."
-                },
-                "previous_next_links": {
-                    "title": "Previous/next links",
-                    "type": "boolean",
-                    "description": "This setting can be used to show navigation links to the previous/next indicators.",
-                    "format": "checkbox"
                 }
             },
             "links": [
