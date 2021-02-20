@@ -32,8 +32,6 @@ create_pages:
     layout: indicator-json
   - folder: /search
     layout: search
-create_config_forms:
-  layout: config-builder
 
 analytics:
   ga_prod: ''

@@ -10,7 +10,8 @@ module JekyllOpenSdgPlugins
       # Some references to clean up the code below.
       language_config = site.config['languages']
       indicator_config = site.config['create_indicators']
-      form_config = site.config['create_config_forms']
+      form_settings_config = site.config['indicator_config_form']
+      form_settings_meta = site.config['indicator_metadata_form']
       translations = site.data['translations']
       # If site.create_indicators is set, create indicators per the metadata.
       if language_config and indicator_config and indicator_config.key?('layout') and indicator_config['layout'] != ''
@@ -50,10 +51,11 @@ module JekyllOpenSdgPlugins
             site.collections['indicators'].docs << IndicatorPage.new(site, site.source, dir, inid, language, layout)
           end
         end
-        # Create the indicator settings configuration pages.
-        if form_config && form_config.key?('layout') && form_config['layout'] != ''
+        # Create the indicator settings configuration/metadata pages.
+        do_indicator_config_forms = form_settings_config && form_settings_config['enabled']
+        do_indicator_meta_forms = form_settings_meta && form_settings_config['enabled']
+        if do_indicator_config_forms || do_indicator_meta_forms
 
-          layout = form_config['layout']
           metadata = {}
           if opensdg_translated_builds(site)
             if site.data.has_key?('untranslated')
@@ -66,11 +68,16 @@ module JekyllOpenSdgPlugins
             metadata = site.data['meta']
           end
 
-          # Because we have config forms for indicator config and metadata, we
+          # Because we have config forms for indicator config or metadata, we
           # take over the metadata_edit_url and configuration_edit_url settings
           # here with simple relative links.
-          site.config['metadata_edit_url'] = 'metadata'
-          site.config['configuration_edit_url'] = 'config'
+          if do_indicator_config_forms
+            site.config['configuration_edit_url'] = 'config'
+          end
+
+          if do_indicator_meta_forms
+            site.config['metadata_edit_url'] = 'metadata'
+          end
 
           # Loop through the indicators (using metadata as a list).
           if !metadata.empty?
@@ -91,15 +98,19 @@ module JekyllOpenSdgPlugins
                   dir_base = File.join(language_public, permalink)
                 end
 
-                dir = File.join(dir_base, 'config')
-                title = opensdg_translate_key('indicator.edit_configuration', translations, language)
-                config_type = 'indicator'
-                site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta, layout, title, config_type, site.config['indicator_config_form'])
+                if do_indicator_config_forms
+                  dir = File.join(dir_base, 'config')
+                  title = opensdg_translate_key('indicator.edit_configuration', translations, language)
+                  config_type = 'indicator'
+                  site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta, title, config_type, form_settings_config)
+                end
 
-                dir = File.join(dir_base, 'metadata')
-                title = opensdg_translate_key('indicator.edit_metadata', translations, language)
-                config_type = 'metadata'
-                site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta, layout, title, config_type, site.config['indicator_metadata_form'])
+                if do_indicator_meta_forms
+                  dir = File.join(dir_base, 'metadata')
+                  title = opensdg_translate_key('indicator.edit_metadata', translations, language)
+                  config_type = 'metadata'
+                  site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta, title, config_type, form_settings_meta)
+                end
               end
             end
           end
@@ -128,7 +139,7 @@ module JekyllOpenSdgPlugins
 
   # A Page subclass used in the `CreateIndicators` class for the indicator config forms.
   class IndicatorConfigPage < Jekyll::Page
-    def initialize(site, base, dir, inid, language, meta, layout, title, config_type, form_settings)
+    def initialize(site, base, dir, inid, language, meta, title, config_type, form_settings)
       @site = site
       @base = base
       @dir  = dir
@@ -139,7 +150,7 @@ module JekyllOpenSdgPlugins
       self.data['language'] = language
       self.data['indicator_number'] = inid
       self.data['config_type'] = config_type
-      self.data['layout'] = layout
+      self.data['layout'] = 'config-builder'
       self.data['meta'] = meta
       self.data['title'] = title + ': ' + inid.gsub('-', '.')
       self.data['config_filename'] = inid + '.yml'

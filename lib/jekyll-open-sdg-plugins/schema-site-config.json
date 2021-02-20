@@ -113,35 +113,6 @@
                 }
             ]
         },
-        "create_config_forms": {
-            "options": {"collapsed": true},
-            "type": "object",
-            "title": "Create configuration forms",
-            "description": "This setting can be used to automatically create the configuration form pages.",
-            "properties": {
-                "layout": {
-                    "type": "string",
-                    "title": "Layout",
-                    "enum": [
-                        "",
-                        "config-builder"
-                    ],
-                    "options": {
-                        "enum_titles": [
-                            "Do not automatically create config forms",
-                            "config-builder"
-                        ]
-                    },
-                    "description": "The layout to use for the configuration form pages."
-                }
-            },
-            "links": [
-                {
-                    "rel": "More information on the create config forms setting",
-                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#create_config_forms"
-                }
-            ]
-        },
         "create_goals": {
             "options": {"collapsed": true},
             "type": "object",
@@ -1233,6 +1204,12 @@
         "config_form_options": {
             "type": "object",
             "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "title": "Enable this type of form",
+                    "description": "If enabled, this type of configuration form will be available.",
+                    "format": "checkbox"
+                },
                 "dropdowns": {
                     "type": "array",
                     "title": "Dropdown lists",
