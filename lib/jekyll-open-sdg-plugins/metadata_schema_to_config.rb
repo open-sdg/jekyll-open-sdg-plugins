@@ -12,26 +12,25 @@ module JekyllOpenSdgPlugins
       # it can be used to create config forms.
 
       language_config = site.config['languages']
-      form_config = site.config['create_config_forms']
+      form_settings = site.config['indicator_metadata_form']
       t = site.data['translations']
       lang = language_config[0]
 
-      if form_config
-        metadata_form_config = site.config['indicator_metadata_form']
+      if form_settings && form_settings['enabled']
         scopes = ['national', 'global']
-        if metadata_form_config && metadata_form_config.has_key?('scopes')
-          if metadata_form_config['scopes'].kind_of?(Array) && metadata_form_config['scopes'].length() > 0
-            scopes = metadata_form_config['scopes']
+        if form_settings && form_settings.has_key?('scopes')
+          if form_settings['scopes'].kind_of?(Array) && form_settings['scopes'].length() > 0
+            scopes = form_settings['scopes']
           end
         end
         exclude_fields = []
-        if metadata_form_config && metadata_form_config.has_key?('exclude_fields')
-          if metadata_form_config['exclude_fields'].kind_of?(Array) && metadata_form_config['exclude_fields'].length() > 0
-            exclude_fields = metadata_form_config['exclude_fields']
+        if form_settings && form_settings.has_key?('exclude_fields')
+          if form_settings['exclude_fields'].kind_of?(Array) && form_settings['exclude_fields'].length() > 0
+            exclude_fields = form_settings['exclude_fields']
           end
         end
-        if metadata_form_config && metadata_form_config.has_key?('language') && metadata_form_config['language'] != ''
-          lang = metadata_form_config['language']
+        if form_settings && form_settings.has_key?('language') && form_settings['language'] != ''
+          lang = form_settings['language']
         end
 
         schema = {
