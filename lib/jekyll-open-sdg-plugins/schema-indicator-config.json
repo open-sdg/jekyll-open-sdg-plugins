@@ -3,6 +3,17 @@
     "title": "Open SDG indicator configuration",
     "description": "This form will produce an indicator's configuration for your Open SDG implementation.",
     "properties": {
+        "composite_breakdown_label": {
+            "type": "string",
+            "title": "Composite breakdown label",
+            "description": "Used as a label for the COMPOSITE_BREAKDOWN column, if it appears in the indicator data.",
+            "links": [
+                {
+                    "rel": "More information on the composite breakdown label setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#composite-breakdown-label"
+                }
+            ]
+        },
         "computation_units": {
             "type": "string",
             "title": "Unit of measurement",
