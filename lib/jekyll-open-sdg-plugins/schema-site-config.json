@@ -616,7 +616,7 @@
             "title": "Graph color set",
             "description": "This setting can be used to customize the color set used in the charts.",
             "examples": [],
-            "enum": ["default", "sdg", "goal", "custom"],
+            "enum": ["default", "accessible", "sdg", "goal", "custom"],
             "links": [
                 {
                     "rel": "More information on the graph color set setting",
