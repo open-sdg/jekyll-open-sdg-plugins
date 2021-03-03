@@ -222,12 +222,6 @@
                     { "$ref": "#/definitions/series_unit_constraint" },
                     {
                         "properties": {
-                            "preset": {
-                                "type": "string",
-                                "title": "Preset",
-                                "enum": ["target_line"],
-                                "description": "A preset bundle of configurations."
-                            },
                             "value": {
                                 "type": "number",
                                 "minimum": 0,
