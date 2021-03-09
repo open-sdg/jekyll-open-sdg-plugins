@@ -611,6 +611,32 @@
                 }
             ]
         },
+        "graph_color_headline": {
+            "type": "string",
+            "format": "color",
+            "title": "Graph color for headline",
+            "description": "This setting can be used to customize the color used in the chart 'headlines'.",
+            "examples": [],
+            "links": [
+                {
+                    "rel": "More information on the graph color headline setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#graph_color_headline"
+                }
+            ]
+        },
+        "graph_color_headline_high_contrast": {
+            "type": "string",
+            "format": "color",
+            "title": "Graph color for headline - high-contrast",
+            "description": "This setting can be used to customize the color used in the chart 'headlines' in high-contrast mode.",
+            "examples": [],
+            "links": [
+                {
+                    "rel": "More information on the graph color headline high-contrast setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#graph_color_headline_high_contrast"
+                }
+            ]
+        },
         "graph_color_set": {
             "type": "string",
             "title": "Graph color set",
