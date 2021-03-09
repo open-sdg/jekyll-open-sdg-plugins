@@ -761,6 +761,41 @@
                 }
             ]
         },
+        "logos": {
+            "options": {"collapsed": true},
+            "type": "array",
+            "title": "Logos",
+            "description": "This setting can be used to control the main logo (or logos).",
+            "items": {
+                "type": "object",
+                "title": "Logo",
+                "properties": {
+                    "language": {
+                        "type": "string",
+                        "title": "Language",
+                        "description": "The language on which this logo displays. Leave blank to show on all."
+                    },
+                    "src": {
+                        "type": "string",
+                        "minLength": 1,
+                        "title": "Image file",
+                        "description": "The image file (path or URL) for this logo"
+                    },
+                    "alt": {
+                        "type": "string",
+                        "minLength": 1,
+                        "title": "Alt text",
+                        "description": "The alt text for this logo"
+                    }
+                }
+            },
+            "links": [
+                {
+                    "rel": "More information on the logos setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#logos"
+                }
+            ]
+        },
         "map_layers": {
             "options": {"collapsed": true},
             "type": "array",
