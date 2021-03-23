@@ -15,7 +15,11 @@ module JekyllOpenSdgPlugins
     # Get a target number from an indicator number.
     def get_target_number(indicator_number)
       parts = indicator_number.split('.')
-      parts[0] + '.' + parts[1]
+      if parts.length() < 2
+        indicator_number
+      else
+        parts[0] + '.' + parts[1]
+      end
     end
 
     # Is this string numeric?
