@@ -615,6 +615,7 @@
             "type": "string",
             "format": "color",
             "title": "Graph color for headline",
+            "default": "#004466",
             "description": "This setting can be used to customize the color used in the chart 'headlines'.",
             "examples": [],
             "links": [
@@ -628,6 +629,7 @@
             "type": "string",
             "format": "color",
             "title": "Graph color for headline - high-contrast",
+            "default": "#55a6e5",
             "description": "This setting can be used to customize the color used in the chart 'headlines' in high-contrast mode.",
             "examples": [],
             "links": [
