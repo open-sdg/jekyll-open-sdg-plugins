@@ -276,7 +276,7 @@ module JekyllOpenSdgPlugins
             end
           end
 
-          is_standalone = meta.has_key?('standalone') and meta['standalone']
+          is_standalone = (meta.has_key?('standalone') and meta['standalone'])
 
           # Set the goal for this language, once only.
           if !is_standalone && already_added[language].index(goal_number) == nil

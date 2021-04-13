@@ -8,7 +8,7 @@ module JekyllOpenSdgPlugins
 
     def generate(site)
       # If site.create_indicators is set, create indicators per the metadata.
-      if site.config['languages'] and site.config['create_indicators'] and site.config['create_indicators'].key?('layout') and site.config['create_indicators']['layout'] != ''
+      if (site.config['languages'] and site.config['create_indicators'] and site.config['create_indicators'].key?('layout') and site.config['create_indicators']['layout'] != '')
         # Decide what layout to use for the indicator pages.
         layout = site.config['create_indicators']['layout']
         # See if we need to "map" any language codes.
@@ -35,7 +35,7 @@ module JekyllOpenSdgPlugins
           # Loop through the indicators (using metadata as a list).
           metadata.each do |inid, meta|
             permalink = inid
-            if meta.has_key?('permalink') and meta['permalink'] != ''
+            if (meta.has_key?('permalink') and meta['permalink'] != '')
               permalink = meta['permalink']
             end
             # Add the language subfolder for all except the default (first) language.
@@ -70,7 +70,7 @@ module JekyllOpenSdgPlugins
               end
               metadata.each do |inid, meta|
                 permalink = inid
-                if meta.has_key?('permalink') and meta['permalink'] != ''
+                if (meta.has_key?('permalink') and meta['permalink'] != '')
                   permalink = meta['permalink']
                 end
                 dir = File.join('config', permalink)
