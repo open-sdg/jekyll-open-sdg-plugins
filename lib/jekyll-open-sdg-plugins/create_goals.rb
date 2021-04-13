@@ -23,6 +23,9 @@ module JekyllOpenSdgPlugins
           metadata = site.data['meta']
         end
         metadata.each do |inid, indicator|
+          if indicator.has_key?('standalone') and indicator['standalone']
+            next
+          end
           goal = inid.split('-')[0].to_i
           goals[goal] = true
         end
