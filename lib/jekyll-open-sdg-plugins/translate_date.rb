@@ -64,7 +64,7 @@ module Jekyll
           date = date / 1000
         end
         begin
-          date = Time.at(date)
+          date = Time.at(date).utc
         rescue => err
           return original
         end
@@ -73,7 +73,7 @@ module Jekyll
       # Support other strings.
       if date.is_a? String
         begin
-          date = Time.parse(date)
+          date = Time.parse(date).utc
         rescue => err
           return original
         end
