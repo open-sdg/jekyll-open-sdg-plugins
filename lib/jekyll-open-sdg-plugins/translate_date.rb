@@ -57,7 +57,25 @@ module Jekyll
 
       # Support timestamps.
       if date.is_a? Integer
-        date = Time.at(date)
+        begin
+          date = Time.at(date)
+        rescue => err
+          return ''
+        end
+      end
+
+      # Support other strings.
+      if date.is_a? String
+        begin
+          date = Time.parse(date)
+        rescue => err
+          return ''
+        end
+      end
+
+      # Avoid nil errors.
+      unless date.is_a? Time
+        return ''
       end
 
       # Convert the date into English.
