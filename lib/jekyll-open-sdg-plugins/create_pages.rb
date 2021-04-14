@@ -30,7 +30,7 @@ module JekyllOpenSdgPlugins
       # To use the default 4 pages, simply put:
       #
       # create_pages: true
-      if site.config['languages'] and site.config['create_pages']
+      if (site.config['languages'] and site.config['create_pages'])
 
         default_pages = [
           {
@@ -54,7 +54,7 @@ module JekyllOpenSdgPlugins
           }
         ]
         pages = default_pages
-        if site.config['create_pages'].is_a?(Hash) and site.config['create_pages'].key?('pages')
+        if (site.config['create_pages'].is_a?(Hash) and site.config['create_pages'].key?('pages'))
           # Backwards compatability to support the deprecated "pages" key.
           pages = site.config['create_pages']['pages']
         elsif site.config['create_pages'].is_a?(Array)

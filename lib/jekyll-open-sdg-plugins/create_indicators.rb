@@ -14,7 +14,7 @@ module JekyllOpenSdgPlugins
       form_settings_meta = site.config['indicator_metadata_form']
       translations = site.data['translations']
       # If site.create_indicators is set, create indicators per the metadata.
-      if language_config and indicator_config and indicator_config.key?('layout') and indicator_config['layout'] != ''
+      if (language_config and indicator_config and indicator_config.key?('layout') and indicator_config['layout'] != '')
         # Decide what layout to use for the indicator pages.
         layout = indicator_config['layout']
         # See if we need to "map" any language codes.
@@ -41,7 +41,7 @@ module JekyllOpenSdgPlugins
           # Loop through the indicators (using metadata as a list).
           metadata.each do |inid, meta|
             permalink = inid
-            if meta.has_key?('permalink') and meta['permalink'] != ''
+            if (meta.has_key?('permalink') and meta['permalink'] != '')
               permalink = meta['permalink']
             end
             # Add the language subfolder for all except the default (first) language.
@@ -90,7 +90,7 @@ module JekyllOpenSdgPlugins
               end
               metadata.each do |inid, meta|
                 permalink = inid
-                if meta.has_key?('permalink') and meta['permalink'] != ''
+                if (meta.has_key?('permalink') and meta['permalink'] != '')
                   permalink = meta['permalink']
                 end
                 dir_base = File.join(permalink)

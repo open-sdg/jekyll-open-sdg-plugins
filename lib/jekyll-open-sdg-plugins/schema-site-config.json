@@ -582,12 +582,40 @@
                 }
             ]
         },
+        "graph_color_headline": {
+            "type": "string",
+            "format": "color",
+            "title": "Graph color for headline",
+            "default": "#004466",
+            "description": "This setting can be used to customize the color used in the chart 'headlines'.",
+            "examples": [],
+            "links": [
+                {
+                    "rel": "More information on the graph color headline setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#graph_color_headline"
+                }
+            ]
+        },
+        "graph_color_headline_high_contrast": {
+            "type": "string",
+            "format": "color",
+            "title": "Graph color for headline - high-contrast",
+            "default": "#55a6e5",
+            "description": "This setting can be used to customize the color used in the chart 'headlines' in high-contrast mode.",
+            "examples": [],
+            "links": [
+                {
+                    "rel": "More information on the graph color headline high-contrast setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#graph_color_headline_high_contrast"
+                }
+            ]
+        },
         "graph_color_set": {
             "type": "string",
             "title": "Graph color set",
             "description": "This setting can be used to customize the color set used in the charts.",
             "examples": [],
-            "enum": ["default", "sdg", "goal", "custom"],
+            "enum": ["default", "accessible", "sdg", "goal", "custom"],
             "links": [
                 {
                     "rel": "More information on the graph color set setting",
@@ -767,6 +795,41 @@
                 {
                     "rel": "More information on the language override setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#languages_public"
+                }
+            ]
+        },
+        "logos": {
+            "options": {"collapsed": true},
+            "type": "array",
+            "title": "Logos",
+            "description": "This setting can be used to control the main logo (or logos).",
+            "items": {
+                "type": "object",
+                "title": "Logo",
+                "properties": {
+                    "language": {
+                        "type": "string",
+                        "title": "Language",
+                        "description": "The language on which this logo displays. Leave blank to show on all."
+                    },
+                    "src": {
+                        "type": "string",
+                        "minLength": 1,
+                        "title": "Image file",
+                        "description": "The image file (path or URL) for this logo"
+                    },
+                    "alt": {
+                        "type": "string",
+                        "minLength": 1,
+                        "title": "Alt text",
+                        "description": "The alt text for this logo"
+                    }
+                }
+            },
+            "links": [
+                {
+                    "rel": "More information on the logos setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#logos"
                 }
             ]
         },

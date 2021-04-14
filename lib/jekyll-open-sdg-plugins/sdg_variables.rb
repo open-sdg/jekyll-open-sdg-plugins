@@ -15,7 +15,11 @@ module JekyllOpenSdgPlugins
     # Get a target number from an indicator number.
     def get_target_number(indicator_number)
       parts = indicator_number.split('.')
-      parts[0] + '.' + parts[1]
+      if parts.length() < 2
+        indicator_number
+      else
+        parts[0] + '.' + parts[1]
+      end
     end
 
     # Is this string numeric?
@@ -272,7 +276,7 @@ module JekyllOpenSdgPlugins
             end
           end
 
-          is_standalone = meta.has_key?('standalone') and meta['standalone']
+          is_standalone = (meta.has_key?('standalone') and meta['standalone'])
 
           # Set the goal for this language, once only.
           if !is_standalone && already_added[language].index(goal_number) == nil
@@ -385,6 +389,31 @@ module JekyllOpenSdgPlugins
           if opensdg_translated_builds(site)
             doc.data['remote_data_prefix'] = File.join(doc.data['remote_data_prefix'], language)
           end
+
+          # Set the logo for this page.
+          logo = {}
+          match = false
+          if site.config.has_key?('logos') && site.config['logos'].length > 0
+            match = site.config['logos'].find{ |item| item['language'] == language }
+            unless match
+              match = site.config['logos'].find{ |item| item.fetch('language', '') == '' }
+            end
+          end
+          if match
+            src = match['src']
+            unless src.start_with?('http')
+              src = normalize_baseurl(baseurl) + src
+            end
+            logo['src'] = src
+            logo['alt'] = opensdg_translate_key(match['alt'], translations, language)
+          else
+            logo['src'] = normalize_baseurl(baseurl) + 'assets/img/SDG_logo.png'
+            alt_text = opensdg_translate_key('general.sdg', translations, language)
+            alt_text += ' - '
+            alt_text += opensdg_translate_key('header.tag_line', translations, language)
+            logo['alt'] = alt_text
+          end
+          doc.data['logo'] = logo
 
           if collection == 'indicators'
             # For indicators we also set the current indicator/target/goal.
