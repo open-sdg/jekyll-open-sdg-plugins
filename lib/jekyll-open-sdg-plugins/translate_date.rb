@@ -59,6 +59,10 @@ module Jekyll
 
       # Support timestamps.
       if date.is_a? Integer
+        # Convert milliseconds to seconds if necessary.
+        if date > 9000000000
+          date = date / 1000
+        end
         begin
           date = Time.at(date)
         rescue => err
