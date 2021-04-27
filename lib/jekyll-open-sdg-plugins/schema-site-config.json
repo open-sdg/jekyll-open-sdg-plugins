@@ -745,6 +745,12 @@
                                 "type": "string",
                                 "title": "Field"
                             }
+                        },
+                        "translated": {
+                            "type": "boolean",
+                            "title": "Display translated contents in the form",
+                            "description": "This should only be enabled if you are using the 'subfolder' approach for your metadata.",
+                            "format": "checkbox"
                         }
                     }
                 }

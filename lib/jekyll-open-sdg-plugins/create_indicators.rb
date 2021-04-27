@@ -53,7 +53,8 @@ module JekyllOpenSdgPlugins
         end
         # Create the indicator settings configuration/metadata pages.
         do_indicator_config_forms = form_settings_config && form_settings_config['enabled']
-        do_indicator_meta_forms = form_settings_meta && form_settings_config['enabled']
+        do_indicator_meta_forms = form_settings_meta && form_settings_meta['enabled']
+        use_translated_metadata = form_settings_meta && form_settings_meta['translated']
         if do_indicator_config_forms || do_indicator_meta_forms
 
           metadata = {}
@@ -66,6 +67,15 @@ module JekyllOpenSdgPlugins
             end
           else
             metadata = site.data['meta']
+          end
+
+          metadata_by_language = {}
+          language_config.each do |language|
+            if opensdg_translated_builds(site)
+              metadata_by_language[language] = site.data[language]['meta']
+            else
+              metadata_by_language[language] = site.data['meta']
+            end
           end
 
           # Because we have config forms for indicator config or metadata, we
@@ -106,10 +116,14 @@ module JekyllOpenSdgPlugins
                 end
 
                 if do_indicator_meta_forms
+                  metadata_to_use = meta
+                  if use_translated_metadata
+                    metadata_to_use = metadata_by_language[language][inid]
+                  end
                   dir = File.join(dir_base, 'metadata')
                   title = opensdg_translate_key('indicator.edit_metadata', translations, language)
                   config_type = 'metadata'
-                  site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta, title, config_type, form_settings_meta)
+                  site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, metadata_to_use, title, config_type, form_settings_meta)
                 end
               end
             end
