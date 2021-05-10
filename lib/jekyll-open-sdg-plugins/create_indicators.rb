@@ -198,7 +198,7 @@ module JekyllOpenSdgPlugins
       self.data['indicator_number'] = inid
       self.data['layout'] = 'data-editor'
       self.data['title'] = title + ': ' + inid.gsub('-', '.')
-      self.data['config_filename'] = 'indicator_' + inid + '.csv'
+      self.data['config_filename'] = 'indicator_' + inid
       self.data['form_settings'] = form_settings
     end
   end
