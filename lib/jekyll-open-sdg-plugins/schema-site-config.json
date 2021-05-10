@@ -712,6 +712,25 @@
             "description": "Configuration of the indicator configuration form.",
             "$ref": "#/definitions/config_form_options"
         },
+        "indicator_data_form": {
+            "options": {"collapsed": true},
+            "type": "object",
+            "title": "Indicator data form",
+            "description": "Configuration of the indicator data form.",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "title": "Enable this type of form",
+                    "description": "If enabled, the indicator data form will be available.",
+                    "format": "checkbox"
+                },
+                "repository_link": {
+                    "type": "string",
+                    "title": "Repository link",
+                    "description": "The URL pattern of the 'Go to repository' link on the configuration page."
+                }
+            }
+        },
         "indicator_metadata_form": {
             "options": {"collapsed": true},
             "type": "object",
