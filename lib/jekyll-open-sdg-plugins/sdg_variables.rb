@@ -388,6 +388,9 @@ module JekyllOpenSdgPlugins
           end
           if opensdg_translated_builds(site)
             doc.data['remote_data_prefix'] = File.join(doc.data['remote_data_prefix'], language)
+            doc.data['remote_data_prefix_untranslated'] = File.join(doc.data['remote_data_prefix'], 'untranslated')
+          else
+            doc.data['remote_data_prefix_untranslated'] = doc.data['remote_data_prefix']
           end
 
           # Set the logo for this page.
