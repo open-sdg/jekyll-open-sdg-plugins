@@ -681,6 +681,18 @@
                 }
             ]
         },
+        "graph_title_from_series": {
+            "title": "Graph title from series",
+            "type": "boolean",
+            "description": "This setting can be set to `true` to use the selected series for the graph title, whenever possible.",
+            "format": "checkbox",
+            "links": [
+                {
+                    "rel": "More information on the graph title from series setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#graph_title_from_series"
+                }
+            ]
+        },
         "header": {
             "options": {"collapsed": true},
             "type": "object",
