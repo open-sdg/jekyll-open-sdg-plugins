@@ -132,35 +132,6 @@
                 }
             ]
         },
-        "create_config_forms": {
-            "options": {"collapsed": true},
-            "type": "object",
-            "title": "Create configuration forms",
-            "description": "This setting can be used to automatically create the configuration form pages.",
-            "properties": {
-                "layout": {
-                    "type": "string",
-                    "title": "Layout",
-                    "enum": [
-                        "",
-                        "config-builder"
-                    ],
-                    "options": {
-                        "enum_titles": [
-                            "Do not automatically create config forms",
-                            "config-builder"
-                        ]
-                    },
-                    "description": "The layout to use for the configuration form pages."
-                }
-            },
-            "links": [
-                {
-                    "rel": "More information on the create config forms setting",
-                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#create_config_forms"
-                }
-            ]
-        },
         "create_goals": {
             "options": {"collapsed": true},
             "type": "object",
@@ -772,6 +743,69 @@
             "description": "Configuration of the indicator configuration form.",
             "$ref": "#/definitions/config_form_options"
         },
+        "indicator_data_form": {
+            "options": {"collapsed": true},
+            "type": "object",
+            "title": "Indicator data form",
+            "description": "Configuration of the indicator data form.",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "title": "Enable this type of form",
+                    "description": "If enabled, the indicator data form will be available.",
+                    "format": "checkbox"
+                },
+                "repository_link": {
+                    "type": "string",
+                    "title": "Repository link",
+                    "description": "The URL pattern of the 'Go to repository' link on the configuration page."
+                }
+            }
+        },
+        "indicator_metadata_form": {
+            "options": {"collapsed": true},
+            "type": "object",
+            "title": "Indicator metadata form",
+            "description": "Configuration of the indicator metadata form.",
+            "allOf": [
+                { "$ref": "#/definitions/config_form_options" },
+                {
+                    "properties": {
+                        "language": {
+                            "type": "string",
+                            "title": "Language for editing",
+                            "description": "Choose the language you prefer when editing metadata. This is used to translate the labels of the metadata fields."
+                        },
+                        "scopes": {
+                            "options": {"collapsed": true},
+                            "type": "array",
+                            "title": "Metadata scopes",
+                            "description": "Specify the 'scopes' of metadata to include on the form. Eg: 'national' or 'global'.",
+                            "items": {
+                                "type": "string",
+                                "title": "Scope"
+                            }
+                        },
+                        "exclude_fields": {
+                            "options": {"collapsed": true},
+                            "type": "array",
+                            "title": "Exclude fields",
+                            "description": "Specify any fields you would like to exclude from the form.",
+                            "items": {
+                                "type": "string",
+                                "title": "Field"
+                            }
+                        },
+                        "translated": {
+                            "type": "boolean",
+                            "title": "Display translated contents in the form",
+                            "description": "This should only be enabled if you are using the 'subfolder' approach for your metadata.",
+                            "format": "checkbox"
+                        }
+                    }
+                }
+            ]
+        },
         "languages": {
             "options": {"collapsed": true},
             "type": "array",
@@ -1341,6 +1375,12 @@
         "config_form_options": {
             "type": "object",
             "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "title": "Enable this type of form",
+                    "description": "If enabled, this type of configuration form will be available.",
+                    "format": "checkbox"
+                },
                 "dropdowns": {
                     "type": "array",
                     "title": "Dropdown lists",
@@ -1374,6 +1414,16 @@
                             }
                         }
                     }
+                },
+                "repository_link": {
+                    "type": "string",
+                    "title": "Repository link",
+                    "description": "The URL pattern of the 'Go to repository' link on the configuration page."
+                },
+                "translation_link": {
+                    "type": "string",
+                    "title": "Translation link",
+                    "description": "The URL pattern for all 'Go to translation' links on the configuration page."
                 }
             }
         }
