@@ -443,6 +443,17 @@
                 }
             ]
         },
+        "indicator_available": {
+            "type": "string",
+            "title": "Indicator available",
+            "description": "An optional sub-title for the indicator, which displays below the indicator name. Intended for cases where the available data is slightly different than the indicator name.",
+            "links": [
+                {
+                    "rel": "More information on the indicator available setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#recommended-special-fields"
+                }
+            ]
+        },
         "indicator_name": {
             "type": "string",
             "title": "Indicator name",
