@@ -8,6 +8,8 @@ module Jekyll
     # language of the current page and a date format given.
     def t_date(date, format_type)
 
+      original = date
+
       # Determine the language of the current page.
       config = @context.registers[:site].config
       translations = @context.registers[:site].data['translations']
@@ -57,7 +59,29 @@ module Jekyll
 
       # Support timestamps.
       if date.is_a? Integer
-        date = Time.at(date)
+        # Convert milliseconds to seconds if necessary.
+        if date > 9000000000
+          date = date / 1000
+        end
+        begin
+          date = Time.at(date).utc
+        rescue => err
+          return original
+        end
+      end
+
+      # Support other strings.
+      if date.is_a? String
+        begin
+          date = Time.parse(date).utc
+        rescue => err
+          return original
+        end
+      end
+
+      # Avoid nil errors.
+      unless date.is_a? Time
+        return original
       end
 
       # Convert the date into English.
