@@ -1155,8 +1155,8 @@
         "remote_data_prefix": {
             "type": "string",
             "minLength": 1,
-            "title": "Remote data repository URL",
-            "description": "Specify the URL of your published data repository.",
+            "title": "Remote data prefix",
+            "description": "Specify the URL of the 'data service' that is generated from your data repository.",
             "links": [
                 {
                     "rel": "More information on the remote data prefix setting",
