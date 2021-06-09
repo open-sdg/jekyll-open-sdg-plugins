@@ -65,9 +65,9 @@ module JekyllOpenSdgPlugins
         pages = pages.clone
 
         # Hardcode the site configuration page if it's not already there.
+        form_settings = site.config['site_config_form']
         config_page = pages.find { |page| page['layout'] == 'config-builder' }
         if config_page == nil
-          form_settings = site.config['site_config_form']
           if form_settings && form_settings['enabled']
             pages.push({
               'folder' => '/config',
@@ -75,9 +75,22 @@ module JekyllOpenSdgPlugins
               'title' => 'Open SDG site configuration',
               'config_type' => 'site',
               'config_filename' => 'site_config.yml',
-              'form_settings' => form_settings,
             })
           end
+        end
+        # Make sure the form settings are set.
+        config_page = pages.find { |page| page['layout'] == 'config-builder' }
+        if config_page != nil && form_settings && form_settings['enabled']
+          # Special treatment of repository_link.
+          if form_settings['repository_link'] && form_settings['repository_link'] != ''
+            unless form_settings['repository_link'].start_with?('http')
+              repo_url = site.config['repository_url_site']
+              if repo_url && repo_url != '' && repo_url.start_with?('http')
+                form_settings['repository_link'] = repo_url + form_settings['repository_link']
+              end
+            end
+          end
+          config_page['form_settings'] = form_settings
         end
 
         # See if we need to "map" any language codes.
