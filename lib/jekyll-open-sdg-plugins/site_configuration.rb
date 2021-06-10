@@ -37,7 +37,7 @@ module JekyllOpenSdgPlugins
       ]
       env_settings.each do |setting|
           if ENV.has_key?(setting)
-            site.data[setting.downcase] = ENV[setting]
+            site.config[setting.downcase] = ENV[setting]
           end
       end
     end
