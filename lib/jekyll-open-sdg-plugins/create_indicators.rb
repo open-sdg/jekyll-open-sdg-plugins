@@ -13,6 +13,34 @@ module JekyllOpenSdgPlugins
       form_settings_config = site.config['indicator_config_form']
       form_settings_meta = site.config['indicator_metadata_form']
       form_settings_data = site.config['indicator_data_form']
+
+      # Special treatment of repository_link settings: prefix them
+      # with the repository_url_data site config if needed.
+      repo_url = site.config['repository_url_data']
+      if repo_url && repo_url != '' && repo_url.start_with?('http')
+        if form_settings_config != nil && form_settings_config && form_settings_config['enabled']
+          if form_settings_config['repository_link'] && form_settings_config['repository_link'] != ''
+            unless form_settings_config['repository_link'].start_with?('http')
+              form_settings_config['repository_link'] = repo_url + form_settings_config['repository_link']
+            end
+          end
+        end
+        if form_settings_meta != nil && form_settings_meta && form_settings_meta['enabled']
+          if form_settings_meta['repository_link'] && form_settings_meta['repository_link'] != ''
+            unless form_settings_meta['repository_link'].start_with?('http')
+              form_settings_meta['repository_link'] = repo_url + form_settings_meta['repository_link']
+            end
+          end
+        end
+        if form_settings_data != nil && form_settings_data && form_settings_data['enabled']
+          if form_settings_data['repository_link'] && form_settings_data['repository_link'] != ''
+            unless form_settings_data['repository_link'].start_with?('http')
+              form_settings_data['repository_link'] = repo_url + form_settings_data['repository_link']
+            end
+          end
+        end
+      end
+
       translations = site.data['translations']
       # If site.create_indicators is set, create indicators per the metadata.
       if (language_config and indicator_config and indicator_config.key?('layout') and indicator_config['layout'] != '')

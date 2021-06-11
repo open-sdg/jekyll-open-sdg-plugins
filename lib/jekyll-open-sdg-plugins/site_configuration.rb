@@ -31,6 +31,15 @@ module JekyllOpenSdgPlugins
         hash_to_hash(site.data['site_config_prod'], site.config)
       end
 
+      # Look for environment variables for some settings.
+      env_settings = [
+        'REPOSITORY_URL_SITE',
+      ]
+      env_settings.each do |setting|
+          if ENV.has_key?(setting)
+            site.config[setting.downcase] = ENV[setting]
+          end
+      end
     end
 
     # Copy properties from a hash onto another hash.

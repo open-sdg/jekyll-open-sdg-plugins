@@ -68,7 +68,7 @@ module JekyllOpenSdgPlugins
     # The Jekyll baseurl is user-configured, and can be inconsistent. This
     # ensure it is consistent in whether it starts/ends with a slash.
     def normalize_baseurl(baseurl)
-      if baseurl == ''
+      if baseurl == '' || baseurl.nil?
         baseurl = '/'
       end
       if !baseurl.start_with? '/'

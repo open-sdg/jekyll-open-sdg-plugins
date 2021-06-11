@@ -1189,6 +1189,28 @@
                 }
             ]
         },
+        "repository_url_data": {
+            "type": "string",
+            "title": "Repository URL - Data",
+            "description": "The URL of your data repository, eg: https://github.com/my-github-org/data",
+            "links": [
+                {
+                    "rel": "More information on the data repository URL setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#repository_url_data"
+                }
+            ]
+        },
+        "repository_url_site": {
+            "type": "string",
+            "title": "Repository URL - Site",
+            "description": "The URL of your site repository, eg: https://github.com/my-github-org/site",
+            "links": [
+                {
+                    "rel": "More information on the site repository URL setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#repository_url_site"
+                }
+            ]
+        },
         "search_index_boost": {
             "options": {"collapsed": true},
             "type": "array",
