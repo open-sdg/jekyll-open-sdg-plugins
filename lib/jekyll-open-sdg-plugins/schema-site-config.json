@@ -106,6 +106,26 @@
                 }
             ]
         },
+        "cookie_consent_form": {
+            "options": {"collapsed": true},
+            "type": "object",
+            "title": "Cookie consent form",
+            "description": "A cookie consent form for users",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "title": "Enabled",
+                    "description": "Whether the cookie consent form will be enabled",
+                    "format": "checkbox"
+                }
+            },
+            "links": [
+                {
+                    "rel": "More information on the cookie_consent_form setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#cookie_consent_form"
+                }
+            ]
+        },
         "country": {
             "options": {"collapsed": true},
             "type": "object",
