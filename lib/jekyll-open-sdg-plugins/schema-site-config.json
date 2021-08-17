@@ -736,6 +736,30 @@
                 }
             ]
         },
+        "hide_single_series": {
+            "title": "Hide single series",
+            "type": "boolean",
+            "description": "This setting can be used to hide the 'Series' toggle on indicators where there is only one choice.",
+            "format": "checkbox",
+            "links": [
+                {
+                    "rel": "More information on the hide single series setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#hide_single_series"
+                }
+            ]
+        },
+        "hide_single_unit": {
+            "title": "Hide single unit",
+            "type": "boolean",
+            "description": "This setting can be used to hide the 'Unit' toggle on indicators where there is only one choice.",
+            "format": "checkbox",
+            "links": [
+                {
+                    "rel": "More information on the hide single unit setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#hide_single_unit"
+                }
+            ]
+        },
         "indicator_config_form": {
             "options": {"collapsed": true},
             "type": "object",
