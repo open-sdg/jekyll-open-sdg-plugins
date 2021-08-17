@@ -576,6 +576,17 @@
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#recommended-special-fields"
                 }
             ]
+        },
+        "x_axis_label": {
+            "type": "string",
+            "title": "X axis label",
+            "description": "A label beneath the X axis on charts. This overrides the same site configuration setting.",
+            "links": [
+                {
+                    "rel": "More information on the X axis label setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/indicator-configuration/#x_axis_label"
+                }
+            ]
         }
     },
     "additionalProperties": true,
