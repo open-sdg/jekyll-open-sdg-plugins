@@ -1334,6 +1334,17 @@
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#validate_site_config"
                 }
             ]
+        },
+        "x_axis_label": {
+            "type": "string",
+            "title": "X axis label",
+            "description": "A label beneath the X axis on charts. This is overridden by the same indicator configuration setting.",
+            "links": [
+                {
+                    "rel": "More information on the X axis label setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#x_axis_label"
+                }
+            ]
         }
     },
     "additionalProperties": true,
