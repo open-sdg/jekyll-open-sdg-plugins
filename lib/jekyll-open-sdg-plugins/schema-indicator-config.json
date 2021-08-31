@@ -257,6 +257,18 @@
                                     }
                                 ]
                             },
+                            "borderDash": {
+                                "type": "string",
+                                "title": "Line dash type",
+                                "description": "The type of line dash.",
+                                "default": "[10, 5]",
+                                "links": [
+                                    {
+                                        "rel": "More information on the line dash setting",
+                                        "href": "https://github.com/chartjs/chartjs-plugin-annotation/blob/master/README.md"
+                                    }
+                                ]
+                            },
                             "label": {
                                 "type": "object",
                                 "title": "Label",
