@@ -3,6 +3,17 @@
     "title": "Open SDG indicator configuration",
     "description": "This form will produce an indicator's configuration for your Open SDG implementation.",
     "properties": {
+        "composite_breakdown_label": {
+            "type": "string",
+            "title": "Composite breakdown label",
+            "description": "Used as a label for the COMPOSITE_BREAKDOWN column, if it appears in the indicator data.",
+            "links": [
+                {
+                    "rel": "More information on the composite breakdown label setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#composite-breakdown-label"
+                }
+            ]
+        },
         "computation_units": {
             "type": "string",
             "title": "Unit of measurement",
@@ -207,142 +218,131 @@
             "items": {
                 "type": "object",
                 "title": "Graph annotation",
-                "properties": {
-                    "preset": {
-                        "type": "string",
-                        "title": "Preset",
-                        "enum": ["target_line"],
-                        "description": "A preset bundle of configurations."
-                    },
-                    "value": {
-                        "type": "number",
-                        "minimum": 0,
-                        "title": "Value",
-                        "description": "The value at which to draw the line. For horizontal lines, this number corresponds to your actual data. For vertical lines, this number should be between 0 (the left side of the chart) and the number of years minus 1 (the right side of the chart)."
-                    },
-                    "endValue": {
-                        "type": "number",
-                        "title": "End value",
-                        "description": "Optionally add a different ending value for the line."
-                    },
-                    "description": {
-                        "type": "string",
-                        "title": "Description",
-                        "description": "A description of the annotation to be read by screenreaders."
-                    },
-                    "unit": {
-                        "type": "string",
-                        "title": "Unit",
-                        "description": "The unit of measurement the annotation displays on."
-                    },
-                    "series": {
-                        "type": "string",
-                        "title": "Series",
-                        "description": "The series the annotation displays on."
-                    },
-                    "mode": {
-                        "type": "string",
-                        "title": "Mode",
-                        "description": "Whether the line will be vertical or horizontal.",
-                        "enum": ["horizontal", "vertical"]
-                    },
-                    "borderColor": {
-                        "type": "string",
-                        "format": "color",
-                        "title": "Line color",
-                        "description": "The color of the line.",
-                        "links": [
-                            {
-                                "rel": "More information on the border color setting",
-                                "href": "https://github.com/chartjs/chartjs-plugin-annotation/blob/master/README.md"
-                            }
-                        ]
-                    },
-                    "borderDash": {
-                        "type": "string",
-                        "title": "Line dash type",
-                        "description": "The type of line dash.",
-                        "links": [
-                            {
-                                "rel": "More information on the line dash setting",
-                                "href": "https://github.com/chartjs/chartjs-plugin-annotation/blob/master/README.md"
-                            }
-                        ]
-                    },
-                    "label": {
-                        "type": "object",
-                        "title": "Label",
-                        "description": "A text label for the annotation.",
+                "allOf": [
+                    { "$ref": "#/definitions/series_unit_constraint" },
+                    {
                         "properties": {
-                            "position": {
-                                "type": "string",
-                                "title": "Position",
-                                "description": "Placement of the label along the line.",
-                                "enum": [
-                                    "top",
-                                    "bottom",
-                                    "left",
-                                    "right",
-                                    "center"
-                                ]
+                            "value": {
+                                "type": "number",
+                                "minimum": 0,
+                                "title": "Value",
+                                "description": "The value at which to draw the line. For horizontal lines, this number corresponds to your actual data. For vertical lines, this number should be between 0 (the left side of the chart) and the number of years minus 1 (the right side of the chart)."
                             },
-                            "content": {
-                                "type": "string",
-                                "minLength": 1,
-                                "title": "Content",
-                                "description": "Text of the line label."
+                            "endValue": {
+                                "type": "number",
+                                "title": "End value",
+                                "description": "Optionally add a different ending value for the line."
                             },
-                            "fontColor": {
+                            "description": {
                                 "type": "string",
-                                "format": "color",
-                                "title": "Label color",
-                                "description": "Color for the label text."
+                                "title": "Description",
+                                "description": "A description of the annotation to be read by screenreaders."
                             },
-                            "backgroundColor": {
+                            "mode": {
                                 "type": "string",
-                                "format": "color",
-                                "default": "#FFFFFFF",
-                                "title": "Background color",
-                                "description": "Background color for the label text."
-                            }
-                        }
-                    },
-                    "highContrast": {
-                        "type": "object",
-                        "title": "High contrast options",
-                        "description": "High-contrast overrides of certain color.",
-                        "properties": {
+                                "title": "Mode",
+                                "description": "Whether the line will be vertical or horizontal.",
+                                "enum": ["horizontal", "vertical"]
+                            },
                             "borderColor": {
                                 "type": "string",
                                 "format": "color",
-                                "default": "#FFFFFF",
-                                "title": "High-contrast line color",
-                                "description": "The color of the line in high-contrast mode."
+                                "title": "Line color",
+                                "description": "The color of the line.",
+                                "links": [
+                                    {
+                                        "rel": "More information on the border color setting",
+                                        "href": "https://github.com/chartjs/chartjs-plugin-annotation/blob/master/README.md"
+                                    }
+                                ]
+                            },
+                            "borderDash": {
+                                "type": "string",
+                                "title": "Line dash type",
+                                "description": "The type of line dash.",
+                                "links": [
+                                    {
+                                        "rel": "More information on the line dash setting",
+                                        "href": "https://github.com/chartjs/chartjs-plugin-annotation/blob/master/README.md"
+                                    }
+                                ]
                             },
                             "label": {
                                 "type": "object",
-                                "title": "High contrast label",
-                                "description": "High-contrast version of the label.",
+                                "title": "Label",
+                                "description": "A text label for the annotation.",
                                 "properties": {
+                                    "position": {
+                                        "type": "string",
+                                        "title": "Position",
+                                        "description": "Placement of the label along the line.",
+                                        "enum": [
+                                            "top",
+                                            "bottom",
+                                            "left",
+                                            "right",
+                                            "center"
+                                        ]
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "title": "Content",
+                                        "description": "Text of the line label."
+                                    },
                                     "fontColor": {
                                         "type": "string",
                                         "format": "color",
-                                        "default": "#FFFFFF",
-                                        "title": "High-contrast label color",
-                                        "description": "Color for the label text in high-contrast mode."
+                                        "title": "Label color",
+                                        "description": "Color for the label text."
                                     },
                                     "backgroundColor": {
                                         "type": "string",
                                         "format": "color",
-                                        "default": "#000000",
-                                        "title": "High-contrast background color",
-                                        "description": "Background color for the label text in high-contrast mode."
+                                        "default": "#FFFFFFF",
+                                        "title": "Background color",
+                                        "description": "Background color for the label text."
+                                    }
+                                }
+                            },
+                            "highContrast": {
+                                "type": "object",
+                                "title": "High contrast options",
+                                "description": "High-contrast overrides of certain color.",
+                                "properties": {
+                                    "borderColor": {
+                                        "type": "string",
+                                        "format": "color",
+                                        "default": "#FFFFFF",
+                                        "title": "High-contrast line color",
+                                        "description": "The color of the line in high-contrast mode."
+                                    },
+                                    "label": {
+                                        "type": "object",
+                                        "title": "High contrast label",
+                                        "description": "High-contrast version of the label.",
+                                        "properties": {
+                                            "fontColor": {
+                                                "type": "string",
+                                                "format": "color",
+                                                "default": "#FFFFFF",
+                                                "title": "High-contrast label color",
+                                                "description": "Color for the label text in high-contrast mode."
+                                            },
+                                            "backgroundColor": {
+                                                "type": "string",
+                                                "format": "color",
+                                                "default": "#000000",
+                                                "title": "High-contrast background color",
+                                                "description": "Background color for the label text in high-contrast mode."
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
                     }
-                }
+                ]
             },
             "links": [
                 {
@@ -359,30 +359,25 @@
             "items": {
                 "type": "object",
                 "title": "Graph limit",
-                "properties": {
-                    "minimum": {
-                        "type": "number",
-                        "minimum": 0,
-                        "title": "Minimum",
-                        "description": "Minimum value for the y axis."
-                    },
-                    "maximum": {
-                        "type": "number",
-                        "minimum": 0,
-                        "title": "Maximum",
-                        "description": "Maximum value for the y axis."
-                    },
-                    "unit": {
-                        "type": "string",
-                        "title": "Unit",
-                        "description": "The unit of measurement the limits apply to."
-                    },
-                    "series": {
-                        "type": "string",
-                        "title": "Series",
-                        "description": "The series the limits apply to."
+                "allOf": [
+                    { "$ref": "#/definitions/series_unit_constraint" },
+                    {
+                        "properties": {
+                            "minimum": {
+                                "type": "number",
+                                "minimum": 0,
+                                "title": "Minimum",
+                                "description": "Minimum value for the y axis."
+                            },
+                            "maximum": {
+                                "type": "number",
+                                "minimum": 0,
+                                "title": "Maximum",
+                                "description": "Maximum value for the y axis."
+                            }
+                        }
                     }
-                }
+                ]
             },
             "links": [
                 {
@@ -421,24 +416,19 @@
             "items": {
                 "type": "object",
                 "title": "Graph title",
-                "properties": {
-                    "title": {
-                        "type": "string",
-                        "minLength": 1,
-                        "title": "Title",
-                        "description": "The graph title."
-                    },
-                    "unit": {
-                        "type": "string",
-                        "title": "Unit",
-                        "description": "The unit of measurement the title applies to."
-                    },
-                    "series": {
-                        "type": "string",
-                        "title": "Series",
-                        "description": "The series the title applies to."
+                "allOf": [
+                    { "$ref": "#/definitions/series_unit_constraint" },
+                    {
+                        "properties": {
+                            "title": {
+                                "type": "string",
+                                "minLength": 1,
+                                "title": "Title",
+                                "description": "The graph title."
+                            }
+                        }
                     }
-                }
+                ]
             }
         },
         "graph_type": {
@@ -450,6 +440,17 @@
                 {
                     "rel": "More information on the graph titles setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#mandatory-for-statistical-indicators"
+                }
+            ]
+        },
+        "indicator_available": {
+            "type": "string",
+            "title": "Indicator available",
+            "description": "An optional sub-title for the indicator, which displays below the indicator name. Intended for cases where the available data is slightly different than the indicator name.",
+            "links": [
+                {
+                    "rel": "More information on the indicator available setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#recommended-special-fields"
                 }
             ]
         },
@@ -503,6 +504,28 @@
                 }
             ]
         },
+        "precision": {
+            "options": {"collapsed": true},
+            "type": "array",
+            "title": "Precision rules",
+            "description": "Control the number of decimal places for data in this indicator.",
+            "items": {
+                "type": "object",
+                "title": "Precision rule",
+                "allOf": [
+                    { "$ref": "#/definitions/series_unit_constraint" },
+                    {
+                        "properties": {
+                            "decimals": {
+                                "type": "number",
+                                "title": "Decimals",
+                                "description": "The number of decimal places"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
         "reporting_status": {
             "type": "string",
             "title": "Reporting status",
@@ -553,7 +576,35 @@
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#recommended-special-fields"
                 }
             ]
+        },
+        "x_axis_label": {
+            "type": "string",
+            "title": "X axis label",
+            "description": "A label beneath the X axis on charts. This overrides the same site configuration setting.",
+            "links": [
+                {
+                    "rel": "More information on the X axis label setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/indicator-configuration/#x_axis_label"
+                }
+            ]
         }
     },
-    "additionalProperties": true
+    "additionalProperties": true,
+    "definitions": {
+        "series_unit_constraint": {
+            "type": "object",
+            "properties": {
+                "series": {
+                    "type": "string",
+                    "title": "Series",
+                    "description": "Limit to this particular series"
+                },
+                "unit": {
+                    "type": "string",
+                    "title": "Unit",
+                    "description": "Limit to this particular unit"
+                }
+            }
+        }
+    }
 }

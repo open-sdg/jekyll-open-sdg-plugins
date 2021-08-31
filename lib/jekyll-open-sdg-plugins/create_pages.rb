@@ -30,7 +30,7 @@ module JekyllOpenSdgPlugins
       # To use the default 4 pages, simply put:
       #
       # create_pages: true
-      if site.config['languages'] and site.config['create_pages']
+      if (site.config['languages'] and site.config['create_pages'])
 
         default_pages = [
           {
@@ -54,7 +54,7 @@ module JekyllOpenSdgPlugins
           }
         ]
         pages = default_pages
-        if site.config['create_pages'].is_a?(Hash) and site.config['create_pages'].key?('pages')
+        if (site.config['create_pages'].is_a?(Hash) and site.config['create_pages'].key?('pages'))
           # Backwards compatability to support the deprecated "pages" key.
           pages = site.config['create_pages']['pages']
         elsif site.config['create_pages'].is_a?(Array)
@@ -65,17 +65,32 @@ module JekyllOpenSdgPlugins
         pages = pages.clone
 
         # Hardcode the site configuration page if it's not already there.
+        form_settings = site.config['site_config_form']
         config_page = pages.find { |page| page['layout'] == 'config-builder' }
         if config_page == nil
-          if site.config['create_config_forms'] && site.config['create_config_forms'].key?('layout') && site.config['create_config_forms']['layout'] != ''
+          if form_settings && form_settings['enabled']
             pages.push({
               'folder' => '/config',
-              'layout' => site.config['create_config_forms']['layout'],
+              'layout' => 'config-builder',
               'title' => 'Open SDG site configuration',
               'config_type' => 'site',
-              'config_filename' => 'site_config.yml'
+              'config_filename' => 'site_config.yml',
             })
           end
+        end
+        # Make sure the form settings are set.
+        config_page = pages.find { |page| page['layout'] == 'config-builder' }
+        if config_page != nil && form_settings && form_settings['enabled']
+          # Special treatment of repository_link.
+          if form_settings['repository_link'] && form_settings['repository_link'] != ''
+            unless form_settings['repository_link'].start_with?('http')
+              repo_url = site.config['repository_url_site']
+              if repo_url && repo_url != '' && repo_url.start_with?('http')
+                form_settings['repository_link'] = repo_url + form_settings['repository_link']
+              end
+            end
+          end
+          config_page['form_settings'] = form_settings
         end
 
         # See if we need to "map" any language codes.

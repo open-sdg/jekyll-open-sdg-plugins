@@ -9,6 +9,7 @@ data_edit_url: http://prose.io/#open-sdg/open-sdg-data-starter/edit/develop/data
 metadata_edit_url: http://prose.io/#open-sdg/open-sdg-data-starter/edit/develop/meta/[id].md
 languages:
   - en
+  - es
 
 title: Indicators For The Sustainable Development Goals
 url: ""
@@ -145,3 +146,12 @@ exclude:
 #    max_zoom: 10
 #    subfolder: my-geojson-subfolder
 #    label: My map layer label (can be a translation key)
+
+site_config_form:
+  repository_link: https://github.com/open-sdg/open-sdg-site-starter
+indicator_config_form:
+  repository_link: https://github.com/open-sdg/open-sdg-data-starter/tree/develop/meta
+indicator_metadata_form:
+  repository_link: https://github.com/open-sdg/open-sdg-data-starter/tree/develop/meta
+  scopes:
+    - national

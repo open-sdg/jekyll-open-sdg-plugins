@@ -15,7 +15,11 @@ module JekyllOpenSdgPlugins
     # Get a target number from an indicator number.
     def get_target_number(indicator_number)
       parts = indicator_number.split('.')
-      parts[0] + '.' + parts[1]
+      if parts.length() < 2
+        indicator_number
+      else
+        parts[0] + '.' + parts[1]
+      end
     end
 
     # Is this string numeric?
@@ -43,10 +47,28 @@ module JekyllOpenSdgPlugins
       sort_order
     end
 
+    # Get previous item from an array, or loop to the end.
+    def get_previous_item(list, index)
+      decremented = index - 1
+      if decremented < 0
+        decremented = list.length() - 1
+      end
+      list[decremented]
+    end
+
+    # Get next item from an array, or loop to the beginning.
+    def get_next_item(list, index)
+      incremented = index + 1
+      if incremented >= list.length()
+        incremented = 0
+      end
+      list[incremented]
+    end
+
     # The Jekyll baseurl is user-configured, and can be inconsistent. This
     # ensure it is consistent in whether it starts/ends with a slash.
     def normalize_baseurl(baseurl)
-      if baseurl == ''
+      if baseurl == '' || baseurl.nil?
         baseurl = '/'
       end
       if !baseurl.start_with? '/'
@@ -254,7 +276,7 @@ module JekyllOpenSdgPlugins
             end
           end
 
-          is_standalone = meta.has_key?('standalone') and meta['standalone']
+          is_standalone = (meta.has_key?('standalone') and meta['standalone'])
 
           # Set the goal for this language, once only.
           if !is_standalone && already_added[language].index(goal_number) == nil
@@ -365,8 +387,36 @@ module JekyllOpenSdgPlugins
             doc.data['remote_data_prefix'] = normalize_baseurl(baseurl)
           end
           if opensdg_translated_builds(site)
+            doc.data['remote_data_prefix_untranslated'] = File.join(doc.data['remote_data_prefix'], 'untranslated')
             doc.data['remote_data_prefix'] = File.join(doc.data['remote_data_prefix'], language)
+          else
+            doc.data['remote_data_prefix_untranslated'] = doc.data['remote_data_prefix']
           end
+
+          # Set the logo for this page.
+          logo = {}
+          match = false
+          if site.config.has_key?('logos') && site.config['logos'].length > 0
+            match = site.config['logos'].find{ |item| item['language'] == language }
+            unless match
+              match = site.config['logos'].find{ |item| item.fetch('language', '') == '' }
+            end
+          end
+          if match
+            src = match['src']
+            unless src.start_with?('http')
+              src = normalize_baseurl(baseurl) + src
+            end
+            logo['src'] = src
+            logo['alt'] = opensdg_translate_key(match['alt'], translations, language)
+          else
+            logo['src'] = normalize_baseurl(baseurl) + 'assets/img/SDG_logo.png'
+            alt_text = opensdg_translate_key('general.sdg', translations, language)
+            alt_text += ' - '
+            alt_text += opensdg_translate_key('header.tag_line', translations, language)
+            logo['alt'] = alt_text
+          end
+          doc.data['logo'] = logo
 
           if collection == 'indicators'
             # For indicators we also set the current indicator/target/goal.
@@ -386,7 +436,11 @@ module JekyllOpenSdgPlugins
             target_number = get_target_number(indicator_number)
             doc.data['goal'] = available_goals[language].find {|x| x['number'] == goal_number}
             doc.data['target'] = available_targets[language].find {|x| x['number'] == target_number}
-            doc.data['indicator'] = available_indicators[language].find {|x| x['number'] == indicator_number}
+            indicator_index = available_indicators[language].find_index {|x| x['number'] == indicator_number}
+            doc.data['indicator'] = available_indicators[language][indicator_index]
+            doc.data['next'] = get_next_item(available_indicators[language], indicator_index)
+            doc.data['previous'] = get_previous_item(available_indicators[language], indicator_index)
+
           elsif collection == 'goals'
             # For goals we also set the current goal.
             if doc.data.has_key? 'goal_number'
@@ -401,7 +455,10 @@ module JekyllOpenSdgPlugins
             if goal_number.is_a? Numeric
               goal_number = goal_number.to_s
             end
-            doc.data['goal'] = available_goals[language].find {|x| x['number'] == goal_number}
+            goal_index = available_goals[language].find_index {|x| x['number'] == goal_number}
+            doc.data['goal'] = available_goals[language][goal_index]
+            doc.data['next'] = get_next_item(available_goals[language], goal_index)
+            doc.data['previous'] = get_previous_item(available_goals[language], goal_index)
           end
         end
       end

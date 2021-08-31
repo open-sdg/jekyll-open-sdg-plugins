@@ -87,6 +87,45 @@
                 }
             ]
         },
+        "contrast_type": {
+            "type": "string",
+            "title": "Contrast type",
+            "description": "The type of high-contrast toggle to use.",
+            "enum": ["default", "single", "long"],
+            "options": {
+                "enum_titles": [
+                    "Default - two 'A' buttons side-by-side",
+                    "Single - one 'A' button which toggles on/off",
+                    "Long - text toggling between 'High contrast' and 'Default contrast'"
+                ]
+            },
+            "links": [
+                {
+                    "rel": "More information on the contrast type setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#contrast_type"
+                }
+            ]
+        },
+        "cookie_consent_form": {
+            "options": {"collapsed": true},
+            "type": "object",
+            "title": "Cookie consent form",
+            "description": "A cookie consent form for users",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "title": "Enabled",
+                    "description": "Whether the cookie consent form will be enabled",
+                    "format": "checkbox"
+                }
+            },
+            "links": [
+                {
+                    "rel": "More information on the cookie_consent_form setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#cookie_consent_form"
+                }
+            ]
+        },
         "country": {
             "options": {"collapsed": true},
             "type": "object",
@@ -110,35 +149,6 @@
                 {
                     "rel": "More information on the country setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#country"
-                }
-            ]
-        },
-        "create_config_forms": {
-            "options": {"collapsed": true},
-            "type": "object",
-            "title": "Create configuration forms",
-            "description": "This setting can be used to automatically create the configuration form pages.",
-            "properties": {
-                "layout": {
-                    "type": "string",
-                    "title": "Layout",
-                    "enum": [
-                        "",
-                        "config-builder"
-                    ],
-                    "options": {
-                        "enum_titles": [
-                            "Do not automatically create config forms",
-                            "config-builder"
-                        ]
-                    },
-                    "description": "The layout to use for the configuration form pages."
-                }
-            },
-            "links": [
-                {
-                    "rel": "More information on the create config forms setting",
-                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#create_config_forms"
                 }
             ]
         },
@@ -166,6 +176,12 @@
                         ]
                     },
                     "description": "The layout to use for the goal pages."
+                },
+                "previous_next_links": {
+                    "title": "Previous/next links",
+                    "type": "boolean",
+                    "description": "This setting can be used to show navigation links to the previous/next goals.",
+                    "format": "checkbox"
                 },
                 "goals": {
                     "options": {"collapsed": true},
@@ -213,6 +229,12 @@
                         ]
                     },
                     "description": "The layout to use for the indicator pages."
+                },
+                "previous_next_links": {
+                    "title": "Previous/next links",
+                    "type": "boolean",
+                    "description": "This setting can be used to show navigation links to the previous/next indicators.",
+                    "format": "checkbox"
                 }
             },
             "links": [
@@ -303,6 +325,30 @@
                 {
                     "rel": "More information on the data edit URL setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#data_edit_url"
+                }
+            ]
+        },
+        "data_fields": {
+            "options": {"collapsed": true},
+            "type": "object",
+            "title": "Data fields",
+            "description": "Control the names of fields used for special purposes in data.",
+            "properties": {
+                "units": {
+                    "type": "string",
+                    "title": "Units",
+                    "description": "Field to reserve for units of measurement. Defaults to 'Units'."
+                },
+                "series": {
+                    "type": "string",
+                    "title": "Series",
+                    "description": "Field to reserve for the SDG series. Defaults to 'Series'."
+                }
+            },
+            "links": [
+                {
+                    "rel": "More information on the data fields setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#data_fields"
                 }
             ]
         },
@@ -575,12 +621,40 @@
                 }
             ]
         },
+        "graph_color_headline": {
+            "type": "string",
+            "format": "color",
+            "title": "Graph color for headline",
+            "default": "#004466",
+            "description": "This setting can be used to customize the color used in the chart 'headlines'.",
+            "examples": [],
+            "links": [
+                {
+                    "rel": "More information on the graph color headline setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#graph_color_headline"
+                }
+            ]
+        },
+        "graph_color_headline_high_contrast": {
+            "type": "string",
+            "format": "color",
+            "title": "Graph color for headline - high-contrast",
+            "default": "#55a6e5",
+            "description": "This setting can be used to customize the color used in the chart 'headlines' in high-contrast mode.",
+            "examples": [],
+            "links": [
+                {
+                    "rel": "More information on the graph color headline high-contrast setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#graph_color_headline_high_contrast"
+                }
+            ]
+        },
         "graph_color_set": {
             "type": "string",
             "title": "Graph color set",
             "description": "This setting can be used to customize the color set used in the charts.",
             "examples": [],
-            "enum": ["default", "sdg", "goal", "custom"],
+            "enum": ["default", "accessible", "sdg", "goal", "custom"],
             "links": [
                 {
                     "rel": "More information on the graph color set setting",
@@ -614,6 +688,18 @@
                 {
                     "rel": "More information on the graph color number setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#graph_color_number"
+                }
+            ]
+        },
+        "graph_title_from_series": {
+            "title": "Graph title from series",
+            "type": "boolean",
+            "description": "This setting can be set to `true` to use the selected series for the graph title, whenever possible.",
+            "format": "checkbox",
+            "links": [
+                {
+                    "rel": "More information on the graph title from series setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#graph_title_from_series"
                 }
             ]
         },
@@ -670,12 +756,99 @@
                 }
             ]
         },
+        "hide_single_series": {
+            "title": "Hide single series",
+            "type": "boolean",
+            "description": "This setting can be used to hide the 'Series' toggle on indicators where there is only one choice.",
+            "format": "checkbox",
+            "links": [
+                {
+                    "rel": "More information on the hide single series setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#hide_single_series"
+                }
+            ]
+        },
+        "hide_single_unit": {
+            "title": "Hide single unit",
+            "type": "boolean",
+            "description": "This setting can be used to hide the 'Unit' toggle on indicators where there is only one choice.",
+            "format": "checkbox",
+            "links": [
+                {
+                    "rel": "More information on the hide single unit setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#hide_single_unit"
+                }
+            ]
+        },
         "indicator_config_form": {
             "options": {"collapsed": true},
             "type": "object",
             "title": "Indicator configuration form",
             "description": "Configuration of the indicator configuration form.",
             "$ref": "#/definitions/config_form_options"
+        },
+        "indicator_data_form": {
+            "options": {"collapsed": true},
+            "type": "object",
+            "title": "Indicator data form",
+            "description": "Configuration of the indicator data form.",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "title": "Enable this type of form",
+                    "description": "If enabled, the indicator data form will be available.",
+                    "format": "checkbox"
+                },
+                "repository_link": {
+                    "type": "string",
+                    "title": "Repository link",
+                    "description": "The URL pattern of the 'Go to repository' link on the configuration page."
+                }
+            }
+        },
+        "indicator_metadata_form": {
+            "options": {"collapsed": true},
+            "type": "object",
+            "title": "Indicator metadata form",
+            "description": "Configuration of the indicator metadata form.",
+            "allOf": [
+                { "$ref": "#/definitions/config_form_options" },
+                {
+                    "properties": {
+                        "language": {
+                            "type": "string",
+                            "title": "Language for editing",
+                            "description": "Choose the language you prefer when editing metadata. This is used to translate the labels of the metadata fields."
+                        },
+                        "scopes": {
+                            "options": {"collapsed": true},
+                            "type": "array",
+                            "title": "Metadata scopes",
+                            "description": "Specify the 'scopes' of metadata to include on the form. Eg: 'national' or 'global'.",
+                            "items": {
+                                "type": "string",
+                                "title": "Scope"
+                            }
+                        },
+                        "exclude_fields": {
+                            "options": {"collapsed": true},
+                            "type": "array",
+                            "title": "Exclude fields",
+                            "description": "Specify any fields you would like to exclude from the form.",
+                            "items": {
+                                "type": "string",
+                                "title": "Field"
+                            }
+                        },
+                        "translated": {
+                            "type": "boolean",
+                            "title": "Display translated contents in the form",
+                            "description": "This should only be enabled if you are using the 'subfolder' approach for your metadata.",
+                            "format": "checkbox"
+                        }
+                    }
+                }
+            ]
         },
         "languages": {
             "options": {"collapsed": true},
@@ -722,6 +895,41 @@
                 {
                     "rel": "More information on the language override setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#languages_public"
+                }
+            ]
+        },
+        "logos": {
+            "options": {"collapsed": true},
+            "type": "array",
+            "title": "Logos",
+            "description": "This setting can be used to control the main logo (or logos).",
+            "items": {
+                "type": "object",
+                "title": "Logo",
+                "properties": {
+                    "language": {
+                        "type": "string",
+                        "title": "Language",
+                        "description": "The language on which this logo displays. Leave blank to show on all."
+                    },
+                    "src": {
+                        "type": "string",
+                        "minLength": 1,
+                        "title": "Image file",
+                        "description": "The image file (path or URL) for this logo"
+                    },
+                    "alt": {
+                        "type": "string",
+                        "minLength": 1,
+                        "title": "Alt text",
+                        "description": "The alt text for this logo"
+                    }
+                }
+            },
+            "links": [
+                {
+                    "rel": "More information on the logos setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#logos"
                 }
             ]
         },
@@ -884,7 +1092,23 @@
             "title": "Main menu",
             "description": "The links to display in the main menu.",
             "items": {
-                "$ref": "#/definitions/menu_item"
+                "title": "Menu item",
+                "allOf": [
+                    { "$ref": "#/definitions/menu_item" },
+                    {
+                        "properties": {
+                            "dropdown": {
+                                "title": "Dropdown menu",
+                                "type": "array",
+                                "description": "Enter menu items here to turn this into a dropdown.",
+                                "items": {
+                                    "$ref": "#/definitions/menu_item",
+                                    "title": "Dropdown menu item"
+                                }
+                            }
+                        }
+                    }
+                ]
             },
             "links": [
                 {
@@ -975,8 +1199,8 @@
         "remote_data_prefix": {
             "type": "string",
             "minLength": 1,
-            "title": "Remote data repository URL",
-            "description": "Specify the URL of your published data repository.",
+            "title": "Remote data prefix",
+            "description": "Specify the URL of the 'data service' that is generated from your data repository.",
             "links": [
                 {
                     "rel": "More information on the remote data prefix setting",
@@ -1006,6 +1230,28 @@
                 {
                     "rel": "More information on the reporting status setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#reporting_status"
+                }
+            ]
+        },
+        "repository_url_data": {
+            "type": "string",
+            "title": "Repository URL - Data",
+            "description": "The URL of your data repository, eg: https://github.com/my-github-org/data",
+            "links": [
+                {
+                    "rel": "More information on the data repository URL setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#repository_url_data"
+                }
+            ]
+        },
+        "repository_url_site": {
+            "type": "string",
+            "title": "Repository URL - Site",
+            "description": "The URL of your site repository, eg: https://github.com/my-github-org/site",
+            "links": [
+                {
+                    "rel": "More information on the site repository URL setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#repository_url_site"
                 }
             ]
         },
@@ -1108,6 +1354,17 @@
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#validate_site_config"
                 }
             ]
+        },
+        "x_axis_label": {
+            "type": "string",
+            "title": "X axis label",
+            "description": "A label beneath the X axis on charts. This is overridden by the same indicator configuration setting.",
+            "links": [
+                {
+                    "rel": "More information on the X axis label setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#x_axis_label"
+                }
+            ]
         }
     },
     "additionalProperties": true,
@@ -1195,6 +1452,12 @@
         "config_form_options": {
             "type": "object",
             "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "title": "Enable this type of form",
+                    "description": "If enabled, this type of configuration form will be available.",
+                    "format": "checkbox"
+                },
                 "dropdowns": {
                     "type": "array",
                     "title": "Dropdown lists",
@@ -1228,6 +1491,16 @@
                             }
                         }
                     }
+                },
+                "repository_link": {
+                    "type": "string",
+                    "title": "Repository link",
+                    "description": "The URL pattern of the 'Go to repository' link on the configuration page."
+                },
+                "translation_link": {
+                    "type": "string",
+                    "title": "Translation link",
+                    "description": "The URL pattern for all 'Go to translation' links on the configuration page."
                 }
             }
         }
