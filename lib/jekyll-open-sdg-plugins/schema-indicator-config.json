@@ -248,6 +248,7 @@
                                 "type": "string",
                                 "format": "color",
                                 "title": "Line color",
+                                "default": "#949494",
                                 "description": "The color of the line.",
                                 "links": [
                                     {
@@ -260,6 +261,7 @@
                                 "type": "string",
                                 "title": "Line dash type",
                                 "description": "The type of line dash.",
+                                "default": "[10, 5]",
                                 "links": [
                                     {
                                         "rel": "More information on the line dash setting",
@@ -294,7 +296,8 @@
                                         "type": "string",
                                         "format": "color",
                                         "title": "Label color",
-                                        "description": "Color for the label text."
+                                        "description": "Color for the label text.",
+                                        "default": "#000000"
                                     },
                                     "backgroundColor": {
                                         "type": "string",
