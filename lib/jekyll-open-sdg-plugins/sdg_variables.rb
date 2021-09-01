@@ -73,9 +73,12 @@ module JekyllOpenSdgPlugins
       is_placeholder = (indicator.has_key?('placeholder') and indicator['placeholder'] != '')
       while (is_placeholder)
         index -= 1
+        if index < 0
+          index = list.length() - 1
+        end
         #puts indicator['placeholder']
         #puts indicator['placeholder'].class
-        indicator = get_previous_indicator(list, index)
+        indicator = get_previous_item(list, index)
         is_placeholder = (indicator.has_key?('placeholder') and indicator['placeholder'] != '')
       end
       return indicator
@@ -89,9 +92,12 @@ module JekyllOpenSdgPlugins
       is_placeholder = (indicator.has_key?('placeholder') and indicator['placeholder'] != '')
       while (is_placeholder)
         index += 1
+        if index >= list.length()
+          index = 0
+        end
         #puts indicator['placeholder']
         #puts indicator['placeholder'].class
-        indicator = get_next_indicator(list, index)
+        indicator = get_next_item(list, index)
         is_placeholder = (indicator.has_key?('placeholder') and indicator['placeholder'] != '')
       end
       return indicator
