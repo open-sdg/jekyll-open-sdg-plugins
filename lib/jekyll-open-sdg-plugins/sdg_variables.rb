@@ -67,7 +67,6 @@ module JekyllOpenSdgPlugins
 
     # Wrapper of get_previous_item specifically for indicators.
     def get_previous_indicator(list, index)
-      puts 'get_previous_indicator'
       indicator = get_previous_item(list, index)
       # Skip placeholder indicators.
       is_placeholder = (indicator.has_key?('placeholder') and indicator['placeholder'] != '')
@@ -76,8 +75,6 @@ module JekyllOpenSdgPlugins
         if index < 0
           index = list.length() - 1
         end
-        #puts indicator['placeholder']
-        #puts indicator['placeholder'].class
         indicator = get_previous_item(list, index)
         is_placeholder = (indicator.has_key?('placeholder') and indicator['placeholder'] != '')
       end
@@ -86,7 +83,6 @@ module JekyllOpenSdgPlugins
 
     # Wrapper of get_next_item specifically for indicators.
     def get_next_indicator(list, index)
-      puts 'get_next_indicator'
       indicator = get_next_item(list, index)
       # Skip placeholder indicators.
       is_placeholder = (indicator.has_key?('placeholder') and indicator['placeholder'] != '')
@@ -95,8 +91,6 @@ module JekyllOpenSdgPlugins
         if index >= list.length()
           index = 0
         end
-        #puts indicator['placeholder']
-        #puts indicator['placeholder'].class
         indicator = get_next_item(list, index)
         is_placeholder = (indicator.has_key?('placeholder') and indicator['placeholder'] != '')
       end
