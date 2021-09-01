@@ -393,6 +393,40 @@
                 }
             ]
         },
+        "graph_series_breaks": {
+            "options": {"collapsed": true},
+            "type": "array",
+            "title": "Graph series breaks",
+            "description": "A list of series break (ie, a gap among the years) lines to display on the graph.",
+            "items": {
+                "type": "object",
+                "title": "Series break",
+                "allOf": [
+                    { "$ref": "#/definitions/series_unit_constraint" },
+                    {
+                        "properties": {
+                            "label": {
+                                "type": "string",
+                                "title": "Label",
+                                "default": "indicator.annotation_series_break",
+                                "description": "The text to display for this series break."
+                            },
+                            "value": {
+                                "type": "number",
+                                "title": "Value",
+                                "description": "The numeric value at which to place the series break. This number should be between 0 (the left side of the chart) and the number of years minus 1 (the right side of the chart)."
+                            }
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "rel": "More information on the graph target lines setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/indicator-configuration/#graph_series_breaks"
+                }
+            ]
+        },
         "graph_stacked_disaggregation": {
             "type": "string",
             "title": "Stacked disaggregation",
@@ -401,6 +435,40 @@
                 {
                     "rel": "More information on the stacked disaggregation setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#recommended-special-fields"
+                }
+            ]
+        },
+        "graph_target_lines": {
+            "options": {"collapsed": true},
+            "type": "array",
+            "title": "Graph target lines",
+            "description": "A list of target lines to display on the graph.",
+            "items": {
+                "type": "object",
+                "title": "Target line",
+                "allOf": [
+                    { "$ref": "#/definitions/series_unit_constraint" },
+                    {
+                        "properties": {
+                            "label": {
+                                "type": "string",
+                                "title": "Label",
+                                "default": "indicator.annotation_2030_target",
+                                "description": "The text to display for this target line."
+                            },
+                            "value": {
+                                "type": "number",
+                                "title": "Value",
+                                "description": "The numeric value at which to place the target line."
+                            }
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "rel": "More information on the graph target lines setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/indicator-configuration/#graph_target_lines"
                 }
             ]
         },
