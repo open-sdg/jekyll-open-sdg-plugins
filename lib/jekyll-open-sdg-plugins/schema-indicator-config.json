@@ -405,9 +405,9 @@
                     { "$ref": "#/definitions/series_unit_constraint" },
                     {
                         "properties": {
-                            "label": {
+                            "label_content": {
                                 "type": "string",
-                                "title": "Label",
+                                "title": "Label content",
                                 "default": "indicator.annotation_series_break",
                                 "description": "The text to display for this series break."
                             },
@@ -450,9 +450,9 @@
                     { "$ref": "#/definitions/series_unit_constraint" },
                     {
                         "properties": {
-                            "label": {
+                            "label_content": {
                                 "type": "string",
-                                "title": "Label",
+                                "title": "Label content",
                                 "default": "indicator.annotation_2030_target",
                                 "description": "The text to display for this target line."
                             },
