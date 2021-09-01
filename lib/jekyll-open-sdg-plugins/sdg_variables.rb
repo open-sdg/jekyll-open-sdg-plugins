@@ -75,7 +75,7 @@ module JekyllOpenSdgPlugins
         index -= 1
         #puts indicator['placeholder']
         #puts indicator['placeholder'].class
-        indicator = get_previous_item(list, index)
+        indicator = get_previous_indicator(list, index)
         is_placeholder = (indicator.has_key?('placeholder') and indicator['placeholder'] != '')
       end
       return indicator
@@ -91,7 +91,7 @@ module JekyllOpenSdgPlugins
         index += 1
         #puts indicator['placeholder']
         #puts indicator['placeholder'].class
-        indicator = get_next_item(list, index)
+        indicator = get_next_indicator(list, index)
         is_placeholder = (indicator.has_key?('placeholder') and indicator['placeholder'] != '')
       end
       return indicator
