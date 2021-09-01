@@ -72,6 +72,7 @@ module JekyllOpenSdgPlugins
       is_placeholder = (indicator.has_key?('placeholder') and indicator['placeholder'] != '')
       while (is_placeholder)
         index -= 1
+        puts "Checking index " + index
         indicator = get_previous_item(list, index)
         is_placeholder = (indicator.has_key?('placeholder') and indicator['placeholder'] != '')
       end
@@ -85,6 +86,7 @@ module JekyllOpenSdgPlugins
       is_placeholder = (indicator.has_key?('placeholder') and indicator['placeholder'] != '')
       while (is_placeholder)
         index += 1
+        puts "Checking index " + index
         indicator = get_next_item(list, index)
         is_placeholder = (indicator.has_key?('placeholder') and indicator['placeholder'] != '')
       end
