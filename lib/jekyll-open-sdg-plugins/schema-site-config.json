@@ -31,12 +31,22 @@
             "options": {"collapsed": true},
             "type": "object",
             "title": "Analytics",
-            "description": "If these settings are used, usage statistics will be sent to Google Analytics.",
+            "description": "If these settings are used, usage statistics will be sent to Google Analytics. These are optional, and you don't have to use all of them. Typically you would just use one, such as the 'ua' option.",
             "properties": {
-                "ga_prod": {
+                "ua": {
                     "type": "string",
-                    "title": "Google Analytics tracking ID",
-                    "description": "The tracking ID (UA code) for your property on Google Analytics."
+                    "title": "Universal Analytics (ua) tracking ID",
+                    "description": "The tracking ID for the analytics.js approach, for your property on Google Analytics. Typically starts with 'UA-'."
+                },
+                "gtag": {
+                    "type": "string",
+                    "title": "gtag.js (gtag) tracking ID",
+                    "description": "The tracking ID for the gtag.js approach, for your property on Google Analytics. Typically starts with 'G-'."
+                },
+                "gtm": {
+                    "type": "string",
+                    "title": "Google Tag Manager (gtm) tracking ID",
+                    "description": "Your tracking ID for Google Tag Manager. Typically starts with 'GTM-'. Though this is included as an analytics approach, it requires additional configuration within Google Tag Manager in order to capture analytics."
                 }
             },
             "links": [
