@@ -26,7 +26,7 @@ module JekyllOpenSdgPlugins
           if indicator.has_key?('standalone') and indicator['standalone']
             next
           end
-          goal = inid.split('-')[0].to_i
+          goal = inid.split('-')[0]
           goals[goal] = true
         end
         # Decide what layout to use for the goal pages.
@@ -44,11 +44,13 @@ module JekyllOpenSdgPlugins
             language_public = languages_public[language]
           end
           # Loop through the goals.
-          goals.sort.each do |goal, value|
+          goal_index = 0
+          goals.keys.sort.each do |goal|
             # Add the language subfolder for all except the default (first) language.
             dir = index == 0 ? goal.to_s : File.join(language_public, goal.to_s)
             # Create the goal page.
-            site.collections['goals'].docs << GoalPage.new(site, site.source, dir, goal, language, layout)
+            site.collections['goals'].docs << GoalPage.new(site, site.source, dir, goal, language, layout, goal_index)
+            goal_index += 1
           end
         end
       end
@@ -57,7 +59,7 @@ module JekyllOpenSdgPlugins
 
   # A Page subclass used in the `CreateGoals` class.
   class GoalPage < Jekyll::Page
-    def initialize(site, base, dir, goal, language, layout)
+    def initialize(site, base, dir, goal, language, layout, goal_index)
       @site = site
       @base = base
       @dir  = dir
@@ -65,8 +67,8 @@ module JekyllOpenSdgPlugins
 
       goal_content = ''
       if site.config['create_goals'].has_key?('goals')
-        if !site.config['create_goals']['goals'][goal - 1].nil?
-          goal_content = site.config['create_goals']['goals'][goal - 1]['content']
+        if !site.config['create_goals']['goals'][goal_index].nil?
+          goal_content = site.config['create_goals']['goals'][goal_index]['content']
         end
       end
       @content = goal_content
