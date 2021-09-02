@@ -504,6 +504,18 @@
                 }
             ]
         },
+        "placeholder": {
+            "title": "Placeholder indicator",
+            "type": "string",
+            "description": "Entering text here identifies this as a 'placeholder' indicator. The text will be displayed on the goal page, in place of a link to the indicator page.",
+            "format": "textarea",
+            "links": [
+                {
+                    "rel": "More information the placeholder setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/indicator-configuration/#placeholder"
+                }
+            ]
+        },
         "precision": {
             "options": {"collapsed": true},
             "type": "array",

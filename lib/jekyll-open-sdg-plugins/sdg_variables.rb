@@ -65,6 +65,38 @@ module JekyllOpenSdgPlugins
       list[incremented]
     end
 
+    # Wrapper of get_previous_item specifically for indicators.
+    def get_previous_indicator(list, index)
+      indicator = get_previous_item(list, index)
+      # Skip placeholder indicators.
+      is_placeholder = (indicator.has_key?('placeholder') and indicator['placeholder'] != '')
+      while (is_placeholder)
+        index -= 1
+        if index < 0
+          index = list.length() - 1
+        end
+        indicator = get_previous_item(list, index)
+        is_placeholder = (indicator.has_key?('placeholder') and indicator['placeholder'] != '')
+      end
+      return indicator
+    end
+
+    # Wrapper of get_next_item specifically for indicators.
+    def get_next_indicator(list, index)
+      indicator = get_next_item(list, index)
+      # Skip placeholder indicators.
+      is_placeholder = (indicator.has_key?('placeholder') and indicator['placeholder'] != '')
+      while (is_placeholder)
+        index += 1
+        if index >= list.length()
+          index = 0
+        end
+        indicator = get_next_item(list, index)
+        is_placeholder = (indicator.has_key?('placeholder') and indicator['placeholder'] != '')
+      end
+      return indicator
+    end
+
     # The Jekyll baseurl is user-configured, and can be inconsistent. This
     # ensure it is consistent in whether it starts/ends with a slash.
     def normalize_baseurl(baseurl)
@@ -277,6 +309,7 @@ module JekyllOpenSdgPlugins
           end
 
           is_standalone = (meta.has_key?('standalone') and meta['standalone'])
+          is_placeholder = (meta.has_key?('placeholder') and meta['placeholder'] != '')
 
           # Set the goal for this language, once only.
           if !is_standalone && already_added[language].index(goal_number) == nil
@@ -438,8 +471,8 @@ module JekyllOpenSdgPlugins
             doc.data['target'] = available_targets[language].find {|x| x['number'] == target_number}
             indicator_index = available_indicators[language].find_index {|x| x['number'] == indicator_number}
             doc.data['indicator'] = available_indicators[language][indicator_index]
-            doc.data['next'] = get_next_item(available_indicators[language], indicator_index)
-            doc.data['previous'] = get_previous_item(available_indicators[language], indicator_index)
+            doc.data['next'] = get_next_indicator(available_indicators[language], indicator_index)
+            doc.data['previous'] = get_previous_indicator(available_indicators[language], indicator_index)
 
           elsif collection == 'goals'
             # For goals we also set the current goal.
