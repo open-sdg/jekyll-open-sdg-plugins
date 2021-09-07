@@ -248,6 +248,7 @@
                                 "type": "string",
                                 "format": "color",
                                 "title": "Line color",
+                                "default": "#949494",
                                 "description": "The color of the line.",
                                 "links": [
                                     {
@@ -257,9 +258,14 @@
                                 ]
                             },
                             "borderDash": {
-                                "type": "string",
+                                "type": "array",
                                 "title": "Line dash type",
                                 "description": "The type of line dash.",
+                                "default": [10, 5],
+                                "items": {
+                                    "type": "number"
+                                },
+                                "minItems": 2,
                                 "links": [
                                     {
                                         "rel": "More information on the line dash setting",
@@ -294,12 +300,13 @@
                                         "type": "string",
                                         "format": "color",
                                         "title": "Label color",
-                                        "description": "Color for the label text."
+                                        "description": "Color for the label text.",
+                                        "default": "#000000"
                                     },
                                     "backgroundColor": {
                                         "type": "string",
                                         "format": "color",
-                                        "default": "#FFFFFFF",
+                                        "default": "#ffffff",
                                         "title": "Background color",
                                         "description": "Background color for the label text."
                                     }
@@ -313,7 +320,7 @@
                                     "borderColor": {
                                         "type": "string",
                                         "format": "color",
-                                        "default": "#FFFFFF",
+                                        "default": "#ffffff",
                                         "title": "High-contrast line color",
                                         "description": "The color of the line in high-contrast mode."
                                     },
@@ -325,7 +332,7 @@
                                             "fontColor": {
                                                 "type": "string",
                                                 "format": "color",
-                                                "default": "#FFFFFF",
+                                                "default": "#ffffff",
                                                 "title": "High-contrast label color",
                                                 "description": "Color for the label text in high-contrast mode."
                                             },
@@ -386,6 +393,40 @@
                 }
             ]
         },
+        "graph_series_breaks": {
+            "options": {"collapsed": true},
+            "type": "array",
+            "title": "Graph series breaks",
+            "description": "A list of series break (ie, a gap among the years) lines to display on the graph.",
+            "items": {
+                "type": "object",
+                "title": "Series break",
+                "allOf": [
+                    { "$ref": "#/definitions/series_unit_constraint" },
+                    {
+                        "properties": {
+                            "label_content": {
+                                "type": "string",
+                                "title": "Label content",
+                                "default": "indicator.annotation_series_break",
+                                "description": "The text to display for this series break."
+                            },
+                            "value": {
+                                "type": "number",
+                                "title": "Value",
+                                "description": "The numeric value at which to place the series break. This number should be between 0 (the left side of the chart) and the number of years minus 1 (the right side of the chart)."
+                            }
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "rel": "More information on the graph target lines setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/indicator-configuration/#graph_series_breaks"
+                }
+            ]
+        },
         "graph_stacked_disaggregation": {
             "type": "string",
             "title": "Stacked disaggregation",
@@ -394,6 +435,40 @@
                 {
                     "rel": "More information on the stacked disaggregation setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#recommended-special-fields"
+                }
+            ]
+        },
+        "graph_target_lines": {
+            "options": {"collapsed": true},
+            "type": "array",
+            "title": "Graph target lines",
+            "description": "A list of target lines to display on the graph.",
+            "items": {
+                "type": "object",
+                "title": "Target line",
+                "allOf": [
+                    { "$ref": "#/definitions/series_unit_constraint" },
+                    {
+                        "properties": {
+                            "label_content": {
+                                "type": "string",
+                                "title": "Label content",
+                                "default": "indicator.annotation_2030_target",
+                                "description": "The text to display for this target line."
+                            },
+                            "value": {
+                                "type": "number",
+                                "title": "Value",
+                                "description": "The numeric value at which to place the target line."
+                            }
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "rel": "More information on the graph target lines setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/indicator-configuration/#graph_target_lines"
                 }
             ]
         },
