@@ -363,8 +363,8 @@ module JekyllOpenSdgPlugins
           if meta.has_key?('graph_annotations') && meta['graph_annotations'].length > 0
             meta['graph_annotations'].each do |annotation|
               if annotation.has_key?('borderDash') && annotation['borderDash'].is_a?(String)
-                annotation['borderDash'] = []
-                opensdg_notice('The "borderDash" property in graph annotations must be an array.')
+                annotation['borderDash'] = [2, 2]
+                opensdg_notice('The "borderDash" property in graph annotations must be an array. Using [2, 2].')
               end
             end
           end
