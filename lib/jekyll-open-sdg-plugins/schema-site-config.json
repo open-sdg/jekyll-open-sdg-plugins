@@ -470,6 +470,24 @@
                 }
             ]
         },
+        "favicons": {
+            "type": "string",
+            "title": "Favicons",
+            "description": "The type of favicons to use.",
+            "enum": ["legacy", "favicon.io"],
+            "options": {
+                "enum_titles": [
+                    "Legacy",
+                    "Favicon.io (recommended)"
+                ]
+            },
+            "links": [
+                {
+                    "rel": "More information on the favicons setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#favicons"
+                }
+            ]
+        },
         "footer_language_toggle": {
             "type": "string",
             "title": "Footer language toggle",
