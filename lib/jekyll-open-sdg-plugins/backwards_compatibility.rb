@@ -30,8 +30,8 @@ module JekyllOpenSdgPlugins
         reporting_status_types = reporting_status['field']['options']
         site.config['reporting_status']['status_types'] = reporting_status_types.map do |status_type|
           {
-            'value': status_type['value'],
-            'label': status_type['translation_key'],
+            'value' => status_type['value'],
+            'label' => status_type['translation_key'],
           }
         end
       end
