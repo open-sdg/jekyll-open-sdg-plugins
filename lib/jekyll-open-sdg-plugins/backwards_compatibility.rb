@@ -22,6 +22,7 @@ module JekyllOpenSdgPlugins
                 'label': status_type['translation_key'],
               }
             end
+            puts site.config['reporting_status']
         end
         # Also fill in the "reporting" data with things needed by older templates.
         puts site.data['reporting']
