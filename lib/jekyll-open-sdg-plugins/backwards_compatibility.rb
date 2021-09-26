@@ -32,7 +32,7 @@ module JekyllOpenSdgPlugins
       end
 
       add_translation_keys(site.data['reporting']['statuses'])
-      add_translation_keys(site.data['reporting']['overall']['statuses']
+      add_translation_keys(site.data['reporting']['overall']['statuses'])
       if site.data['reporting'].has_key?('extra_fields')
         site.data['reporting']['extra_fields'] each do |key, extra_field|
           extra_field.each do |extra_field_value|
