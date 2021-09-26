@@ -15,8 +15,7 @@ module JekyllOpenSdgPlugins
                site.config['reporting_status'].has_key?('status_types') &&
                site.config['reporting_status']['status_types'].count > 0
             puts "Foo"
-        endunless
-
+        end
     end
   end
 end
