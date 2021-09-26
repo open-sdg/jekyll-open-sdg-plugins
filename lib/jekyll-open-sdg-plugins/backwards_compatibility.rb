@@ -8,7 +8,6 @@ module JekyllOpenSdgPlugins
 
     def add_translation_keys(statuses, site)
       statuses.each do |status|
-        puts status
         status_var = 'value'
         unless status.has_key?(status_var)
           status_var = 'status'
@@ -45,7 +44,10 @@ module JekyllOpenSdgPlugins
       add_translation_keys(site.data['reporting']['overall']['statuses'], site)
 
       if site.data['reporting'].has_key?('extra_fields')
+        puts 'extra fields'
         site.data['reporting']['extra_fields'].each do |key, extra_field|
+          puts key
+          puts extra_field
           extra_field.each do |extra_field_value|
             add_translation_keys(extra_field_value['statuses'], site)
           end
@@ -53,7 +55,10 @@ module JekyllOpenSdgPlugins
       end
 
       if site.data['reporting'].has_key?('goals')
+        puts 'goals'
         site.data['reporting']['goals'].each do |key, goal|
+          puts key
+          puts goal
           goal.each do |goal_value|
             add_translation_keys(goal_value['statuses'], site)
           end
