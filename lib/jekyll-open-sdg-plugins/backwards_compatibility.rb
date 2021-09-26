@@ -23,6 +23,8 @@ module JekyllOpenSdgPlugins
               }
             end
         end
+        # Also fill in the "reporting" data with things needed by older templates.
+        puts site.data['reporting']
     end
   end
 end
