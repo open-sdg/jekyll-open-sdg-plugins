@@ -56,6 +56,8 @@ module JekyllOpenSdgPlugins
           add_translation_keys(goal['statuses'], site)
         end
       end
+
+      puts site.config['reporting_types']['status_types']
     end
   end
 end
