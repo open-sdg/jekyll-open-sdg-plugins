@@ -11,7 +11,7 @@ module JekyllOpenSdgPlugins
         status_in_site_config = site.config['reporting_status']['status_types'].detect {|s| s['value'] == status['status'] }
         if status_in_site_config.nil?
           opensdg_notice('Unexpected reporting status type: ' + status['status'] + '. Expected reporting status types:')
-          puts site.config['reporting_status']['status_types'].map { |status_type| status_type.value }
+          puts site.config['reporting_status']['status_types'].map { |status_type| status_type['value'] }
         end
         status['translation_key'] = status_in_site_config['label']
       end
