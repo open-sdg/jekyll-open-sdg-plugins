@@ -34,14 +34,14 @@ module JekyllOpenSdgPlugins
       add_translation_keys(site.data['reporting']['statuses'])
       add_translation_keys(site.data['reporting']['overall']['statuses'])
       if site.data['reporting'].has_key?('extra_fields')
-        site.data['reporting']['extra_fields'] each do |key, extra_field|
+        site.data['reporting']['extra_fields'].each do |key, extra_field|
           extra_field.each do |extra_field_value|
             add_translation_keys(extra_field_value['statuses'])
           end
         end
       end
       if site.data['reporting'].has_key?('goals')
-        site.data['reporting']['goals'] each do |key, goal|
+        site.data['reporting']['goals'].each do |key, goal|
           goal.each do |goal_value|
             add_translation_keys(goal_value['statuses'])
           end
