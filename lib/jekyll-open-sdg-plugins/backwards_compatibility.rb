@@ -11,9 +11,10 @@ module JekyllOpenSdgPlugins
     def generate(site)
 
       # Handle legacy treatment of reporting status types.
-      unless site.config.has_key?('reporting_status') &&
+      puts 'foo'
+      unless (site.config.has_key?('reporting_status') &&
              site.config['reporting_status'].has_key?('status_types') &&
-             site.config['reporting_status']['status_types'].count > 0
+             site.config['reporting_status']['status_types'].count > 0)
         reporting_status = site.data['schema'].detect {|f| f['name'] == 'reporting_status' }
         reporting_status_types = reporting_status['field']['options']
         site.config['reporting_status']['status_types'] = reporting_status_types.map do |status_type|
@@ -23,6 +24,7 @@ module JekyllOpenSdgPlugins
           }
         end
       end
+      puts 'foo2'
       # Also fill in the "reporting" data with things needed by older templates.
       def add_translation_keys(statuses)
         statuses.each do |status|
@@ -40,6 +42,7 @@ module JekyllOpenSdgPlugins
           end
         end
       end
+      puts 'foo3'
       if site.data['reporting'].has_key?('goals')
         site.data['reporting']['goals'].each do |key, goal|
           goal.each do |goal_value|
