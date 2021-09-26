@@ -7,10 +7,11 @@ module JekyllOpenSdgPlugins
     priority :low
 
     def add_translation_keys(statuses, site)
-      puts statuses
-      puts site.config['reporting_status']
       statuses.each do |status|
         status_in_site_config = site.config['reporting_status']['status_types'].detect {|s| s['value'] == status['status'] }
+        if status_in_site_config == Nil
+          opensdg_notice('Unexpected reporting status type: ' + status['status'])
+        end
         status['translation_key'] = status_in_site_config['label']
       end
     end
@@ -35,12 +36,9 @@ module JekyllOpenSdgPlugins
 
       # Also fill in the "reporting" data with things needed by older templates.
       add_translation_keys(site.data['reporting']['statuses'], site)
-      foo = bar['fdsfds'].sdkfjdsf
       add_translation_keys(site.data['reporting']['overall']['statuses'], site)
 
       if site.data['reporting'].has_key?('extra_fields')
-        puts 'about to loop'
-        puts site.data['reporting']['extra_fields']
         site.data['reporting']['extra_fields'].each do |key, extra_field|
           extra_field.each do |extra_field_value|
             add_translation_keys(extra_field_value['statuses'], site)
