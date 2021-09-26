@@ -162,3 +162,5 @@ reporting_status:
       label: Complete
     - value: notstarted
       label: Not started
+    - value: inprogress
+      label: In progress
