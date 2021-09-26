@@ -11,6 +11,7 @@ module JekyllOpenSdgPlugins
     def generate(site)
 
         # Handle legacy treatment of reporting status types.
+        puts 'here'
         unless site.config.has_key?('reporting_status') &&
                site.config['reporting_status'].has_key?('status_types') &&
                site.config['reporting_status']['status_types'].count > 0
@@ -23,9 +24,11 @@ module JekyllOpenSdgPlugins
               }
             end
             puts site.config['reporting_status']
+            puts 'still here'
         end
         # Also fill in the "reporting" data with things needed by older templates.
         puts site.data['reporting']
+        puts 'again'
     end
   end
 end
