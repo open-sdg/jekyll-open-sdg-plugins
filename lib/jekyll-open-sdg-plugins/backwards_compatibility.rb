@@ -14,7 +14,8 @@ module JekyllOpenSdgPlugins
         unless site.config.has_key?('reporting_status') &&
                site.config['reporting_status'].has_key?('status_types') &&
                site.config['reporting_status']['status_types'].count > 0
-            puts "Foo"
+            legacy_reporting_status_types = site.data['schema']
+            puts legacy_reporting_status_types
         end
     end
   end
