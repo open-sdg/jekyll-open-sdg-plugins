@@ -6,12 +6,18 @@ module JekyllOpenSdgPlugins
     safe true
     priority :low
 
+    def add_translation_keys(statuses, site)
+      statuses.each do |status|
+        status_in_site_config = site.config['reporting_status']['status_types'].detect {|s| s['value'] == status['status'] }
+        status['translation_key'] = status_in_site_config['label']
+      end
+    end
+
     # This file is used to avoid any backwards compatibility issues
     # as the Open SDG API changes over time.
     def generate(site)
 
       # Handle legacy treatment of reporting status types.
-      puts 'foo'
       unless (site.config.has_key?('reporting_status') &&
              site.config['reporting_status'].has_key?('status_types') &&
              site.config['reporting_status']['status_types'].count > 0)
@@ -24,29 +30,23 @@ module JekyllOpenSdgPlugins
           }
         end
       end
-      puts 'foo2'
-      # Also fill in the "reporting" data with things needed by older templates.
-      def add_translation_keys(statuses)
-        statuses.each do |status|
-          status_in_site_config = site.config['reporting_status']['status_types'].detect {|s| s['value'] == status['status'] }
-          status['translation_key'] = status_in_site_config['label']
-        end
-      end
 
-      add_translation_keys(site.data['reporting']['statuses'])
-      add_translation_keys(site.data['reporting']['overall']['statuses'])
+      # Also fill in the "reporting" data with things needed by older templates.
+      add_translation_keys(site.data['reporting']['statuses'], site)
+      add_translation_keys(site.data['reporting']['overall']['statuses'], site)
+
       if site.data['reporting'].has_key?('extra_fields')
         site.data['reporting']['extra_fields'].each do |key, extra_field|
           extra_field.each do |extra_field_value|
-            add_translation_keys(extra_field_value['statuses'])
+            add_translation_keys(extra_field_value['statuses'], site)
           end
         end
       end
-      puts 'foo3'
+
       if site.data['reporting'].has_key?('goals')
         site.data['reporting']['goals'].each do |key, goal|
           goal.each do |goal_value|
-            add_translation_keys(goal_value['statuses'])
+            add_translation_keys(goal_value['statuses'], site)
           end
         end
       end
