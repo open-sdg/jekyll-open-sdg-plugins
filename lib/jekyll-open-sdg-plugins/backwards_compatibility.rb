@@ -9,7 +9,7 @@ module JekyllOpenSdgPlugins
     def add_translation_keys(statuses, site)
       statuses.each do |status|
         status_in_site_config = site.config['reporting_status']['status_types'].detect {|s| s['value'] == status['status'] }
-        if status_in_site_config == Nil
+        if status_in_site_config.nil?
           opensdg_notice('Unexpected reporting status type: ' + status['status'])
         end
         status['translation_key'] = status_in_site_config['label']
