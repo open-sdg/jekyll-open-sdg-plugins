@@ -35,6 +35,7 @@ module JekyllOpenSdgPlugins
 
       # Also fill in the "reporting" data with things needed by older templates.
       add_translation_keys(site.data['reporting']['statuses'], site)
+      foo = bar['fdsfds'].sdkfjdsf
       add_translation_keys(site.data['reporting']['overall']['statuses'], site)
 
       if site.data['reporting'].has_key?('extra_fields')
