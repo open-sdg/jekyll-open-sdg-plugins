@@ -10,8 +10,9 @@ module JekyllOpenSdgPlugins
       statuses.each do |status|
         status_in_site_config = site.config['reporting_status']['status_types'].detect {|s| s['value'] == status['status'] }
         if status_in_site_config.nil?
+          puts site.config['reporting_status']['status_types']
           opensdg_notice('Unexpected reporting status type: ' + status['status'] + '. Expected reporting status types:')
-          puts site.config['reporting_status']['status_types'].map { |status_type| status_type['value'] }
+          puts site.config['reporting_status']['status_types'].map { |s| s['value'] }
         end
         status['translation_key'] = status_in_site_config['label']
       end
@@ -30,7 +31,7 @@ module JekyllOpenSdgPlugins
         site.config['reporting_status']['status_types'] = reporting_status_types.map do |status_type|
           {
             'value': status_type['value'],
-             'label': status_type['translation_key'],
+            'label': status_type['translation_key'],
           }
         end
       end
