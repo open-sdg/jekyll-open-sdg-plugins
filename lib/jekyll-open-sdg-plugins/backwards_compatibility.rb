@@ -53,9 +53,7 @@ module JekyllOpenSdgPlugins
 
       if site.data['reporting'].has_key?('goals')
         site.data['reporting']['goals'].each do |goal|
-          goal.each do |goal_value|
-            add_translation_keys(goal_value['statuses'], site)
-          end
+          add_translation_keys(goal['statuses'], site)
         end
       end
     end
