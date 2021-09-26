@@ -7,6 +7,8 @@ module JekyllOpenSdgPlugins
     priority :low
 
     def add_translation_keys(statuses, site)
+      puts statuses
+      puts site.config['reporting_status']
       statuses.each do |status|
         status_in_site_config = site.config['reporting_status']['status_types'].detect {|s| s['value'] == status['status'] }
         status['translation_key'] = status_in_site_config['label']
