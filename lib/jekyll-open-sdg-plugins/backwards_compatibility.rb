@@ -18,7 +18,7 @@ module JekyllOpenSdgPlugins
             reporting_status = site.data['schema'].detect {|f| f['name'] == 'reporting_status' }
             reporting_status_types = reporting_status['field']['options']
             site.config['reporting_status']['status_types'] = reporting_status_types.map do |status_type|
-              return {
+              {
                 'value': status_type['value'],
                 'label': status_type['translation_key'],
               }
