@@ -10,25 +10,43 @@ module JekyllOpenSdgPlugins
     # as the Open SDG API changes over time.
     def generate(site)
 
-        # Handle legacy treatment of reporting status types.
-        puts 'here'
-        unless site.config.has_key?('reporting_status') &&
-               site.config['reporting_status'].has_key?('status_types') &&
-               site.config['reporting_status']['status_types'].count > 0
-            reporting_status = site.data['schema'].detect {|f| f['name'] == 'reporting_status' }
-            reporting_status_types = reporting_status['field']['options']
-            site.config['reporting_status']['status_types'] = reporting_status_types.map do |status_type|
-              {
-                'value': status_type['value'],
-                'label': status_type['translation_key'],
-              }
-            end
-            puts site.config['reporting_status']
-            puts 'still here'
+      # Handle legacy treatment of reporting status types.
+      unless site.config.has_key?('reporting_status') &&
+             site.config['reporting_status'].has_key?('status_types') &&
+             site.config['reporting_status']['status_types'].count > 0
+        reporting_status = site.data['schema'].detect {|f| f['name'] == 'reporting_status' }
+        reporting_status_types = reporting_status['field']['options']
+        site.config['reporting_status']['status_types'] = reporting_status_types.map do |status_type|
+          {
+            'value': status_type['value'],
+             'label': status_type['translation_key'],
+          }
         end
-        # Also fill in the "reporting" data with things needed by older templates.
-        puts site.data['reporting']
-        puts 'again'
+      end
+      # Also fill in the "reporting" data with things needed by older templates.
+      def add_translation_keys(statuses)
+        statuses.each do |status|
+          status_in_site_config = site.config['reporting_status']['status_types'].detect {|s| s['value'] == status['status'] }
+          status['translation_key'] = status_in_site_config['label']
+        end
+      end
+
+      add_translation_keys(site.data['reporting']['statuses'])
+      add_translation_keys(site.data['reporting']['overall']['statuses']
+      if site.data['reporting'].has_key?('extra_fields')
+        site.data['reporting']['extra_fields'] each do |key, extra_field|
+          extra_field.each do |extra_field_value|
+            add_translation_keys(extra_field_value['statuses'])
+          end
+        end
+      end
+      if site.data['reporting'].has_key?('goals')
+        site.data['reporting']['goals'] each do |key, goal|
+          goal.each do |goal_value|
+            add_translation_keys(goal_value['statuses'])
+          end
+        end
+      end
     end
   end
 end
