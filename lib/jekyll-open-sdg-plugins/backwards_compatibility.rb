@@ -57,7 +57,7 @@ module JekyllOpenSdgPlugins
         end
       end
 
-      puts site.config['reporting_status']['status_types']
+      puts type(site.config['reporting_status']['status_types'])
     end
   end
 end
