@@ -175,7 +175,8 @@
                         "",
                         "goal",
                         "goal-by-target",
-                        "goal-by-target-vertical"
+                        "goal-by-target-vertical",
+                        "goal-with-progress"
                     ],
                     "options": {
                         "enum_titles": [
