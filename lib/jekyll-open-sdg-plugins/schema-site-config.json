@@ -1265,6 +1265,7 @@
                                 "type": "string",
                                 "title": "Alt",
                                 "description": "An alt tag for the image above."
+                            }
                         }
                     }
                 }
