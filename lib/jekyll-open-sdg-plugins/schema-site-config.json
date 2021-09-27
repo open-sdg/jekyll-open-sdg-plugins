@@ -1225,6 +1225,57 @@
                 }
             ]
         },
+        "progress_status": {
+            "options": {"collapsed": true},
+            "type": "object",
+            "title": "Progress status",
+            "description": "This setting is used in the 'goal-with-progress' layout. It controls the behavior of progress status functionality.",
+            "properties": {
+                "status_label": {
+                    "title": "Status label",
+                    "type": "string",
+                    "description": "A label to display before the progress status on indicator pages."
+                },
+                "status_types": {
+                    "options": {"collapsed": true},
+                    "type": "array",
+                    "title": "Status types",
+                    "description": "Controls the behavior and labels for the different progress status types.",
+                    "items": {
+                        "type": "object",
+                        "title": "Status type",
+                        "properties": {
+                            "value": {
+                                "type": "string",
+                                "minLength": 1,
+                                "title": "Value",
+                                "description": "The value of the status type, as it is set in the indicator configuration (eg, 'targetachieved')."
+                            },
+                            "label": {
+                                "type": "string",
+                                "title": "Label",
+                                "description": "The human-readable label for the status type. Can be a translation key (eg, 'status.target_achieved')."
+                            },
+                            "image": {
+                                "type": "string",
+                                "title": "Image",
+                                "description": "The internal path to the image to use (if any) for this progress status."
+                            },
+                            "alt": {
+                                "type": "string",
+                                "title": "Alt",
+                                "description": "An alt tag for the image above."
+                        }
+                    }
+                }
+            },
+            "links": [
+                {
+                    "rel": "More information on the progress status setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#progress_status"
+                }
+            ]
+        },
         "remote_data_prefix": {
             "type": "string",
             "minLength": 1,
