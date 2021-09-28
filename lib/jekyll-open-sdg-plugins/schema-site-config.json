@@ -1231,10 +1231,10 @@
             "title": "Progress status",
             "description": "This setting is used in the 'goal-with-progress' layout. It controls the behavior of progress status functionality.",
             "properties": {
-                "status_label": {
-                    "title": "Status label",
+                "status_heading": {
+                    "title": "Status heading",
                     "type": "string",
-                    "description": "A label to display before the progress status on indicator pages."
+                    "description": "A heading to display before the progress status on indicator pages."
                 },
                 "status_types": {
                     "options": {"collapsed": true},
