@@ -14,33 +14,6 @@ module JekyllOpenSdgPlugins
       form_settings_meta = site.config['indicator_metadata_form']
       form_settings_data = site.config['indicator_data_form']
 
-      # Special treatment of repository_link settings: prefix them
-      # with the repository_url_data site config if needed.
-      repo_url = site.config['repository_url_data']
-      if repo_url && repo_url != '' && repo_url.start_with?('http')
-        if form_settings_config != nil && form_settings_config && form_settings_config['enabled']
-          if form_settings_config['repository_link'] && form_settings_config['repository_link'] != ''
-            unless form_settings_config['repository_link'].start_with?('http')
-              form_settings_config['repository_link'] = repo_url + form_settings_config['repository_link']
-            end
-          end
-        end
-        if form_settings_meta != nil && form_settings_meta && form_settings_meta['enabled']
-          if form_settings_meta['repository_link'] && form_settings_meta['repository_link'] != ''
-            unless form_settings_meta['repository_link'].start_with?('http')
-              form_settings_meta['repository_link'] = repo_url + form_settings_meta['repository_link']
-            end
-          end
-        end
-        if form_settings_data != nil && form_settings_data && form_settings_data['enabled']
-          if form_settings_data['repository_link'] && form_settings_data['repository_link'] != ''
-            unless form_settings_data['repository_link'].start_with?('http')
-              form_settings_data['repository_link'] = repo_url + form_settings_data['repository_link']
-            end
-          end
-        end
-      end
-
       translations = site.data['translations']
       # If site.create_indicators is set, create indicators per the metadata.
       if (language_config and indicator_config and indicator_config.key?('layout') and indicator_config['layout'] != '')
@@ -109,18 +82,18 @@ module JekyllOpenSdgPlugins
           end
 
           # Because we have config forms for indicator config or meta/data, we
-          # take over the meta/data_edit_url and configuration_edit_url settings
-          # here with simple relative links.
-          if do_indicator_config_forms
-            site.config['configuration_edit_url'] = 'config'
+          # should remind the user that the meta/data_edit_url and
+          # configuration_edit_url settings should be simple relative links.
+          if do_indicator_config_forms && site.config['configuration_edit_url'] != 'config'
+            opensdg_notice('Since you have indicator configuration forms enabled, it is recommended to set "configuration_edit_url" to "config".')
           end
 
-          if do_indicator_meta_forms
-            site.config['metadata_edit_url'] = 'metadata'
+          if do_indicator_meta_forms && site.config['metadata_edit_url'] != 'metadata'
+            opensdg_notice('Since you have indicator metadata forms enabled, it is recommended to set "metadata_edit_url" to "metadata".')
           end
 
-          if do_indicator_data_forms
-            site.config['data_edit_url'] = 'data'
+          if do_indicator_data_forms && site.config['data_edit_url'] != 'data'
+            opensdg_notice('Since you have indicator data forms enabled, it is recommended to set "data_edit_url" to "data".')
           end
 
           # Loop through the indicators (using metadata as a list).
