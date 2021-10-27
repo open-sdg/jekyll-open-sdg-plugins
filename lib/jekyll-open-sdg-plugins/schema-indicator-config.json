@@ -613,11 +613,23 @@
                 ]
             }
         },
+        "progress_status": {
+            "type": "string",
+            "title": "Progress status",
+            "enum": ["not_available", "challenges_remain", "approaching_target", "target_achieved"],
+            "description": "The progress status of the indicator.",
+            "links": [
+                {
+                    "rel": "More information on the progress status setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/indicator-configuration/#progress-status"
+                }
+            ]
+        },
         "reporting_status": {
             "type": "string",
             "title": "Reporting status",
             "enum": ["complete", "inprogress", "notstarted", "notapplicable"],
-            "description": "The status of the indicator.",
+            "description": "The reporting status of the indicator.",
             "links": [
                 {
                     "rel": "More information on the reporting status setting",
