@@ -82,18 +82,18 @@ module JekyllOpenSdgPlugins
           end
 
           # Because we have config forms for indicator config or meta/data, we
-          # should remind the user that the meta/data_edit_url and
-          # configuration_edit_url settings should be simple relative links.
-          if do_indicator_config_forms && site.config['configuration_edit_url'] != 'config'
-            opensdg_notice('Since you have indicator configuration forms enabled, it is recommended to set "configuration_edit_url" to "config".')
+          # take over the meta/data_edit_url and configuration_edit_url settings
+          # here with simple relative links.
+          if do_indicator_config_forms
+            site.config['configuration_edit_url'] = 'config'
           end
 
-          if do_indicator_meta_forms && site.config['metadata_edit_url'] != 'metadata'
-            opensdg_notice('Since you have indicator metadata forms enabled, it is recommended to set "metadata_edit_url" to "metadata".')
+          if do_indicator_meta_forms
+            site.config['metadata_edit_url'] = 'metadata'
           end
 
-          if do_indicator_data_forms && site.config['data_edit_url'] != 'data'
-            opensdg_notice('Since you have indicator data forms enabled, it is recommended to set "data_edit_url" to "data".')
+          if do_indicator_data_forms
+            site.config['data_edit_url'] = 'data'
           end
 
           # Loop through the indicators (using metadata as a list).
