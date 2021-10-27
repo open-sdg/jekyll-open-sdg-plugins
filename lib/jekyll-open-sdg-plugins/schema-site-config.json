@@ -329,7 +329,6 @@
         },
         "data_edit_url": {
             "type": "string",
-            "minLength": 1,
             "title": "Data edit URL",
             "description": "This setting controls the URL of the 'Edit Data' buttons that appear on the staging site's indicator pages.",
             "links": [
@@ -1148,7 +1147,6 @@
         },
         "metadata_edit_url": {
             "type": "string",
-            "minLength": 1,
             "title": "Metadata edit URL",
             "description": "This setting controls the URL of the 'Edit Metadata' buttons that appear on the staging site's indicator pages.",
             "links": [
