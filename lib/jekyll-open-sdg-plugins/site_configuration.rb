@@ -40,6 +40,27 @@ module JekyllOpenSdgPlugins
             site.config[setting.downcase] = ENV[setting]
           end
       end
+
+      # Hardcode some variables.
+      site.config['disaggregation_status'] = {}
+      site.config['disaggregation_status']['status_types'] = [
+        {
+          'value' => 'complete',
+          'label' => 'status.disaggregation_status_complete',
+        },
+        {
+          'value' => 'inprogress',
+          'label' => 'status.disaggregation_status_inprogress',
+        },
+        {
+          'value' => 'notstarted',
+          'label' => 'status.disaggregation_status_notstarted',
+        },
+        {
+          'value' => 'notapplicable',
+          'label' => 'status.disaggregation_status_notapplicable',
+        },
+      ]
     end
 
     # Copy properties from a hash onto another hash.
