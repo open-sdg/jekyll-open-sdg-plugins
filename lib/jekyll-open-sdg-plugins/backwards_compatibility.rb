@@ -31,6 +31,9 @@ module JekyllOpenSdgPlugins
              site.config['reporting_status']['status_types'].count > 0)
         reporting_status = site.data['schema'].detect {|f| f['name'] == 'reporting_status' }
         reporting_status_types = reporting_status['field']['options']
+        unless site.config.has_key?('reporting_status')
+          site.config['reporting_status'] = {}
+        end
         site.config['reporting_status']['status_types'] = reporting_status_types.map do |status_type|
           {
             'value' => status_type['value'],
