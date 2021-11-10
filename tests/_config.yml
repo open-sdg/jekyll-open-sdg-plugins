@@ -155,3 +155,14 @@ indicator_metadata_form:
   repository_link: https://github.com/open-sdg/open-sdg-data-starter/tree/develop/meta
   scopes:
     - national
+
+reporting_status:
+  status_types:
+    - value: complete
+      label: Complete
+    - value: notstarted
+      label: Not started
+    - value: inprogress
+      label: In progress
+    - value: notapplicable
+      label: Not applicable

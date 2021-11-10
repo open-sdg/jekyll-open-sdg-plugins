@@ -12,6 +12,7 @@ require_relative "jekyll-open-sdg-plugins/sdg_variables"
 require_relative "jekyll-open-sdg-plugins/search_index"
 require_relative "jekyll-open-sdg-plugins/validate_indicator_config"
 require_relative "jekyll-open-sdg-plugins/metadata_schema_to_config"
+require_relative "jekyll-open-sdg-plugins/backwards_compatibility"
 
 module JekyllOpenSdgPlugins
 end
