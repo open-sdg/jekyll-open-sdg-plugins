@@ -551,35 +551,41 @@
                 }
             ]
         },
-        "indicator_tab_order": {
+        "indicator_tabs": {
             "options": {"collapsed": true},
             "type": "object",
-            "title": "Indicator tab order",
-            "description": "Sorting of the indicator tabs.",
+            "title": "Indicator tabs",
+            "description": "Assign content for the indicator tabs, if the override box is checked. Otherwise this indicator will use the assignments set in your site configuration.",
             "properties": {
+                "override": {
+                    "type": "boolean",
+                    "title": "Override site configuration",
+                    "description": "If checked, the site-wide indicator tab configuration will be ignored for this indicator.",
+                    "format": "checkbox"
+                },
                 "tab_1": {
                     "type": "string",
                     "title": "Tab 1",
                     "description": "What to display in the first tab",
-                    "$ref": "#/definitions/indicator_tabs"
+                    "$ref": "#/definitions/indicator_tabs_options"
                 },
                 "tab_2": {
                     "type": "string",
                     "title": "Tab 2",
                     "description": "What to display in the second tab",
-                    "$ref": "#/definitions/indicator_tabs"
+                    "$ref": "#/definitions/indicator_tabs_options"
                 },
                 "tab_3": {
                     "type": "string",
                     "title": "Tab 3",
                     "description": "What to display in the third tab",
-                    "$ref": "#/definitions/indicator_tabs"
+                    "$ref": "#/definitions/indicator_tabs_options"
                 },
                 "tab_4": {
                     "type": "string",
                     "title": "Tab 4",
                     "description": "What to display in the fourth tab",
-                    "$ref": "#/definitions/indicator_tabs"
+                    "$ref": "#/definitions/indicator_tabs_options"
                 }
             }
         },
@@ -737,7 +743,7 @@
                 }
             }
         },
-        "indicator_tabs": {
+        "indicator_tabs_options": {
             "enum": ["chart", "table", "map", "embed", "hide"],
             "options": {
                 "enum_titles": [
