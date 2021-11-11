@@ -878,6 +878,38 @@
                 }
             ]
         },
+        "indicator_tab_order": {
+            "options": {"collapsed": true},
+            "type": "object",
+            "title": "Indicator tab order",
+            "description": "Sorting of the indicator tabs.",
+            "properties": {
+                "tab_1": {
+                    "type": "string",
+                    "title": "Tab 1",
+                    "description": "What to display in the first tab",
+                    "$ref": "#/definitions/indicator_tabs"
+                },
+                "tab_2": {
+                    "type": "string",
+                    "title": "Tab 2",
+                    "description": "What to display in the second tab",
+                    "$ref": "#/definitions/indicator_tabs"
+                },
+                "tab_3": {
+                    "type": "string",
+                    "title": "Tab 3",
+                    "description": "What to display in the third tab",
+                    "$ref": "#/definitions/indicator_tabs"
+                },
+                "tab_4": {
+                    "type": "string",
+                    "title": "Tab 4",
+                    "description": "What to display in the fourth tab",
+                    "$ref": "#/definitions/indicator_tabs"
+                }
+            }
+        },
         "languages": {
             "options": {"collapsed": true},
             "type": "array",
@@ -1611,6 +1643,18 @@
                     "title": "Translation link",
                     "description": "The URL pattern for all 'Go to translation' links on the configuration page."
                 }
+            }
+        },
+        "indicator_tabs": {
+            "enum": ["chart", "table", "map", "embed", "hide"],
+            "options": {
+                "enum_titles": [
+                    "Chart",
+                    "Table",
+                    "Map",
+                    "Embed",
+                    "Hide this tab"
+                ]
             }
         }
     }
