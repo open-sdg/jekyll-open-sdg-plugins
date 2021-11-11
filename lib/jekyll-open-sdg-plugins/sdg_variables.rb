@@ -221,9 +221,6 @@ module JekyllOpenSdgPlugins
             next
           end
         elsif type == 'map'
-          puts '******************************************************'
-          puts '******************************************************'
-          puts indicator_config
           show_map = (indicator_config.has_key?('data_show_map') && indicator_config['data_show_map'])
           unless show_map
             next
@@ -544,7 +541,7 @@ module JekyllOpenSdgPlugins
             doc.data['previous'] = get_previous_indicator(available_indicators[language], indicator_index)
 
             # Also calculate the content for the indicator tabs.
-            set_indicator_tab_content(doc.data, site.config)
+            set_indicator_tab_content(doc.data['indicator'], site.config)
 
           elsif collection == 'goals'
             # For goals we also set the current goal.
