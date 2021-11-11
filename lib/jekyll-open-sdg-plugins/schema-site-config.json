@@ -1423,17 +1423,6 @@
                 }
             ]
         },
-        "sharethis_property": {
-            "type": "string",
-            "title": "ShareThis property",
-            "description": "This setting creates a ShareThis widget along the left side of every page. It should be the property id for your ShareThis account.",
-            "links": [
-                {
-                    "rel": "More information on the sharethis setting",
-                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#sharethis_property"
-                }
-            ]
-        },
         "site_config_form": {
             "options": {"collapsed": true},
             "type": "object",
