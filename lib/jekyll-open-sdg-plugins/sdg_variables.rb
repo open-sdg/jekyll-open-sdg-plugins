@@ -221,8 +221,9 @@ module JekyllOpenSdgPlugins
             next
           end
         elsif type == 'map'
-          puts '--------- it is map'
-          puts indicator_config
+          if indicator_config['slug'] == '1-3-1'
+            puts indicator_config
+          end
           show_map = (indicator_config.has_key?('data_show_map') && indicator_config['data_show_map'])
           unless show_map
             next
