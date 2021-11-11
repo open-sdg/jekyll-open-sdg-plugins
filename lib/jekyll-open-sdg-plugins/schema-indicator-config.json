@@ -744,9 +744,10 @@
             }
         },
         "indicator_tabs_options": {
-            "enum": ["chart", "table", "map", "embed", "hide"],
+            "enum": ["", "chart", "table", "map", "embed", "hide"],
             "options": {
                 "enum_titles": [
+                    "",
                     "Chart",
                     "Table",
                     "Map",

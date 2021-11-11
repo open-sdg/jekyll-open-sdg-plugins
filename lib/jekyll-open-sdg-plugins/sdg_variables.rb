@@ -188,6 +188,10 @@ module JekyllOpenSdgPlugins
       }
       # Use the site config or defaults if necessary.
       tabs = site_config.has_key?('indicator_tabs') ? site_config['indicator_tabs'] : defaults
+      no_config = tabs.values.all? { |value| value == '' }
+      if no_config
+        tabs = defaults
+      end
       # Override for this indicator if needed.
       if indicator_config.has_key?('indicator_tabs')
         if indicator_config['indicator_tabs'].has_key?('override')
