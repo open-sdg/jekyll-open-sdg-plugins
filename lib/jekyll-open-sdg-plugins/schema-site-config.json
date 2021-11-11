@@ -183,7 +183,8 @@
                             "Do not automatically create goals",
                             "goal",
                             "goal-by-target",
-                            "goal-by-target-vertical"
+                            "goal-by-target-vertical",
+                            "goal-with-progress"
                         ]
                     },
                     "description": "The layout to use for the goal pages."
