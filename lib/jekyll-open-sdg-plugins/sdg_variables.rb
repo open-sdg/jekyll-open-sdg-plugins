@@ -178,6 +178,68 @@ module JekyllOpenSdgPlugins
       goal_image_base + '/' + language + '/' + number + '.' + extension
     end
 
+    # Calculate the correct content for the indicator tabs.
+    def set_indicator_tab_content(indicator_config, site_config)
+      defaults = {
+        'tab_1' => 'chart',
+        'tab_2' => 'table',
+        'tab_3' => 'map',
+        'tab_4' => 'embed',
+      }
+      # Use the site config or defaults if necessary.
+      tabs = site_config.has_key?('indicator_tabs') ? site_config['indicator_tabs'] : defaults
+      no_config = tabs.values.all? { |value| value == '' }
+      if no_config
+        tabs = defaults
+      end
+      # Override for this indicator if needed.
+      if indicator_config.has_key?('indicator_tabs')
+        if indicator_config['indicator_tabs'].has_key?('override')
+          if indicator_config['indicator_tabs']['override']
+            tabs = indicator_config['indicator_tabs']
+          end
+        end
+      end
+
+      embed_has_label = (indicator_config.has_key?('embedded_feature_tab_title') && indicator_config['embedded_feature_tab_title'] != '')
+      embed_label = embed_has_label ? indicator_config['embedded_feature_tab_title'] : 'Embed'
+
+      labels = {
+        'chart' => 'indicator.chart',
+        'table' => 'indicator.table',
+        'map' => 'indicator.map',
+        'embed' => embed_label,
+      }
+
+      tabs_list = []
+      ['tab_1', 'tab_2', 'tab_3', 'tab_4'].each do |tab_number|
+        type = tabs[tab_number]
+        if type == 'hide'
+          next
+        end
+
+        if type == 'embed'
+          embed_url = (indicator_config.has_key?('embedded_feature_url') && indicator_config['embedded_feature_url'] != '')
+          embed_html = (indicator_config.has_key?('embedded_feature_html') && indicator_config['embedded_feature_html'] != '')
+          unless embed_url || embed_html
+            next
+          end
+        elsif type == 'map'
+          show_map = (indicator_config.has_key?('data_show_map') && indicator_config['data_show_map'])
+          unless show_map
+            next
+          end
+        end
+
+        tabs_list.push({
+          'type' => type,
+          'label' => labels[type],
+        })
+      end
+
+      indicator_config['indicator_tabs_list'] = tabs_list
+    end
+
     # This creates variables for use in Liquid templates under "page".
     # We'll create lists of goals, targets, and indicators. These will be put
     # on the page object. Eg: page.goals. In order to generate these lists
@@ -481,6 +543,9 @@ module JekyllOpenSdgPlugins
             doc.data['indicator'] = available_indicators[language][indicator_index]
             doc.data['next'] = get_next_indicator(available_indicators[language], indicator_index)
             doc.data['previous'] = get_previous_indicator(available_indicators[language], indicator_index)
+
+            # Also calculate the content for the indicator tabs.
+            set_indicator_tab_content(doc.data['indicator'], site.config)
 
           elsif collection == 'goals'
             # For goals we also set the current goal.
