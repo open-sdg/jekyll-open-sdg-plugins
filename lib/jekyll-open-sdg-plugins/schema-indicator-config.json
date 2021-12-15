@@ -210,6 +210,33 @@
                 }
             ]
         },
+        "footer_fields": {
+            "options": {"collapsed": true},
+            "type": "array",
+            "title": "Footer fields",
+            "description": "Additional arbitrary information to display beneath the graph/table.",
+            "items": {
+                "type": "object",
+                "title": "Footer field",
+                "allOf": [
+                    { "$ref": "#/definitions/series_unit_constraint" },
+                    {
+                        "properties": {
+                            "label": {
+                                "type": "string",
+                                "title": "Label",
+                                "description": "The label for the field"
+                            },
+                            "value": {
+                                "type": "string",
+                                "title": "Value",
+                                "description": "The value/content for the field"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
         "graph_annotations": {
             "options": {"collapsed": true},
             "type": "array",
