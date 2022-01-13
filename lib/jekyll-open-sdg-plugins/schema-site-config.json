@@ -183,7 +183,8 @@
                             "Do not automatically create goals",
                             "goal",
                             "goal-by-target",
-                            "goal-by-target-vertical"
+                            "goal-by-target-vertical",
+                            "goal-with-progress"
                         ]
                     },
                     "description": "The layout to use for the goal pages."
@@ -878,6 +879,38 @@
                 }
             ]
         },
+        "indicator_tabs": {
+            "options": {"collapsed": true},
+            "type": "object",
+            "title": "Indicator tabs",
+            "description": "Assign content for the indicator tabs.",
+            "properties": {
+                "tab_1": {
+                    "type": "string",
+                    "title": "Tab 1",
+                    "description": "What to display in the first tab",
+                    "$ref": "#/definitions/indicator_tabs_options"
+                },
+                "tab_2": {
+                    "type": "string",
+                    "title": "Tab 2",
+                    "description": "What to display in the second tab",
+                    "$ref": "#/definitions/indicator_tabs_options"
+                },
+                "tab_3": {
+                    "type": "string",
+                    "title": "Tab 3",
+                    "description": "What to display in the third tab",
+                    "$ref": "#/definitions/indicator_tabs_options"
+                },
+                "tab_4": {
+                    "type": "string",
+                    "title": "Tab 4",
+                    "description": "What to display in the fourth tab",
+                    "$ref": "#/definitions/indicator_tabs_options"
+                }
+            }
+        },
         "languages": {
             "options": {"collapsed": true},
             "type": "array",
@@ -1422,17 +1455,6 @@
                 }
             ]
         },
-        "sharethis_property": {
-            "type": "string",
-            "title": "ShareThis property",
-            "description": "This setting creates a ShareThis widget along the left side of every page. It should be the property id for your ShareThis account.",
-            "links": [
-                {
-                    "rel": "More information on the sharethis setting",
-                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#sharethis_property"
-                }
-            ]
-        },
         "site_config_form": {
             "options": {"collapsed": true},
             "type": "object",
@@ -1611,6 +1633,19 @@
                     "title": "Translation link",
                     "description": "The URL pattern for all 'Go to translation' links on the configuration page."
                 }
+            }
+        },
+        "indicator_tabs_options": {
+            "enum": ["", "chart", "table", "map", "embed", "hide"],
+            "options": {
+                "enum_titles": [
+                    "",
+                    "Chart",
+                    "Table",
+                    "Map",
+                    "Embed",
+                    "Hide this tab"
+                ]
             }
         }
     }
