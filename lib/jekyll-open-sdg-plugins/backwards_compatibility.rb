@@ -59,6 +59,58 @@ module JekyllOpenSdgPlugins
           add_translation_keys(goal['statuses'], site)
         end
       end
+
+      # Print warnings for settings that are deprecated
+      # and will be removed in version 2.0.0.
+      there_was_a_deprecation_notice = false
+      if !site.config.has_key?('accessible_charts') || !site.config['accessible_charts']
+        there_was_a_deprecation_notice = true
+        opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the accessible_charts setting will be automatically set to true.')
+      end
+      if !site.config.has_key?('accessible_tabs') || !site.config['accessible_tabs']
+        there_was_a_deprecation_notice = true
+        opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the accessible_tabs setting will be automatically set to true.')
+      end
+      if !site.config.has_key?('contrast_type') || site.config['contrast_type'] != 'single'
+        there_was_a_deprecation_notice = true
+        opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the contrast_type setting will be automatically set to "single".')
+      end
+      if site.config.has_key?('create_goals') && site.config['create_goals']['layout'] != 'goal-with-progress'
+        there_was_a_deprecation_notice = true
+        opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the create_goals.layout setting will be automatically set to "goal-with-progress".')
+      end
+      if site.config.has_key?('create_pages')
+        site.config['create_pages'].each do |page|
+          if page['layout'] == 'frontpage'
+            opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the "frontpage" layout will become the same as the "frontpage-alt" layout.')
+            there_was_a_deprecation_notice = true
+          end
+        end
+      end
+      if !site.config.has_key?('favicons') || site.config['favicons'] != 'favicon.io'
+        there_was_a_deprecation_notice = true
+        opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the favicons setting will be automatically set to "favicon.io".')
+      end
+      if site.config.has_key?('frontpage_heading') && site.config['frontpage_heading'] != ''
+        there_was_a_deprecation_notice = true
+        opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the "frontpage_heading" setting will no longer be used.')
+      end
+      if site.config.has_key?('frontpage_instructions') && site.config['frontpage_instructions'] != ''
+        there_was_a_deprecation_notice = true
+        opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the "frontpage_instructions" setting will no longer be used.')
+      end
+      if site.config.has_key?('header') && site.config['header']['include'] != 'header-menu-left-aligned.html'
+        there_was_a_deprecation_notice = true
+        opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the "header.include" setting will automatically be set to "header-menu-left-aligned.html".'
+      end
+      if site.config.has_key?('non_global_metadata') && site.config['non_global_metadata'] != ''
+        there_was_a_deprecation_notice = true
+        opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the "non_global_metadata" setting will be removed. Please use the "metadata_tabs" setting to control the labels of the metadata tabs.'
+      end
+      if !site.config.has_key?('series_toggle') || !site.config['series_toggle']
+        there_was_a_deprecation_notice = true
+        opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the "series_toggle" will be automatically set to "true".
+      end
     end
   end
 end
