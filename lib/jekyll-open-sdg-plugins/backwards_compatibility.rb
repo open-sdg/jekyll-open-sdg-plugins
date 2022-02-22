@@ -109,7 +109,7 @@ module JekyllOpenSdgPlugins
       end
       if !site.config.has_key?('series_toggle') || !site.config['series_toggle']
         there_was_a_deprecation_notice = true
-        opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the "series_toggle" will be automatically set to "true".
+        opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the "series_toggle" will be automatically set to "true".')
       end
     end
   end
