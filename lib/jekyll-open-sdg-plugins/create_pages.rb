@@ -130,6 +130,16 @@ module JekyllOpenSdgPlugins
           self.data[key] = value
         end
       end
+
+      if site.config['bootstrap_5']
+        if page.has_key?('layout') && page['layout'] == 'reportingstatus'
+          self.data['layout'] = 'reportingstatus-bootstrap5'
+        end
+        if page.has_key?('layout') && page['layout'] == 'frontpage'
+          self.data['layout'] = 'frontpage-alt'
+        end
+        self.data['layout'] = 'goal-bootstrap5'
+      end
     end
   end
 end

@@ -77,12 +77,12 @@ module JekyllOpenSdgPlugins
       end
       if site.config.has_key?('create_goals') && site.config['create_goals']['layout'] != 'goal-with-progress'
         there_was_a_deprecation_notice = true
-        opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the create_goals.layout setting will be automatically set to "goal-with-progress".')
+        opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the create_goals.layout setting will be removed, because there will only be a single option for goal layouts. To see a preview, set "bootstrap_5" to "true".')
       end
       if site.config.has_key?('create_pages')
         site.config['create_pages'].each do |page|
           if page['layout'] == 'frontpage'
-            opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the "frontpage" layout will become the same as the "frontpage-alt" layout.')
+            opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the "frontpage" layout will change. To see a preview, set "bootstrap_5" to "true".')
             there_was_a_deprecation_notice = true
           end
         end
@@ -101,7 +101,7 @@ module JekyllOpenSdgPlugins
       end
       if site.config.has_key?('header') && site.config['header']['include'] != 'header-menu-left-aligned.html'
         there_was_a_deprecation_notice = true
-        opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the "header.include" setting will automatically be set to "header-menu-left-aligned.html".'
+        opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the "header.include" setting will no longer be used because there will only be a single option for headers. To see what this will look like, set "bootstrap_5" to "true".'
       end
       if site.config.has_key?('non_global_metadata') && site.config['non_global_metadata'] != ''
         there_was_a_deprecation_notice = true
@@ -109,7 +109,7 @@ module JekyllOpenSdgPlugins
       end
       if !site.config.has_key?('series_toggle') || !site.config['series_toggle']
         there_was_a_deprecation_notice = true
-        opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the "series_toggle" will be automatically set to "true".')
+        opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the "series_toggle" will be automatically set to "true". In order to keep the "false" behavior, please rename your "Series" column to something else.')
       end
     end
   end
