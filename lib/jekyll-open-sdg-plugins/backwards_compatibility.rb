@@ -101,11 +101,11 @@ module JekyllOpenSdgPlugins
       end
       if site.config.has_key?('header') && site.config['header']['include'] != 'header-menu-left-aligned.html'
         there_was_a_deprecation_notice = true
-        opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the "header.include" setting will no longer be used because there will only be a single option for headers. To see what this will look like, set "bootstrap_5" to "true".'
+        opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the "header.include" setting will no longer be used because there will only be a single option for headers. To see what this will look like, set "bootstrap_5" to "true".')
       end
       if site.config.has_key?('non_global_metadata') && site.config['non_global_metadata'] != ''
         there_was_a_deprecation_notice = true
-        opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the "non_global_metadata" setting will be removed. Please use the "metadata_tabs" setting to control the labels of the metadata tabs.'
+        opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the "non_global_metadata" setting will be removed. Please use the "metadata_tabs" setting to control the labels of the metadata tabs.')
       end
       if !site.config.has_key?('series_toggle') || !site.config['series_toggle']
         there_was_a_deprecation_notice = true
