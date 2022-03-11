@@ -138,7 +138,6 @@ module JekyllOpenSdgPlugins
         if page.has_key?('layout') && page['layout'] == 'frontpage'
           self.data['layout'] = 'frontpage-alt'
         end
-        self.data['layout'] = 'goal-bootstrap5'
       end
     end
   end
