@@ -61,6 +61,16 @@ module JekyllOpenSdgPlugins
           'label' => 'status.disaggregation_status_notapplicable',
         },
       ]
+
+      # Provide some defaults.
+      if !site.config.has_key?('time_series_attributes') or site.config['time_series_attributes'].length == 0
+        site.config['time_series_attributes'] = [
+          {
+            'field' => 'COMMENT_TS',
+            'label' => 'Comment (time series)',
+          }
+        ]
+      end
     end
 
     # Copy properties from a hash onto another hash.
