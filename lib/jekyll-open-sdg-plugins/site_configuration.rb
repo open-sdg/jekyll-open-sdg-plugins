@@ -67,8 +67,12 @@ module JekyllOpenSdgPlugins
         site.config['time_series_attributes'] = [
           {
             'field' => 'COMMENT_TS',
-            'label' => 'Comment (time series)',
-          }
+            'label' => 'indicator.footnote',
+          },
+          {
+            'field' => 'DATA_LAST_UPDATE',
+            'label' => 'metadata_fields.national_data_update_url'
+          },
         ]
       end
     end
