@@ -438,6 +438,12 @@
                     "type": "string",
                     "title": "Message",
                     "description": "A short disclaimer message."
+                },
+                "hidden": {
+                    "type": "boolean",
+                    "title": "Hidden",
+                    "description": "Hide the disclaimer.",
+                    "format": "checkbox"
                 }
             },
             "links": [
