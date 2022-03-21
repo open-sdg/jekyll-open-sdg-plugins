@@ -56,6 +56,18 @@
                 }
             ]
         },
+        "bootstrap_5": {
+            "title": "Bootstrap 5",
+            "type": "boolean",
+            "description": "This setting can be set to `true` to enable Bootstrap 5. Importantly, this will automatically be set to 'true' in Open SDG 2.0.0.",
+            "format": "checkbox",
+            "links": [
+                {
+                    "rel": "More information on the bootstrap_5 setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#bootstrap_5"
+                }
+            ]
+        },
         "breadcrumbs": {
             "options": {"collapsed": true},
             "type": "object",
@@ -94,6 +106,18 @@
                 {
                     "rel": "More information on the breadcrumbs setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#breadcrumbs"
+                }
+            ]
+        },
+        "chartjs_3": {
+            "title": "Chart.js 3",
+            "type": "boolean",
+            "description": "This setting can be set to `true` to enable Chart.js 3. Importantly, this will automatically be set to 'true' in Open SDG 2.0.0.",
+            "format": "checkbox",
+            "links": [
+                {
+                    "rel": "More information on the chartjs_3 setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#chartjs_3"
                 }
             ]
         },

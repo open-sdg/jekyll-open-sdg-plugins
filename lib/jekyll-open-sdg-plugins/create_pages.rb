@@ -61,6 +61,12 @@ module JekyllOpenSdgPlugins
           pages = site.config['create_pages']
         end
 
+        pages.each do |page|
+          if page['layout'] == 'frontpage'
+            opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the "frontpage" layout will change. To see a preview, set "bootstrap_5" to "true".')
+          end
+        end
+
         # Clone pages so that we don't edit the original.
         pages = pages.clone
 
@@ -128,6 +134,15 @@ module JekyllOpenSdgPlugins
       page.each do |key, value|
         if key != 'folder' && key != 'filename'
           self.data[key] = value
+        end
+      end
+
+      if site.config['bootstrap_5']
+        if page.has_key?('layout') && page['layout'] == 'reportingstatus'
+          self.data['layout'] = 'reportingstatus-bootstrap5'
+        end
+        if page.has_key?('layout') && page['layout'] == 'frontpage'
+          self.data['layout'] = 'frontpage-alt'
         end
       end
     end

@@ -78,6 +78,9 @@ module JekyllOpenSdgPlugins
       self.data['goal_number'] = goal.to_s
       self.data['language'] = language
       self.data['layout'] = layout
+      if site.config['bootstrap_5']
+        self.data['layout'] = 'goal-bootstrap5'
+      end
       # Backwards compatibility:
       self.data['sdg_goal'] = self.data['goal_number']
     end

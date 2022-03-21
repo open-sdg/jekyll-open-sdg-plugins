@@ -158,6 +158,9 @@ module JekyllOpenSdgPlugins
       self.data = {}
       self.data['indicator_number'] = inid.gsub('-', '.')
       self.data['layout'] = layout
+      if site.config['bootstrap_5']
+        self.data['layout'] = 'indicator-bootstrap5'
+      end
       self.data['language'] = language
       # Backwards compatibility:
       self.data['indicator'] = self.data['indicator_number']
