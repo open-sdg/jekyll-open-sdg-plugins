@@ -1486,6 +1486,36 @@
             "description": "Configuration of the site configuration form.",
             "$ref": "#/definitions/config_form_options"
         },
+        "time_series_attributes": {
+            "options": {"collapsed": true},
+            "type": "array",
+            "title": "Time-series attributes",
+            "description": "This setting can be used to specify data columns to be considered 'time-series attributes' and displayed in the footer.",
+            "items": {
+                "type": "object",
+                "title": "Time-series attribute",
+                "properties": {
+                    "field": {
+                        "type": "string",
+                        "minLength": 1,
+                        "title": "Field",
+                        "description": "Column name in the data."
+                    },
+                    "label": {
+                        "type": "string",
+                        "minLength": 1,
+                        "title": "Label",
+                        "description": "Label when displayed in the footer."
+                    }
+                }
+            },
+            "links": [
+                {
+                    "rel": "More information on the time series attributes setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#time_series_attributes"
+                }
+            ]
+        },
         "validate_indicator_config": {
             "title": "Validate indicator config",
             "type": "boolean",

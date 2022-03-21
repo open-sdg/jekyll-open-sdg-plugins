@@ -61,6 +61,20 @@ module JekyllOpenSdgPlugins
           'label' => 'status.disaggregation_status_notapplicable',
         },
       ]
+
+      # Provide some defaults.
+      if !site.config.has_key?('time_series_attributes') or site.config['time_series_attributes'].length == 0
+        site.config['time_series_attributes'] = [
+          {
+            'field' => 'COMMENT_TS',
+            'label' => 'indicator.footnote',
+          },
+          {
+            'field' => 'DATA_LAST_UPDATE',
+            'label' => 'metadata_fields.national_data_update_url'
+          },
+        ]
+      end
     end
 
     # Copy properties from a hash onto another hash.
