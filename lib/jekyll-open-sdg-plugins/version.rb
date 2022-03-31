@@ -1,3 +1,3 @@
 module JekyllOpenSdgPlugins
-  VERSION = "1.8.0-beta1".freeze
+  VERSION = "1.8.0".freeze
 end
