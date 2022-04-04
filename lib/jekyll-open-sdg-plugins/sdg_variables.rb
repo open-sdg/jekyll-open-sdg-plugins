@@ -149,7 +149,7 @@ module JekyllOpenSdgPlugins
       end
 
       urls = {
-        language => url
+        language => (baseurl + url).gsub('//', '/')
       }
       if language != default_language
         default_language_url = baseurl + url_without_language
