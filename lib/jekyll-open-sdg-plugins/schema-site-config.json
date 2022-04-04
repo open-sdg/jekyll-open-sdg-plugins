@@ -1338,6 +1338,18 @@
                 }
             ]
         },
+        "progressive_web_app": {
+            "title": "Progressive Web App",
+            "type": "boolean",
+            "description": "This setting can be set to `true` to allow users to add the platform to their home screen on mobile devices, and use it while offline.",
+            "format": "checkbox",
+            "links": [
+                {
+                    "rel": "More information on the progressive_web_app setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#progressive_web_app"
+                }
+            ]
+        },
         "remote_data_prefix": {
             "type": "string",
             "minLength": 1,

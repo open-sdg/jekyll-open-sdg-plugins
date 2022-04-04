@@ -112,6 +112,22 @@ module JekyllOpenSdgPlugins
           end
         end
       end
+
+      if site.config.has_key?('progressive_web_app') and site.config['progressive_web_app']
+        language = site.config['languages'][0]
+        manifest_page = {
+          'filename' => 'manifest.json',
+          'folder' => '/',
+          'layout' => 'manifest',
+        }
+        service_worker_page = {
+          'filename' => 'service-worker.js',
+          'folder' => '/',
+          'layout' => 'service-worker',
+        }
+        site.collections['pages'].docs << OpenSdgPage.new(site, site.source, '/', manifest_page, language)
+        site.collections['pages'].docs << OpenSdgPage.new(site, site.source, '/', service_worker_page, language)
+      end
     end
   end
 
