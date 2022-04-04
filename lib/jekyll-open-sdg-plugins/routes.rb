@@ -81,7 +81,6 @@ module JekyllOpenSdgPlugins
       end
       
       site.data['routes'] = routes
-      puts routes
     end
   end
 end
