@@ -22,6 +22,10 @@ module JekyllOpenSdgPlugins
         site.collections[collection].docs.each do |doc|
           route = baseurl + doc.url
           route = route.gsub('//', '/')
+
+          unless route.end_with?('/') or route.end_with?('.html') or route.end_with?('.json')
+            route = route + '/'
+          end
           routes['pages'].append(route)
         end
       end
