@@ -18,16 +18,36 @@ module JekyllOpenSdgPlugins
       end
 
       routes['pages'] = []
-      site.collections.keys.each do |collection|
-        site.collections[collection].docs.each do |doc|
-          route = baseurl + doc.url
-          route = route.gsub('//', '/')
+      site.collections['pages'].docs.each do |doc|
+        route = baseurl + doc.url
+        route = route.gsub('//', '/')
 
-          unless route.end_with?('/') or route.end_with?('.html') or route.end_with?('.json')
-            route = route + '/'
-          end
-          routes['pages'].append(route)
+        unless route.end_with?('/') or route.end_with?('.html') or route.end_with?('.json')
+          route = route + '/'
         end
+        routes['pages'].append(route)
+      end
+
+      routes['indicators'] = []
+      site.collections['indicators'].docs.each do |doc|
+        route = baseurl + doc.url
+        route = route.gsub('//', '/')
+
+        unless route.end_with?('/') or route.end_with?('.html') or route.end_with?('.json')
+          route = route + '/'
+        end
+        routes['indicators'].append(route)
+      end
+
+      routes['posts'] = []
+      site.collections['posts'].docs.each do |doc|
+        route = baseurl + doc.url
+        route = route.gsub('//', '/')
+
+        unless route.end_with?('/') or route.end_with?('.html') or route.end_with?('.json')
+          route = route + '/'
+        end
+        routes['posts'].append(route)
       end
 
       routes['images'] = []
