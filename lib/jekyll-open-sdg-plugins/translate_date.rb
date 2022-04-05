@@ -40,6 +40,13 @@ module Jekyll
         # In a deprecated form of date_formats, it was a nested hash keyed first
         # by the format type and then by the language.
         if config['date_formats'].is_a?(Hash) && config['date_formats'].has_key?(format_type)
+          opensdg_notice(
+            <<~HEREDOC
+            DEPRECATION NOTICE: In Open SDG 2.0.0, the 'date_formats' setting will be
+            a list of items instead of an object. Please update your configuration based
+            on the Open SDG documentation.
+            HEREDOC
+          )
           if config['date_formats'][format_type].has_key?(language)
             date_format = config['date_formats'][format_type][language]
           end

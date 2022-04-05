@@ -149,6 +149,14 @@ module JekyllOpenSdgPlugins
       # This is deprecated because translations should now be in the
       # data repository, where they will be fetched in fetch_build().
       if site.config['remote_translations']
+        opensdg_notice(
+          <<~HEREDOC
+          DEPRECATION NOTICE: In Open SDG 2.0.0, the 'remote_translations' setting will
+          be removed. Translations are now managed in the data configuration, instead of
+          the site configuration. Please update your platform accordingly. You can use
+          the open-sdg/open-sdg-data-starter repository as a guide."
+          HEREDOC
+        )
         key = 'translations'
         target = site.data[key]
         site.config['remote_translations'].each do |endpoint|
@@ -172,6 +180,13 @@ module JekyllOpenSdgPlugins
   # into the Jekyll build, so that they can be served from the website.
   Jekyll::Hooks.register :site, :post_write do |site|
     if site.config['local_data_folder']
+      opensdg_notice(
+        <<~HEREDOC
+        DEPRECATION NOTICE: In Open SDG 2.0.0, the 'local_data_folder' setting will
+        be removed. Instead please use the 'remote_data_prefix' setting. It can
+        contain exactly what you previously used in 'local_data_folder'.
+        HEREDOC
+      )
       source = File.join(Dir.pwd, site.config['local_data_folder'], '.')
       destination = site.config['destination']
       FileUtils.cp_r(source, destination)
