@@ -56,6 +56,17 @@ module JekyllOpenSdgPlugins
         routes['indicators'].append(route)
       end
 
+      routes['goals'] = []
+      site.collections['goals'].docs.each do |doc|
+        route = baseurl + doc.url
+        route = route.gsub('//', '/')
+
+        unless route.end_with?('/') or route.end_with?('.html') or route.end_with?('.json')
+          route = route + '/'
+        end
+        routes['goals'].append(route)
+      end
+
       routes['posts'] = []
       site.collections['posts'].docs.each do |doc|
         route = baseurl + doc.url
