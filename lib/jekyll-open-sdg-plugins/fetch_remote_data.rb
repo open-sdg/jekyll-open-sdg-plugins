@@ -152,9 +152,9 @@ module JekyllOpenSdgPlugins
         opensdg_notice(
           <<~HEREDOC
           DEPRECATION NOTICE: In Open SDG 2.0.0, the 'remote_translations' setting will
-          be removed. Translations are now managed in the data configuration, instead of
-          the site configuration. Please update your platform accordingly. You can use
-          the open-sdg/open-sdg-data-starter repository as a guide."
+            be removed. Translations are now managed in the data configuration, instead of
+            the site configuration. Please update your platform accordingly. You can use
+            the open-sdg/open-sdg-data-starter repository as a guide."
           HEREDOC
         )
         key = 'translations'
@@ -183,8 +183,8 @@ module JekyllOpenSdgPlugins
       opensdg_notice(
         <<~HEREDOC
         DEPRECATION NOTICE: In Open SDG 2.0.0, the 'local_data_folder' setting will
-        be removed. Instead please use the 'remote_data_prefix' setting. It can
-        contain exactly what you previously used in 'local_data_folder'.
+          be removed. Instead please use the 'remote_data_prefix' setting. It can
+          contain exactly what you previously used in 'local_data_folder'.
         HEREDOC
       )
       source = File.join(Dir.pwd, site.config['local_data_folder'], '.')

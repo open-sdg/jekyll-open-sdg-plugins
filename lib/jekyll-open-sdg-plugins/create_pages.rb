@@ -60,8 +60,8 @@ module JekyllOpenSdgPlugins
           opensdg_notice(
             <<~HEREDOC
             DEPRECATION NOTICE: In Open SDG 2.0.0, the 'create_pages' setting will be
-            a list of items instead of an object with a "pages" property. Please update
-            your configuration based on the Open SDG documentation.
+              a list of items instead of an object with a "pages" property. Please update
+              your configuration based on the Open SDG documentation.
             HEREDOC
           )
         elsif site.config['create_pages'].is_a?(Array)
