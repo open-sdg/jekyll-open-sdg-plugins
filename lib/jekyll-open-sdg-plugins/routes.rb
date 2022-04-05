@@ -25,7 +25,24 @@ module JekyllOpenSdgPlugins
         unless route.end_with?('/') or route.end_with?('.html') or route.end_with?('.json')
           route = route + '/'
         end
-        routes['pages'].append(route)
+
+        unless doc.data['layout'] == 'config-builder' or doc.data['layout'] == 'data-editor'
+          routes['pages'].append(route)
+        end
+      end
+
+      routes['config'] = []
+      site.collections['pages'].docs.each do |doc|
+        route = baseurl + doc.url
+        route = route.gsub('//', '/')
+
+        unless route.end_with?('/') or route.end_with?('.html') or route.end_with?('.json')
+          route = route + '/'
+        end
+
+        if doc.data['layout'] == 'config-builder' or doc.data['layout'] == 'data-editor'
+          routes['config'].append(route)
+        end
       end
 
       routes['indicators'] = []

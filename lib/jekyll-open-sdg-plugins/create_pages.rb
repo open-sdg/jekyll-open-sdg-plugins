@@ -113,7 +113,7 @@ module JekyllOpenSdgPlugins
         end
       end
 
-      if site.config.has_key?('progressive_web_app') and site.config['progressive_web_app']
+      if site.config.has_key?('progressive_web_app') and site.config['progressive_web_app']['enabled']
         language = site.config['languages'][0]
         manifest_page = {
           'filename' => 'manifest.json',
