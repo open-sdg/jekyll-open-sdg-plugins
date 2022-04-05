@@ -1359,6 +1359,12 @@
                     "type": "string",
                     "title": "Short name",
                     "description": "The short name of the app (displays under home screen icon)."
+                },
+                "precache": {
+                    "type": "boolean",
+                    "title": "Precaching",
+                    "description": "If enabled, all indicator and goal pages will be precached when the app is installed.",
+                    "format": "checkbox"
                 }
             },
             "links": [
