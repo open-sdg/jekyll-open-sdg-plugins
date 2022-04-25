@@ -26,25 +26,8 @@ module Jekyll
       #     language: es
       #     format: "%d de %b de %Y"
       #
-      # However the following deprecated structure is also supported:
-      #
-      # date_formats:
-      #   standard:
-      #     en: "%b %d, %Y"
-      #     es: "%d de %b de %Y"
-      #     etc...
       date_format = '%b %d, %Y'
       if config.has_key?('date_formats')
-
-        # @deprecated start
-        # In a deprecated form of date_formats, it was a nested hash keyed first
-        # by the format type and then by the language.
-        if config['date_formats'].is_a?(Hash) && config['date_formats'].has_key?(format_type)
-          if config['date_formats'][format_type].has_key?(language)
-            date_format = config['date_formats'][format_type][language]
-          end
-        end
-        # @deprecated end
 
         # In the current form of data_formats, it is an array of hashes, each
         # containing "type", "language", and "format" keys.
