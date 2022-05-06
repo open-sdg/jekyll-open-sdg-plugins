@@ -9,10 +9,26 @@ module Jekyll
     def t(key)
 
       # Determine the language of the current page.
-      translations = @context.registers[:site].data['translations']
+      site = @context.registers[:site]
+      translations = site.data['translations']
       language = @context.environments.first["page"]['language']
 
-      return opensdg_translate_key(key, translations, language)
+      translated = opensdg_translate_key(key, translations, language)
+      if translated == key
+        # If nothing changed, also check for parameters within
+        # the content.
+        translated = translated.gsub(/^(%+)\w+/) do |m|
+          # Remove periods that may be at the end.
+          m = m.delete_suffix('.')
+          # Check to see if it is a site configuration.
+          m = opensdg_parse_site_config(m, site)
+          # Check to see if it is a translation key.
+          m = opensdg_translate_key(m, translations, language)
+          return m
+        end
+      end
+
+      return translated
     end
   end
 end
