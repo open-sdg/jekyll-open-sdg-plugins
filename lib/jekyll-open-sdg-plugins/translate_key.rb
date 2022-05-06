@@ -20,6 +20,8 @@ module Jekyll
         translated = translated.gsub(/^(%+)\w+/) do |m|
           # Remove periods that may be at the end.
           m = m.delete_suffix('.')
+          # Remove HTML paragraph tags that may be at the end.
+          m = m.delete_suffix('</p>')
           # Check to see if it is a site configuration.
           m = opensdg_parse_site_config(m, site)
           # Check to see if it is a translation key.
