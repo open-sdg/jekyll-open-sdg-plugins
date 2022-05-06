@@ -32,7 +32,7 @@ def opensdg_parse_site_config(key, site)
   levels.each do |level|
 
     # If we have drilled down to a scalar value too soon, abort.
-    break if drilled.class != Hash
+    break if drilled.class != Hash and drilled.class != Jekyll::Configuration
 
     if drilled.has_key? level
       # If we find something, continue drilling.
