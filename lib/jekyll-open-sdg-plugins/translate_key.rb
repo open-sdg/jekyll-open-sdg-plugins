@@ -26,6 +26,7 @@ module Jekyll
           m = opensdg_parse_site_config(m, site)
           # Check to see if it is a translation key.
           m = opensdg_translate_key(m, translations, language)
+          puts m
           return m
         end
       end
