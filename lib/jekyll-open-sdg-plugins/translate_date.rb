@@ -28,6 +28,11 @@ module Jekyll
       #
       date_format = '%b %d, %Y'
       if config.has_key?('date_formats')
+        
+        # Abort if this setting is using an old format.
+        if config['date_formats'].is_a?(Hash)
+          opensdg_error('The "date_formats" site configuration must be in a list format. See the documentation here: https://open-sdg.readthedocs.io/en/latest/configuration/#date_formats')
+        end
 
         # In the current form of data_formats, it is an array of hashes, each
         # containing "type", "language", and "format" keys.
