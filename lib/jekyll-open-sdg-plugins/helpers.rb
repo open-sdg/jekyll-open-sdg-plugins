@@ -53,23 +53,15 @@ def opensdg_translate_key(key, translations, language)
   return drilled
 end
 
-# Takes a site object and decides whether it is using translated builds.
-def opensdg_translated_builds(site)
-  # Assume the site is using translated builds.
-  translated_builds = true
-  site.config['languages'].each do |language|
-    # If any languages don't have a key in site.data, the site is not using
-    # translated builds.
-    if !site.data.has_key? language
-      translated_builds = false
-    end
-  end
-  return translated_builds
-end
-
 # Print a notice during compilation.
 def opensdg_notice(message)
   Jekyll.logger.warn message.yellow
+end
+
+# Print an error that should halt the build.
+def opensdg_error(message)
+  Jekyll.logger.error message.red
+  exit 1
 end
 
 # Get the public language codes for a site, keyed by the actual language codes.

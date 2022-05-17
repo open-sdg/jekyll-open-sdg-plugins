@@ -41,6 +41,11 @@ module JekyllOpenSdgPlugins
           end
       end
 
+      # Abort early if some required settings are not there.
+      unless site.config.has_key?('languages') && site.config['languages'].length > 0
+        opensdg_error('The "languages" site configuration must have at least one language. See the documentation here: https://open-sdg.readthedocs.io/en/latest/configuration/#languages')
+      end
+
       # Hardcode some variables.
       site.config['disaggregation_status'] = {}
       site.config['disaggregation_status']['status_types'] = [

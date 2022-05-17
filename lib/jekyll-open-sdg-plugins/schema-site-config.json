@@ -3,30 +3,6 @@
     "title": "Open SDG site configuration",
     "description": "This form will produce the site configuration for your Open SDG implementation.",
     "properties": {
-        "accessible_charts": {
-            "title": "Accessible charts",
-            "type": "boolean",
-            "description": "This setting can be set to `true` to enable chart functionality that is intended to increase accessibility by adding support for screenreaders and keyboard navigation.",
-            "format": "checkbox",
-            "links": [
-                {
-                    "rel": "More information on the accessible charts setting",
-                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#accessible_charts"
-                }
-            ]
-        },
-        "accessible_tabs": {
-            "title": "Accessible tabs",
-            "type": "boolean",
-            "description": "This setting can be set to `true` to enable tab functionality that is compliant with the WAI-ARIA best practices. This adds improved keyboard navigation of the tabs.",
-            "format": "checkbox",
-            "links": [
-                {
-                    "rel": "More information on the accessible tabs setting",
-                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#accessible_tabs"
-                }
-            ]
-        },
         "analytics": {
             "options": {"collapsed": true},
             "type": "object",
@@ -53,18 +29,6 @@
                 {
                     "rel": "More information on the analytics setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#analytics"
-                }
-            ]
-        },
-        "bootstrap_5": {
-            "title": "Bootstrap 5",
-            "type": "boolean",
-            "description": "This setting can be set to `true` to enable Bootstrap 5. Importantly, this will automatically be set to 'true' in Open SDG 2.0.0.",
-            "format": "checkbox",
-            "links": [
-                {
-                    "rel": "More information on the bootstrap_5 setting",
-                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#bootstrap_5"
                 }
             ]
         },
@@ -106,37 +70,6 @@
                 {
                     "rel": "More information on the breadcrumbs setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#breadcrumbs"
-                }
-            ]
-        },
-        "chartjs_3": {
-            "title": "Chart.js 3",
-            "type": "boolean",
-            "description": "This setting can be set to `true` to enable Chart.js 3. Importantly, this will automatically be set to 'true' in Open SDG 2.0.0.",
-            "format": "checkbox",
-            "links": [
-                {
-                    "rel": "More information on the chartjs_3 setting",
-                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#chartjs_3"
-                }
-            ]
-        },
-        "contrast_type": {
-            "type": "string",
-            "title": "Contrast type",
-            "description": "The type of high-contrast toggle to use.",
-            "enum": ["default", "single", "long"],
-            "options": {
-                "enum_titles": [
-                    "Default - two 'A' buttons side-by-side",
-                    "Single - one 'A' button which toggles on/off",
-                    "Long - text toggling between 'High contrast' and 'Default contrast'"
-                ]
-            },
-            "links": [
-                {
-                    "rel": "More information on the contrast type setting",
-                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#contrast_type"
                 }
             ]
         },
@@ -192,27 +125,6 @@
             "title": "Create goals",
             "description": "This setting can be used to automatically create the goal pages.",
             "properties": {
-                "layout": {
-                    "type": "string",
-                    "title": "Layout",
-                    "enum": [
-                        "",
-                        "goal",
-                        "goal-by-target",
-                        "goal-by-target-vertical",
-                        "goal-with-progress"
-                    ],
-                    "options": {
-                        "enum_titles": [
-                            "Do not automatically create goals",
-                            "goal",
-                            "goal-by-target",
-                            "goal-by-target-vertical",
-                            "goal-with-progress"
-                        ]
-                    },
-                    "description": "The layout to use for the goal pages."
-                },
                 "previous_next_links": {
                     "title": "Previous/next links",
                     "type": "boolean",
@@ -251,21 +163,6 @@
             "title": "Create indicators",
             "description": "This setting can be used to automatically create the indicator pages.",
             "properties": {
-                "layout": {
-                    "type": "string",
-                    "title": "Layout",
-                    "enum": [
-                        "",
-                        "indicator"
-                    ],
-                    "options": {
-                        "enum_titles": [
-                            "Do not automatically create indicators",
-                            "indicator"
-                        ]
-                    },
-                    "description": "The layout to use for the indicator pages."
-                },
                 "previous_next_links": {
                     "title": "Previous/next links",
                     "type": "boolean",
@@ -501,24 +398,6 @@
                 }
             ]
         },
-        "favicons": {
-            "type": "string",
-            "title": "Favicons",
-            "description": "The type of favicons to use.",
-            "enum": ["legacy", "favicon.io"],
-            "options": {
-                "enum_titles": [
-                    "Legacy",
-                    "Favicon.io (recommended)"
-                ]
-            },
-            "links": [
-                {
-                    "rel": "More information on the favicons setting",
-                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#favicons"
-                }
-            ]
-        },
         "footer_language_toggle": {
             "type": "string",
             "title": "Footer language toggle",
@@ -606,28 +485,6 @@
                 {
                     "rel": "More information on the frontpage goals grid setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#frontpage_goals_grid"
-                }
-            ]
-        },
-        "frontpage_heading": {
-            "type": "string",
-            "title": "Frontpage heading",
-            "description": "This setting can control the heading that appears on the front page. This setting is only used in the frontpage layout.",
-            "links": [
-                {
-                    "rel": "More information on the frontpage heading setting",
-                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#frontpage_heading"
-                }
-            ]
-        },
-        "frontpage_instructions": {
-            "type": "string",
-            "title": "Frontpage instructions",
-            "description": "This setting can control the instructions that appear on the front page. This setting is only used in the frontpage layout.",
-            "links": [
-                {
-                    "rel": "More information on the frontpage instructions setting",
-                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#frontpage_instructions"
                 }
             ]
         },
@@ -759,35 +616,6 @@
                 {
                     "rel": "More information on the graph title from series setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#graph_title_from_series"
-                }
-            ]
-        },
-        "header": {
-            "options": {"collapsed": true},
-            "type": "object",
-            "title": "Header",
-            "description": "This setting can be used to customise the header.",
-            "properties": {
-                "include": {
-                    "type": "string",
-                    "title": "Include file",
-                    "enum": [
-                        "header-default.html",
-                        "header-menu-left-aligned.html"
-                    ],
-                    "options": {
-                        "enum_titles": [
-                            "Default header",
-                            "Menu left-aligned"
-                        ]
-                    },
-                    "description": "The header style to use on all pages."
-                }
-            },
-            "links": [
-                {
-                    "rel": "More information on the header setting",
-                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#header"
                 }
             ]
         },
@@ -1275,17 +1103,6 @@
                 }
             ]
         },
-        "non_global_metadata": {
-            "type": "string",
-            "title": "Non-global metadata",
-            "description": "This setting can be used to control the text of the tab containing non-global metadata.",
-            "links": [
-                {
-                    "rel": "More information on the non-global metadata setting",
-                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#non_global_metadata"
-                }
-            ]
-        },
         "progress_status": {
             "options": {"collapsed": true},
             "type": "object",
@@ -1470,18 +1287,6 @@
                 {
                     "rel": "More information on the search index extra fields setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#search_index_extra_fields"
-                }
-            ]
-        },
-        "series_toggle": {
-            "title": "Series toggle",
-            "type": "boolean",
-            "description": "This setting enables the special treatment of the 'Series' column in the data. If set to true, when an indicator's data includes a 'Series' column, it will be displayed above 'Units' as radio buttons.",
-            "format": "checkbox",
-            "links": [
-                {
-                    "rel": "More information on the series toggle setting",
-                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#series_toggle"
                 }
             ]
         },

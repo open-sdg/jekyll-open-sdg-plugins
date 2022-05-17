@@ -34,18 +34,9 @@ module JekyllOpenSdgPlugins
 
         default_pages = [
           {
-            'folder' => '/',
-            'layout' => 'frontpage'
-          },
-          {
             'folder' => '/reporting-status',
             'layout' => 'reportingstatus',
             'title' => 'status.reporting_status',
-          },
-          {
-            'filename' => 'indicators.json',
-            'folder' => '/',
-            'layout' => 'indicator-json',
           },
           {
             'folder' => '/search',
@@ -55,20 +46,25 @@ module JekyllOpenSdgPlugins
         ]
         pages = default_pages
         if (site.config['create_pages'].is_a?(Hash) and site.config['create_pages'].key?('pages'))
-          # Backwards compatability to support the deprecated "pages" key.
-          pages = site.config['create_pages']['pages']
-        elsif site.config['create_pages'].is_a?(Array)
-          pages = site.config['create_pages']
+          opensdg_error('The create_pages setting is not in the correct format. Please consult the latest documentation: https://open-sdg.readthedocs.io/en/latest/configuration/#create_pages')
         end
-
-        pages.each do |page|
-          if page['layout'] == 'frontpage'
-            opensdg_notice('DEPRECATION NOTICE: In Open SDG 2.0.0, the "frontpage" layout will change. To see a preview, set "bootstrap_5" to "true".')
-          end
+        if site.config['create_pages'].is_a?(Array)
+          pages = site.config['create_pages']
         end
 
         # Clone pages so that we don't edit the original.
         pages = pages.clone
+
+        # Automate the frontpage and indicators.json.
+        pages.push({
+          'folder' => '/',
+          'layout' => 'frontpage',
+        })
+        pages.push({
+          'folder' => '/',
+          'layout' => 'indicator-json',
+          'filename' => 'indicators.json'
+        })
 
         # Hardcode the site configuration page if it's not already there.
         form_settings = site.config['site_config_form']
@@ -134,15 +130,6 @@ module JekyllOpenSdgPlugins
       page.each do |key, value|
         if key != 'folder' && key != 'filename'
           self.data[key] = value
-        end
-      end
-
-      if site.config['bootstrap_5']
-        if page.has_key?('layout') && page['layout'] == 'reportingstatus'
-          self.data['layout'] = 'reportingstatus-bootstrap5'
-        end
-        if page.has_key?('layout') && page['layout'] == 'frontpage'
-          self.data['layout'] = 'frontpage-alt'
         end
       end
     end
