@@ -99,6 +99,11 @@ def opensdg_translate_key(key, translations, language)
     return key
   end
 
+  # If the result is still not a string, return the original string.
+  if drilled.class != String
+    return key
+  end
+
   # Otherwise we must have drilled all they way.
   return drilled
 end
