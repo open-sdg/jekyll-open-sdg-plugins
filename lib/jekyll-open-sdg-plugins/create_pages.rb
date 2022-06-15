@@ -6,9 +6,6 @@ module JekyllOpenSdgPlugins
     safe true
     priority :normal
 
-    def layout_used_in_pages(layout, pages):
-
-
     def generate(site)
       # If site.create_pages is set, create the 4 required pages. These include:
       # - the home page: /
