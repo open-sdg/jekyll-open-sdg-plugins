@@ -6,6 +6,9 @@ module JekyllOpenSdgPlugins
     safe true
     priority :normal
 
+    def layout_used_in_pages(layout, pages):
+
+
     def generate(site)
       # If site.create_pages is set, create the 4 required pages. These include:
       # - the home page: /
@@ -55,16 +58,22 @@ module JekyllOpenSdgPlugins
         # Clone pages so that we don't edit the original.
         pages = pages.clone
 
-        # Automate the frontpage and indicators.json.
-        pages.push({
-          'folder' => '/',
-          'layout' => 'frontpage',
-        })
-        pages.push({
-          'folder' => '/',
-          'layout' => 'indicator-json',
-          'filename' => 'indicators.json'
-        })
+        # Automate the frontpage and indicators.json if not already there.
+        frontpage = pages.find { |page| page['folder'] == '/' && page['filename'] == nil }
+        if frontpage == nil
+          pages.push({
+            'folder' => '/',
+            'layout' => 'frontpage',
+          })
+        end
+        indicatorjson = pages.find { |page| page['layout'] == 'indicator-json' }
+        if indicatorjson == nil
+          pages.push({
+            'folder' => '/',
+            'layout' => 'indicator-json',
+            'filename' => 'indicators.json'
+          })
+        end
 
         # Hardcode the site configuration page if it's not already there.
         form_settings = site.config['site_config_form']
