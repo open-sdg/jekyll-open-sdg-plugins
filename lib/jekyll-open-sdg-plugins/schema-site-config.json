@@ -902,6 +902,12 @@
             "title": "Map options",
             "description": "Site-wide configuration of map behavior and style.",
             "properties": {
+                "disaggregation_controls": {
+                    "title": "Disaggregation controls",
+                    "type": "boolean",
+                    "description": "Whether the map should provide a button and form for changing the displayed disaggregation.",
+                    "format": "checkbox"
+                },
                 "minZoom": {
                     "title": "Minimum zoom",
                     "type": "integer",
