@@ -25,6 +25,11 @@ module JekyllOpenSdgPlugins
     # as the Open SDG API changes over time.
     def generate(site)
 
+      # Abort if some configurations from 1.x are still being used.
+      if (site.config.has_key?('metadata_tabs') && site.config['metadata_tabs'].is_a?(Hash))
+        opensdg_error('The metadata_tabs setting is not in the correct format. Please consult the latest documentation: https://open-sdg.readthedocs.io/en/latest/configuration/#metadata_tabs')
+      end
+
       # Handle legacy treatment of reporting status types.
       unless (site.config.has_key?('reporting_status') &&
              site.config['reporting_status'].has_key?('status_types') &&
