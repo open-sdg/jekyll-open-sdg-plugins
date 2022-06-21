@@ -15,7 +15,7 @@ module Jekyll
       translated = opensdg_translate_key(key, translations, language)
       # Also look for references to site configuration within the translation,
       # as "%" parameters.
-      translated = translated.gsub(/%([a-zA-Z0-9_.\-]+)/) do |match|
+      translated = translated.gsub(/%([a-zA-Z0-9_.]+)/) do |match|
         # Special case for trailing dots.
         trailing_dot = match.end_with?('.')
         key_candidate = match.delete_suffix('.').delete_prefix('%')
