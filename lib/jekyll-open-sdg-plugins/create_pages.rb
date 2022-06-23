@@ -57,7 +57,7 @@ module JekyllOpenSdgPlugins
 
         # Automate the frontpage and indicators.json if not already there.
         frontpage = pages.find { |page| page['folder'] == '/' && page['filename'] == nil }
-        if frontpage == nil
+        if frontpage == nil || frontpage['layout'] == 'frontpage-alt'
           pages.push({
             'folder' => '/',
             'layout' => 'frontpage',

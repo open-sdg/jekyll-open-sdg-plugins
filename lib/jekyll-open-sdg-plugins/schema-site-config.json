@@ -570,7 +570,7 @@
             "title": "Graph color set",
             "description": "This setting can be used to customize the color set used in the charts.",
             "examples": [],
-            "enum": ["default", "accessible", "sdg", "goal", "custom"],
+            "enum": ["accessible", "classic", "sdg", "goal", "custom"],
             "links": [
                 {
                     "rel": "More information on the graph color set setting",
@@ -902,6 +902,12 @@
             "title": "Map options",
             "description": "Site-wide configuration of map behavior and style.",
             "properties": {
+                "disaggregation_controls": {
+                    "title": "Disaggregation controls",
+                    "type": "boolean",
+                    "description": "Whether the map should provide a button and form for changing the displayed disaggregation.",
+                    "format": "checkbox"
+                },
                 "minZoom": {
                     "title": "Minimum zoom",
                     "type": "integer",
