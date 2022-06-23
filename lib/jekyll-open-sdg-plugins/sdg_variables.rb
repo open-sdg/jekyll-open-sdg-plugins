@@ -294,7 +294,7 @@ module JekyllOpenSdgPlugins
       # country-specific metadata doesn't use any of these fields.
       protected_keys = ['goals', 'goal', 'targets', 'target', 'indicators',
         'indicator', 'language', 'name', 'number', 'sort', 'global', 'url',
-        'goal_number', 'target_number', 'indicator_number'
+        'goal_number', 'target_number'
       ]
 
       # Figure out from our translations the global indicator numbers.
