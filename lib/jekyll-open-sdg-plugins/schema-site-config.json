@@ -667,6 +667,22 @@
                 }
             ]
         },
+        "ignored_disaggregations": {
+            "options": {"collapsed": true},
+            "type": "array",
+            "title": "Ignored disaggregations",
+            "description": "An optional list of data columns that should not appear as disaggregation drop-downs in the left sidebar.",
+            "items": {
+                "type": "string",
+                "title": "Ignored disaggregation"
+            },
+            "links": [
+                {
+                    "rel": "More information on the ignored_disaggregations setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#ignored_disaggregations"
+                }
+            ]
+        },
         "indicator_config_form": {
             "options": {"collapsed": true},
             "type": "object",
