@@ -433,6 +433,14 @@ module JekyllOpenSdgPlugins
               available_indicator[key] = opensdg_translate_key(value, translations, language)
             end
           end
+          # Translate and add any relevant site configuration.
+          if site.config.has_key?('ignored_disaggregations')
+            ignored_diss = site.config['ignored_disaggregations']
+            if ignored_diss.is_a?(Array)
+              available_indicator['ignored_disaggregations'] = opensdg_translate_key(ignored_diss, translations, language)
+            end
+          end
+
           available_indicators[language].push(available_indicator)
         end
       end
