@@ -118,7 +118,7 @@ def opensdg_translate_key_array(keys, translations, language)
   end
 
   # Also make sure it is an array.
-  if not key.is_a? Array
+  if not keys.is_a? Array
     return keys
   end
 
