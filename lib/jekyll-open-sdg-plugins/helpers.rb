@@ -108,28 +108,6 @@ def opensdg_translate_key(key, translations, language)
   return drilled
 end
 
-# Takes an array of translation keys and performs opensdg_translate_key
-# on each one, returning a translated array.
-def opensdg_translate_key_array(keys, translations, language)
-
-  # Safety code - abort now if key is nil.
-  if keys.nil?
-    return ""
-  end
-
-  # Also make sure it is an array.
-  if not keys.is_a? Array
-    return keys
-  end
-
-  translated = []
-  keys.each do |key|
-    translated.push(opensdg_translate_key(key, translations, language))
-  end
-
-  return translated
-end
-
 # Print a notice during compilation.
 def opensdg_notice(message)
   Jekyll.logger.warn message.yellow
