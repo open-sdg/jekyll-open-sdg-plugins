@@ -451,7 +451,7 @@ module JekyllOpenSdgPlugins
                   data_translation = opensdg_translate_key(data_key, translations, language)
                   if data_translation != data_key
                     translated = data_translation
-                  else
+                  end
                 end
               end
               translated_ignored_disaggregations.push(translated)
