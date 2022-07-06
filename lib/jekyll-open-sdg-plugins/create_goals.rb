@@ -8,20 +8,12 @@ module JekyllOpenSdgPlugins
 
     def generate(site)
       # If site.create_goals is set, create goals per the metadata.
-      if site.config['languages'] and site.config['create_goals'] and site.config['create_goals'].key?('layout') and site.config['create_goals']['layout'] != ''
+      if site.config['languages'] and site.config['create_goals']
         # Compile the list of goals.
         goals = {}
-        # Are we using translated builds?
         metadata = {}
-        if opensdg_translated_builds(site)
-          # If we are using translated builds, the 'meta' data is underneath
-          # language codes. We just use the first language.
-          default_language = site.config['languages'][0]
-          metadata = site.data[default_language]['meta']
-        else
-          # Otherwise the 'meta' data is not underneath any language code.
-          metadata = site.data['meta']
-        end
+        default_language = site.config['languages'][0]
+        metadata = site.data[default_language]['meta']
         metadata.each do |inid, indicator|
           if indicator.has_key?('standalone') and indicator['standalone']
             next
@@ -30,7 +22,7 @@ module JekyllOpenSdgPlugins
           goals[goal] = true
         end
         # Decide what layout to use for the goal pages.
-        layout = site.config['create_goals']['layout']
+        layout = 'goal'
         # See if we need to "map" any language codes.
         languages_public = Hash.new
         if site.config['languages_public']
@@ -78,11 +70,6 @@ module JekyllOpenSdgPlugins
       self.data['goal_number'] = goal.to_s
       self.data['language'] = language
       self.data['layout'] = layout
-      if site.config['bootstrap_5']
-        self.data['layout'] = 'goal-bootstrap5'
-      end
-      # Backwards compatibility:
-      self.data['sdg_goal'] = self.data['goal_number']
     end
   end
 end

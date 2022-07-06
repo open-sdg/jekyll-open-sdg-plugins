@@ -23,11 +23,7 @@ module JekyllOpenSdgPlugins
           language = site.config['languages'][0]
         end
         metadata = {}
-        if opensdg_translated_builds(site)
-          metadata = site.data[language]['meta']
-        else
-          metadata = site.data['meta']
-        end
+        metadata = site.data[language]['meta']
         # Loop through the indicators (using metadata as a list).
         validation_failed = false
         metadata.each do |inid, meta|

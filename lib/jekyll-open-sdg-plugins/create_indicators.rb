@@ -16,9 +16,9 @@ module JekyllOpenSdgPlugins
 
       translations = site.data['translations']
       # If site.create_indicators is set, create indicators per the metadata.
-      if (language_config and indicator_config and indicator_config.key?('layout') and indicator_config['layout'] != '')
+      if (language_config and indicator_config)
         # Decide what layout to use for the indicator pages.
-        layout = indicator_config['layout']
+        layout = 'indicator'
         # See if we need to "map" any language codes.
         languages_public = Hash.new
         if site.config['languages_public']
@@ -32,14 +32,7 @@ module JekyllOpenSdgPlugins
             language_public = languages_public[language]
           end
           metadata = {}
-          if opensdg_translated_builds(site)
-            # If we are using translated builds, the metadata is underneath a
-            # language code.
-            metadata = site.data[language]['meta']
-          else
-            # Otherwise the 'meta' data is not underneath any language code.
-            metadata = site.data['meta']
-          end
+          metadata = site.data[language]['meta']
           # Loop through the indicators (using metadata as a list).
           metadata.each do |inid, meta|
             permalink = inid
@@ -61,24 +54,17 @@ module JekyllOpenSdgPlugins
         if do_indicator_config_forms || do_indicator_meta_forms || do_indicator_data_forms
 
           metadata = {}
-          if opensdg_translated_builds(site)
-            if site.data.has_key?('untranslated')
-              metadata = site.data['untranslated']['meta']
-            else
-              default_language = language_config[0]
-              metadata = site.data[default_language]['meta']
-            end
+          
+          if site.data.has_key?('untranslated')
+            metadata = site.data['untranslated']['meta']
           else
-            metadata = site.data['meta']
+            default_language = language_config[0]
+            metadata = site.data[default_language]['meta']
           end
 
           metadata_by_language = {}
           language_config.each do |language|
-            if opensdg_translated_builds(site)
-              metadata_by_language[language] = site.data[language]['meta']
-            else
-              metadata_by_language[language] = site.data['meta']
-            end
+            metadata_by_language[language] = site.data[language]['meta']
           end
 
           # Because we have config forms for indicator config or meta/data, we
@@ -158,12 +144,7 @@ module JekyllOpenSdgPlugins
       self.data = {}
       self.data['indicator_number'] = inid.gsub('-', '.')
       self.data['layout'] = layout
-      if site.config['bootstrap_5']
-        self.data['layout'] = 'indicator-bootstrap5'
-      end
       self.data['language'] = language
-      # Backwards compatibility:
-      self.data['indicator'] = self.data['indicator_number']
     end
   end
 

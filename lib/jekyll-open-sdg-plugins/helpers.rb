@@ -2,6 +2,56 @@
 
 require "jekyll"
 
+# Takes a string that might be a textual representation of a
+# site configuration, such as "baseurl" or "country.name".
+def opensdg_parse_site_config(key, site)
+
+  # Safety code - abort now if key is nil.
+  if key.nil?
+    return ""
+  end
+
+  # Also make sure it is a string, and other just return it.
+  if not key.is_a? String
+    return key
+  end
+
+  # More safety code - abort now if key is empty.
+  if key.empty?
+    return ""
+  end
+
+  # Keep track of the last thing we drilled to.
+  drilled = site.config
+
+  # Keep track of how many levels we have drilled.
+  levels_drilled = 0
+  levels = key.split('.')
+
+  # Loop through each level.
+  levels.each do |level|
+
+    # If we have drilled down to a scalar value too soon, abort.
+    break if drilled.class != Hash and drilled.class != Jekyll::Configuration
+
+    if drilled.has_key? level
+      # If we find something, continue drilling.
+      drilled = drilled[level]
+      levels_drilled += 1
+    end
+
+  end
+
+  # If we didn't drill the right number of levels, return the
+  # original string.
+  if levels.length != levels_drilled
+    return key
+  end
+
+  # Otherwise we must have drilled all they way.
+  return drilled
+end
+
 # Takes a translation key and returns a translated string according to the
 # language of the current page. Or if none is found, returns the original
 # key.
@@ -49,27 +99,24 @@ def opensdg_translate_key(key, translations, language)
     return key
   end
 
+  # If the result is still not a string, return the original string.
+  if drilled.class != String
+    return key
+  end
+
   # Otherwise we must have drilled all they way.
   return drilled
-end
-
-# Takes a site object and decides whether it is using translated builds.
-def opensdg_translated_builds(site)
-  # Assume the site is using translated builds.
-  translated_builds = true
-  site.config['languages'].each do |language|
-    # If any languages don't have a key in site.data, the site is not using
-    # translated builds.
-    if !site.data.has_key? language
-      translated_builds = false
-    end
-  end
-  return translated_builds
 end
 
 # Print a notice during compilation.
 def opensdg_notice(message)
   Jekyll.logger.warn message.yellow
+end
+
+# Print an error that should halt the build.
+def opensdg_error(message)
+  Jekyll.logger.error message.red
+  exit 1
 end
 
 # Get the public language codes for a site, keyed by the actual language codes.

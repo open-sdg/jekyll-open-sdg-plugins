@@ -304,7 +304,7 @@ module JekyllOpenSdgPlugins
 
       # For available indicators, we simply map the "indicators" collection.
       available_inids = site.collections['indicators'].docs.select { |x| x.data['language'] == default_language }
-      available_inids = available_inids.map { |x| x.data['indicator'] }
+      available_inids = available_inids.map { |x| x.data['indicator_number'] }
       available_indicators = {}
       available_targets = {}
       available_goals = {}
@@ -355,20 +355,7 @@ module JekyllOpenSdgPlugins
           # arbitrary (it's because they came from filenames) and could maybe
           # be changed eventually to dot-delimited for consistency.
           meta_key = indicator_number.gsub('.', '-')
-          # The location of the metadata is different depending on whether we are
-          # using "translated_builds" or not.
-          if opensdg_translated_builds(site)
-            meta = site.data[language]['meta'][meta_key]
-          else
-            meta = site.data['meta'][meta_key]
-            # Also for untranslated builds, we need to support the "subfolder"
-            # approach for metadata translation. (This is handled at build-time
-            # for translated builds.)
-            if meta.has_key? language
-              meta = meta.merge(meta[language])
-              meta.delete(language)
-            end
-          end
+          meta = site.data[language]['meta'][meta_key]
 
           is_standalone = (meta.has_key?('standalone') and meta['standalone'])
           is_placeholder = (meta.has_key?('placeholder') and meta['placeholder'] != '')
@@ -489,12 +476,8 @@ module JekyllOpenSdgPlugins
           else
             doc.data['remote_data_prefix'] = normalize_baseurl(baseurl)
           end
-          if opensdg_translated_builds(site)
-            doc.data['remote_data_prefix_untranslated'] = File.join(doc.data['remote_data_prefix'], 'untranslated')
-            doc.data['remote_data_prefix'] = File.join(doc.data['remote_data_prefix'], language)
-          else
-            doc.data['remote_data_prefix_untranslated'] = doc.data['remote_data_prefix']
-          end
+          doc.data['remote_data_prefix_untranslated'] = File.join(doc.data['remote_data_prefix'], 'untranslated')
+          doc.data['remote_data_prefix'] = File.join(doc.data['remote_data_prefix'], language)
 
           # Set the logo for this page.
           logo = {}
@@ -525,11 +508,8 @@ module JekyllOpenSdgPlugins
             # For indicators we also set the current indicator/target/goal.
             if doc.data.has_key? 'indicator_number'
               indicator_number = doc.data['indicator_number']
-            elsif doc.data.has_key? 'indicator'
-              # Backwards compatibility.
-              indicator_number = doc.data['indicator']
             else
-              raise "Error: An indicator does not have 'indicator_number' property."
+              opensdg_error("Error: An indicator does not have 'indicator_number' property.")
             end
             # Force the indicator number to be a string.
             if indicator_number.is_a? Numeric
@@ -551,11 +531,8 @@ module JekyllOpenSdgPlugins
             # For goals we also set the current goal.
             if doc.data.has_key? 'goal_number'
               goal_number = doc.data['goal_number']
-            elsif doc.data.has_key? 'sdg_goal'
-              # Backwards compatibility.
-              goal_number = doc.data['sdg_goal']
             else
-              raise "Error: A goal does not have 'goal_number' property."
+              opensdg_error("Error: A goal does not have 'goal_number' property.")
             end
             # Force the goal number to be a string.
             if goal_number.is_a? Numeric
