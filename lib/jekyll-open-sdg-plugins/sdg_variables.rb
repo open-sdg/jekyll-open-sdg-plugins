@@ -441,7 +441,11 @@ module JekyllOpenSdgPlugins
               if translated == key && key.is_a?(String)
                 # If no translation happened, also try the SDMX convention of using the dimension code
                 # for both the "translation group" and the "translation key". Eg, "OBS_STATUS.OBS_STATUS"
-                translated = opensdg_translate_key(key + '.' + key, translations, language)
+                sdmx_key = key + '.' + key
+                sdmx_translation = opensdg_translate_key(sdmx_key, translations, language)
+                if sdmx_translation != sdmx_key
+                  translated = sdmx_translation
+                end
               end
               translated_ignored_disaggregations.push(translated)
             end
