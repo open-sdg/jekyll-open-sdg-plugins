@@ -449,7 +449,6 @@ module JekyllOpenSdgPlugins
               end
               translated_ignored_disaggregations.push(translated)
             end
-            puts(translated_ignored_disaggregations)
             available_indicator['ignored_disaggregations'] = translated_ignored_disaggregations
           end
 
