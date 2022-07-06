@@ -131,7 +131,7 @@ module JekyllOpenSdgPlugins
         route = data_prefix + language + '/zip/' + site.data[language]['zip']['filename']
         routes['zip'].append(route)
       end
-      
+
       site.data['routes'] = routes
     end
   end
