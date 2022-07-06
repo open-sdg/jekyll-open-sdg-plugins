@@ -445,6 +445,13 @@ module JekyllOpenSdgPlugins
                 sdmx_translation = opensdg_translate_key(sdmx_key, translations, language)
                 if sdmx_translation != sdmx_key
                   translated = sdmx_translation
+                else
+                  # If still no translation happened, also try the "data" translation group.
+                  data_key = 'data.' + key
+                  data_translation = opensdg_translate_key(data_key, translations, language)
+                  if data_translation != data_key
+                    translated = data_translation
+                  else
                 end
               end
               translated_ignored_disaggregations.push(translated)
