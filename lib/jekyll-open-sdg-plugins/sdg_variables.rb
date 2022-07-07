@@ -433,6 +433,32 @@ module JekyllOpenSdgPlugins
               available_indicator[key] = opensdg_translate_key(value, translations, language)
             end
           end
+          # Translate the ignored_disaggregations site configuration for this particular indicator.
+          if site.config.has_key?('ignored_disaggregations') && site.config['ignored_disaggregations'].is_a?(Array)
+            translated_ignored_disaggregations = []
+            site.config['ignored_disaggregations'].each do |key|
+              translated = opensdg_translate_key(key, translations, language)
+              if translated == key && key.is_a?(String)
+                # If no translation happened, also try the SDMX convention of using the dimension code
+                # for both the "translation group" and the "translation key". Eg, "OBS_STATUS.OBS_STATUS"
+                sdmx_key = key + '.' + key
+                sdmx_translation = opensdg_translate_key(sdmx_key, translations, language)
+                if sdmx_translation != sdmx_key
+                  translated = sdmx_translation
+                else
+                  # If still no translation happened, also try the "data" translation group.
+                  data_key = 'data.' + key
+                  data_translation = opensdg_translate_key(data_key, translations, language)
+                  if data_translation != data_key
+                    translated = data_translation
+                  end
+                end
+              end
+              translated_ignored_disaggregations.push(translated)
+            end
+            available_indicator['ignored_disaggregations'] = translated_ignored_disaggregations
+          end
+
           available_indicators[language].push(available_indicator)
         end
       end
