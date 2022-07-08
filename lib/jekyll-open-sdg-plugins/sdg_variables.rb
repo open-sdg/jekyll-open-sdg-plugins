@@ -127,7 +127,18 @@ module JekyllOpenSdgPlugins
       end
 
       number = number.gsub('.', '-')
-      baseurl + number + '/'
+      baseurl + number
+    end
+
+    # Compute a sub-page URL for an item, given it's number.
+    def get_subpage_url(baseurl, language, number, languages, languages_public)
+      url = get_url(baseurl, language, number, languages, languages_public)
+      # Becuase Open SDG is a static site, subpages should end with
+      # a slash if they are not actual files (with file extensions).
+      unless url.split('/').last().include?('.')
+        url = url + '/'
+      end
+      url
     end
 
     # Get a Hash of all the URLs based on one particular one.
@@ -368,7 +379,7 @@ module JekyllOpenSdgPlugins
               'slug' => goal_number.gsub('.', '-'),
               'name' => opensdg_translate_key(goal_translation_key + '-title', translations, language),
               'short' => opensdg_translate_key(goal_translation_key + '-short', translations, language),
-              'url' => get_url(baseurl, language, goal_number, languages, languages_public),
+              'url' => get_subpage_url(baseurl, language, goal_number, languages, languages_public),
               'icon' => get_goal_image(goal_image_base, language, goal_number, goal_image_extension),
               'sort' => get_sort_order(goal_number),
               'global' => global_goal,
@@ -421,7 +432,7 @@ module JekyllOpenSdgPlugins
             'number' => indicator_number,
             'slug' => indicator_number.gsub('.', '-'),
             'name' => opensdg_translate_key(indicator_name, translations, language),
-            'url' => get_url(baseurl, language, indicator_path, languages, languages_public),
+            'url' => get_subpage_url(baseurl, language, indicator_path, languages, languages_public),
             'sort' => indicator_sort,
             'goal_number' => goal_number,
             'target_number' => target_number,
