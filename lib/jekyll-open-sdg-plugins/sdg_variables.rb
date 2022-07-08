@@ -127,7 +127,7 @@ module JekyllOpenSdgPlugins
       end
 
       number = number.gsub('.', '-')
-      baseurl + number
+      baseurl + number + '/'
     end
 
     # Get a Hash of all the URLs based on one particular one.
