@@ -55,7 +55,7 @@ module JekyllOpenSdgPlugins
         # Clone pages so that we don't edit the original.
         pages = pages.clone
 
-        # Automate the frontpage and indicators.json if not already there.
+        # Automate some required pages if not already there.
         frontpage = pages.find { |page| page['folder'] == '/' && page['filename'] == nil }
         if frontpage == nil || frontpage['layout'] == 'frontpage-alt'
           pages.push({
@@ -70,6 +70,20 @@ module JekyllOpenSdgPlugins
             'layout' => 'indicator-json',
             'filename' => 'indicators.json'
           })
+        end
+        if site.config.has_key?('progressive_web_app')
+          if site.config['progressive_web_app'].is_a?(Hash)
+            if site.config['progressive_web_app']['enabled']
+              offline = pages.find { |page| page['layout'] == 'offline' }
+              if offline == nil
+                pages.push({
+                  'folder' => '/',
+                  'layout' => 'offline',
+                  'filename' => 'offline.html'
+                })
+              end
+            end
+          end
         end
 
         # Hardcode the site configuration page if it's not already there.
