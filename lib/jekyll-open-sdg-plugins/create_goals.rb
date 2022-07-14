@@ -37,7 +37,13 @@ module JekyllOpenSdgPlugins
           end
           # Loop through the goals.
           goal_index = 0
-          goals.keys.sort.each do |goal|
+          # In the SDGs the goals are numeric, so try to sort them numerically.
+          begin
+            goals_sorted = goals.keys.sort_by { |k| k.to_i if Float(k) rescue k }
+          rescue
+            goals_sorted = goals.keys.sort
+          end
+          goals_sorted.each do |goal|
             # Add the language subfolder for all except the default (first) language.
             dir = index == 0 ? goal.to_s : File.join(language_public, goal.to_s)
             # Create the goal page.
@@ -59,8 +65,14 @@ module JekyllOpenSdgPlugins
 
       goal_content = ''
       if site.config['create_goals'].has_key?('goals')
-        if !site.config['create_goals']['goals'][goal_index].nil?
+        # Try to find goal content by match the goal ID with a "goal" property on each item
+        # in the create_goals.goals site config. Otherwise fallback to the order they appear
+        # in that list.
+        matching_goal = site.config['create_goals']['goals'].detect {|g| g['goal'] == goal.to_s }
+        if matching_goal.nil? && !site.config['create_goals']['goals'][goal_index].nil?
           goal_content = site.config['create_goals']['goals'][goal_index]['content']
+        elsif !site.config['create_goals']['goals'][goal_index].nil?
+          goal_content = matching_goal['content']
         end
       end
       @content = goal_content
