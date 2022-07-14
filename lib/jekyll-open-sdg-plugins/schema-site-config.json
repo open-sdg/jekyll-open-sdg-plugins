@@ -145,6 +145,11 @@
                                 "title": "Content",
                                 "format": "markdown",
                                 "description": "Markdown content or a translation key for this goal."
+                            },
+                            "goal": {
+                                "type": "string",
+                                "title": "Goal",
+                                "description": "Optionally specify the goal ID this content applies to. Can be left blank if using the correct order of the goals (1, 2, 3, etc.)."
                             }
                         }
                     }
