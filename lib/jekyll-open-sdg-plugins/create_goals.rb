@@ -68,11 +68,14 @@ module JekyllOpenSdgPlugins
         # Try to find goal content by match the goal ID with a "goal" property on each item
         # in the create_goals.goals site config. Otherwise fallback to the order they appear
         # in that list.
-        matching_goal = site.config['create_goals']['goals'].detect {|g| g['goal'] == goal.to_s }
-        if matching_goal.nil? && !site.config['create_goals']['goals'][goal_index].nil?
-          goal_content = site.config['create_goals']['goals'][goal_index]['content']
-        elsif !site.config['create_goals']['goals'][goal_index].nil?
-          goal_content = matching_goal['content']
+        goal_by_goal = site.config['create_goals']['goals'].detect {|g| g['goal'].to_s == goal.to_s }
+        goal_by_index = site.config['create_goals']['goals'][goal_index]
+        if !goal_by_goal.nil?
+          goal_content = goal_by_goal['content']
+        elsif !goal_by_index.nil?
+          if !goal_by_index.has_key?('goal') || goal_by_index['goal'].to_s == goal.to_s
+            goal_content = goal_by_index['content']
+          end
         end
       end
       @content = goal_content
