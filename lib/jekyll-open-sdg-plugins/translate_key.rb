@@ -13,6 +13,12 @@ module Jekyll
       translations = site.data['translations']
       language = @context.environments.first["page"]['language']
       translated = opensdg_translate_key(key, translations, language)
+
+      # Stop now if we do not have a string.
+      unless translated.is_a?(String)
+        return translated
+      end
+
       # Also look for references to site configuration within the translation,
       # as "%" parameters.
       translated = translated.gsub(/%([a-zA-Z0-9_.]+)/) do |match|
