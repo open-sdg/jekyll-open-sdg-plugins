@@ -690,6 +690,57 @@
                 }
             ]
         },
+        "publications": {
+            "options": {"collapsed": true},
+            "type": "array",
+            "title": "Publications",
+            "description": "This setting controls the content of the 'Related publications' tab. It can contain any number of publications. You may have much of this information in the indicator metadata, but this configuration is available to supplement the metadata with a more structured way to list multiple publications.",
+            "items": {
+                "type": "object",
+                "title": "Publication",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "title": "Title"
+                    },
+                    "link": {
+                        "type": "string",
+                        "title": "Link"
+                    },
+                    "description": {
+                        "type": "string",
+                        "title": "description",
+                        "format": "markdown"
+                    },
+                    "date": {
+                        "type": "string",
+                        "title": "Date"
+                    }
+                }
+            },
+            "links": [
+                {
+                    "rel": "More information on the publications setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/indicator-configuration/#publications"
+                }
+            ]
+        },
+        "related_indicators": {
+            "options": {"collapsed": true},
+            "type": "array",
+            "title": "Related indicators",
+            "description": "This setting controls the 'Related indicators' tab. Specify indicators by using their indicator numbers, such as: 1.1.1",
+            "items": {
+                "type": "string",
+                "title": "Related indicator"
+            },
+            "links": [
+                {
+                    "rel": "More information on the related_indicators setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/indicator-configuration/#related_indicators"
+                }
+            ]
+        },
         "reporting_status": {
             "type": "string",
             "title": "Reporting status",
@@ -710,6 +761,73 @@
                 {
                     "rel": "More information on the sort setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/metadata-format/#sorting-in-lists"
+                }
+            ]
+        },
+        "sources": {
+            "options": {"collapsed": true},
+            "type": "array",
+            "title": "Sources",
+            "description": "This setting controls the content of the 'Sources' tab. It can contain any number sources. You may have much of this information in the metadata, but this configuration is available to supplement the metadata with a more structured way to list multiple sources.",
+            "items": {
+                "type": "object",
+                "title": "Source",
+                "properties": {
+                    "organisation": {
+                        "type": "string",
+                        "title": "Organisation"
+                    },
+                    "periodicity": {
+                        "type": "string",
+                        "title": "Periodicity"
+                    },
+                    "earliest_available": {
+                        "type": "string",
+                        "title": "Earliest available data"
+                    },
+                    "geographical_coverage": {
+                        "type": "string",
+                        "title": "Geographical coverage"
+                    },
+                    "url": {
+                        "type": "string",
+                        "title": "URL"
+                    },
+                    "url_text": {
+                        "type": "string",
+                        "title": "URL text"
+                    },
+                    "release_date": {
+                        "type": "string",
+                        "title": "Release date"
+                    },
+                    "next_release": {
+                        "type": "string",
+                        "title": "Next release"
+                    },
+                    "statistical_classification": {
+                        "type": "string",
+                        "title": "Statistical classification"
+                    },
+                    "contact": {
+                        "type": "string",
+                        "title": "Contact"
+                    },
+                    "other_info": {
+                        "type": "string",
+                        "title": "Other information",
+                        "format": "markdown"
+                    },
+                    "logo": {
+                        "type": "string",
+                        "title": "Path to logo image"
+                    }
+                }
+            },
+            "links": [
+                {
+                    "rel": "More information on the sources setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/indicator-configuration/#sources"
                 }
             ]
         },
