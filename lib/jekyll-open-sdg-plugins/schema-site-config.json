@@ -1141,6 +1141,11 @@
                     "type": "string",
                     "description": "A heading to display before the progress status on indicator pages."
                 },
+                "status_help": {
+                    "title": "Status help",
+                    "type": "string",
+                    "description": "An explanatory column header above the progress status on goal pages."
+                },
                 "status_types": {
                     "options": {"collapsed": true},
                     "type": "array",
