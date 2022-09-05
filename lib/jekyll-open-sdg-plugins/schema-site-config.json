@@ -390,6 +390,17 @@
                 }
             ]
         },
+        "empty_metadata_placeholder": {
+            "type": "string",
+            "title": "Empty metadata placeholder",
+            "description": "This setting controls the text that will display for any metadata field which has no content. Note that this is not used if 'hide_empty_metadata' is true.",
+            "links": [
+                {
+                    "rel": "More information on the empty metadata placeholder setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#empty_metadata_placeholder"
+                }
+            ]
+        },
         "environment": {
             "type": "string",
             "minLength": 1,
