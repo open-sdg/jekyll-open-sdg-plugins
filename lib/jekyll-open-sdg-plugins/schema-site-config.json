@@ -131,6 +131,11 @@
                     "description": "This setting can be used to show navigation links to the previous/next goals.",
                     "format": "checkbox"
                 },
+                "goal_content_header": {
+                    "type": "string",
+                    "title": "Goal content heading",
+                    "description": "Text entered here will appear as an H2 heading above any content configured below in 'goals'."
+                },
                 "goals": {
                     "options": {"collapsed": true},
                     "type": "array",
