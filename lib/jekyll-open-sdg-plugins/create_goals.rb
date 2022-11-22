@@ -63,10 +63,11 @@ module JekyllOpenSdgPlugins
       @dir  = dir
       @name = 'index.html'
 
-      goal_content = ''
       goal_heading = ''
+      goal_content = ''
+      goal_content_heading = ''
       if site.config['create_goals'].has_key?('goal_content_heading')
-        goal_heading = site.config['create_goals']['goal_content_heading']
+        goal_content_heading = site.config['create_goals']['goal_content_heading']
       end
       if site.config['create_goals'].has_key?('goals')
         # Try to find goal content by match the goal ID with a "goal" property on each item
@@ -76,13 +77,19 @@ module JekyllOpenSdgPlugins
         goal_by_index = site.config['create_goals']['goals'][goal_index]
         if !goal_by_goal.nil?
           goal_content = goal_by_goal['content']
-          if goal_by_goal.has_key?('heading') && goal_by_goal['heading'] != ''
+          if goal_by_goal.has_key?('content_heading') && goal_by_goal['content_heading'] != ''
+            goal_content_heading = goal_by_goal['content_heading']
+          end
+          if goal_by_goal.has_key?('heading')
             goal_heading = goal_by_goal['heading']
           end
         elsif !goal_by_index.nil?
           if !goal_by_index.has_key?('goal') || goal_by_index['goal'].to_s == goal.to_s
             goal_content = goal_by_index['content']
-            if goal_by_index.has_key?('heading') && goal_by_index['heading'] != ''
+            if goal_by_index.has_key?('content_heading') && goal_by_index['content_heading'] != ''
+              goal_content_heading = goal_by_index['content_heading']
+            end
+            if goal_by_index.has_key?('heading')
               goal_heading = goal_by_index['heading']
             end
           end
@@ -95,7 +102,8 @@ module JekyllOpenSdgPlugins
       self.data['goal_number'] = goal.to_s
       self.data['language'] = language
       self.data['layout'] = layout
-      self.data['goal_content_heading'] = goal_heading
+      self.data['goal_content_heading'] = goal_content_heading
+      self.data['goal_heading'] = goal_heading
     end
   end
 end

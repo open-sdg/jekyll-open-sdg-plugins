@@ -145,16 +145,21 @@
                         "type": "object",
                         "title": "Goal",
                         "properties": {
+                            "heading": {
+                                "type": "string",
+                                "title": "Page heading",
+                                "description": "Optional heading to display in the goal banner (as an H1) for this goal. If left blank, the goal name will be used."
+                            },
                             "content": {
                                 "type": "string",
                                 "title": "Content",
                                 "format": "markdown",
                                 "description": "Markdown content or a translation key for this goal."
                             },
-                            "heading": {
+                            "content_heading": {
                                 "type": "string",
-                                "title": "Heading",
-                                "description": "Heading to display above the content for this goal. If left blank, the site-wide 'Goal content heading' (above) will be used."
+                                "title": "Content heading",
+                                "description": "Optional heading to display above the content (as an H2) for this goal. If left blank, the site-wide 'Goal content heading' (above) will be used."
                             },
                             "goal": {
                                 "type": "string",
