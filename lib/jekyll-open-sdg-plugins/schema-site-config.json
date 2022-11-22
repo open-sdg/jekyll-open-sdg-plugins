@@ -151,6 +151,11 @@
                                 "format": "markdown",
                                 "description": "Markdown content or a translation key for this goal."
                             },
+                            "heading": {
+                                "type": "string",
+                                "title": "Heading",
+                                "description": "Heading to display above the content for this goal. If left blank, the site-wide 'Goal content heading' (above) will be used."
+                            },
                             "goal": {
                                 "type": "string",
                                 "title": "Goal",
