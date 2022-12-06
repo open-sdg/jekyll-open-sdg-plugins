@@ -1137,6 +1137,42 @@
                 }
             ]
         },
+        "meta_tags": {
+            "options": {"collapsed": true},
+            "type": "array",
+            "title": "Meta tags",
+            "description": "This setting can be used to add custom meta tags at any paths.",
+            "items": {
+                "type": "object",
+                "title": "Meta tag",
+                "properties": {
+                    "path": {
+                        "type": "string",
+                        "minLength": 1,
+                        "title": "Path",
+                        "description": "The path within the platform at which to place this tag."
+                    },
+                    "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "title": "Name",
+                        "description": "The 'name' attribute for the meta tag."
+                    },
+                    "src": {
+                        "type": "string",
+                        "minLength": 1,
+                        "title": "Content",
+                        "description": "The 'content' attribute for the meta tag. Translation keys can be used."
+                    }
+                }
+            },
+            "links": [
+                {
+                    "rel": "More information on the Meta Tags setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#meta_tags"
+                }
+            ]
+        },
         "news": {
             "options": {"collapsed": true},
             "type": "object",
