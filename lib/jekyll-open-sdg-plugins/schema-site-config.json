@@ -131,6 +131,11 @@
                     "description": "This setting can be used to show navigation links to the previous/next goals.",
                     "format": "checkbox"
                 },
+                "goal_content_heading": {
+                    "type": "string",
+                    "title": "Goal content heading",
+                    "description": "Text entered here will appear as an H2 heading above any content configured below in 'goals'."
+                },
                 "goals": {
                     "options": {"collapsed": true},
                     "type": "array",
@@ -145,6 +150,11 @@
                                 "title": "Content",
                                 "format": "markdown",
                                 "description": "Markdown content or a translation key for this goal."
+                            },
+                            "goal": {
+                                "type": "string",
+                                "title": "Goal",
+                                "description": "Optionally specify the goal ID this content applies to. Can be left blank if using the correct order of the goals (1, 2, 3, etc.)."
                             }
                         }
                     }
@@ -382,6 +392,28 @@
                 {
                     "rel": "More information on the email contacts setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#email_contacts"
+                }
+            ]
+        },
+        "empty_metadata_placeholder": {
+            "type": "string",
+            "title": "Empty metadata placeholder",
+            "description": "This setting controls the text that will display for any metadata field which has no content. Note that this is not used if 'hide_empty_metadata' is true.",
+            "links": [
+                {
+                    "rel": "More information on the empty metadata placeholder setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#empty_metadata_placeholder"
+                }
+            ]
+        },
+        "empty_metadata_placeholder_sources": {
+            "type": "string",
+            "title": "Empty metadata placeholder (sources)",
+            "description": "This setting controls the text that will display for any sources field which has no content. Note that this is not used if 'hide_empty_metadata' is true.",
+            "links": [
+                {
+                    "rel": "More information on the empty metadata placeholder (sources) setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#empty_metadata_placeholder_sources"
                 }
             ]
         },
@@ -664,6 +696,22 @@
                 {
                     "rel": "More information on the hide single unit setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#hide_single_unit"
+                }
+            ]
+        },
+        "ignored_disaggregations": {
+            "options": {"collapsed": true},
+            "type": "array",
+            "title": "Ignored disaggregations",
+            "description": "An optional list of data columns that should not appear as disaggregation drop-downs in the left sidebar.",
+            "items": {
+                "type": "string",
+                "title": "Ignored disaggregation"
+            },
+            "links": [
+                {
+                    "rel": "More information on the ignored_disaggregations setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#ignored_disaggregations"
                 }
             ]
         },
@@ -1119,6 +1167,11 @@
                     "title": "Status heading",
                     "type": "string",
                     "description": "A heading to display before the progress status on indicator pages."
+                },
+                "status_help": {
+                    "title": "Status help",
+                    "type": "string",
+                    "description": "An explanatory column header above the progress status on goal pages."
                 },
                 "status_types": {
                     "options": {"collapsed": true},
