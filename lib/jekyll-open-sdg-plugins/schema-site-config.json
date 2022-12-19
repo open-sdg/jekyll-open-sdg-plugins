@@ -145,11 +145,21 @@
                         "type": "object",
                         "title": "Goal",
                         "properties": {
+                            "heading": {
+                                "type": "string",
+                                "title": "Page heading",
+                                "description": "Optional heading to display in the goal banner (as an H1) for this goal. If left blank, the goal name will be used."
+                            },
                             "content": {
                                 "type": "string",
                                 "title": "Content",
                                 "format": "markdown",
                                 "description": "Markdown content or a translation key for this goal."
+                            },
+                            "content_heading": {
+                                "type": "string",
+                                "title": "Content heading",
+                                "description": "Optional heading to display above the content (as an H2) for this goal. If left blank, the site-wide 'Goal content heading' (above) will be used."
                             },
                             "goal": {
                                 "type": "string",
@@ -1134,6 +1144,42 @@
                 {
                     "rel": "More information on the metadata tabs setting",
                     "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#metadata_tabs"
+                }
+            ]
+        },
+        "meta_tags": {
+            "options": {"collapsed": true},
+            "type": "array",
+            "title": "Meta tags",
+            "description": "This setting can be used to add custom meta tags at any paths.",
+            "items": {
+                "type": "object",
+                "title": "Meta tag",
+                "properties": {
+                    "path": {
+                        "type": "string",
+                        "minLength": 1,
+                        "title": "Path",
+                        "description": "The path within the platform at which to place this tag."
+                    },
+                    "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "title": "Name",
+                        "description": "The 'name' attribute for the meta tag."
+                    },
+                    "src": {
+                        "type": "string",
+                        "minLength": 1,
+                        "title": "Content",
+                        "description": "The 'content' attribute for the meta tag. Translation keys can be used."
+                    }
+                }
+            },
+            "links": [
+                {
+                    "rel": "More information on the Meta Tags setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#meta_tags"
                 }
             ]
         },
