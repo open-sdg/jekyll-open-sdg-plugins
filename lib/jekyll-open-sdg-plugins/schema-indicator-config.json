@@ -690,6 +690,18 @@
                 }
             ]
         },
+        "proxy": {
+            "title": "Proxy indicator",
+            "type": "boolean",
+            "description": "Whether the indicator is a 'proxy', meaning that it is somehow different than the globally-defined SDG indicator.",
+            "format": "checkbox",
+            "links": [
+                {
+                    "rel": "More information the proxy setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/indicator-configuration/#proxy"
+                }
+            ]
+        },
         "publications": {
             "options": {"collapsed": true},
             "type": "array",
