@@ -1296,6 +1296,24 @@
                 }
             ]
         },
+        "proxy_indicators": {
+            "options": {"collapsed": true},
+            "type": "object",
+            "title": "Proxy indicators",
+            "description": "Configuration for the proxy indicator functionality.",
+            "properties": {
+                "label": {
+                    "type": "string",
+                    "title": "Label",
+                    "description": "The label to display when flagging a proxy indicator. Defaults to 'Proxy'."
+                },
+                "description": {
+                    "type": "string",
+                    "title": "Description",
+                    "description": "The description to display at the top of indicator pages, explaining what 'Proxy' means."
+                }
+            }
+        },
         "remote_data_prefix": {
             "type": "string",
             "minLength": 1,
