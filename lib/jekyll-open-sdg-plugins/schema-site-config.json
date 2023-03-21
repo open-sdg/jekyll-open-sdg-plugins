@@ -1260,6 +1260,42 @@
                 }
             ]
         },
+        "progressive_web_app": {
+            "options": {"collapsed": true},
+            "type": "object",
+            "title": "Progressive Web App",
+            "description": "Configuration for turning the platform into a progressive web app for offline usage.",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "title": "Enabled",
+                    "description": "If enabled, the platform will be a progressive web app for offline usage.",
+                    "format": "checkbox"
+                },
+                "name": {
+                    "type": "string",
+                    "title": "Name",
+                    "description": "The full name of the app (displays on splash screen)."
+                },
+                "short_name": {
+                    "type": "string",
+                    "title": "Short name",
+                    "description": "The short name of the app (displays under home screen icon)."
+                },
+                "precaching": {
+                    "type": "boolean",
+                    "title": "Precaching",
+                    "description": "If enabled, all indicator and goal pages will be precached when the app is installed.",
+                    "format": "checkbox"
+                }
+            },
+            "links": [
+                {
+                    "rel": "More information on the progressive_web_app setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#progressive_web_app"
+                }
+            ]
+        },
         "proxy_indicators": {
             "options": {"collapsed": true},
             "type": "object",
