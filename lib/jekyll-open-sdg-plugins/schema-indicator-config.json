@@ -690,6 +690,41 @@
                 }
             ]
         },
+        "proxy": {
+            "title": "Proxy indicator",
+            "type": "string",
+            "description": "Whether the indicator is a 'proxy' (meaning that it is somehow different than the globally-defined SDG indicator).",
+            "enum": ["", "proxy", "both"],
+            "options": {
+                "enum_titles": [
+                    "Not a proxy indicator (default)",
+                    "Proxy indicator",
+                    "Both (contains both a proxy series and a non-proxy series)"
+                ]
+            },
+            "links": [
+                {
+                    "rel": "More information the proxy setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/indicator-configuration/#proxy"
+                }
+            ]
+        },
+        "proxy_series": {
+            "options": {"collapsed": true},
+            "type": "array",
+            "title": "Proxy indicator - per series",
+            "description": "A list of each series within this indicator that should be considered a proxy (meaning that it is different somehow from the globally-defined series). Only needed if you chose 'Mixed series' above.",
+            "items": {
+                "type": "string",
+                "title": "Series"
+            },
+            "links": [
+                {
+                    "rel": "More information on the proxy_series setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/indicator-configuration/#proxy_series"
+                }
+            ]
+        },
         "publications": {
             "options": {"collapsed": true},
             "type": "array",
