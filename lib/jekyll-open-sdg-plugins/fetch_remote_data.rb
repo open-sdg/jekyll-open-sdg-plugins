@@ -39,7 +39,7 @@ module JekyllOpenSdgPlugins
         endpoint = is_remote ? path + '/' + value : File.join(path, fix_path(value))
 
         begin
-          json_file = is_remote ? open(endpoint) : File.open(endpoint)
+          json_file = is_remote ? URI.open(endpoint) : File.open(endpoint)
           build[key] = JSON.load(json_file)
         rescue StandardError => e
           # For backwards compatibility, forego the exception in some cases.
