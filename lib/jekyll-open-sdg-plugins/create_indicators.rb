@@ -46,7 +46,7 @@ module JekyllOpenSdgPlugins
             site.collections['indicators'].docs << IndicatorPage.new(site, site.source, dir, inid, language, layout)
             # Also create the iframe version.
             iframe_layout = 'indicator-iframe'
-            iframe_permalink = File.join(permalink, 'iframe')
+            iframe_permalink = permalink + '-iframe'
             iframe_dir = index == 0 ? iframe_permalink : File.join(language_public, iframe_permalink)
             site.collections['pages'].docs << IndicatorPage.new(site, site.source, iframe_dir, inid, language, iframe_layout)
           end
