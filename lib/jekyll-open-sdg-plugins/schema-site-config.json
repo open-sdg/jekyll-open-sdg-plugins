@@ -1335,6 +1335,11 @@
                 { "$ref": "#/definitions/title_and_description" },
                 {
                     "properties": {
+                        "disaggregation_indicator_count_label": {
+                            "title": "Disaggregation indicator count label",
+                            "type": "string",
+                            "description": "An alternative label to use for the indicator count on the disaggregation tab, to be display after a number."
+                        },
                         "disaggregation_tabs": {
                             "title": "Disaggregation tabs",
                             "type": "boolean",
