@@ -1203,6 +1203,36 @@
                 }
             ]
         },
+        "observation_attributes": {
+            "options": {"collapsed": true},
+            "type": "array",
+            "title": "Observation attributes",
+            "description": "This setting can be used to specify data columns to be considered 'observation attributes' and displayed along with individual data-points.",
+            "items": {
+                "type": "object",
+                "title": "Observation attribute",
+                "properties": {
+                    "field": {
+                        "type": "string",
+                        "minLength": 1,
+                        "title": "Field",
+                        "description": "Column name in the data."
+                    },
+                    "label": {
+                        "type": "string",
+                        "minLength": 1,
+                        "title": "Label",
+                        "description": "Optional label when displayed in footnotes."
+                    }
+                }
+            },
+            "links": [
+                {
+                    "rel": "More information on the observation attributes setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#observation_attributes"
+                }
+            ]
+        },
         "progress_status": {
             "options": {"collapsed": true},
             "type": "object",
