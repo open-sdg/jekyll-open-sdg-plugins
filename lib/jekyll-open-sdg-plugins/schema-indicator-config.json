@@ -310,6 +310,8 @@
                                         "title": "Position",
                                         "description": "Placement of the label along the line.",
                                         "enum": [
+                                            "start",
+                                            "end",
                                             "top",
                                             "bottom",
                                             "left",
@@ -324,6 +326,13 @@
                                         "description": "Text of the line label."
                                     },
                                     "fontColor": {
+                                        "type": "string",
+                                        "format": "color",
+                                        "title": "Label color [DEPRECATED]",
+                                        "description": "[DEPRECATED: USE 'color' INSTEAD]",
+                                        "default": "#000000"
+                                    },
+                                    "color": {
                                         "type": "string",
                                         "format": "color",
                                         "title": "Label color",
@@ -357,6 +366,13 @@
                                         "description": "High-contrast version of the label.",
                                         "properties": {
                                             "fontColor": {
+                                                "type": "string",
+                                                "format": "color",
+                                                "default": "#ffffff",
+                                                "title": "High-contrast label color [DEPRECATED]",
+                                                "description": "[DEPRECATED: USE 'color' INSTEAD]"
+                                            },
+                                            "color": {
                                                 "type": "string",
                                                 "format": "color",
                                                 "default": "#ffffff",
