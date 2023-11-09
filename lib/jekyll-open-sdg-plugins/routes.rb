@@ -10,7 +10,7 @@ module JekyllOpenSdgPlugins
 
       routes = {}
       baseurl = ''
-      if site.config.has_key?('baseurl')
+      if site.config.has_key?('baseurl') and site.config['baseurl'].is_a?(String)
         baseurl = site.config['baseurl']
       end
       unless baseurl.end_with?('/')
