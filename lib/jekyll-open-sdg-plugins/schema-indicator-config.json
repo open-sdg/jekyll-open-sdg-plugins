@@ -310,6 +310,8 @@
                                         "title": "Position",
                                         "description": "Placement of the label along the line.",
                                         "enum": [
+                                            "start",
+                                            "end",
                                             "top",
                                             "bottom",
                                             "left",
@@ -326,7 +328,14 @@
                                     "fontColor": {
                                         "type": "string",
                                         "format": "color",
-                                        "title": "Label color",
+                                        "title": "Label color (do not use)",
+                                        "description": "[DEPRECATED: USE 'Label color (use this)' INSTEAD]",
+                                        "default": "#000000"
+                                    },
+                                    "color": {
+                                        "type": "string",
+                                        "format": "color",
+                                        "title": "Label color (use this)",
                                         "description": "Color for the label text.",
                                         "default": "#000000"
                                     },
@@ -360,7 +369,14 @@
                                                 "type": "string",
                                                 "format": "color",
                                                 "default": "#ffffff",
-                                                "title": "High-contrast label color",
+                                                "title": "High-contrast label color (do not use)",
+                                                "description": "[DEPRECATED: USE 'High-contrast label color (use this)' INSTEAD]"
+                                            },
+                                            "color": {
+                                                "type": "string",
+                                                "format": "color",
+                                                "default": "#ffffff",
+                                                "title": "High-contrast label color (use this)",
                                                 "description": "Color for the label text in high-contrast mode."
                                             },
                                             "backgroundColor": {
