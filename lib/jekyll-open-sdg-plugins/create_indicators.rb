@@ -13,6 +13,10 @@ module JekyllOpenSdgPlugins
       form_settings_config = site.config['indicator_config_form']
       form_settings_meta = site.config['indicator_metadata_form']
       form_settings_data = site.config['indicator_data_form']
+      config_builder_layout = 'config-builder'
+      #if site.config['use_new_config_forms']
+      #  config_builder_layout = 'config-builder-2'
+      #end
 
       translations = site.data['translations']
       # If site.create_indicators is set, create indicators per the metadata.
@@ -105,7 +109,7 @@ module JekyllOpenSdgPlugins
                   dir = File.join(dir_base, 'config')
                   title = opensdg_translate_key('indicator.edit_configuration', translations, language)
                   config_type = 'indicator'
-                  site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta, title, config_type, form_settings_config)
+                  site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, meta, title, config_type, form_settings_config, config_builder_layout)
                 end
 
                 if do_indicator_meta_forms
@@ -116,7 +120,7 @@ module JekyllOpenSdgPlugins
                   dir = File.join(dir_base, 'metadata')
                   title = opensdg_translate_key('indicator.edit_metadata', translations, language)
                   config_type = 'metadata'
-                  site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, metadata_to_use, title, config_type, form_settings_meta)
+                  site.collections['pages'].docs << IndicatorConfigPage.new(site, site.source, dir, inid, language, metadata_to_use, title, config_type, form_settings_meta, config_builder_layout)
                 end
 
                 if do_indicator_data_forms
@@ -150,7 +154,7 @@ module JekyllOpenSdgPlugins
 
   # A Page subclass used in the `CreateIndicators` class for the indicator config forms.
   class IndicatorConfigPage < Jekyll::Page
-    def initialize(site, base, dir, inid, language, meta, title, config_type, form_settings)
+    def initialize(site, base, dir, inid, language, meta, title, config_type, form_settings, layout)
       @site = site
       @base = base
       @dir  = dir
@@ -161,7 +165,7 @@ module JekyllOpenSdgPlugins
       self.data['language'] = language
       self.data['indicator_number'] = inid
       self.data['config_type'] = config_type
-      self.data['layout'] = 'config-builder'
+      self.data['layout'] = layout
       self.data['meta'] = meta
       self.data['title'] = title + ': ' + inid.gsub('-', '.')
       self.data['config_filename'] = inid + '.yml'

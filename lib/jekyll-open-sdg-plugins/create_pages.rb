@@ -89,11 +89,15 @@ module JekyllOpenSdgPlugins
         # Hardcode the site configuration page if it's not already there.
         form_settings = site.config['site_config_form']
         config_page = pages.find { |page| page['layout'] == 'config-builder' }
+        config_builder_layout = 'config-builder'
+        if site.config['use_new_config_forms']
+          config_builder_layout = 'config-builder-2'
+        end
         if config_page == nil
           if form_settings && form_settings['enabled']
             pages.push({
               'folder' => '/config',
-              'layout' => 'config-builder',
+              'layout' => config_builder_layout,
               'title' => 'Open SDG site configuration',
               'config_type' => 'site',
               'config_filename' => 'site_config.yml',
@@ -101,7 +105,7 @@ module JekyllOpenSdgPlugins
           end
         end
         # Make sure the form settings are set.
-        config_page = pages.find { |page| page['layout'] == 'config-builder' }
+        config_page = pages.find { |page| page['layout'] == config_builder_layout }
         if config_page != nil && form_settings && form_settings['enabled']
           config_page['form_settings'] = form_settings
         end
