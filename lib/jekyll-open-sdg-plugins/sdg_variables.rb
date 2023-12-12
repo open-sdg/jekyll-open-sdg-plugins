@@ -541,7 +541,7 @@ module JekyllOpenSdgPlugins
           end
           doc.data['logo'] = logo
 
-          if collection == 'indicators'
+          if collection == 'indicators' || doc.data['layout'] == 'indicator-iframe'
             # For indicators we also set the current indicator/target/goal.
             if doc.data.has_key? 'indicator_number'
               indicator_number = doc.data['indicator_number']
