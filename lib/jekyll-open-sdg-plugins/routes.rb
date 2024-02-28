@@ -26,7 +26,7 @@ module JekyllOpenSdgPlugins
           route = route + '/'
         end
 
-        unless doc.data['layout'] == 'config-builder' or doc.data['layout'] == 'data-editor'
+        unless doc.data['layout'] == 'config-builder' or doc.data['layout'] == 'data-editor' or doc.data['layout'] == 'config-builder-2'
           routes['pages'].append(route)
         end
       end
@@ -40,7 +40,7 @@ module JekyllOpenSdgPlugins
           route = route + '/'
         end
 
-        if doc.data['layout'] == 'config-builder' or doc.data['layout'] == 'data-editor'
+        if doc.data['layout'] == 'config-builder' or doc.data['layout'] == 'data-editor' or doc.data['layout'] == 'config-builder-2'
           routes['config'].append(route)
         end
       end
