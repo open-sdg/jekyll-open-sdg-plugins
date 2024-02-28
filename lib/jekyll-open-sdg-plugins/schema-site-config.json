@@ -1521,6 +1521,18 @@
                 }
             ]
         },
+        "use_new_config_forms": {
+            "title": "Use new config forms",
+            "type": "boolean",
+            "description": "This setting can be set to `true` to try the new site configuration forms. This is experimental and will eventually be the default.",
+            "format": "checkbox",
+            "links": [
+                {
+                    "rel": "More information on the use_new_config_forms setting",
+                    "href": "https://open-sdg.readthedocs.io/en/latest/configuration/#use_new_config_forms"
+                }
+            ]
+        },
         "validate_indicator_config": {
             "title": "Validate indicator config",
             "type": "boolean",
