@@ -63,9 +63,6 @@ module JekyllOpenSdgPlugins
           }
           schema['additionalProperties'] = true
         end
-
-        # Regardless place the schema in site data so it can be used in Jekyll templates.
-        site.data['schema-indicator-metadata'] = schema
       end
     end
   end

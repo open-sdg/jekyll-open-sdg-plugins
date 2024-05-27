@@ -14,9 +14,6 @@ module JekyllOpenSdgPlugins
       form_settings_meta = site.config['indicator_metadata_form']
       form_settings_data = site.config['indicator_data_form']
       config_builder_layout = 'config-builder'
-      if site.config['use_new_config_forms']
-        config_builder_layout = 'config-builder-2'
-      end
 
       translations = site.data['translations']
       # If site.create_indicators is set, create indicators per the metadata.

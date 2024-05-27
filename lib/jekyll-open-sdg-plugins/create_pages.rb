@@ -90,9 +90,6 @@ module JekyllOpenSdgPlugins
         form_settings = site.config['site_config_form']
         config_page = pages.find { |page| page['layout'] == 'config-builder' }
         config_builder_layout = 'config-builder'
-        if site.config['use_new_config_forms']
-          config_builder_layout = 'config-builder-2'
-        end
         if config_page == nil
           if form_settings && form_settings['enabled']
             pages.push({
