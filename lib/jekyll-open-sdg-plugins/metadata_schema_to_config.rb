@@ -57,11 +57,9 @@ module JekyllOpenSdgPlugins
 
           schema['properties'][field_name] = {
             "type" => "string",
-            "format" => "markdown",
             "title" => field_label,
             "description" => 'Scope: ' + field_scope + ', Field: ' + field_name,
           }
-          schema['additionalProperties'] = true
         end
 
         # Regardless place the schema in site data so it can be used in Jekyll templates.
