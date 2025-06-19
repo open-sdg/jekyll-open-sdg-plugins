@@ -504,7 +504,7 @@ module JekyllOpenSdgPlugins
           if site.config.has_key?('languages_numbers') && site.config['languages_numbers'].is_a?(Array)
             language_for_numbers = site.config['languages_numbers'].find{ |item| item['language'] == language }
             unless language_for_numbers.nil?
-              doc.data['language_numbers'] = language_for_numbers
+              doc.data['language_numbers'] = language_for_numbers['language_numbers']
             end
           end
           # Set these on the page object.
