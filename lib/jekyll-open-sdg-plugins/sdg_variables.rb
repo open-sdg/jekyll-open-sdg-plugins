@@ -499,6 +499,14 @@ module JekyllOpenSdgPlugins
             doc.data['language'] = default_language
           end
           language = doc.data['language']
+          # Set the language for numbers.
+          doc.data['language_numbers'] = language
+          if site.config.has_key?('languages_numbers') && site.config['languages_numbers'].is_a?(Array)
+            language_for_numbers = site.config['languages_numbers'].find{ |item| item['language'] == language }
+            unless language_for_numbers.nil?
+              doc.data['language_numbers'] = language_for_numbers
+            end
+          end
           # Set these on the page object.
           doc.data['goals'] = available_goals[language]
           doc.data['targets'] = available_targets[language]
