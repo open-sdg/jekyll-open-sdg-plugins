@@ -22,6 +22,7 @@ module JekyllOpenSdgPlugins
         'headlines' => 'headline/all.json',
         'schema' => 'meta/schema.json',
         'reporting' => 'stats/reporting.json',
+        'progress' => 'stats/progress.json',
         'disaggregation' => 'stats/disaggregation.json',
         'translations' => 'translations/translations.json',
         'zip' => 'zip/all_indicators.json',
@@ -110,6 +111,7 @@ module JekyllOpenSdgPlugins
       # and should be moved to the top level.
       first_language = site.config['languages'][0]
       site.data['reporting'] = site.data[first_language]['reporting']
+      site.data['progress'] = site.data[first_language]['progress']
       site.data['schema'] = site.data[first_language]['schema']
       site.data['zip'] = site.data[first_language]['zip']
     end
